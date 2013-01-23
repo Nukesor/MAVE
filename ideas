@@ -1,3 +1,9 @@
+Fragen:
+
+Warum in der main.lua eine love.load und nicht klassenbezogen.
+Wie kann ich z.B. die Objekte des walls:init löschen.
+
+
 Kollidieren mit Wänden und Wöden bei zu hoher Geschwindigkeit Schaden?
 Abbremsen des Cutie, wenn er zu hoch fliegt
 Attribute:

@@ -3,6 +3,7 @@ Fragen:
 Warum in der main.lua eine love.load und nicht klassenbezogen.
 Wie kann ich z.B. die Objekte des walls:init löschen.
 
+Ideen:
 
 Kollidieren mit Wänden und Wöden bei zu hoher Geschwindigkeit Schaden?
 Abbremsen des Cutie, wenn er zu hoch fliegt
@@ -26,7 +27,7 @@ Treffersound. Zufällige Soundauswahl
 Sounds noch zurechtschneiden
 Hüfpsounds bei Kollision mit Wänden. 
 
-yaourt -S lib32-nvidia-utils-bumblebee nvidia-bumblebee nvidia-utils-bumblebee
+counter modulo menüpunkte +1
 
 
 

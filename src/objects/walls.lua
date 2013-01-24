@@ -2,7 +2,7 @@
 
 Walls = {}
 
-function Walls:__init()
+function Walls:setup()
 
 	Walls.ground = {} -- Erstellung des Objekts Boden
         Walls.ground.body = love.physics.newBody(world, 1000/2, 530)
@@ -30,7 +30,7 @@ function Walls:update(dt)
 
 end
 
-function Walls:destroy()
+function Walls:shutdown()
 
     self.ground.fixture:destroy()
     self.ceiling.fixture:destroy()

@@ -4,7 +4,7 @@
 
 Cutie = {} -- Erstellung der Klasse Cutie 1
 
-function Cutie:__init(x,y)
+function Cutie:setup(x,y)
     love.physics.setMeter(64) 
     world = love.physics.newWorld(0, 9.81*64, true)
     self.shape = love.physics.newCircleShape( 20) 
@@ -35,7 +35,7 @@ end
 
 function Cutie:drawn()
 
-love.graphics.draw(ressources.images.cutie0, self.body:getX(), self.body:getY(), 0, 0.3, self.scale)
+love.graphics.draw(resources.images.cutie0, self.body:getX(), self.body:getY(), 0, 0.3, self.scale)
 
 end
 
@@ -47,7 +47,7 @@ function Cutie:position()
     return x, y
 end	
 
-function Cutie:destroy()
+function Cutie:shutdown()
 
     self.fixture:destroy()
     self.body:destroy()

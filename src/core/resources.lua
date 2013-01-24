@@ -1,14 +1,15 @@
 
 
-ressources = {}
+Resources = {}
 
-function ressources:__init()
-
+function Resources:setup()
+    
 	self.imageQueue = {}
     self.musicQueue = {}
 
 	self.images = {}
     self.music = {}
+end
 
 function Resources:addImage(name, src)
     self.imageQueue[name] = src
@@ -18,7 +19,7 @@ function Resources:addMusic(name, src)
     self.musicQueue[name] = src
 end
 
-function ressources:load(threaded)
+function Resources:load()
 
     for name, src in pairs(self.musicQueue) do
         self.music[name] = love.audio.newSource(self.prefix .. src)

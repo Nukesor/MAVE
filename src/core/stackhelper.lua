@@ -1,9 +1,6 @@
+StackHelper = class("StackHelper")
 
-
-StackHelper = {}
-
-
-function StackHelper:setup()
+function StackHelper:__init()
 	self.states = {}
 end
 

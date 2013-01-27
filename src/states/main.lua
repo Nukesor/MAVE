@@ -2,21 +2,15 @@ require("objects/cutie")
 require("objects/walls")
 require("core/resources")
 
-MainState = {}
+MainState = class("MainState")
 
-function MainState:setup()
+function MainState:__init()
 
 	world = love.physics.newWorld()
-	cutie1 = class(Cutie)
-	cutie2 = class(Cutie)
-	walls = class(Walls)
-	
-	walls:setup()
-	cutie1:setup(333, 400)
-	cutie2:setup(666, 400)
-
+	cutie1 = Cutie(333, 400)
+	cutie2 = Cutie(666, 400)
+	walls = Walls()
 end
-
 
 function MainState:update(dt)
 	world:update(dt)

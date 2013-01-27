@@ -1,8 +1,6 @@
+Walls = class("Walls")
 
-
-Walls = {}
-
-function Walls:setup()
+function Walls:__init()
 
 	Walls.ground = {} -- Erstellung des Objekts Boden
         Walls.ground.body = love.physics.newBody(world, 1000/2, 530)

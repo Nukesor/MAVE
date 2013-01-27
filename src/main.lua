@@ -6,12 +6,10 @@ require("states/main")
 require("states/menu")
 
 
-GameState = class("GameState", StackHelper)
 
 function love.load()
 
-    resources = class(Resources)
-    
+    resources = Resources()
 
     resources:addImage("cutie0", 'data/gfx/cutie-0.png')
     resources:addImage("cutie1", 'data/gfx/cutie-1.png')
@@ -25,10 +23,10 @@ function love.load()
 
     resources:load()
 
-    main = class(MainState)
-    GameState:setup()
+    main = MainState()
 
-    if GameState:current() ~= nil  then GameState:push(main) end
+    states = StackHelper()
+    if states:current() ~= nil  then states:push(main) end
 
 end
 

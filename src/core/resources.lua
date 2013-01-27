@@ -1,8 +1,8 @@
+require("core/helper")
 
+Resources = class("Resources")
 
-Resources = {}
-
-function Resources:setup()
+function Resources:__init()
     
 	self.imageQueue = {}
     self.musicQueue = {}
@@ -22,12 +22,12 @@ end
 function Resources:load()
 
     for name, src in pairs(self.musicQueue) do
-        self.music[name] = love.audio.newSource(self.prefix .. src)
+        self.music[name] = love.audio.newSource(src)
         self.musicQueue[name] = nil
     end
 
     for name, src in pairs(self.imageQueue) do
-        self.images[name] = love.graphics.newImage(self.prefix .. src)
+        self.images[name] = love.graphics.newImage(src)
         self.imageQueue[name] = nil
     end
 

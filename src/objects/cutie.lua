@@ -1,19 +1,15 @@
+Cutie = class("Cutie")
 
-
-
-
-Cutie = {} -- Erstellung der Klasse Cutie 1
-
-function Cutie:setup(x,y)
+function Cutie:__init(x,y)
     love.physics.setMeter(64) 
     world = love.physics.newWorld(0, 9.81*64, true)
-    self.shape = love.physics.newCircleShape( 20) 
+    self.body = love.physics.newBody(world, x, y)
+    self.shape = love.physics.newCircleShape(20) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
     self.fixture:setRestitution(1.0) 
     self.life = 100
     self.cuteness = 1
     self.mobbeligkeit = 0
-
 end
 
 

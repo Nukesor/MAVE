@@ -2,8 +2,8 @@ require("core/resources")
 require("core/stackhelper")
 require("core/helper")
 require("objects/cutie")
-require("states/main")
-require("states/menu")
+require("states/mainState")
+require("states/menuState")
 
 
 
@@ -32,11 +32,9 @@ end
 
 
 function love.update(dt)
-	StackHelper:update(dt)
+	states:update(dt)
 end
 
 function love.draw()
-
-	GameState:draw()
-
+	main:draw()
 end

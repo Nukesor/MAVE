@@ -29,10 +29,8 @@ function Cutie:update(dt)
 
 end
 
-function Cutie:drawn()
-
-love.graphics.draw(resources.images.cutie0, self.body:getX(), self.body:getY(), 0, 0.3, self.scale)
-
+function Cutie:draw()
+    love.graphics.draw(resources.images.cutie0, self.body:getX(), self.body:getY(), 0, 0.3, self.scale)
 end
 
 function Cutie:position()

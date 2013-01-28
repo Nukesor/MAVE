@@ -26,8 +26,6 @@ function MainState:draw()
 	cutie2:draw()
 
 	if cutie1.life > 0 and cutie2.life > 0 then
-
-    love.graphics.draw(background, 0, 0)
     
         if cutie1.body:getX() < cutie2.body:getX() then
 

@@ -8,7 +8,6 @@ require("states/menuState")
 
 
 function love.load()
-
     resources = Resources()
 
     resources:addImage("cutie0", 'data/gfx/cutie-0.png')
@@ -24,10 +23,8 @@ function love.load()
     resources:load()
 
     main = MainState()
-
     states = StackHelper()
-    if states:current() ~= nil  then states:push(main) end
-
+    states:push(main)
 end
 
 

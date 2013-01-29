@@ -14,19 +14,11 @@ end
 
 
 function Cutie:update(dt)
-
-    dtotal = dtotal + dt  
-
-    if dtotal >= 1 then
-      dtotal = -dtotal
-    end
-
     if self.body:getY() > 480 then
         self.scale = 0.3-((self.body:getY()-480)/300)
     else
         self.scale = 0.3
     end
-
 end
 
 function Cutie:draw()

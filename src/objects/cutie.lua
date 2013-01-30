@@ -6,7 +6,11 @@ function Cutie:__init(x,y)
     self.body = love.physics.newBody(world, x, y, "dynamic")
     self.shape = love.physics.newCircleShape(20) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
+<<<<<<< Updated upstream
     self.fixture:setRestitution(0.9) 
+=======
+    self.fixture:setRestitution(1.5) 
+>>>>>>> Stashed changes
     self.life = 100
     self.cuteness = 1
     self.mobbeligkeit = 0

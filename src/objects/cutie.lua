@@ -3,7 +3,7 @@ require("core/helper")
 Cutie = class("Cutie")
 
 function Cutie:__init(x,y)
-    self.body = love.physics.newBody(world, x, y)
+    self.body = love.physics.newBody(world, x, y, "dynamic")
     self.shape = love.physics.newCircleShape(20) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
     self.fixture:setRestitution(1.0) 
@@ -20,6 +20,7 @@ function Cutie:update(dt)
     else
         self.scale = 0.3
     end
+    self.body:setY(self.body:getY()+1)
 end
 
 function Cutie:draw()

@@ -39,8 +39,8 @@ function MainState:draw()
             love.audio.play(resources.music.bounce1)
             cutie2.body:applyLinearImpulse( math.random(100, 200), math.random(50, 110))
             cutie1.body:applyLinearImpulse( math.random(100, 200), math.random(50, 110))
-            cutie2:loselife(math.random(5) * cutie1.cuteness)
-            cutie1:loselife(math.random(5) * cutie2.cuteness)
+            cutie2:loseLife(math.random(5) * cutie1.cuteness)
+            cutie1:loseLife(math.random(5) * cutie2.cuteness)
         end
     end    
 end

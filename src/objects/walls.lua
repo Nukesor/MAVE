@@ -1,7 +1,9 @@
+require("core/helper")
+
 Walls = class("Walls")
 
 function Walls:__init()
-
+    
 	Walls.ground = {} -- Erstellung des Objekts Boden
         Walls.ground.body = love.physics.newBody(world, 1000/2, 530)
         Walls.ground.shape = love.physics.newRectangleShape(1050, 0)

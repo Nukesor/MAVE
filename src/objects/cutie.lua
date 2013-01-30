@@ -1,8 +1,8 @@
+require("core/helper")
+
 Cutie = class("Cutie")
 
 function Cutie:__init(x,y)
-    love.physics.setMeter(64) 
-    world = love.physics.newWorld(0, 9.81*64, true)
     self.body = love.physics.newBody(world, x, y)
     self.shape = love.physics.newCircleShape(20) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
@@ -10,6 +10,7 @@ function Cutie:__init(x,y)
     self.life = 100
     self.cuteness = 1
     self.mobbeligkeit = 0
+    self.scale= 0.3
 end
 
 

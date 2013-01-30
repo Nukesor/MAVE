@@ -5,5 +5,4 @@ build:
 	cd src/ && zip -r ../MAVE.love *
 
 run:
-	make build
 	love MAVE.love

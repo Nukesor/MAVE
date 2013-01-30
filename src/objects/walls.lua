@@ -3,35 +3,28 @@ require("core/helper")
 Walls = class("Walls")
 
 function Walls:__init()
-    
-	Walls.ground = {} -- Erstellung des Objekts Boden
-        Walls.ground.body = love.physics.newBody(world, 1000/2, 530)
-        Walls.ground.shape = love.physics.newRectangleShape(1050, 0)
-        Walls.ground.fixture = love.physics.newFixture(Walls.ground.body, Walls.ground.shape)
+	self.ground = {} -- Erstellung des Objekts Boden
+        self.ground.body = love.physics.newBody(world, 1000/2, 530)
+        self.ground.shape = love.physics.newRectangleShape(1050, 0)
+        self.ground.fixture = love.physics.newFixture(self.ground.body, self.ground.shape)
 
-    Walls.ceiling = {} -- Erstellung des Objekts Decke
-        Walls.ceiling.body = love.physics.newBody(world, 1000/2, -600)
-        Walls.ceiling.shape = love.physics.newRectangleShape(1050, 0)
-        Walls.ceiling.fixture = love.physics.newFixture(Walls.ceiling.body, Walls.ceiling.shape)
+    self.ceiling = {} -- Erstellung des Objekts Decke
+        self.ceiling.body = love.physics.newBody(world, 1000/2, -600)
+        self.ceiling.shape = love.physics.newRectangleShape(1050, 0)
+        self.ceiling.fixture = love.physics.newFixture(self.ceiling.body, self.ceiling.shape)
 
-    Walls.sideleft = {} -- Erstellung des Objekts Linke Seite
-        Walls.sideleft.body = love.physics.newBody(world, 1000, 0)
-        Walls.sideleft.shape = love.physics.newRectangleShape(0, 1250)
-        Walls.sideleft.fixture = love.physics.newFixture(Walls.sideleft.body, Walls.sideleft.shape)
+    self.sideleft = {} -- Erstellung des Objekts Linke Seite
+        self.sideleft.body = love.physics.newBody(world, 1000, 0)
+        self.sideleft.shape = love.physics.newRectangleShape(0, 1250)
+        self.sideleft.fixture = love.physics.newFixture(self.sideleft.body, self.sideleft.shape)
 
-    Walls.sideright = {} --Erstellung des Objekts Rechte Seite
-        Walls.sideright.body = love.physics.newBody(world, 0, 0)
-        Walls.sideright.shape = love.physics.newRectangleShape(0, 1250)
-        Walls.sideright.fixture = love.physics.newFixture(Walls.sideright.body, Walls.sideright.shape)
-
-end
-
-function Walls:update(dt)
-
+    self.sideright = {} --Erstellung des Objekts Rechte Seite
+        self.sideright.body = love.physics.newBody(world, 0, 0)
+        self.sideright.shape = love.physics.newRectangleShape(0, 1250)
+        self.sideright.fixture = love.physics.newFixture(self.sideright.body, self.sideright.shape)
 end
 
 function Walls:shutdown()
-
     self.ground.fixture:destroy()
     self.ceiling.fixture:destroy()
     self.sideleft.fixture:destroy()
@@ -41,5 +34,4 @@ function Walls:shutdown()
     self.ceiling.body:destroy()
     self.sideleft.body:destroy()
     self.sideright.body:destroy()
-
 end

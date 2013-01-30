@@ -17,21 +17,23 @@ function MainState:update(dt)
 	world:update(dt)
     cutie1:update(dt)
     cutie2:update(dt)
+end
 
-	if cutie1.life > 0 and cutie2.life > 0 then
+function MainState:draw()
+    love.graphics.draw(resources.images.arena, 0, 0)
+    cutie1:draw()
+    cutie2:draw()
     
+    if cutie1.life > 0 and cutie2.life > 0 then
         if cutie1.body:getX() < cutie2.body:getX() then
-
             cutie1.body:applyForce( 100, 5)
             cutie2.body:applyForce( -100, 5)
         end
 
         if cutie2.body:getX() < cutie1.body:getX() then
-
             cutie2.body:applyForce( 100, 5)
             cutie1.body:applyForce( -100, 5)
         end
-
 
         if math.abs(cutie1.body:getY() - cutie2.body:getY()) < 35 and math.abs(cutie1.body:getX() - cutie2.body:getX()) < 35 then
             love.audio.play(resources.music.bounce1)
@@ -43,16 +45,7 @@ function MainState:update(dt)
     end    
 end
 
-function MainState:draw()
-    love.graphics.draw(resources.images.arena, 0, 0)
-    cutie1:draw()
-    cutie2:draw()
-end
-
-
-
 function MainState:shutdown()
-	
 	cutie1:shutdown()
 	cutie2:shutdown()
 	wall:shutdown()

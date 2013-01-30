@@ -7,9 +7,7 @@ require("states/menuState")
 
 
 function love.load()
-
     resources = Resources()
-
     resources:addImage("cutie0", 'data/gfx/cutie-0.png')
     resources:addImage("cutie1", 'data/gfx/cutie-1.png')
     resources:addImage("cutie2", 'data/gfx/cutie-2.png')
@@ -18,10 +16,9 @@ function love.load()
     resources:addImage("cutie5", 'data/gfx/cutie-5.png')
     resources:addImage("arena", 'data/gfx/arena.png')
     resources:addMusic("bounce1", 'data/sfx/bounce_low_level.ogg')
-
-    love.graphics.setMode(1000, 600, false, true, 0) -- Fensteroberfläche
-
     resources:load()
+    
+    love.graphics.setMode(1000, 600, false, true, 0) -- Fensteroberfläche
 
     main = MainState()
     states = StackHelper()
@@ -31,6 +28,7 @@ end
 
 function love.update(dt)
 	states:update(dt)
+    love.timer.sleep(0.01)
 end
 
 function love.draw()

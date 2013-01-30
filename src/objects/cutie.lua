@@ -27,7 +27,6 @@ function Cutie:draw()
 end
 
 function Cutie:position()
-
     local x = self.body:getX()
     local y = self.body:getY()
 
@@ -35,13 +34,10 @@ function Cutie:position()
 end	
 
 function Cutie:shutdown()
-
     self.fixture:destroy()
     self.body:destroy()
-
 end
 
 function Cutie:loseLife(y)
-    
     self.life = self.life - y
 end

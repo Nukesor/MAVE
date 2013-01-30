@@ -25,14 +25,17 @@ function MainState:draw()
     cutie2:draw()
     
     if cutie1.life > 0 and cutie2.life > 0 then
+        print("roflcopter")
         if cutie1.body:getX() < cutie2.body:getX() then
             cutie1.body:applyForce( 100, 5)
             cutie2.body:applyForce( -100, 5)
+            print("That")
         end
 
         if cutie2.body:getX() < cutie1.body:getX() then
             cutie2.body:applyForce( 100, 5)
             cutie1.body:applyForce( -100, 5)
+            print("extreme")
         end
 
         if math.abs(cutie1.body:getY() - cutie2.body:getY()) < 35 and math.abs(cutie1.body:getX() - cutie2.body:getX()) < 35 then
@@ -41,6 +44,7 @@ function MainState:draw()
             cutie1.body:applyLinearImpulse( math.random(100, 200), math.random(50, 110))
             cutie2:loseLife(math.random(5) * cutie1.cuteness)
             cutie1:loseLife(math.random(5) * cutie2.cuteness)
+            print("Monster roflcopter")
         end
     end    
 end

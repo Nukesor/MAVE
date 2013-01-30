@@ -20,7 +20,6 @@ function Cutie:update(dt)
     else
         self.scale = 0.3
     end
-    self.body:setY(self.body:getY()+1)
 end
 
 function Cutie:draw()

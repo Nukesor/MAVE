@@ -28,7 +28,6 @@ end
 
 function love.update(dt)
 	states:update(dt)
-    love.timer.sleep(0.01)
 end
 
 function love.draw()

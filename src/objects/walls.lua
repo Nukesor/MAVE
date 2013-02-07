@@ -19,7 +19,7 @@ function Walls:__init()
         self.sideleft.fixture = love.physics.newFixture(self.sideleft.body, self.sideleft.shape)
 
     self.sideright = {} --Erstellung des Objekts Rechte Seite
-        self.sideright.body = love.physics.newBody(world, 0, 0)
+        self.sideright.body = love.physics.newBody(world, -50, 0)
         self.sideright.shape = love.physics.newRectangleShape(0, 1250)
         self.sideright.fixture = love.physics.newFixture(self.sideright.body, self.sideright.shape)
 end

@@ -3,6 +3,9 @@ require("core/stackhelper")
 require("core/helper")
 require("states/MainState")
 require("states/MenuState")
+require("states/WinState")
+require("states/GameOverState")
+
 
 
 function love.load()
@@ -25,20 +28,22 @@ function love.load()
 
     main = MainState()
     menu = MenuState()
-    states = StackHelper()
-    states:push(menu)
+    win= WinState()
+    gameover= GameOverState()
+    stack = StackHelper()
+    stack:push(menu)
 end
 
 
 function love.update(dt)
-	states:update(dt)
+	stack:update(dt)
 end
 
 function love.draw()
-	states:draw()
+	stack:draw()
 end
 
 
 function love.keypressed(key, u)
-    states:keypressed(key, u)
+    stack:keypressed(key, u)
 end

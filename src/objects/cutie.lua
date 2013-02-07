@@ -9,7 +9,7 @@ function Cutie:__init(x,y)
     self.fixture:setRestitution(1) 
     self.life = 100
     self.cuteness = 1
-    self.mobbeligkeit = 0
+    self.mobbelity = 0
     self.scale= 0.3
 end
 

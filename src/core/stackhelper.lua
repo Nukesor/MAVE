@@ -2,7 +2,9 @@ StackHelper = class("StackHelper")
 
 function StackHelper:__init()
 	self.states = {}
+	self.backCounter = 0
 end
+
 
 function StackHelper:current()
 	if #self.states == 0 then return nil
@@ -12,8 +14,8 @@ function StackHelper:current()
 	end
 end
 
+
 function StackHelper:push(element)
-	if self:current() then self:current():shutdown() end
 	table.insert(self.states, element)	
 end
 
@@ -26,13 +28,23 @@ end
 
 
 function StackHelper:draw()
-	if self:current() then self:current():draw() end
+	for i = 0, #self.states-1 , 1 do
+		if self.states[#self.states-i].renderBelow == false then
+			break
+		elseif self.states[#self.states-i].renderBelow == true then
+			self.backCounter = i
+		end
+	end
+	for i = self.backCounter, 0 , -1 do
+		self.states[#self.states-i]:draw() 
+	end 
 end
 
 
 function StackHelper:update(dt)
 	if self:current() then self:current():update(dt) end
 end
+
 
 function StackHelper:keypressed(key, u)
 	if self:current() then self:current():keypressed(key, u)

@@ -1,9 +1,8 @@
 require("core/resources")
 require("core/stackhelper")
 require("core/helper")
-require("states/mainState")
-require("states/menuState")
-
+require("states/MainState")
+require("states/MenuState")
 
 
 function love.load()
@@ -15,14 +14,19 @@ function love.load()
     resources:addImage("cutie4", 'data/gfx/cutie-4.png')
     resources:addImage("cutie5", 'data/gfx/cutie-5.png')
     resources:addImage("arena", 'data/gfx/arena.png')
+
     resources:addMusic("bounce1", 'data/sfx/bounce_low_level.ogg')
+
+    resources:addFont("font1", 'data/font/SwankyandMooMoo.ttf')
+
     resources:load()
     
     love.graphics.setMode(1000, 600, false, true, 0) -- Fensteroberfläche
 
     main = MainState()
+    menu = MenuState()
     states = StackHelper()
-    states:push(main)
+    states:push(menu)
 end
 
 

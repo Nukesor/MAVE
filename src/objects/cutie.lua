@@ -6,7 +6,7 @@ function Cutie:__init(x,y)
     self.body = love.physics.newBody(world, x, y, "dynamic")
     self.shape = love.physics.newCircleShape(20) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
-    self.fixture:setRestitution(0.9) 
+    self.fixture:setRestitution(1) 
     self.life = 100
     self.cuteness = 1
     self.mobbeligkeit = 0
@@ -29,7 +29,6 @@ end
 function Cutie:position()
     local x = self.body:getX()
     local y = self.body:getY()
-
     return x, y
 end	
 

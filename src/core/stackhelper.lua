@@ -20,7 +20,6 @@ end
 
 function StackHelper:pop()
 	if self:current() then 
-		self:current():shutdown()
 		table.remove(self.states, #self.states)
 	end
 end
@@ -35,6 +34,7 @@ function StackHelper:update(dt)
 	if self:current() then self:current():update(dt) end
 end
 
---[[function StackHelper:shutdown()
-	for #self.states do self:pop()
-end]]--
+function StackHelper:keypressed(key, u)
+	if self:current() then self:current():keypressed(key, u)
+	end
+end

@@ -37,3 +37,8 @@ end
 function love.draw()
 	states:draw()
 end
+
+
+function love.keypressed(key, u)
+    states:keypressed(key, u)
+end

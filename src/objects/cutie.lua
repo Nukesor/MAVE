@@ -2,7 +2,7 @@ require("core/helper")
 
 Cutie = class("Cutie")
 
-function Cutie:__init(x,y)
+function Cutie:__init(x,y, image)
     self.body = love.physics.newBody(world, x, y, "dynamic")
     self.shape = love.physics.newCircleShape(20) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
@@ -11,6 +11,8 @@ function Cutie:__init(x,y)
     self.cuteness = 1
     self.mobbelity = 0
     self.scale= 0.3
+    self.level = 0
+    self.image = image
 end
 
 
@@ -23,7 +25,7 @@ function Cutie:update(dt)
 end
 
 function Cutie:draw()
-    love.graphics.draw(resources.images.cutie0, self.body:getX(), self.body:getY(), 0, 0.3, self.scale)
+    love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.3, self.scale)
 end
 
 function Cutie:position()

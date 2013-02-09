@@ -9,7 +9,7 @@ function Walls:__init()
         self.ground.fixture = love.physics.newFixture(self.ground.body, self.ground.shape)
 
     self.ceiling = {} -- Erstellung des Objekts Decke
-        self.ceiling.body = love.physics.newBody(world, 1000/2, -200)
+        self.ceiling.body = love.physics.newBody(world, 1000/2, -50)
         self.ceiling.shape = love.physics.newRectangleShape(1050, 0)
         self.ceiling.fixture = love.physics.newFixture(self.ceiling.body, self.ceiling.shape)
 

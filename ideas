@@ -1,30 +1,39 @@
 Fragen:
 
-Warum in der main.lua eine love.load und nicht klassenbezogen.
-
-
 Ideen:
 
-Kollidieren mit Wänden und Wöden bei zu hoher Geschwindigkeit Schaden?
-Abbremsen des Cutie, wenn er zu hoch fliegt
-Attribute:
-Cuteness: Schaden/Critical Hit?          Streicheleinheiten
-Mobbelligkeit: Wegstoßung, weniger Abbremsung, mehr Leben?      Kekse
+Gegner Levelsystem:
+	Automatisches Leveln:
+		Schwierig zu implementieren, da es an das Aufleveln angepasst sein muss. Alles muss komplett durchdacht sein oder es gibt eine Gegnerberechnung, bei der die Gegner schnell zu leicht oder schnell zu schwer werden. Dafür ist kein XP-System erforderlich.  
+	vs. Auswahl des Levels: 
+		impliziert Erfahrungspunktesystem, da sonst mit leichten Gegnern ein unfairer Levelvorteil errungen werden könnte. Schlechte Gegner bringen wenig Erfahrung und wenig Geld, bessere Gegner bringen exponentiell mehr Geld und Xp ein. 
 
-Aufleveln der Gegner. Dimension?
-Specialmoves
-Sich verändernde Cuties beim Aufleveln.
+Eigenes Levelsystem:
+	Entweder angelehnt an gewonnene Kämpfe oder Gegnerstärke.
+	Falls das Level XP-abhängig ist, müssten vom Gameplay her mehr als 10 level möglich sein. 16-20?
+	Maximales Level erreichbar!?
+
+Belohnungssystem:
+	Bei Besiegen von Gegner wird Geld gewonnen. Je nach Schwierigkeit des Gegners  (level) wird eine höhere Belohnung ausgegeben. 
+
+Itemsystem: 
+	Waffen und Passive Items kaufbar für Geld.
+
+Attribute:
+	Cuteness: Schaden/Critical Hit?          Streicheleinheiten
+	Mobbelligkeit: Wegstoßung, weniger Abbremsung, mehr Leben?      Kekse
+
+- Kollidieren mit Wänden und Wöden bei zu hoher Geschwindigkeit Schaden?
+- Abbremsen des Cutie, wenn er zu hoch fliegt
+
 
 Juiciness:
-
-Gore bei Hit und Aufprall
-Blut bei weniger als 30? Leben
-Wobble bei Aufprall. dynamisch!
-Wobble bei Upgrade, Freudensound
+	Gore bei Hit und Aufprall
+	Blut bei weniger als 30? Leben
+	Wobble bei Aufprall. dynamisch!
+	Wobble bei Upgrade, Freudensound
 
 Sounds:
-Treffersound. Zufällige Soundauswahl
-Sounds noch zurechtschneiden
-Hüfpsounds bei Kollision mit Wänden. 
-
-counter modulo menüpunkte +1
+	Treffersound. Zufällige Soundauswahl
+	Sounds noch zurechtschneiden
+	Hüfpsounds bei Kollision mit Wänden. 

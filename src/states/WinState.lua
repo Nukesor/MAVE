@@ -53,10 +53,10 @@ function WinState:keypressed(key, u)
 		end
 	elseif key == "return" then
 		if self.index == 0 then
-			cutie1.cuteness = cutie1.cuteness + 1
+			cutie1.mobbelity = cutie1.mobbelity + 1
 			WinState:restart()
 		elseif self.index == 1 then
-			cutie1.mobbelity = cutie1.mobbelity + 1
+			cutie1.cuteness = cutie1.cuteness + 1
 			self:restart()
 		elseif self.index == 2 then
 			love.event.push("quit")
@@ -65,8 +65,8 @@ function WinState:keypressed(key, u)
 end
 
 function WinState:restart()
-	cutie1.life = 100 + 10*cutie1.mobbelity
-	cutie2.life = 100 + 10*cutie2.mobbelity
+	cutie1.life = (100 + 10 * cutie1.mobbelity)
+	cutie2.life = (100 + 10 * cutie2.mobbelity)
 	cutie1.body:setX(333)
 	cutie2.body:setX(666)
 	cutie1.body:setY(400)

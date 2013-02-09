@@ -11,6 +11,7 @@ function GameOverState:__init()
 	self.runner = 0
 	self.mode = 0
 	self.menupoints = {"Play Again", "Exit"}
+	self.index = 1
 end
 
 function GameOverState:update(dt)
@@ -39,24 +40,23 @@ function GameOverState:draw()
 end
 
 function GameOverState:keypressed(key, u)
-	if key == "right" or "left" then
+	if key == ("right" or "left") then
 		if self.index == 1 then
-			self.index = 0 
-		elseif self.index == 0 then
+			self.index = 2 
+		elseif self.index == 2 then
 			self.index = 1
 		end
 	elseif key == "return" then
-		if self.index == 0 then
+		if self.index == 1 then
 			self:restart()
-		elseif self.index == 1 then
-			stack:pop()
-			main:destroy()
+		elseif self.index == 2 then
+			GameOverState:restart()
 			stack:pop()
 		end
 	end
 end
 
-function WinState:restart()
+function GameOverState:restart()
 	cutie1.life = 100 + 10*cutie1.mobbelity
 	cutie2.life = 100 + 10*cutie2.mobbelity
 	cutie1.body:setX(333)

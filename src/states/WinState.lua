@@ -23,7 +23,7 @@ function WinState:update(dt)
 end
 
 function WinState:draw()
-		self.x = 50
+		self.x = 200
 
 	love.graphics.draw(resources.images.arena)
 	love.graphics.draw(resources.images.cutie2, 390, 200)
@@ -34,18 +34,18 @@ function WinState:draw()
 		else
 			love.graphics.print(self.menupoints[i], self.x, 500, 0, 2*self.wobble-0.25, 2*self.wobble)
 		end
-	self.x = self.x + 250
+	self.x = self.x + 270
 	end
 end
 
 function WinState:keypressed(key, u)
-	if key == "right" then
+	if key == "right" or key ==  "d" then
 		if self.index < 2 then
 			self.index = self.index + 1
 		elseif self.index == 2 then
 			self.index = 0
 		end
-	elseif key == "left" then
+	elseif key == "left" or key == "a" then
 		if self.index > 0 then
 			self.index = self.index -1
 		elseif self.index == 0 then

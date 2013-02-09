@@ -18,6 +18,16 @@ Belohnungssystem:
 
 Itemsystem: 
 	Waffen und Passive Items kaufbar für Geld.
+	Aktiv: 
+		Ak-47: 
+			Feuert regelmäßig einen Schuss in Richtung des Gegners ab, der jedoch nicht treffen muss. Schaden 1-2
+
+	Passiv:
+		Schild:
+			Fügt +20 Leben hinzu.
+		Rüstung: 
+			Fängt 1 Schaden ab.
+
 
 Attribute:
 	Cuteness: Schaden/Critical Hit?          Streicheleinheiten

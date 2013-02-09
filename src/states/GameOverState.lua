@@ -40,7 +40,7 @@ function GameOverState:draw()
 end
 
 function GameOverState:keypressed(key, u)
-	if key == ("right" or "left") then
+	if key == "left" or key == "right" or key == "a" or key == "d" then
 		if self.index == 1 then
 			self.index = 2 
 		elseif self.index == 2 then

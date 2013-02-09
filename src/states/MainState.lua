@@ -36,15 +36,15 @@ function MainState:draw()
         if cutie1y > 2000 then
         cutie1.body:setLinearVelocity(cutie1x, 2000)
         end
-        if cutie1x > 3000 then
-        cutie1.body:setLinearVelocity(3000, cutie1y)
+        if cutie1x > 2500 then
+        cutie1.body:setLinearVelocity(2500, cutie1y)
         end
 
         if cutie2y > 2000 then
         cutie2.body:setLinearVelocity(cutie2x, 2000)
         end
-        if cutie2x > 3000 then
-        cutie2.body:setLinearVelocity(3000, cutie2y)
+        if cutie2x > 2500 then
+        cutie2.body:setLinearVelocity(2500, cutie2y)
         end
 
 
@@ -88,13 +88,13 @@ function MainState:keypressed(key, u)
     elseif key == "p" then
         cutie1.life = 0
         cutie2.life = 0
-    elseif key == ("s" or "down") then
+    elseif key == "s" or key == "down" then
         cutie1.body:applyLinearImpulse(0,200)
-    elseif key == ("w" or "up") then
+    elseif key == "w" or key == "up" then
         cutie1.body:applyLinearImpulse(0,-200)
-    elseif key == ("d" or "right") then
+    elseif key == "d" or key == "right" then
         cutie1.body:applyLinearImpulse(200, 0)
-    elseif key == ("a" or "left") then
+    elseif key == "a" or key == "left" then
         cutie1.body:applyLinearImpulse(-200, 0)
     end
 end

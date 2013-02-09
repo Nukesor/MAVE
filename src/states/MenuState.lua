@@ -43,13 +43,13 @@ end
 
 
 function MenuState:keypressed(key, u)
-	if key == "right" then
+	if key == "right" or key ==  "d" then
 		if self.index < 2 then
 			self.index = self.index + 1
 		elseif self.index == 2 then
 			self.index = 0
 		end
-	elseif key == "left" then
+	elseif key == "left" or key == "a" then
 		if self.index > 0 then
 			self.index = self.index -1
 		elseif self.index == 0 then

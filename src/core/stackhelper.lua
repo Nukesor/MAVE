@@ -16,7 +16,8 @@ end
 
 
 function StackHelper:push(element)
-	table.insert(self.states, element)	
+	table.insert(self.states, element)
+	element:load()	
 end
 
 

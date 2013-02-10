@@ -17,7 +17,7 @@ Belohnungssystem:
 	Bei Besiegen von Gegner wird Geld gewonnen. Je nach Schwierigkeit des Gegners  (level) wird eine höhere Belohnung ausgegeben. 
 
 Itemsystem: 
-	Waffen und Passive Items kaufbar für Geld.
+	Waffen und Passive Items kaufbar für Geld. (Eventuell schwierig so zu implementieren, dass es gut aussieht...)
 	Aktiv: 
 		Ak-47: 
 			Feuert regelmäßig einen Schuss in Richtung des Gegners ab, der jedoch nicht treffen muss. Schaden 1-2

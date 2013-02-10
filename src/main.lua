@@ -5,6 +5,7 @@ require("states/MainState")
 require("states/MenuState")
 require("states/WinState")
 require("states/GameOverState")
+require("states/CreditsState")
 
 
 
@@ -26,6 +27,7 @@ function love.load()
     
     love.graphics.setMode(1000, 600, false, true, 0) -- Fensteroberfläche
 
+    credits = CreditsState()
     main = MainState()
     menu = MenuState()
     win= WinState()

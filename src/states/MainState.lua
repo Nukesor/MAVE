@@ -14,6 +14,10 @@ function MainState:__init()
 	walls = Walls()
 end
 
+function MainState:load()
+   love.graphics.setNewFont()
+end
+
 function MainState:update(dt)
 	world:update(dt)
     cutie1:update(dt)
@@ -72,6 +76,22 @@ function MainState:draw()
         gameover.mode = 2
     end
 end
+
+function MainState:reset()
+    cutie1.life = 100
+    cutie1.mobbelity = 0
+    cutie1.cuteness = 0
+    cutie2.life = 100
+    cutie2.mobbelity = 0
+    cutie2.cuteness = 0
+    cutie1.body:setX(333)
+    cutie2.body:setX(666)
+    cutie1.body:setY(400)
+    cutie2.body:setY(400)
+    cutie1.body:setLinearVelocity(0, 0)
+    cutie2.body:setLinearVelocity(0, 0)
+end
+
 
 function MainState:shutdown()
 	cutie1:shutdown()

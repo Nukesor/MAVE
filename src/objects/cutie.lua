@@ -8,7 +8,7 @@ function Cutie:__init(x,y, image)
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
     self.fixture:setRestitution(1) 
     self.life = 100
-    self.cuteness = 1
+    self.cuteness = 0
     self.mobbelity = 0
     self.scale= 0.3
     self.level = 0

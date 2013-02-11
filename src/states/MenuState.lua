@@ -10,8 +10,13 @@ function MenuState:__init()
 	love.graphics.setFont(resources.fonts.font1)
 	self.menupoints = {"Credits","Play","Exit"}
 	self.index = 1
-	self.runner = 1
+	self.runner = 0
 	self.x = 0
+end
+
+function MenuState:load()
+	self.index = 1
+    love.graphics.setNewFont()
 end
 
 
@@ -57,6 +62,7 @@ function MenuState:keypressed(key, u)
 			stack:push(credits)
 		elseif self.index == 1 then
 			stack:push(main)
+			stack:current():reset()
 		elseif self.index == 2 then
 			love.event.push("quit")
 		end

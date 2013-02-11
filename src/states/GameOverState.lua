@@ -14,6 +14,12 @@ function GameOverState:__init()
 	self.index = 1
 end
 
+function GameOverState:load()
+	self.index = 1
+    love.graphics.setNewFont()
+end
+
+
 function GameOverState:update(dt)
 	self.runner = self.runner + dt/7
 	if self.runner > 0.1 then

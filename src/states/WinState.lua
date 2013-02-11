@@ -13,6 +13,11 @@ function WinState:__init()
 	self.index = 0
 end
 
+function WinState:load()
+	self.index = 0
+	love.graphics.setNewFont()
+end
+
 function WinState:update(dt)
 	self.runner = self.runner + dt/7
 	if self.runner > 0.1 then
@@ -59,7 +64,8 @@ function WinState:keypressed(key, u)
 			cutie1.cuteness = cutie1.cuteness + 1
 			self:restart()
 		elseif self.index == 2 then
-			love.event.push("quit")
+			stack:pop()
+			stack:pop()
 		end
 	end
 end

@@ -63,13 +63,7 @@ function GameOverState:keypressed(key, u)
 end
 
 function GameOverState:restart()
-	cutie1.life = 100 + 10*cutie1.mobbelity
-	cutie2.life = 100 + 10*cutie2.mobbelity
-	cutie1.body:setX(333)
-	cutie2.body:setX(666)
-	cutie1.body:setY(400)
-	cutie2.body:setY(400)
-	cutie1.body:setLinearVelocity(math.random(-70, 70), math.random(-40, 40))
-	cutie2.body:setLinearVelocity(math.random(-70, 70), math.random(-40, 40))
+	cutie1:restart()
+	cutie2:restart()
 	stack:pop()
 end

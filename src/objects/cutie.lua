@@ -13,6 +13,8 @@ function Cutie:__init(x,y, image)
     self.scale= 0.3
     self.level = 0
     self.image = image
+    self.startx = x
+    self.starty = y
 end
 
 
@@ -41,4 +43,20 @@ end
 
 function Cutie:loseLife(y)
     self.life = self.life - y
+end
+
+function Cutie:reset()
+    self.life = 100
+    self.mobbelity = 0
+    self.cuteness = 0
+    self.body:setX(self.startx)
+    self.body:setY(self.starty)
+    self.body:setLinearVelocity(math.random(-70, 70), math.random(-40, 40))
+end
+
+function Cutie:restart()
+    self.life = 100 + 10*self.mobbelity
+    self.body:setX(self.startx)
+    self.body:setY(self.starty)
+    self.body:setLinearVelocity(math.random(-70, 70), math.random(-40, 40))
 end

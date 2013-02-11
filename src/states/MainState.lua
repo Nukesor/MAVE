@@ -78,18 +78,8 @@ function MainState:draw()
 end
 
 function MainState:reset()
-    cutie1.life = 100
-    cutie1.mobbelity = 0
-    cutie1.cuteness = 0
-    cutie2.life = 100
-    cutie2.mobbelity = 0
-    cutie2.cuteness = 0
-    cutie1.body:setX(333)
-    cutie2.body:setX(666)
-    cutie1.body:setY(400)
-    cutie2.body:setY(400)
-    cutie1.body:setLinearVelocity(0, 0)
-    cutie2.body:setLinearVelocity(0, 0)
+    cutie1:reset()
+    cutie2:reset()
 end
 
 

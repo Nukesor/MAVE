@@ -7,14 +7,15 @@ function Cutie:__init(x,y, image)
     self.shape = love.physics.newCircleShape(20) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
     self.fixture:setRestitution(1) 
+    self.scale= 0.3
+    self.startx = x
+    self.starty = y
+
+    self.image = image
+    self.level = 0
     self.life = 100
     self.cuteness = 0
     self.mobbelity = 0
-    self.scale= 0.3
-    self.level = 0
-    self.image = image
-    self.startx = x
-    self.starty = y
 end
 
 

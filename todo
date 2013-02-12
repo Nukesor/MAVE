@@ -4,7 +4,11 @@
 # Code
 - Credits-State
 - Blutpartikelsystem
+- Kollision anschauen und verstehen! 
+	- Momentane Kollisionsabfrage überarbeiten.
 
 # GFX
 - Arena fertig
 - Menubuttons
+- Backgrounds für GameOver-, Win-, und MenuState 
+- Neuen Font suchen, der nicht so beschissen ist

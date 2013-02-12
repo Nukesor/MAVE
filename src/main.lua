@@ -19,7 +19,7 @@ function love.load()
     resources:addImage("cutie5", 'data/gfx/cutie-5.png')
     resources:addImage("arena", 'data/gfx/arena.png')
 
-    resources:addMusic("bounce1", 'data/sfx/bounce_low_level.ogg')
+    resources:addSound("bounce1", 'data/sfx/bounce_low_level.ogg')
 
     resources:addFont("font1", 'data/font/SwankyandMooMoo.ttf')
 

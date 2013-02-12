@@ -5,7 +5,7 @@ Ideen:
 Gegner Levelsystem:
 	Automatisches Leveln:
 		Schwierig zu implementieren, da es an das Aufleveln angepasst sein muss. Alles muss komplett durchdacht sein oder es gibt eine Gegnerberechnung, bei der die Gegner schnell zu leicht oder schnell zu schwer werden. Dafür ist kein XP-System erforderlich.  
-	vs. Auswahl des Levels: 
+	Auswahl des Levels: 
 		impliziert Erfahrungspunktesystem, da sonst mit leichten Gegnern ein unfairer Levelvorteil errungen werden könnte. Schlechte Gegner bringen wenig Erfahrung und wenig Geld, bessere Gegner bringen exponentiell mehr Geld und Xp ein. 
 
 Eigenes Levelsystem:
@@ -20,7 +20,7 @@ Itemsystem:
 	Waffen und Passive Items kaufbar für Geld. (Eventuell schwierig so zu implementieren, dass es gut aussieht...)
 	Aktiv: 
 		Ak-47: 
-			Feuert regelmäßig einen Schuss in Richtung des Gegners ab, der jedoch nicht treffen muss. Schaden 1-2
+			Feuert regelmäßig einen Schuss linear in Richtung des Gegners. Schaden 1-2, 2 Sek-Takt?
 
 	Passiv:
 		Schild:
@@ -30,16 +30,13 @@ Itemsystem:
 
 
 Attribute:
-	Cuteness: Schaden/Critical Hit?          Streicheleinheiten
-	Mobbelligkeit: Wegstoßung, weniger Abbremsung, mehr Leben?      Kekse
-
-- Kollidieren mit Wänden und Wöden bei zu hoher Geschwindigkeit Schaden?
-- Abbremsen des Cutie, wenn er zu hoch fliegt
-
+- Mobbelligkeit: Wegstoßung, weniger Abbremsung, mehr Leben?      Kekse
+- Abstoßung überarbeiten. Veraltet durch Steurungsmöglichkeit?
+- Kollidieren mit Wänden und Böden, bei zu hoher Geschwindigkeit Schaden?
 
 Juiciness:
 	Gore bei Hit und Aufprall
-	Blut bei weniger als 30? Leben
+	Blutspur bei weniger als 30? Leben
 	Wobble bei Aufprall. dynamisch!
 	Wobble bei Upgrade, Freudensound
 

@@ -6,10 +6,12 @@ function Resources:__init()
     
 	self.imageQueue = {}
     self.musicQueue = {}
+    self.soundQueue = {}
     self.fontQueue= {}
 
 	self.images = {}
     self.music = {}
+    self.sounds = {}
     self.fonts = {}
 end
 
@@ -19,6 +21,10 @@ end
 
 function Resources:addMusic(name, src)
     self.musicQueue[name] = src
+end
+
+function Resources:addSound(name, src)
+    self.soundQueue[name] = src
 end
 
 function Resources:addFont(name, src, size)
@@ -34,6 +40,11 @@ function Resources:load(threaded)
     for name, src in pairs(self.musicQueue) do
         self.music[name] = love.audio.newSource(src)
         self.musicQueue[name] = nil
+    end
+
+    for name, src in pairs(self.soundQueue) do
+        self.sounds[name] = love.audio.newSource(src)
+        self.soundQueue[name] = nil
     end
 
     for name, src in pairs(self.imageQueue) do

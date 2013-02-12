@@ -6,6 +6,7 @@ require("states/MenuState")
 require("states/WinState")
 require("states/GameOverState")
 require("states/CreditsState")
+require("objects/particles")
 
 
 
@@ -17,6 +18,7 @@ function love.load()
     resources:addImage("cutie3", 'data/gfx/cutie-3.png')
     resources:addImage("cutie4", 'data/gfx/cutie-4.png')
     resources:addImage("cutie5", 'data/gfx/cutie-5.png')
+    resources:addImage("blood1", 'data/gfx/blood1.png')
     resources:addImage("arena", 'data/gfx/arena.png')
 
     resources:addSound("bounce1", 'data/sfx/bounce_low_level.ogg')
@@ -33,6 +35,9 @@ function love.load()
     win= WinState()
     gameover= GameOverState()
     stack = StackHelper()
+
+    particles = Particles()
+
     stack:push(menu)
 end
 

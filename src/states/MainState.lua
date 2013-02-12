@@ -62,8 +62,8 @@ function MainState:draw()
 
         if math.abs(cutie1y - cutie2y) < 40 and math.abs(cutie1x - cutie2x) < 40 then
             love.audio.play(resources.sounds.bounce1)
-            cutie2.body:applyLinearImpulse( math.random(100, 200), math.random(50, 70))
-            cutie1.body:applyLinearImpulse( math.random(100, 200), math.random(50, 70))            
+            -- cutie2.body:applyLinearImpulse( math.random(100, 200), math.random(50, 70))
+            -- cutie1.body:applyLinearImpulse( math.random(100, 200), math.random(50, 70))            
 
             if math.random(0, 100 + 2*cutie2.cuteness) > 100 then
                 cutie1:loseLife(3*math.random(0, 5 + cutie2.cuteness))

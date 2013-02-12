@@ -30,9 +30,10 @@ Itemsystem:
 
 
 Attribute:
-- Mobbelligkeit: Wegstoßung, weniger Abbremsung, mehr Leben?      Kekse
-- Abstoßung überarbeiten. Veraltet durch Steurungsmöglichkeit?
+- Mobbelligkeit: Wegstoßung, weniger Abbremsung? Alternativ hinzufügen von Masse.
+- Abstoßung bei Kollision überarbeiten. Veraltet durch Steuerungsmöglichkeit?
 - Kollidieren mit Wänden und Böden, bei zu hoher Geschwindigkeit Schaden?
+- MONSTERBEAMZ
 
 Juiciness:
 	Gore bei Hit und Aufprall

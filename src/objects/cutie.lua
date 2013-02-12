@@ -16,6 +16,7 @@ function Cutie:__init(x,y, image)
     self.life = 100
     self.cuteness = 0
     self.mobbelity = 0
+    self.lifebefore = 100
 end
 
 
@@ -25,10 +26,23 @@ function Cutie:update(dt)
     else
         self.scale = 0.3
     end
+    if self.life < self.lifebefore then
+        particles.hit:setPosition(self:position())
+        particles.hit:start()
+    end
+    if self.life < 100 then
+        particles.bleeding:setPosition(self:position())
+        particles.bleeding:start()
+    end
+    self.lifebefore = self.life
+    particles.hit:update(dt)
+    particles.bleeding:update(dt)
 end
 
 function Cutie:draw()
-    love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.3, self.scale)
+    love.graphics.draw(particles.hit, 0, 0)
+    love.graphics.draw(particles.bleeding, 0, 0)
+    love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.3, self.scale, 140, 140)
 end
 
 function Cutie:position()

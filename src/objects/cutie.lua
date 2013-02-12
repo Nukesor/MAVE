@@ -23,8 +23,8 @@ end
 
 
 function Cutie:update(dt)
-    if self.body:getY() > 480 then
-        self.scale = 0.3-((self.body:getY()-480)/300)
+    if self.body:getY() > 530 then
+        self.scale = 0.3-((self.body:getY()-530)/300)
     else
         self.scale = 0.3
     end

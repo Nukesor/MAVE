@@ -80,7 +80,8 @@ function WinState:keypressed(key, u)
 			self.index = 2
 		end
 	elseif key == "return" then
-        particles:reset()
+		cutie1.particles:reset()
+		cutie2.particles:reset()
 		if self.index == 0 then
 			cutie1.mobbelity = cutie1.mobbelity + 1
 			self:restart()

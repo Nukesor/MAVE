@@ -76,7 +76,8 @@ function GameOverState:keypressed(key, u)
 			self.index = 1
 		end
 	elseif key == "return" then
-		particles:reset()
+		cutie1.particles:reset()
+		cutie2.particles:reset()
 		if self.index == 1 then
 			self:restart()
 		elseif self.index == 2 then

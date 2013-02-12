@@ -6,7 +6,6 @@ require("states/MenuState")
 require("states/WinState")
 require("states/GameOverState")
 require("states/CreditsState")
-require("objects/particles")
 
 
 
@@ -35,8 +34,6 @@ function love.load()
     win= WinState()
     gameover= GameOverState()
     stack = StackHelper()
-
-    particles = Particles()
 
     stack:push(menu)
 end

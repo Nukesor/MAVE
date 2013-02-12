@@ -9,8 +9,9 @@ MainState = class("MainState", State)
 function MainState:__init()
 	love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
-	cutie1 = Cutie(333, 400, resources.images.cutie1)
-	cutie2 = Cutie(666, 400, resources.images.cutie0)
+    world:setCallbacks(beginContact,endContact)
+	cutie1 = Cutie(333, 400, resources.images.cutie1, "cutie1")
+	cutie2 = Cutie(666, 400, resources.images.cutie0, "cutie2")
 	walls = Walls()
 end
 
@@ -60,23 +61,6 @@ function MainState:draw()
             cutie2.body:applyForce( 150, 5)
         end
 
-        if math.abs(cutie1y - cutie2y) < 40 and math.abs(cutie1x - cutie2x) < 40 then
-            love.audio.play(resources.sounds.bounce1)
-            -- cutie2.body:applyLinearImpulse( math.random(100, 200), math.random(50, 70))
-            -- cutie1.body:applyLinearImpulse( math.random(100, 200), math.random(50, 70))            
-
-            if math.random(0, 100 + 2*cutie2.cuteness) > 100 then
-                cutie1:loseLife(3*math.random(0, 5 + cutie2.cuteness))
-            else
-                cutie1:loseLife(math.random(0, 5 + cutie2.cuteness))
-            end
-            if math.random(0, 100 + 2*cutie1.cuteness) > 100 then
-                cutie2:loseLife(3*math.random(0, 5 + cutie1.cuteness))
-            else
-                cutie2:loseLife(math.random(0, 5 + cutie1.cuteness))
-            end
-
-        end    
     elseif cutie1.life <= 0 and cutie2.life <= 0 then
         stack:push(gameover)
         gameover.mode = 1
@@ -117,5 +101,27 @@ function MainState:keypressed(key, u)
         cutie1.body:applyLinearImpulse(200, 0)
     elseif key == "a" or key == "left" then
         cutie1.body:applyLinearImpulse(-200, 0)
+    end
+end
+
+
+function beginContact(a, b, coll)
+    local aa = a:getUserData()
+    local bb = b:getUserData()
+    if (aa == "cutie1" or aa == "cutie2") and (bb == "cutie1" or bb == "cutie2") then
+        love.audio.play(resources.sounds.bounce1)
+        -- cutie2.body:applyLinearImpulse( math.random(100, 200), math.random(50, 70))
+        -- cutie1.body:applyLinearImpulse( math.random(100, 200), math.random(50, 70))            
+
+        if math.random(0, 100 + 2*cutie2.cuteness) > 100 then
+            cutie1:loseLife(3*math.random(0, 5 + cutie2.cuteness))
+        else
+            cutie1:loseLife(math.random(0, 5 + cutie2.cuteness))
+        end
+        if math.random(0, 100 + 2*cutie1.cuteness) > 100 then
+            cutie2:loseLife(3*math.random(0, 5 + cutie1.cuteness))
+        else
+            cutie2:loseLife(math.random(0, 5 + cutie1.cuteness))
+        end
     end
 end

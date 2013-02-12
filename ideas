@@ -30,19 +30,19 @@ Itemsystem:
 
 
 Attribute:
-- Mobbelligkeit: Wegstoßung, weniger Abbremsung? Alternativ hinzufügen von Masse.
-- Abstoßung bei Kollision überarbeiten. Veraltet durch Steuerungsmöglichkeit?
 - Kollidieren mit Wänden und Böden, bei zu hoher Geschwindigkeit Schaden?
+	- Mobbelligkeit: Wegstoßung, weniger Abbremsung? Alternativ hinzufügen von Masse.
+		-Masse könnte zu schnell op werden.
+	- 8 verschiedene Callback-Möglichkeiten müssten durchgegangen werden. Nervig!
 - MONSTERBEAMZ
 
 Juiciness:
-	Gore bei Hit und Aufprall
-	Blutspur bei weniger als 30? Leben
+	Camera-Shake
 	Wobble bei Aufprall. dynamisch!
 	Wobble bei Upgrade, Freudensound
 
 Sounds:
-	Treffersound. Zufällige Soundauswahl
+	Treffersound: Zufällige Soundauswahl
 	Sounds noch zurechtschneiden
 	Hüfpsounds bei Kollision mit Wänden.
 

@@ -4,10 +4,8 @@
 # Code
 - Irgendwo ist ein fetter Bug, der das Spiel manchmal aufhängt.
 - Camerashake verbessern mit
-	- Cutie nicht steuerbar während Camerashake
     - love.graphics.rotate(angle)
-- Nachschauen, ob die getSuper function funktioniert. 
-	- setmetatable anschauen und verstehen für tieferes verständnis, damit die getSuper und getClass funktion implementiert werden kann. 	- Elementar, wenn man nicht für jedes bescheuerte Element in seiner Welt einen eigenen Fall erstellen will. 
+- bounce der Cuties fixen.
 
 # GFX
 - Arena fertig

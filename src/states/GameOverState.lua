@@ -1,5 +1,5 @@
 require("objects/cutie")
-require("objects/player") 
+require("objects/playercutie") 
 require("objects/walls")
 require("core/resources")
 require("core/helper")
@@ -36,11 +36,11 @@ function GameOverState:update(dt)
 end
 
 function GameOverState:draw()
-		self.x = 333
 
 	love.graphics.draw(resources.images.arena)
 	love.graphics.draw(resources.images.cutie2, 390, 200)
 
+	-- Zeichnen der Statistik
 	for i = 1, 3, 1 do 
 		local y = 100 + (i-1) * 15
 		love.graphics.print(self.List[i], 100, y, 0, 1, 1 )
@@ -59,13 +59,14 @@ function GameOverState:draw()
 		love.graphics.print(self.c2Stats[i], 860, y, 0, 1, 1 )
 	end
 
+	-- Zeichnen des Menüs
 	for i = 1, 2, 1 do
+		local x = 333 + (i-1)*333
 		if i == self.index then
-			love.graphics.print(self.menupoints[i], self.x, 500, 0, 3*self.wobble-0.25, 3*self.wobble)
+			love.graphics.print(self.menupoints[i], x, 500, 0, 3*self.wobble-0.25, 3*self.wobble)
 		else
-			love.graphics.print(self.menupoints[i], self.x, 500, 0, 2*self.wobble-0.25, 2*self.wobble)
+			love.graphics.print(self.menupoints[i], x, 500, 0, 2*self.wobble-0.25, 2*self.wobble)
 		end
-	self.x = self.x + 333
 	end
 end
 

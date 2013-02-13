@@ -1,5 +1,5 @@
 require("objects/cutie")
-require("objects/player") 
+require("objects/playercutie") 
 require("objects/walls")
 require("core/resources")
 require("core/helper")
@@ -34,11 +34,10 @@ function WinState:update(dt)
 end
 
 function WinState:draw()
-
-
 	love.graphics.draw(resources.images.arena)
 	love.graphics.draw(resources.images.cutie2, 390, 200)
 
+	-- Zeichnen der Statistiken
 	for i = 1, 3, 1 do 
 		local y = 100 + (i-1) * 15
 		love.graphics.print(self.List[i], 100, y, 0, 1, 1 )
@@ -57,6 +56,7 @@ function WinState:draw()
 		love.graphics.print(self.c2Stats[i], 860, y, 0, 1, 1 )
 	end
 
+	-- Zeichnen des Menüs
 	for i = 1, 3, 1 do
 		local x = 200 + (i-1) * 270
 		if (i-1) == self.index then
@@ -79,7 +79,7 @@ function WinState:keypressed(key, u)
 			self.index = self.index -1
 		elseif self.index == 0 then
 			self.index = 2
-		end
+		en	
 	elseif key == "return" then
 		playercutie.particles:reset()
 		cutie2.particles:reset()

@@ -11,8 +11,19 @@ function GameOverState:__init()
 	self.runner = 0
 	self.mode = 0
 	self.menupoints = {"Play Again", "Exit"}
-	self.index = 1
+	self.List = {"Life: ", "Damage: ", "Crit-Chance: "}
+	self:load()
 end
+
+function GameOverState:load()
+    love.graphics.setNewFont()
+	self.index = 1
+	self.c1Stats = nil
+	self.c2Stats = nil
+	self.c1Stats = {cutie1.life .. "/" .. (100+cutie1.mobbelity*10), "0-".. 5+cutie1.cuteness, string.format("%.2f %%",((2*cutie1.cuteness/(100+2*cutie1.cuteness))*100))}
+	self.c2Stats = {cutie2.life .. "/" .. (100+cutie2.mobbelity*10), "0-".. 5+cutie2.cuteness, string.format("%.2f %%",((2*cutie2.cuteness/(100+2*cutie2.cuteness))*100))}
+end
+
 
 function GameOverState:update(dt)
 	self.runner = self.runner + dt/7
@@ -28,6 +39,24 @@ function GameOverState:draw()
 
 	love.graphics.draw(resources.images.arena)
 	love.graphics.draw(resources.images.cutie2, 390, 200)
+
+	for i = 1, 3, 1 do 
+		local y = 100 + (i-1) * 15
+		love.graphics.print(self.List[i], 100, y, 0, 1, 1 )
+	end
+	for i = 1, 3, 1 do 
+		local y = 100 + (i-1) * 15
+		love.graphics.print(self.List[i], 780, y, 0, 1, 1 )
+	end
+
+	for i = 1, 3, 1 do 
+		local y = 100 + (i-1) * 15
+		love.graphics.print(self.c1Stats[i], 180, y, 0, 1, 1 )
+	end
+	for i = 1, 3, 1 do 
+		local y = 100 + (i-1) * 15
+		love.graphics.print(self.c2Stats[i], 860, y, 0, 1, 1 )
+	end
 
 	for i = 1, 2, 1 do
 		if i == self.index then
@@ -47,23 +76,19 @@ function GameOverState:keypressed(key, u)
 			self.index = 1
 		end
 	elseif key == "return" then
+		cutie1.particles:reset()
+		cutie2.particles:reset()
 		if self.index == 1 then
 			self:restart()
 		elseif self.index == 2 then
-			GameOverState:restart()
+			stack:pop()
 			stack:pop()
 		end
 	end
 end
 
 function GameOverState:restart()
-	cutie1.life = 100 + 10*cutie1.mobbelity
-	cutie2.life = 100 + 10*cutie2.mobbelity
-	cutie1.body:setX(333)
-	cutie2.body:setX(666)
-	cutie1.body:setY(400)
-	cutie2.body:setY(400)
-	cutie1.body:setLinearVelocity(math.random(-70, 70), math.random(-40, 40))
-	cutie2.body:setLinearVelocity(math.random(-70, 70), math.random(-40, 40))
+	cutie1:restart()
+	cutie2:restart()
 	stack:pop()
 end

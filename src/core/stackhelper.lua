@@ -16,7 +16,8 @@ end
 
 
 function StackHelper:push(element)
-	table.insert(self.states, element)	
+	table.insert(self.states, element)
+	self:current():load()	
 end
 
 
@@ -24,6 +25,7 @@ function StackHelper:pop()
 	if self:current() then 
 		table.remove(self.states, #self.states)
 	end
+		self:current():load()
 end
 
 

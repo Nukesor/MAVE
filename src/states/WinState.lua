@@ -10,7 +10,17 @@ function WinState:__init()
 	love.graphics.setFont(resources.fonts.font1)
 	self.runner = 0
 	self.menupoints = {"Give a Cookie",  "Pet your Pet", "Exit"}
+	self.List = {"Life: ", "Damage: ", "Crit-Chance: "}
+	self:load()
+end
+
+function WinState:load()
+	love.graphics.setNewFont()
 	self.index = 0
+	self.c1Stats = nil
+	self.c2Stats = nil
+	self.c1Stats = {cutie1.life .. "/" .. (100+cutie1.mobbelity*10), "0-".. 5+cutie1.cuteness, string.format("%.2f %%",((2*cutie1.cuteness/(100+2*cutie1.cuteness))*100))}
+	self.c2Stats = {cutie2.life .. "/" .. (100+cutie2.mobbelity*10), "0-".. 5+cutie2.cuteness, string.format("%.2f %%",((2*cutie2.cuteness/(100+2*cutie2.cuteness))*100))}
 end
 
 function WinState:update(dt)
@@ -23,18 +33,36 @@ function WinState:update(dt)
 end
 
 function WinState:draw()
-		self.x = 200
+
 
 	love.graphics.draw(resources.images.arena)
 	love.graphics.draw(resources.images.cutie2, 390, 200)
 
+	for i = 1, 3, 1 do 
+		local y = 100 + (i-1) * 15
+		love.graphics.print(self.List[i], 100, y, 0, 1, 1 )
+	end
+	for i = 1, 3, 1 do 
+		local y = 100 + (i-1) * 15
+		love.graphics.print(self.List[i], 780, y, 0, 1, 1 )
+	end
+
+	for i = 1, 3, 1 do 
+		local y = 100 + (i-1) * 15
+		love.graphics.print(self.c1Stats[i], 180, y, 0, 1, 1 )
+	end
+	for i = 1, 3, 1 do 
+		local y = 100 + (i-1) * 15
+		love.graphics.print(self.c2Stats[i], 860, y, 0, 1, 1 )
+	end
+
 	for i = 1, 3, 1 do
+		local x = 200 + (i-1) * 270
 		if (i-1) == self.index then
-			love.graphics.print(self.menupoints[i], self.x, 500, 0, 3*self.wobble-0.25, 3*self.wobble)
+			love.graphics.print(self.menupoints[i], x, 500, 0, 3*self.wobble-0.25, 3*self.wobble)
 		else
-			love.graphics.print(self.menupoints[i], self.x, 500, 0, 2*self.wobble-0.25, 2*self.wobble)
+			love.graphics.print(self.menupoints[i], x, 500, 0, 2*self.wobble-0.25, 2*self.wobble)
 		end
-	self.x = self.x + 270
 	end
 end
 
@@ -52,26 +80,23 @@ function WinState:keypressed(key, u)
 			self.index = 2
 		end
 	elseif key == "return" then
+		cutie1.particles:reset()
+		cutie2.particles:reset()
 		if self.index == 0 then
 			cutie1.mobbelity = cutie1.mobbelity + 1
-			WinState:restart()
+			self:restart()
 		elseif self.index == 1 then
 			cutie1.cuteness = cutie1.cuteness + 1
 			self:restart()
 		elseif self.index == 2 then
-			love.event.push("quit")
+			stack:pop()
+			stack:pop()
 		end
 	end
 end
 
 function WinState:restart()
-	cutie1.life = (100 + 10 * cutie1.mobbelity)
-	cutie2.life = (100 + 10 * cutie2.mobbelity)
-	cutie1.body:setX(333)
-	cutie2.body:setX(666)
-	cutie1.body:setY(400)
-	cutie2.body:setY(400)
-	cutie1.body:setLinearVelocity(0, 0)
-	cutie2.body:setLinearVelocity(0, 0)
+	cutie1:restart()
+	cutie2:restart()
 	stack:pop()
 end

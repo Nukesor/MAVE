@@ -40,6 +40,9 @@ function MainState:update(dt)
             self.shakeY = math.random(-10, 10)
         end
         self.shaketimer = self.shaketimer - dt
+    else
+        self.shakeX = 0
+        self.shakeY = 0
     end
 
 	world:update(dt)

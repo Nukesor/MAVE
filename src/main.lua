@@ -47,7 +47,10 @@ function love.draw()
 	stack:draw()
 end
 
-
 function love.keypressed(key, u)
     stack:current():keypressed(key, u)
+end
+
+function love.keyreleased(key, u)
+    stack:current():keyreleased(key, u)
 end

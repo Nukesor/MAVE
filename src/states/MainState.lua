@@ -12,15 +12,38 @@ function MainState:__init()
 	cutie1 = Cutie(333, 400, resources.images.cutie1)
 	cutie2 = Cutie(666, 400, resources.images.cutie0)
 	walls = Walls()
+    self.speed = 1;
+    self.nextShake = 1
+    self.shakeX = 0
+    self.shakeY = 0
+    self.shaketimer = 0
 end
 
 function MainState:update(dt)
+    dt = dt*self.speed
+    if love.keyboard.isDown(" ") and self.speed > 0.2 then
+        self.speed = self.speed -0.03
+    elseif not love.keyboard.isDown(" ") and self.speed < 1 then
+        self.speed = self.speed + 0.03
+    end
+
+    if self.shaketimer > 0 then
+        self.nextShake = self.nextShake - (dt*50)
+        if self.nextShake < 0 then
+            self.nextShake = 1
+            self.shakeX = math.random(-10, 10)
+            self.shakeY = math.random(-10, 10)
+        end
+        self.shaketimer = self.shaketimer - dt
+    end
+
 	world:update(dt)
     cutie1:update(dt)
     cutie2:update(dt)
 end
 
 function MainState:draw()
+    love.graphics.translate(self.shakeX, self.shakeY)
     love.graphics.draw(resources.images.arena, 0, 0)
     cutie1:draw()
     cutie2:draw()
@@ -88,6 +111,8 @@ function MainState:keypressed(key, u)
     elseif key == "p" then
         cutie1.life = 0
         cutie2.life = 0
+    elseif key == "b" then
+        self.shaketimer = 1
     elseif key == "s" or key == "down" then
         cutie1.body:applyLinearImpulse(0,200)
     elseif key == "w" or key == "up" then

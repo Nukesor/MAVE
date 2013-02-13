@@ -2,7 +2,10 @@
 ============
 
 # Code
-- Irgendwo ist ein fetter Bug, der das Spiel manchmal aufhängt. 
+- Irgendwo ist ein fetter Bug, der das Spiel manchmal aufhängt.
+- Camerashake verbessern mit
+    - love.graphics.rotate(angle)
+    - zurücksetzen der translation (&rotation) nach dem shake
 
 # GFX
 - Arena fertig

@@ -1,4 +1,5 @@
-require("objects/cutie") 
+require("objects/cutie")
+require("objects/player") 
 require("objects/walls")
 require("core/resources")
 require("core/helper")
@@ -19,7 +20,7 @@ function WinState:load()
 	self.index = 0
 	self.c1Stats = nil
 	self.c2Stats = nil
-	self.c1Stats = {cutie1.life .. "/" .. (100+cutie1.mobbelity*10), "0-".. 5+cutie1.cuteness, string.format("%.2f %%",((2*cutie1.cuteness/(100+2*cutie1.cuteness))*100))}
+	self.c1Stats = {playercutie.life .. "/" .. (100+playercutie.mobbelity*10), "0-".. 5+playercutie.cuteness, string.format("%.2f %%",((2*playercutie.cuteness/(100+2*playercutie.cuteness))*100))}
 	self.c2Stats = {cutie2.life .. "/" .. (100+cutie2.mobbelity*10), "0-".. 5+cutie2.cuteness, string.format("%.2f %%",((2*cutie2.cuteness/(100+2*cutie2.cuteness))*100))}
 end
 
@@ -80,13 +81,13 @@ function WinState:keypressed(key, u)
 			self.index = 2
 		end
 	elseif key == "return" then
-		cutie1.particles:reset()
+		playercutie.particles:reset()
 		cutie2.particles:reset()
 		if self.index == 0 then
-			cutie1.mobbelity = cutie1.mobbelity + 1
+			playercutie.mobbelity = playercutie.mobbelity + 1
 			self:restart()
 		elseif self.index == 1 then
-			cutie1.cuteness = cutie1.cuteness + 1
+			playercutie.cuteness = playercutie.cuteness + 1
 			self:restart()
 		elseif self.index == 2 then
 			stack:pop()
@@ -96,7 +97,7 @@ function WinState:keypressed(key, u)
 end
 
 function WinState:restart()
-	cutie1:restart()
+	playercutie:restart()
 	cutie2:restart()
 	stack:pop()
 end

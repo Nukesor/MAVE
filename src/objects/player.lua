@@ -1,16 +1,21 @@
 require("core/helper")
 require("objects/particles")
 
-Cutie = class("Cutie")
+Playercutie = class("Playercutie")
 
-function Cutie:__init(xs,ys, image, name)
-    self.body = love.physics.newBody(world, xpos, y, "dynamic")
+function Playercutie:__init(xs,ys, image, name)
+    self.body = love.physics.newBody(world, xpos, ypos, "dynamic")
     self.shape = love.physics.newCircleShape(5) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
     self.fixture:setRestitution(1) 
     self.fixture:setUserData(name)
     self.particles = Particles()
     
+    -- Variablen für Jumpbegrenzung
+    self.jumpactive = 0
+    self.maxyacc = 500
+    self.counter = 0
+
     -- Startwerte
     self.scale= 0.3
     self.startx = xs
@@ -26,14 +31,14 @@ function Cutie:__init(xs,ys, image, name)
 end
 
 
-function Cutie:update(dt)
-    -- Wobble des Cuties
+function Playercutie:update(dt)
+    -- Wobble des Playercuties
     if self.body:getY() > 560 then
         self.scale = 0.1-((self.body:getY()-560)/100)
     else
         self.scale = 0.1
     end
-    -- Particle effects des Cuties
+    -- Particle effects des Playercuties
     if self.life < self.lifebefore then
         self.particles.hit:setPosition(self:position())
         self.particles.hit:start()
@@ -43,29 +48,26 @@ function Cutie:update(dt)
         self.particles.bleeding:start()
     end
     self.lifebefore = self.life
-    -- Updatfunktion des Cuties
+    -- Updatfunktion des Playercuties
     self.particles.hit:update(dt)
     self.particles.bleeding:update(dt)
 end
 
-function Cutie:draw()
-
-    -- Zeichnen des Cuties und der Particle
+function Playercutie:draw()
     love.graphics.draw(self.particles.hit, 0, 0)
     love.graphics.draw(self.particles.bleeding, 0, 0)
     love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.1, self.scale, 140, 140)
 
-    -- Cutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht
-    if self.body:getX() < 50 or self.body:getX() > 950 then 
-        love.graphics.draw(self.image, self.body:getX()-1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)
+    -- Playercutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht
+    if self.body:getX() < 50 then 
         love.graphics.draw(self.image, self.body:getX()+1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)
+    elseif self.body:getX() > 950 then
+        love.graphics.draw(self.image, self.body:getX()-1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)
     end
 
     -- Deklaration der lokalen Variablen
     local xpos, ypos =  self:position()
     local xacc, yacc = self.body:getLinearVelocity()
-    local playercutiex, playercutiey = playercutie:position()
-
 
     --  Implementation einer durchlaufbaren Welt
     local levelchange = self.body:getX()
@@ -75,9 +77,9 @@ function Cutie:draw()
         self.body:setX(1000 + levelchange)
     end
 
-    -- Geschwindigkeitsbegrenzung für Cuties
-    if yacc > 500 then
-    self.body:setLinearVelocity(xacc, 500)
+    -- Geschwindigkeitsbegrenzung für Playercutie
+    if yacc > self.maxyacc then
+    self.body:setLinearVelocity(xacc, self.maxyacc)
     elseif yacc < -500 then
     self.body:setLinearVelocity(xacc, -500)
     end
@@ -87,26 +89,36 @@ function Cutie:draw()
     self.body:setLinearVelocity(-500, yacc)        
     end
 
-    -- momentane Ki des Gegners
-    if playercutiex < xpos then
-        self.body:applyForce( -5, 1)
+    -- Begrenzung der Hüpfhöhe des Playercuties, außer bei Jumps
+    if self.yacc then 
+        if self.yacc < 0 then
+            self.jumpactive = 0
+        end 
     end
-    if xpos < playercutiex then
-        self.body:applyForce( 5, 1)
+    if self.jumpactive == 1 then
+        self.maxyacc = 1000
+    elseif self.jumbactive == 0 then
+        if self.counter > 0 then
+            self.maxyacc = 500 + 500 * self.counter
+            self.counter = self.counter - dt
+        elseif self.counter < 0 then
+            self.counter = 0
+            self.maxyacc = 500
+        end 
     end
 end
 
-function Cutie:loseLife(damage)
+function Playercutie:loseLife(damage)
     self.life = self.life - damage
 end
 
-function Cutie:position()
+function Playercutie:position()
     local xpos = self.body:getX()
     local ypos = self.body:getY()
     return xpos, ypos
-end	
+end 
 
-function Cutie:reset()
+function Playercutie:reset()
     self.life = 100
     self.mobbelity = 0
     self.cuteness = 0
@@ -115,14 +127,14 @@ function Cutie:reset()
     self.body:setLinearVelocity(math.random(-70, 70), math.random(-40, 40))
 end
 
-function Cutie:restart()
+function Playercutie:restart()
     self.life = 100 + 10*self.mobbelity
     self.body:setX(self.startx)
     self.body:setY(self.starty)
     self.body:setLinearVelocity(math.random(-70, 70), math.random(-40, 40))
 end
 
-function Cutie:shutdown()
+function Playercutie:shutdown()
     self.fixture:destroy()
     self.body:destroy()
 end

@@ -1,4 +1,5 @@
 require("objects/cutie") 
+require("objects/player")
 require("objects/walls")
 require("core/resources")
 require("core/helper")

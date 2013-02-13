@@ -1,4 +1,5 @@
-require("objects/cutie") 
+require("objects/cutie")
+require("objects/player") 
 require("objects/walls")
 require("core/resources")
 require("core/helper")
@@ -10,10 +11,12 @@ function MainState:__init()
 	love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
     world:setCallbacks(beginContact,endContact)
-	cutie1 = Cutie(333, 400, resources.images.cutie1, "cutie1")
+	playercutie = Playercutie(333, 400, resources.images.cutie1, "playercutie")
 	cutie2 = Cutie(666, 400, resources.images.cutie0, "cutie2")
 	walls = Walls()
-    self.speed = 1;
+    -- Slowmospeed
+    self.worldspeed = 1;
+    -- Shake Variablen
     self.nextShake = 1
     self.shakeX = 0
     self.shakeY = 0
@@ -26,11 +29,11 @@ end
 
 function MainState:update(dt)
     -- Slowmotion
-    dt = dt*self.speed
-    if love.keyboard.isDown(" ") and self.speed > 0.2 then
-        self.speed = self.speed -0.03
-    elseif not love.keyboard.isDown(" ") and self.speed < 1 then
-        self.speed = self.speed + 0.03
+    dt = dt*self.worldspeed
+    if love.keyboard.isDown(" ") and self.worldspeed > 0.2 then
+        self.worldspeed = self.worldspeed -0.03
+    elseif not love.keyboard.isDown(" ") and self.worldspeed < 1 then
+        self.worldspeed = self.worldspeed + 0.03
     end
     -- Camerashake
     if self.shaketimer > 0 then
@@ -42,86 +45,59 @@ function MainState:update(dt)
         end
         self.shaketimer = self.shaketimer - dt
     end
-    -- Cutienavigation
-    if love.keyboard.isDown("s") or love.keyboard.isDown("down") then
-        cutie1.body:applyLinearImpulse(0,0.5)
-    elseif love.keyboard.isDown("w") or love.keyboard.isDown("up") then
-        cutie1.body:applyLinearImpulse(0,-0.5)
-    elseif love.keyboard.isDown("d") or love.keyboard.isDown("right") then
-        cutie1.body:applyLinearImpulse(0.5, 0)
+    -- Cutienavigation left right
+    if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
+        playercutie.body:applyLinearImpulse(0.5, 0)
     elseif love.keyboard.isDown("a") or love.keyboard.isDown("left") then
-        cutie1.body:applyLinearImpulse(-0.5, 0)
+        playercutie.body:applyLinearImpulse(-0.5, 0)
     end
+
     --Update Functions
 	world:update(dt)
-    cutie1:update(dt)
+    playercutie:update(dt)
     cutie2:update(dt)
 end
 
 function MainState:draw()
 
-    local cutie1x, cutie1y = cutie1:position()
+    -- Deklaration der lokalen Variablen
+    local playercutiex, playercutiey = playercutie:position()
     local cutie2x, cutie2y = cutie2:position()
-    local cutie1xv, cutie1yv = cutie1.body:getLinearVelocity()
+    local playercutiexv, playercutieyv = playercutie.body:getLinearVelocity()
     local cutie2xv, cutie2yv = cutie2.body:getLinearVelocity()
+
+    -- Zeichnen der Grafiken
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
     love.graphics.draw(resources.images.arena, 0, 0)
-    cutie1:draw()
+    playercutie:draw()
     cutie2:draw()
-    love.graphics.print(cutie1.body:getLinearVelocity(), 20, 20,0,1,1)
+
+    -- Zeichnen der Schriftzüge
+    love.graphics.print(playercutie.body:getLinearVelocity(), 20, 20,0,1,1)
     love.graphics.print(cutie2.body:getLinearVelocity(), 840, 20,0,1,1)
-    love.graphics.print("Your Cutie´s life: " .. cutie1.life, 20, 40, 0, 1, 1)
+    love.graphics.print("Your Cutie´s life: " .. playercutie.life, 20, 40, 0, 1, 1)
     love.graphics.print("Enemy Cutie´s life: " .. cutie2.life, 840, 40, 0, 1, 1)
-    -- Spielmechanik
-    if cutie1.life > 0 and cutie2.life > 0 then
-        -- Geschwindigkeitsbegrenzung für Cuties
-        if cutie1yv > 500 then
-        cutie1.body:setLinearVelocity(cutie1xv, 500)
-        elseif cutie1yv < -500 then
-        cutie1.body:setLinearVelocity(cutie1xv, -500)
-        end
-        if cutie1xv > 500 then
-        cutie1.body:setLinearVelocity(500, cutie1yv)
-        elseif cutie1xv < -500 then
-        cutie1.body:setLinearVelocity(-500, cutie1yv)        
-        end
-        if cutie2yv > 500 then
-        cutie2.body:setLinearVelocity(cutie2xv, 500)
-        elseif cutie2yv < -500 then
-        cutie2.body:setLinearVelocity(cutie2xv, -500)
-        end
-        if cutie2xv > 500 then
-        cutie2.body:setLinearVelocity(500, cutie2yv)
-        elseif cutie2xv < -500 then
-        cutie2.body:setLinearVelocity(-500, cutie2yv)
-        end
-        -- momentane Ki des Gegners
-        if cutie1x < cutie2x then
-            cutie2.body:applyForce( -5, 1)
-        end
-        if cutie2x < cutie1x then
-            cutie2.body:applyForce( 5, 1)
-        end
+
     -- Spielende und Pushen des jeweiligen Gamestates
-    elseif cutie1.life <= 0 and cutie2.life <= 0 then
+    if playercutie.life <= 0 and cutie2.life <= 0 then
         stack:push(gameover)
         gameover.mode = 1
-    elseif cutie1.life > 0 and cutie2.life <= 0 then
+    elseif playercutie.life > 0 and cutie2.life <= 0 then
         stack:push(win)
-    elseif cutie1.life <= 0 and cutie2.life > 0 then
+    elseif playercutie.life <= 0 and cutie2.life > 0 then
         stack:push(gameover)
         gameover.mode = 2
     end
 end
 
 function MainState:reset()
-    cutie1:reset()
+    playercutie:reset()
     cutie2:reset()
 end
 
 
 function MainState:shutdown()
-	cutie1:shutdown()
+	playercutie:shutdown()
 	cutie2:shutdown()
 	walls:shutdown()
 	world:destroy()
@@ -129,22 +105,22 @@ end
 
 function MainState:keypressed(key, u)
     if key == "i" then
-        cutie1.life = 0
+        playercutie.life = 0
     elseif key == "o" then
         cutie2.life = 0
     elseif key == "p" then
-        cutie1.life = 0
+        playercutie.life = 0
         cutie2.life = 0
     elseif key == "b" then
-        self.shaketimer = 1
-    --[[elseif key == "s" or key == "down" then
-        cutie1.body:applyLinearImpulse(0,3)
+        self.shaketimer = 0.5
+
+    -- Cutie Jump
+    elseif key == "s" or key == "down" then
+        playercutie.body:applyLinearImpulse(0,1)
     elseif key == "w" or key == "up" then
-        cutie1.body:applyLinearImpulse(0,-3)
-    elseif key == "d" or key == "right" then
-        cutie1.body:applyLinearImpulse(3, 0)
-    elseif key == "a" or key == "left" then
-        cutie1.body:applyLinearImpulse(-3, 0)--]]
+        playercutie.jumpactive = 1
+        playercutie.counter = 1
+        playercutie.body:applyLinearImpulse(0, -5)
     end
 end
 
@@ -152,19 +128,19 @@ end
 function beginContact(a, b, coll)
     local aa = a:getUserData()
     local bb = b:getUserData()
-    if (aa == "cutie1" or aa == "cutie2") and (bb == "cutie1" or bb == "cutie2") then
+    if (aa == "playercutie" or aa == "cutie2") and (bb == "playercutie" or bb == "cutie2") then
         love.audio.play(resources.sounds.bounce1)
 
         -- Schadensmodell
         if math.random(0, 100 + 2*cutie2.cuteness) > 100 then
-            cutie1:loseLife(3*math.random(0, 5 + cutie2.cuteness))
+            playercutie:loseLife(3*math.random(0, 5 + cutie2.cuteness))
         else
-            cutie1:loseLife(math.random(0, 5 + cutie2.cuteness))
+            playercutie:loseLife(math.random(0, 5 + cutie2.cuteness))
         end
-        if math.random(0, 100 + 2*cutie1.cuteness) > 100 then
-            cutie2:loseLife(3*math.random(0, 5 + cutie1.cuteness))
+        if math.random(0, 100 + 2*playercutie.cuteness) > 100 then
+            cutie2:loseLife(3*math.random(0, 5 + playercutie.cuteness))
         else
-            cutie2:loseLife(math.random(0, 5 + cutie1.cuteness))
+            cutie2:loseLife(math.random(0, 5 + playercutie.cuteness))
         end
     end
 end

@@ -93,12 +93,3 @@ Grobentwürfe:
 				then self.jumpcounter = 2
 			end
 		end 
-
-	Durchgängige Level(keine Walls links oder rechts)
-	Muss in Cutie.lua implementiert werden, da für jeden Cutie der Sidechange implementiert werden soll.
-			local levelchange = self.getX()
-			if levelchange > 1000 then
-				self.setX(levelchange - 1000)
-			elseif levelchange < 0 then 
-				self.setX(1000 + levelchange)
-			end

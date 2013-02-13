@@ -46,9 +46,3 @@ end
 function StackHelper:update(dt)
 	if self:current() then self:current():update(dt) end
 end
-
-
-function StackHelper:keypressed(key, u)
-	if self:current() then self:current():keypressed(key, u)
-	end
-end

@@ -2,35 +2,34 @@ Fragen:
 
 Ideen:
 
-Gegner Levelsystem:
-	Automatisches Leveln:
-		Schwierig zu implementieren, da es an das Aufleveln angepasst sein muss. Alles muss komplett durchdacht sein oder es gibt eine Gegnerberechnung, bei der die Gegner schnell zu leicht oder schnell zu schwer werden. Dafür ist kein XP-System erforderlich.  
-	Auswahl des Levels: 
-		impliziert Erfahrungspunktesystem, da sonst mit leichten Gegnern ein unfairer Levelvorteil errungen werden könnte. Schlechte Gegner bringen wenig Erfahrung und wenig Geld, bessere Gegner bringen exponentiell mehr Geld und Xp ein. 
+Komplette Ummodelierung des Spielprinzips:
+	Cuties wesentlich kleiner:
+		- Ebenen für Cuties einbauen (Jump & Run)
+			- Levelelemente wie verschiebbare Kisten, explodierende Fässer etc. 
+		- Mehrere Cuties als Gegner mit weniger Leben
+		- Fortlaufendes Spiel (Vlt. verschiedene Level bei denen Gegner stärker werden, andere Backgrounds etc.)
+		- Level-up System und Shop während des Spiels jederzeit aufrufbar
+			- Gegner droppen: 
+				- Medipacks
+				- Munition ?
+				- Items
+				- Powerups
+			- Gegner bringen XP
+			- Gegner droppen Gold
 
-Eigenes Levelsystem:
-	Entweder angelehnt an gewonnene Kämpfe oder Gegnerstärke.
-	Falls das Level XP-abhängig ist, müssten vom Gameplay her mehr als 10 level möglich sein. 16-20?
-	Maximales Level erreichbar!?
-
-Belohnungssystem:
-	Bei Besiegen von Gegner wird Geld gewonnen. Je nach Schwierigkeit des Gegners  (level) wird eine höhere Belohnung ausgegeben. 
-
-Itemsystem: 
-	Waffen und Passive Items kaufbar für Geld. (Eventuell schwierig so zu implementieren, dass es gut aussieht...)
-	Aktiv: 
-		Ak-47: 
-			Feuert regelmäßig einen Schuss linear in Richtung des Gegners. Schaden 1-2, 2 Sek-Takt?
-
-	Passiv:
-		Schild:
-			Fügt +20 Leben hinzu.
-		Rüstung: 
-			Fängt 1 Schaden ab.
-
+	Itemsystem: 
+		Waffen und Passive Items kaufbar für Geld. (Eventuell schwierig so zu implementieren, dass es gut aussieht...)
+		Aktiv: 
+			Ak-47: 
+				Feuert regelmäßig einen Schuss linear in Richtung des Gegners. Schaden 1-2, 2 Sek-Takt?
+		Passiv:
+			Schild:
+				Fügt +20 Leben hinzu.
+			Rüstung: 
+				Fängt 1 Schaden ab.
 
 Attribute:
-- Kollidieren mit Wänden und Böden, bei zu hoher Geschwindigkeit Schaden?
+	- Kollidieren mit Wänden und Böden, bei zu hoher Geschwindigkeit Schaden?
 	- Mobbelligkeit: Wegstoßung, weniger Abbremsung? Alternativ hinzufügen von Masse.
 		-Masse könnte zu schnell op werden.
 	- 8 verschiedene Callback-Möglichkeiten müssten durchgegangen werden. Nervig!

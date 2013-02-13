@@ -26,18 +26,19 @@ function MainState:update(dt)
 end
 
 function MainState:draw()
-    love.graphics.draw(resources.images.arena, 0, 0)
-    cutie1:draw()
-    cutie2:draw()
-    love.graphics.print(cutie2.body:getLinearVelocity(), 840, 20,0,1,1)
-    love.graphics.print(cutie1.body:getLinearVelocity(), 20, 20,0,1,1)
-    love.graphics.print("Your Cutie´s life: " .. cutie1.life, 20, 40, 0, 1, 1)
-    love.graphics.print("Enemy Cutie´s life: " .. cutie2.life, 840, 40, 0, 1, 1)
 
     local cutie1x, cutie1y = cutie1:position()
     local cutie2x, cutie2y = cutie2:position()
     local cutie1xv, cutie1yv = cutie1.body:getLinearVelocity()
     local cutie2xv, cutie2yv = cutie2.body:getLinearVelocity()
+
+    love.graphics.draw(resources.images.arena, 0, 0)
+    cutie1:draw()
+    cutie2:draw()
+    love.graphics.print(cutie1.body:getLinearVelocity(), 20, 20,0,1,1)
+    love.graphics.print(cutie2.body:getLinearVelocity(), 840, 20,0,1,1)
+    love.graphics.print("Your Cutie´s life: " .. cutie1.life, 20, 40, 0, 1, 1)
+    love.graphics.print("Enemy Cutie´s life: " .. cutie2.life, 840, 40, 0, 1, 1)
 
     if cutie1.life > 0 and cutie2.life > 0 then
         if cutie1yv > 2000 then

@@ -28,3 +28,9 @@ function class(name, super)
     end})
     return cls
 end
+
+function getSuper(object)
+    if object.__super then
+        return object.__super
+    end
+end

@@ -5,7 +5,7 @@ CreditsState = class("CreditsState", State)
 
 function CreditsState:__init()
 	self.bg = resources.images.arena
-	self.names = {"Code:\nArne Beer", "Graphics:\nRafael Epplée", "Sounds:\nToenjes Peters", 
+	self.names = {"Code:\nArne Beer\nRafael Epplée", "Graphics:\nRafael Epplée", "Sounds:\nToenjes Peters", 
 					"Idea:\nPaul Bienkowski\nSven-Hendrik Haase\nHans-Ole Hatzel\nToenjes Peters\nRafael Epplée\nArne Beer"}
 	self.y = 60
 end
@@ -18,7 +18,7 @@ function CreditsState:draw()
 	love.graphics.draw(self.bg, 0, 0)
 
 	for i = 1, #self.names, 1 do
-		love.graphics.print(self.names[i], 50, self.y+(i*60))
+		love.graphics.print(self.names[i], 50, self.y+(i*100))
 	end
 end
 

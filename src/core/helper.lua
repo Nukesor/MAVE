@@ -34,3 +34,7 @@ function getSuper(object)
         return object.__super
     end
 end
+
+function getName(object)
+    return object.__name
+end

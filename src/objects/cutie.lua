@@ -5,7 +5,7 @@ Cutie = class("Cutie")
 
 function Cutie:__init(x,y, image, name)
     self.body = love.physics.newBody(world, x, y, "dynamic")
-    self.shape = love.physics.newCircleShape(20) 
+    self.shape = love.physics.newCircleShape(5) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
     self.fixture:setRestitution(1) 
     self.fixture:setUserData(name)
@@ -24,11 +24,21 @@ end
 
 
 function Cutie:update(dt)
-    if self.body:getY() > 530 then
-        self.scale = 0.3-((self.body:getY()-530)/300)
-    else
-        self.scale = 0.3
+
+    --  Implementation einer durchlaufbaren Welt
+    local levelchange = self.body:getX()
+    if levelchange > 1000 then
+        self.body:setX(levelchange - 1000)
+    elseif levelchange < 0 then 
+        self.body:setX(1000 + levelchange)
     end
+    -- Wobble des Cuties
+    if self.body:getY() > 560 then
+        self.scale = 0.1-((self.body:getY()-560)/100)
+    else
+        self.scale = 0.1
+    end
+    -- Particle effects des Cuties
     if self.life < self.lifebefore then
         self.particles.hit:setPosition(self:position())
         self.particles.hit:start()
@@ -38,6 +48,8 @@ function Cutie:update(dt)
         self.particles.bleeding:start()
     end
     self.lifebefore = self.life
+
+    -- Updatfunktion des Cuties
     self.particles.hit:update(dt)
     self.particles.bleeding:update(dt)
 end
@@ -45,7 +57,12 @@ end
 function Cutie:draw()
     love.graphics.draw(self.particles.hit, 0, 0)
     love.graphics.draw(self.particles.bleeding, 0, 0)
-    love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.3, self.scale, 140, 140)
+    love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.1, self.scale, 140, 140)
+    -- Cutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht
+    if self.getX() < 50 or self.getX() > 950 then 
+        love.graphics.draw(self.image, self.body:getX()-1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)
+        love.graphics.draw(self.image, self.body:getX()+1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)
+    end
 end
 
 function Cutie:position()

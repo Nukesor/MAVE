@@ -15,7 +15,7 @@ function Walls:__init()
         self.ceiling.fixture = love.physics.newFixture(self.ceiling.body, self.ceiling.shape)
         self.ceiling.fixture:setUserData("ceiling")
 
-    self.leftside = {} -- Erstellung des Objekts Rechte Seite
+  --[[]  self.leftside = {} -- Erstellung des Objekts Rechte Seite
         self.leftside.body = love.physics.newBody(world, 1000, 0)
         self.leftside.shape = love.physics.newRectangleShape(0, 1250)
         self.leftside.fixture = love.physics.newFixture(self.leftside.body, self.leftside.shape)
@@ -25,7 +25,7 @@ function Walls:__init()
         self.rightside.body = love.physics.newBody(world, 0, 0)
         self.rightside.shape = love.physics.newRectangleShape(0, 1250)
         self.rightside.fixture = love.physics.newFixture(self.rightside.body, self.rightside.shape)
-        self.rightside.fixture:setUserData("rightside")
+        self.rightside.fixture:setUserData("rightside")--]]
 end
 
 function Walls:shutdown()

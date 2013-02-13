@@ -1,5 +1,7 @@
 Fragen:
 
+Nachschauen, ob bei Collision beide Möglichkeiten durchgenommen werden. Also ob nicht extra: if (a =nr.1 and b = nr.2 )  or (a =  nr2  and b =  nr1) sondern nur (a = nr. 1 and b = nr. 2) geschrieben werden muss.
+
 Ideen:
 
 Komplette Ummodelierung des Spielprinzips:
@@ -47,3 +49,56 @@ Sounds:
 
 Grafik:
 	Levels von hässlich zu cute, wie bei den cuties
+
+Grobentwürfe:
+
+	Hüpfbegrenzung außer bei Jump:
+		self.jumpactive = 0
+		self.maxyacc = 400
+		self.counter = 0
+
+		if jump then
+			self.jumpactive = 1
+			self.counter = 1
+		elseif self.yacc < 0 then 
+			self.jumpactive = 0
+		end
+
+		if self.jumpactive = 1 then
+			self.maxyacc = 1000
+			elseif self.jumbactive = 0 then
+			if self.counter > 0 then
+				self.maxyacc = 400 + 600 * self.counter
+				self.counter = self.counter - dt
+			elseif self.counter < 0 then
+				self.counter = 0
+				self.maxyacc = 400
+			end	
+		end
+
+	Jump-begrenzung auf 2, dann muss Collision mit Wall oder Plate.
+		self.jumpcounter = 2
+
+		function MainState:keypressed(key, u)
+			if key ==  "up" then
+				if self.jumpcounter > 0 then
+					schub
+					self.jumpcounter = self.jumpcounter -1
+				end
+			end
+		end
+
+		function beginContact(a, b, coll)
+			if (a.getSuper() == "Cutie" and b.getSuper == "Wall") or (a.getSuper() == "Wall" and b.getSuper == "Cutie")
+				then self.jumpcounter = 2
+			end
+		end 
+
+	Durchgängige Level(keine Walls links oder rechts)
+	Muss in Cutie.lua implementiert werden, da für jeden Cutie der Sidechange implementiert werden soll.
+			local levelchange = self.getX()
+			if levelchange > 1000 then
+				self.setX(levelchange - 1000)
+			elseif levelchange < 0 then 
+				self.setX(1000 + levelchange)
+			end

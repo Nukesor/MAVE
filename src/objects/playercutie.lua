@@ -13,7 +13,6 @@ function Playercutie:__init(xs,ys, image)
     -- Variablen für Jumpbegrenzung
     self.jumpactive = 0
     self.maxyacc = 100
-    self.jumpcounter = 0
     self.jumpcount = 2
 
     -- Startwerte
@@ -82,13 +81,7 @@ function Playercutie:update(dt)
         if self.jumpactive == 1 then
             self.maxyacc = -300
         elseif self.jumbactive == 0 then
-            if self.jumpcounter > 0 then
-                self.maxyacc = -200 - 100 * self.jumpcounter
-                self.jumpcounter = self.jumpcounter - dt/2
-            elseif self.jumpcounter < 0 then
-                self.jumpcounter = 0
                 self.maxyacc = -200
-            end 
         end
 
         -- Geschwindigkeitsbegrenzung für Playercutie
@@ -106,7 +99,6 @@ function Playercutie:update(dt)
             self.body:setLinearVelocity(-500, yacc)
             xacc = 500
         end
-
 end
 
 function Playercutie:draw()
@@ -134,7 +126,6 @@ function Playercutie:keypressed(key, u)
         self.body:applyLinearImpulse(0,1)
     elseif key == "w" or key == "up" then
         self.jumpactive = 1
-        self.jumpcounter = 1
         if self.jumpcount > 0 then
             self.body:applyLinearImpulse(0, -6)
             self.jumpcount = self.jumpcount - 1

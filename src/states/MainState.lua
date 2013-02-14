@@ -70,7 +70,7 @@ function MainState:update(dt)
     -- Update Functions
     playercutie:update(dt)
     cutie2:update(dt)
-	world:update(dt)
+	world:update(dt, self.worldspeed)
 end
 
 function MainState:draw()
@@ -167,6 +167,15 @@ function beginContact(a, b, coll)
             elseif object2.__name == "Cutie" then
                 local cutiexv, cutieyv = object2.body:getLinearVelocity()
                 object2.body:setLinearVelocity(cutiexv, -200)
+            end
+        end
+        if (( object2.__name == "Wall" or object2.__name == "Playercutie") and (object1.__name == "Playercutie" or object1.__name == "Wall")) then
+            if object1.__name == "Playercutie" then
+                local playercutiexv, playercutieyv = object1.body:getLinearVelocity()
+                object1.body:setLinearVelocity(playercutiexv, -200)
+            elseif object2.__name == "Playercutie" then
+                local playercutiexv, playercutieyv = object2.body:getLinearVelocity()
+                object2.body:setLinearVelocity(playercutiexv, -200)
             end
         end
         if (object1.__name == "Playercutie" or object1.__name == "Wall" ) and (object2.__name == "Wall" or object2.__name == "Playercutie" ) then

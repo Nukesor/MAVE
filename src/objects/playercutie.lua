@@ -1,15 +1,17 @@
 require("core/helper")
 require("objects/particles")
+require("objects/shot")
 
 Playercutie = class("Playercutie")
 
 function Playercutie:__init(xs,ys, image)
-    self.body = love.physics.newBody(world, xpos, ypos, "dynamic")
-    self.shape = love.physics.newCircleShape(5) 
+    self.body = love.physics.newBody(world, xs, ys, "dynamic")
+    self.shape = love.physics.newCircleShape(7) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
     self.fixture:setRestitution(1)
     self.particles = Particles()
     self.fixture:setUserData(self)
+    self.body:setMass(0.0192)
     -- Variablen für Jumpbegrenzung
     self.jumpactive = 0
     self.maxyacc = 100
@@ -105,9 +107,12 @@ function Playercutie:draw()
     love.graphics.setColorMode("modulate")
     love.graphics.draw(self.particles.hit, 0, 0)
     love.graphics.draw(self.particles.bleeding, 0, 0)
+    if shot then
+    love.graphics.circle("fill", shot.body:getX(), shot.body:getY(), shot.shape:getRadius())
+    end
     love.graphics.setColorMode("replace")
     love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.1, self.scale, 140, 140)
-    
+
     -- Playercutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht
     if self.body:getX() < 50 then 
         love.graphics.draw(self.image, self.body:getX()+1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)

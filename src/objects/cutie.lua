@@ -4,12 +4,13 @@ require("objects/particles")
 Cutie = class("Cutie")
 
 function Cutie:__init(xs,ys, image)
-    self.body = love.physics.newBody(world, xpos, y, "dynamic")
-    self.shape = love.physics.newCircleShape(5) 
+    self.body = love.physics.newBody(world, xs, ys, "dynamic")
+    self.shape = love.physics.newCircleShape(7) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
     self.fixture:setRestitution(1) 
     self.fixture:setUserData(self)
     self.particles = Particles()
+    self.body:setMass(0.0192)
     
     -- Startwerte
     self.scale= 0.3
@@ -36,6 +37,7 @@ function Cutie:update(dt)
     local xacc, yacc = self.body:getLinearVelocity()
     local playercutiex, playercutiey = playercutie:position()
     local playercutiexv, playercutieyv = playercutie.body:getLinearVelocity()
+    local speed = main.worldspeed
 
         -- Wobble des Cuties
         if self.body:getY() > 585 then
@@ -81,13 +83,13 @@ function Cutie:update(dt)
 
         -- momentanes Pathfinding des Gegners
         if xpos >= 500 and (xpos-playercutiex) > 500 then
-            self.body:applyLinearImpulse( 0.5*main.worldspeed, 0)
+            self.body:applyLinearImpulse( 0.5*speed, 0)
         elseif playercutiex < xpos then
-            self.body:applyLinearImpulse( -0.5*main.worldspeed, 0)
+            self.body:applyLinearImpulse( -0.5*speed, 0)
         elseif xpos <= 500 and (playercutiex-xpos) > 500 then
-            self.body:applyLinearImpulse( -0.5*main.worldspeed, 0)
+            self.body:applyLinearImpulse( -0.5*speed, 0)
         elseif  xpos < playercutiex then
-            self.body:applyLinearImpulse( 0.5*main.worldspeed, 0)
+            self.body:applyLinearImpulse( 0.5*speed, 0)
         end
 end
 

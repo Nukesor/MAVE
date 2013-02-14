@@ -57,14 +57,17 @@ function MainState:update(dt)
     end
 
     -- Spiel-Ende und Pushen des jeweiligen Gamestates
-    if playercutie.life <= 0 and cutie2.life <= 0 then
-        stack:push(gameover)
-        gameover.mode = 1
-    elseif cutie2.life <= 0 then
-        stack:push(win)
-    elseif playercutie.life <= 0 then
-        stack:push(gameover)
-        gameover.mode = 2
+    if playercutie.life <= 0 or cutie2.life <= 0 then
+        self.shaketimer = 0
+        if playercutie.life <= 0 and cutie2.life <= 0 then
+            stack:push(gameover)
+            gameover.mode = 1
+        elseif cutie2.life <= 0 then
+            stack:push(win)
+        elseif playercutie.life <= 0 then
+            stack:push(gameover)
+            gameover.mode = 2
+        end
     end
 
     -- Update Functions
@@ -129,6 +132,8 @@ function MainState:keypressed(key, u)
         cutie2.life = 0
     elseif key == "b" then
         self.shaketimer = 0.5
+    elseif key == "x" then
+        shot = Shot(playercutie.body:getX()+20, playercutie.body:getY()+20, 200, 300)
     end
     playercutie:keypressed(key, u)
 end
@@ -150,11 +155,13 @@ function beginContact(a, b, coll)
             -- Schadensmodell
             if math.random(0, 100 + 2*object2.cuteness) > 100 then
                 object1:loseLife(3*math.random(0, 5 + object2.cuteness))
+                main.shaketimer = 0.25
             else
                 object1:loseLife(math.random(0, 5 + object2.cuteness))
             end
             if math.random(0, 100 + 2*object1.cuteness) > 100 then
                 object2:loseLife(3*math.random(0, 5 + object1.cuteness))
+                main.shaketimer = 0.25
             else
                 object2:loseLife(math.random(0, 5 + object1.cuteness))
             end

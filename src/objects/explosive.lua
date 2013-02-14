@@ -1,17 +1,14 @@
-require("core/helper")
 
-Wall = class("Wall")
 
-function Wall:__init(world, x, y, xl, yl, data, type)
+Explosive = class("Explosive")
+
+function Explosive:_init(life, image, world, x, y, xl, yl, data, type)
     self.body = love.physics.newBody(world, x, y, type)
     self.shape = love.physics.newRectangleShape(xl, yl)
     self.fixture = love.physics.newFixture(self.body, self.shape)
     if data then
         self.fixture:setUserData(self)
     end
-end
-
-function Wall:shutdown()
-    self.fixture:destroy()
-    self.ground.body:destroy()
+    self.life = life
+    self.image = image
 end

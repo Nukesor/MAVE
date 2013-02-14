@@ -61,7 +61,6 @@ function Cutie:update(dt)
         elseif levelchange < 0 then 
             self.body:setX(1000 + levelchange)
         end
-
         -- Geschwindigkeitsbegrenzung für Cuties
         if yacc > 500 then
             self.body:setLinearVelocity(xacc, 500)
@@ -90,7 +89,7 @@ function Cutie:draw()
     love.graphics.draw(self.particles.bleeding, 0, 0)
     love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.1, self.scale, 140, 140)
 
-    -- Cutie wird bei Seitenwechsel kurzzeitig auf b"X-Vel: " .. string.format("%.2f %%",playercutiexv)eiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht
+    -- Cutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht
     if self.body:getX() < 50 then 
         love.graphics.draw(self.image, self.body:getX()+1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)
     elseif self.body:getX() > 950 then

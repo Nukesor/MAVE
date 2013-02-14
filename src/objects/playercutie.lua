@@ -40,8 +40,8 @@ function Playercutie:update(dt)
     local xacc, yacc = self.body:getLinearVelocity()
 
         -- Wobble des Playercuties
-        if self.body:getY() > 560 then
-            self.scale = 0.1-((self.body:getY()-560)/100)
+        if self.body:getY() > 585 then
+            self.scale = 0.1-((self.body:getY()-585)/100)
         else
             self.scale = 0.1
         end

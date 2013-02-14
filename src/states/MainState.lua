@@ -13,10 +13,12 @@ function MainState:__init()
     world:setCallbacks(beginContact,endContact)
 	playercutie = Playercutie(333, 400, resources.images.cutie1)
 	cutie2 = Cutie(666, 400, resources.images.cutie0)
-	ground = Wall(world, 1000/2, 570, 1050, 0)
-    --ceiling = Wall(world, 1000/2, -50, 1050, 0)
+	ground = Wall(world, 1000/2, 600, 1050, 10, true, "static")
+    ceiling = Wall(world, 1000/2, -50, 1050, 0, false)
+
     -- Slowmospeed
     self.worldspeed = 1;
+
     -- Shake Variablen
     self.nextShake = 1
     self.shakeX = 0
@@ -66,14 +68,13 @@ function MainState:draw()
     local cutie2x, cutie2y = cutie2:position()
     local playercutiexv, playercutieyv = playercutie.body:getLinearVelocity()
     local cutie2xv, cutie2yv = cutie2.body:getLinearVelocity()
-    print(cutie2yv)
 
     -- Zeichnen der Grafiken
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
     love.graphics.draw(resources.images.arena, 0, 0)
 
     -- Zeichnen der Schriftzüge
-    love.graphics.print("X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutiexv), 20, 20,0,1,1)
+    love.graphics.print("X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)
     love.graphics.print("X-Vel: " .. string.format("%.2f ",cutie2xv) .. ", Y-Vel: " .. string.format("%.2f ",cutie2yv), 800, 20,0,1,1)
     love.graphics.print("Your Cutie´s life: " .. playercutie.life, 20, 40, 0, 1, 1)
     love.graphics.print("Enemy Cutie´s life: " .. cutie2.life, 840, 40, 0, 1, 1)
@@ -82,7 +83,7 @@ function MainState:draw()
     playercutie:draw()
     cutie2:draw()
 
-    -- Spielende und Pushen des jeweiligen Gamestates
+    -- Spiel-Ende und Pushen des jeweiligen Gamestates
     if playercutie.life <= 0 and cutie2.life <= 0 then
         stack:push(gameover)
         gameover.mode = 1
@@ -132,28 +133,31 @@ end
 function beginContact(a, b, coll)
     local object1 = a:getUserData()
     local object2 = b:getUserData()
-    if (object1.__name == "Playercutie" or object1.__name == "Cutie") and (object1.__name == "Playercutie" or object1.__name == "Cutie") then
-        love.audio.play(resources.sounds.bounce1)
+    if object1 and object2 then
+        if (object1.__name == "Playercutie" or object1.__name == "Cutie") and (object1.__name == "Playercutie" or object1.__name == "Cutie") then
+            love.audio.play(resources.sounds.bounce1)
 
-        -- Schadensmodell
-        if math.random(0, 100 + 2*object2.cuteness) > 100 then
-            object1:loseLife(3*math.random(0, 5 + object2.cuteness))
-        else
-            object1:loseLife(math.random(0, 5 + object2.cuteness))
+            -- Schadensmodell
+            if math.random(0, 100 + 2*object2.cuteness) > 100 then
+                object1:loseLife(3*math.random(0, 5 + object2.cuteness))
+            else
+                object1:loseLife(math.random(0, 5 + object2.cuteness))
+            end
+            if math.random(0, 100 + 2*object1.cuteness) > 100 then
+                object2:loseLife(3*math.random(0, 5 + object1.cuteness))
+            else
+                object2:loseLife(math.random(0, 5 + object1.cuteness))
+            end
         end
-        if math.random(0, 100 + 2*object1.cuteness) > 100 then
-            object2:loseLife(3*math.random(0, 5 + object1.cuteness))
-        else
-            object2:loseLife(math.random(0, 5 + object1.cuteness))
-        end
-    end
-    if (( object2.__name == "Wall" or object2.__name == "Cutie") and (object1.__name == "Cutie" or object1.__name == "Wall")) then
-        if object1.__name == "Cutie" then
-            local cutiexv, cutieyv = object1.body:getLinearVelocity()
-            object1.body:setLinearVelocity(cutiexv, -200)
-        elseif object2.__name == "Cutie" then
-            local cutiexv, cutieyv = object2.body:getLinearVelocity()
-            object2.body:setLinearVelocity(cutiexv, -200)
+        -- Hüpfen der Cuties auf einem bestimmten Level
+        if (( object2.__name == "Wall" or object2.__name == "Cutie") and (object1.__name == "Cutie" or object1.__name == "Wall")) then
+            if object1.__name == "Cutie" then
+                local cutiexv, cutieyv = object1.body:getLinearVelocity()
+                object1.body:setLinearVelocity(cutiexv, -200)
+            elseif object2.__name == "Cutie" then
+                local cutiexv, cutieyv = object2.body:getLinearVelocity()
+                object2.body:setLinearVelocity(cutiexv, -200)
+            end
         end
     end
 end

@@ -79,7 +79,7 @@ function WinState:keypressed(key, u)
 			self.index = self.index -1
 		elseif self.index == 0 then
 			self.index = 2
-		en	
+		end
 	elseif key == "return" then
 		playercutie.particles:reset()
 		cutie2.particles:reset()

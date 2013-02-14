@@ -56,9 +56,9 @@ function MainState:update(dt)
     end
 
     --Update Functions
-	world:update(dt)
     playercutie:update(dt)
     cutie2:update(dt)
+	world:update(dt)
 end
 
 function MainState:draw()
@@ -126,6 +126,12 @@ function MainState:keypressed(key, u)
         playercutie.jumpactive = 1
         playercutie.counter = 1
         playercutie.body:applyLinearImpulse(0, -5)
+    end
+end
+
+function MainState:keyreleased(key, u)
+    if key == "w" or key == "up" then
+        playercutie.jumpactive = 0
     end
 end
 

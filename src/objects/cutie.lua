@@ -37,8 +37,8 @@ function Cutie:update(dt)
     local playercutiex, playercutiey = playercutie:position()
 
         -- Wobble des Cuties
-        if self.body:getY() > 560 then
-            self.scale = 0.1-((self.body:getY()-560)/100)
+        if self.body:getY() > 585 then
+            self.scale = 0.1-((self.body:getY()-585)/100)
         else
             self.scale = 0.1
         end
@@ -64,13 +64,17 @@ function Cutie:update(dt)
         -- Geschwindigkeitsbegrenzung für Cuties
         if yacc > 500 then
             self.body:setLinearVelocity(xacc, 500)
-        elseif yacc < -100 then
-            self.body:setLinearVelocity(xacc, -100)
+            yacc = 500
+        elseif yacc < -200 then
+            self.body:setLinearVelocity(xacc, -200)
+            yacc = -200
         end
         if xacc > 500 then
             self.body:setLinearVelocity(500, yacc)
+            xacc = 500
         elseif xacc < -500 then
-            self.body:setLinearVelocity(-500, yacc)        
+            self.body:setLinearVelocity(-500, yacc)
+            xacc = 500
         end
 
         -- momentane Ki des Gegners

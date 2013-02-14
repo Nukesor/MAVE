@@ -2,10 +2,8 @@
 ============
 
 # Code
-- Irgendwo ist ein fetter Bug, der das Spiel manchmal aufhängt.
 - Camerashake verbessern mit
     - love.graphics.rotate(angle)
-- bounce der Cuties fixen.
 
 # GFX
 - Arena fertig

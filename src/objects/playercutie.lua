@@ -79,28 +79,31 @@ function Playercutie:update(dt)
             end 
         end
         if self.jumpactive == 1 then
-            self.maxyacc = -200
+            self.maxyacc = -300
         elseif self.jumbactive == 0 then
             if self.counter > 0 then
-                self.maxyacc = -100 - 100 * self.counter
-                self.counter = self.counter - dt
+                self.maxyacc = -200 - 100 * self.counter
+                self.counter = self.counter - dt/2
             elseif self.counter < 0 then
                 self.counter = 0
-                self.maxyacc = -100
+                self.maxyacc = -200
             end 
         end
 
         -- Geschwindigkeitsbegrenzung für Playercutie
         if yacc > 500 then
             self.body:setLinearVelocity(xacc, 500)
-            yacc = self.maxyacc
+            yacc = 500
         elseif yacc < self.maxyacc then
             self.body:setLinearVelocity(xacc, self.maxyacc)
+            yacc = self.maxyacc
         end
         if xacc > 500 then
             self.body:setLinearVelocity(500, yacc)
+            xacc = 500
         elseif xacc < -500 then
-            self.body:setLinearVelocity(-500, yacc)        
+            self.body:setLinearVelocity(-500, yacc)
+            xacc = 500
         end
 
 end

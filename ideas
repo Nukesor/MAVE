@@ -32,9 +32,9 @@ Komplette Ummodelierung des Spielprinzips:
 
 Attribute:
 	- Kollidieren mit Wänden und Böden, bei zu hoher Geschwindigkeit Schaden?
-	- Mobbelligkeit: Wegstoßung, weniger Abbremsung? Alternativ hinzufügen von Masse.
-		-Masse könnte zu schnell op werden.
-	- 8 verschiedene Callback-Möglichkeiten müssten durchgegangen werden. Nervig!
+		- Leicht zu implementieren
+		- Mobbelligkeit: Wegstoßung, weniger Abbremsung? Alternativ hinzufügen von Masse.
+			-Masse könnte zu schnell op werden.
 - MONSTERBEAMZ
 
 Juiciness:
@@ -51,3 +51,6 @@ Grafik:
 	Levels von hässlich zu cute, wie bei den cuties
 
 Grobentwürfe:
+
+ Überlegung ob Playercutie nicht dauerhaft auf dem Boden sein sollte und nur die EnemyCuties hüpfen.
+ 

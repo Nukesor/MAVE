@@ -40,6 +40,13 @@ function Playercutie:update(dt)
     local xpos, ypos =  self:position()
     local xacc, yacc = self.body:getLinearVelocity()
 
+        -- Cutienavigation left right
+        if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
+            playercutie.body:applyLinearImpulse(0.5, 0)
+        elseif love.keyboard.isDown("a") or love.keyboard.isDown("left") then
+            playercutie.body:applyLinearImpulse(-0.5, 0)
+        end
+
         -- Wobble des Playercuties
         if self.body:getY() > 585 then
             self.scale = 0.1-((self.body:getY()-585)/100)
@@ -52,18 +59,11 @@ function Playercutie:update(dt)
             self.particles.hit:setPosition(self:position())
             self.particles.hit:start()
         end
-        if self.life < 100 then
+        if self.life < 20 then
             self.particles.bleeding:setPosition(self:position())
             self.particles.bleeding:start()
         end
         self.lifebefore = self.life
-
-        -- Playercutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht
-        if self.body:getX() < 50 then 
-            love.graphics.draw(self.image, self.body:getX()+1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)
-        elseif self.body:getX() > 950 then
-            love.graphics.draw(self.image, self.body:getX()-1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)
-        end
 
         --  Implementation einer durchlaufbaren Welt
         local levelchange = self.body:getX()
@@ -110,13 +110,36 @@ function Playercutie:update(dt)
 end
 
 function Playercutie:draw()
+    love.graphics.setColorMode("modulate")
     love.graphics.draw(self.particles.hit, 0, 0)
     love.graphics.draw(self.particles.bleeding, 0, 0)
+    love.graphics.setColorMode("replace")
     love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.1, self.scale, 140, 140)
+    
+    -- Playercutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht
+    if self.body:getX() < 50 then 
+        love.graphics.draw(self.image, self.body:getX()+1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)
+    elseif self.body:getX() > 950 then
+        love.graphics.draw(self.image, self.body:getX()-1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)
+    end
 end
 
 function Playercutie:loseLife(damage)
     self.life = self.life - damage
+end
+
+function Playercutie:keypressed(key, u)
+    -- Playercutie Jump
+    if key == "s" or key == "down" then
+        self.body:applyLinearImpulse(0,1)
+    elseif key == "w" or key == "up" then
+        self.jumpactive = 1
+        self.jumpcounter = 1
+        if self.jumpcount > 0 then
+            self.body:applyLinearImpulse(0, -6)
+            self.jumpcount = self.jumpcount - 1
+        end
+    end
 end
 
 function Playercutie:position()

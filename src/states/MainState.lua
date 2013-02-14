@@ -15,6 +15,12 @@ function MainState:__init()
 	cutie2 = Cutie(666, 400, resources.images.cutie0)
 	ground = Wall(world, 1000/2, 600, 1050, 10, true, "static")
     ceiling = Wall(world, 1000/2, -50, 1050, 0, false)
+    plate1 = Wall(world, 20, 200, 10, 100, true, "static")
+    plate2 = Wall(world, 1000/2, 100, 200, 10, true, "static")
+    plate3 = Wall(world, 1000/2, 200, 300, 10, true, "static")
+    plate4 = Wall(world, 1000/2, 300, 400, 10, true, "static")
+    plate5 = Wall(world, 1000/2, 400, 500, 10, true, "static")
+    plate6 = Wall(world, 1000/2, 500, 600, 10, true, "static")
 
     -- Slowmospeed
     self.worldspeed = 1;
@@ -50,13 +56,6 @@ function MainState:update(dt)
         self.shaketimer = self.shaketimer - dt
     end
 
-    -- Cutienavigation left right
-    if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
-        playercutie.body:applyLinearImpulse(0.5, 0)
-    elseif love.keyboard.isDown("a") or love.keyboard.isDown("left") then
-        playercutie.body:applyLinearImpulse(-0.5, 0)
-    end
-
     -- Spiel-Ende und Pushen des jeweiligen Gamestates
     if playercutie.life <= 0 and cutie2.life <= 0 then
         stack:push(gameover)
@@ -68,7 +67,7 @@ function MainState:update(dt)
         gameover.mode = 2
     end
 
-    --Update Functions
+    -- Update Functions
     playercutie:update(dt)
     cutie2:update(dt)
 	world:update(dt)
@@ -81,18 +80,29 @@ function MainState:draw()
     local cutie2xv, cutie2yv = cutie2.body:getLinearVelocity()
 
     -- Zeichnen der Grafiken
+    love.graphics.setColorMode("replace")
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
     love.graphics.draw(resources.images.arena, 0, 0)
 
+    -- Cutie Zeichnung und Drawfunktion
+    playercutie:draw()
+    cutie2:draw()
+
+    -- Zeichnen der Ebenen in Farbe Grau
+    love.graphics.setColorMode("modulate")
+    love.graphics.setColor(50, 50, 50)
+    love.graphics.polygon("fill", plate1.body:getWorldPoints(plate1.shape:getPoints()))
+    love.graphics.polygon("fill", plate2.body:getWorldPoints(plate2.shape:getPoints()))
+    love.graphics.polygon("fill", plate3.body:getWorldPoints(plate3.shape:getPoints()))
+    love.graphics.polygon("fill", plate4.body:getWorldPoints(plate4.shape:getPoints()))
+    love.graphics.polygon("fill", plate5.body:getWorldPoints(plate5.shape:getPoints()))
+    love.graphics.polygon("fill", plate6.body:getWorldPoints(plate6.shape:getPoints()))
+    love.graphics.setColorMode("replace")
     -- Zeichnen der Schriftzüge
     love.graphics.print("X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)
     love.graphics.print("X-Vel: " .. string.format("%.2f ",cutie2xv) .. ", Y-Vel: " .. string.format("%.2f ",cutie2yv), 800, 20,0,1,1)
     love.graphics.print("Your Cutie´s life: " .. playercutie.life, 20, 40, 0, 1, 1)
     love.graphics.print("Enemy Cutie´s life: " .. cutie2.life, 840, 40, 0, 1, 1)
-
-    -- Cutie Zeichnung und Drawfunktion
-    playercutie:draw()
-    cutie2:draw()
 end
 
 function MainState:reset()
@@ -118,18 +128,8 @@ function MainState:keypressed(key, u)
         cutie2.life = 0
     elseif key == "b" then
         self.shaketimer = 0.5
-
-    -- Cutie Jump
-    elseif key == "s" or key == "down" then
-        playercutie.body:applyLinearImpulse(0,1)
-    elseif key == "w" or key == "up" then
-        playercutie.jumpactive = 1
-        playercutie.jumpcounter = 1
-        if playercutie.jumpcount > 0 then
-            playercutie.body:applyLinearImpulse(0, -6)
-            playercutie.jumpcount = playercutie.jumpcount - 1
-        end
     end
+    playercutie:keypressed(key, u)
 end
 
 function MainState:keyreleased(key, u)

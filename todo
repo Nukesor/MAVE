@@ -4,6 +4,7 @@
 # Code
 - Camerashake verbessern mit
     - love.graphics.rotate(angle)
+- Ki für zwei Dimensionen
 
 # GFX
 - Arena fertig

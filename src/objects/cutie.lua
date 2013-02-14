@@ -48,7 +48,7 @@ function Cutie:update(dt)
             self.particles.hit:setPosition(self:position())
             self.particles.hit:start()
         end
-        if self.life < 100 then
+        if self.life < 20 then
             self.particles.bleeding:setPosition(self:position())
             self.particles.bleeding:start()
         end
@@ -61,6 +61,7 @@ function Cutie:update(dt)
         elseif levelchange < 0 then 
             self.body:setX(1000 + levelchange)
         end
+
         -- Geschwindigkeitsbegrenzung für Cuties
         if yacc > 800 then
             self.body:setLinearVelocity(xacc, 800)
@@ -79,18 +80,20 @@ function Cutie:update(dt)
 
         -- momentane Ki des Gegners
         if playercutiex < xpos then
-            self.body:applyForce( -5, 0)
+            self.body:applyLinearImpulse( -0.5, 0)
         end
         if xpos < playercutiex then
-            self.body:applyForce( 5, 0)
+            self.body:applyLinearImpulse( 0.5, 0)
         end
 end
 
 function Cutie:draw()
 
     -- Zeichnen des Cuties und der Particle
+    love.graphics.setColorMode("modulate")
     love.graphics.draw(self.particles.hit, 0, 0)
     love.graphics.draw(self.particles.bleeding, 0, 0)
+    --love.graphics.setColorMode("replace")
     love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.1, self.scale, 140, 140)
 
     -- Cutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht

@@ -62,9 +62,9 @@ function Cutie:update(dt)
             self.body:setX(1000 + levelchange)
         end
         -- Geschwindigkeitsbegrenzung für Cuties
-        if yacc > 500 then
-            self.body:setLinearVelocity(xacc, 500)
-            yacc = 500
+        if yacc > 800 then
+            self.body:setLinearVelocity(xacc, 800)
+            yacc = 800
         elseif yacc < -200 then
             self.body:setLinearVelocity(xacc, -200)
             yacc = -200

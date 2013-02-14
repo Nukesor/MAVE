@@ -38,6 +38,7 @@ function MainState:update(dt)
     elseif not love.keyboard.isDown(" ") and self.worldspeed < 1 then
         self.worldspeed = self.worldspeed + 0.03
     end
+
     -- Camerashake
     if self.shaketimer > 0 then
         self.nextShake = self.nextShake - (dt*50)
@@ -48,11 +49,23 @@ function MainState:update(dt)
         end
         self.shaketimer = self.shaketimer - dt
     end
+
     -- Cutienavigation left right
     if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
         playercutie.body:applyLinearImpulse(0.5, 0)
     elseif love.keyboard.isDown("a") or love.keyboard.isDown("left") then
         playercutie.body:applyLinearImpulse(-0.5, 0)
+    end
+
+    -- Spiel-Ende und Pushen des jeweiligen Gamestates
+    if playercutie.life <= 0 and cutie2.life <= 0 then
+        stack:push(gameover)
+        gameover.mode = 1
+    elseif cutie2.life <= 0 then
+        stack:push(win)
+    elseif playercutie.life <= 0 then
+        stack:push(gameover)
+        gameover.mode = 2
     end
 
     --Update Functions
@@ -64,8 +77,6 @@ end
 function MainState:draw()
     
     -- Deklaration der lokalen Variablen
-    local playercutiex, playercutiey = playercutie:position()
-    local cutie2x, cutie2y = cutie2:position()
     local playercutiexv, playercutieyv = playercutie.body:getLinearVelocity()
     local cutie2xv, cutie2yv = cutie2.body:getLinearVelocity()
 
@@ -82,17 +93,6 @@ function MainState:draw()
     -- Cutie Zeichnung und Drawfunktion
     playercutie:draw()
     cutie2:draw()
-
-    -- Spiel-Ende und Pushen des jeweiligen Gamestates
-    if playercutie.life <= 0 and cutie2.life <= 0 then
-        stack:push(gameover)
-        gameover.mode = 1
-    elseif playercutie.life > 0 and cutie2.life <= 0 then
-        stack:push(win)
-    elseif playercutie.life <= 0 and cutie2.life > 0 then
-        stack:push(gameover)
-        gameover.mode = 2
-    end
 end
 
 function MainState:reset()
@@ -124,8 +124,11 @@ function MainState:keypressed(key, u)
         playercutie.body:applyLinearImpulse(0,1)
     elseif key == "w" or key == "up" then
         playercutie.jumpactive = 1
-        playercutie.counter = 1
-        playercutie.body:applyLinearImpulse(0, -5)
+        playercutie.jumpcounter = 1
+        if playercutie.jumpcount > 0 then
+            playercutie.body:applyLinearImpulse(0, -6)
+            playercutie.jumpcount = playercutie.jumpcount - 1
+        end
     end
 end
 
@@ -164,6 +167,9 @@ function beginContact(a, b, coll)
                 local cutiexv, cutieyv = object2.body:getLinearVelocity()
                 object2.body:setLinearVelocity(cutiexv, -200)
             end
+        end
+        if (object1.__name == "Playercutie" or object1.__name == "Wall" ) and (object2.__name == "Wall" or object2.__name == "Playercutie" ) then
+            playercutie.jumpcount = 2
         end
     end
 end

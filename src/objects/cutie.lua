@@ -35,6 +35,7 @@ function Cutie:update(dt)
     local xpos, ypos =  self:position()
     local xacc, yacc = self.body:getLinearVelocity()
     local playercutiex, playercutiey = playercutie:position()
+    local playercutiexv, playercutieyv = playercutie.body:getLinearVelocity()
 
         -- Wobble des Cuties
         if self.body:getY() > 585 then
@@ -78,13 +79,22 @@ function Cutie:update(dt)
             xacc = 500
         end
 
-        -- momentane Ki des Gegners
+        if xpos >= 500 and (xpos-playercutiex) > 500 then
+            self.body:applyLinearImpulse( 0.5, 0)
+        elseif playercutiex < xpos then
+            self.body:applyLinearImpulse( -0.5, 0)
+        elseif xpos <= 500 and (playercutiex-xpos) > 500 then
+            self.body:applyLinearImpulse( -0.5, 0)
+        elseif  xpos < playercutiex then
+            self.body:applyLinearImpulse( 0.5, 0)
+        end
+        --[[ momentane Ki des Gegners
         if playercutiex < xpos then
             self.body:applyLinearImpulse( -0.5, 0)
         end
         if xpos < playercutiex then
             self.body:applyLinearImpulse( 0.5, 0)
-        end
+        end--]]
 end
 
 function Cutie:draw()

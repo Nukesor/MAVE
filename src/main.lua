@@ -31,9 +31,10 @@ function love.load()
     credits = CreditsState()
     main = MainState()
     menu = MenuState()
-    win= WinState()
-    gameover= GameOverState()
+    win = WinState()
+    gameover = GameOverState()
     stack = StackHelper()
+    shot = Shot(-100, -100, 0, 0, 0, 0)
 
     stack:push(menu)
 end
@@ -45,7 +46,7 @@ end
 
 function love.draw()
 	stack:draw()
-end
+end 
 
 function love.keypressed(key, u)
     stack:current():keypressed(key, u)

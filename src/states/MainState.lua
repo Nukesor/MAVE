@@ -166,27 +166,28 @@ function beginContact(a, b, coll)
             end
         end
         -- Bei Zusammentreffen von Cutie/Playercutie mit Shot, wird 20 schaden übermittelt und Shot zerstört
-        if (object1.__name == "Shot" or object1.__name == "Cutie") and (object2.__name == "Shot" or object1.__name == "Cutie") then
-            if object1.__name == "Playercutie" or object1.__name == "Cutie" then
+        if ((object1.__name == "Shot" or object1.__name == "Cutie") and (object2.__name == "Shot" or object1.__name == "Cutie")) then
+            if object1.__name == "Cutie" then
                 object1:loseLife(20)
-            elseif object2.__name == "Playercutie" or object2.__name == "Cutie" then
+            elseif object2.__name == "Cutie" then
                 object2:loseLife(20)
             end
             if object1.__name == "Shot" then
                 object1:shutdown()
-             elseif object2.__name == "Shot" then
+                print("heytest")
+            elseif object2.__name == "Shot" then
                 object2:shutdown()
             end
         end
-        if (object1.__name == "Playercutie" or object1.__name == "Shot") and (object2.__name == "Playercutie" or object2.__name == "Shot") then
-            if object1.__name == "Playercutie" or object1.__name == "Cutie" then
+        if ((object1.__name == "Shot" or object1.__name == "Playercutie") and (object2.__name == "Shot" or object2.__name == "Playercutie")) then
+            if object1.__name == "Playercutie" then
                 object1:loseLife(20)
-            elseif object2.__name == "Playercutie" or object2.__name == "Cutie" then
+            elseif object2.__name == "Playercutie" then
                 object2:loseLife(20)
             end
             if object1.__name == "Shot" then
                 object1:shutdown()
-             elseif object2.__name == "Shot" then
+            elseif object2.__name == "Shot" then
                 object2:shutdown()
             end
         end
@@ -215,7 +216,7 @@ function beginContact(a, b, coll)
         end
 
         -- Bei auftreffen mit Wall wird Shot zerstört
-        if (object1.__name == "Shot" or object1.__name == "Wall") and (object2.__name == "Wall" or object2.__name == "Shot") then
+        if ((object1.__name == "Shot" or object1.__name == "Wall") and (object2.__name == "Wall" or object2.__name == "Shot")) then
             if object1.__name == "Shot" then
                 object1:shutdown()
              elseif object2.__name == "Shot" then

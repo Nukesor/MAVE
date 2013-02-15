@@ -76,7 +76,7 @@ function Playercutie:update(dt)
         end
 
         -- Begrenzung der Hüpfhöhe des Playercuties, außer bei Jumps
-        if self.yacc then 
+        if self.yacc then
             if self.yacc > 0 then
                 self.jumpactive = 0
             end 
@@ -108,7 +108,7 @@ function Playercutie:draw()
     love.graphics.setColorMode("modulate")
     love.graphics.draw(self.particles.hit, 0, 0)
     love.graphics.draw(self.particles.bleeding, 0, 0)
-    if shot then
+    if shot.body then
     love.graphics.circle("fill", shot.body:getX(), shot.body:getY(), shot.shape:getRadius())
     end
     love.graphics.setColorMode("replace")
@@ -136,9 +136,10 @@ function Playercutie:keypressed(key, u)
             self.body:applyLinearImpulse(0, -6)
             self.jumpcount = self.jumpcount - 1
         end
-    elseif key == "x" then
-        if shot then shot:shutdown() end
-        shot = Shot(self.body:getX()+20, self.body:getY()+20, 200, 300)
+    end
+    if key == "x" then
+        if shot.body then shot:shutdown() end
+        shot = Shot(self.body:getX()+20, self.body:getY()+20, cutie2.body:getX(), cutie2.body:getY())
     end 
 end
 

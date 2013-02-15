@@ -1,9 +1,12 @@
 default: build run
 
-build:
-	zip -r MAVE.love data/*
-	cd src/ && zip -r ../MAVE.love *
+clean:
+	@[[ ! -e game.love ]] || rm game.love
+	@[[ ! -e pkg ]] || rm -r pkg		
 
-run:
-	make build
-	love MAVE.love
+build:
+	@zip -r -0 MAVE.love data/*
+	@cd src/ && zip -r ../MAVE.love *
+
+run: build
+	@love MAVE.love

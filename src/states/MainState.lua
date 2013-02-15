@@ -102,6 +102,7 @@ function MainState:draw()
     love.graphics.polygon("fill", plate6.body:getWorldPoints(plate6.shape:getPoints()))
     love.graphics.polygon("fill", ground.body:getWorldPoints(ground.shape:getPoints()))
     love.graphics.setColorMode("replace")
+
     -- Zeichnen der Schriftzüge
     love.graphics.print("X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)
     love.graphics.print("X-Vel: " .. string.format("%.2f ",cutie2xv) .. ", Y-Vel: " .. string.format("%.2f ",cutie2yv), 800, 20,0,1,1)
@@ -123,6 +124,7 @@ function MainState:shutdown()
 end
 
 function MainState:keypressed(key, u)
+    playercutie:keypressed(key, u)
     if key == "i" then
         playercutie.life = 0
     elseif key == "o" then
@@ -132,10 +134,7 @@ function MainState:keypressed(key, u)
         cutie2.life = 0
     elseif key == "b" then
         self.shaketimer = 0.5
-    elseif key == "x" then
-        shot = Shot(playercutie.body:getX()+20, playercutie.body:getY()+20, 200, 300)
     end
-    playercutie:keypressed(key, u)
 end
 
 function MainState:keyreleased(key, u)
@@ -149,7 +148,7 @@ function beginContact(a, b, coll)
     local object1 = a:getUserData()
     local object2 = b:getUserData()
     if object1 and object2 then
-        if (object1.__name == "Playercutie" or object1.__name == "Cutie") and (object1.__name == "Playercutie" or object1.__name == "Cutie") then
+        if (object1.__name == "Playercutie" or object1.__name == "Cutie") and (object2.__name == "Playercutie" or object2.__name == "Cutie") then
             love.audio.play(resources.sounds.bounce1)
 
             -- Schadensmodell
@@ -166,8 +165,34 @@ function beginContact(a, b, coll)
                 object2:loseLife(math.random(0, 5 + object1.cuteness))
             end
         end
+        -- Bei Zusammentreffen von Cutie/Playercutie mit Shot, wird 20 schaden übermittelt und Shot zerstört
+        if (object1.__name == "Shot" or object1.__name == "Cutie") and (object2.__name == "Shot" or object1.__name == "Cutie") then
+            if object1.__name == "Playercutie" or object1.__name == "Cutie" then
+                object1:loseLife(20)
+            elseif object2.__name == "Playercutie" or object2.__name == "Cutie" then
+                object2:loseLife(20)
+            end
+            if object1.__name == "Shot" then
+                object1:shutdown()
+             elseif object2.__name == "Shot" then
+                object2:shutdown()
+            end
+        end
+        if (object1.__name == "Playercutie" or object1.__name == "Shot") and (object2.__name == "Playercutie" or object2.__name == "Shot") then
+            if object1.__name == "Playercutie" or object1.__name == "Cutie" then
+                object1:loseLife(20)
+            elseif object2.__name == "Playercutie" or object2.__name == "Cutie" then
+                object2:loseLife(20)
+            end
+            if object1.__name == "Shot" then
+                object1:shutdown()
+             elseif object2.__name == "Shot" then
+                object2:shutdown()
+            end
+        end
+
         -- Hüpfen der Cuties auf einem bestimmten Level
-        if (( object2.__name == "Wall" or object2.__name == "Cutie") and (object1.__name == "Cutie" or object1.__name == "Wall")) then
+        if (( object1.__name == "Wall" or object1.__name == "Cutie") and (object2.__name == "Cutie" or object2.__name == "Wall")) then
             if object1.__name == "Cutie" then
                 local cutiexv, cutieyv = object1.body:getLinearVelocity()
                 object1.body:setLinearVelocity(cutiexv, -200)
@@ -176,7 +201,10 @@ function beginContact(a, b, coll)
                 object2.body:setLinearVelocity(cutiexv, -200)
             end
         end
-        if (( object2.__name == "Wall" or object2.__name == "Playercutie") and (object1.__name == "Playercutie" or object1.__name == "Wall")) then
+
+        -- Hüpfen des Playercuties auf einem bestimmten Level
+        if (( object1.__name == "Wall" or object1.__name == "Playercutie") and (object2.__name == "Playercutie" or object2.__name == "Wall")) then
+            playercutie.jumpcount = 2
             if object1.__name == "Playercutie" then
                 local playercutiexv, playercutieyv = object1.body:getLinearVelocity()
                 object1.body:setLinearVelocity(playercutiexv, -200)
@@ -185,8 +213,14 @@ function beginContact(a, b, coll)
                 object2.body:setLinearVelocity(playercutiexv, -200)
             end
         end
-        if (object1.__name == "Playercutie" or object1.__name == "Wall" ) and (object2.__name == "Wall" or object2.__name == "Playercutie" ) then
-            playercutie.jumpcount = 2
+
+        -- Bei auftreffen mit Wall wird Shot zerstört
+        if (object1.__name == "Shot" or object1.__name == "Wall") and (object2.__name == "Wall" or object2.__name == "Shot") then
+            if object1.__name == "Shot" then
+                object1:shutdown()
+             elseif object2.__name == "Shot" then
+                object2:shutdown()
+            end
         end
     end
 end

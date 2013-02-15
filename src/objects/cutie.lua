@@ -5,7 +5,7 @@ Cutie = class("Cutie")
 
 function Cutie:__init(xs,ys, image)
     self.body = love.physics.newBody(world, xs, ys, "dynamic")
-    self.shape = love.physics.newCircleShape(7) 
+    self.shape = love.physics.newCircleShape(9) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
     self.fixture:setRestitution(1) 
     self.fixture:setUserData(self)

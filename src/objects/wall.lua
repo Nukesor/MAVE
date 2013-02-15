@@ -13,5 +13,5 @@ end
 
 function Wall:shutdown()
     self.fixture:destroy()
-    self.ground.body:destroy()
+    self.body:destroy()
 end

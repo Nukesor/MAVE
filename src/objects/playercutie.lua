@@ -6,7 +6,7 @@ Playercutie = class("Playercutie")
 
 function Playercutie:__init(xs,ys, image)
     self.body = love.physics.newBody(world, xs, ys, "dynamic")
-    self.shape = love.physics.newCircleShape(7) 
+    self.shape = love.physics.newCircleShape(9) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
     self.fixture:setRestitution(1)
     self.particles = Particles()
@@ -14,7 +14,7 @@ function Playercutie:__init(xs,ys, image)
     self.body:setMass(0.0192)
     -- Variablen für Jumpbegrenzung
     self.jumpactive = 0
-    self.maxyacc = 100
+    self.maxyacc = -200
     self.jumpcount = 2
 
     -- Startwerte
@@ -33,9 +33,10 @@ end
 
 
 function Playercutie:update(dt)
-    -- Updatfunktion der Particles
+    -- Updatfunktionen
     self.particles.hit:update(dt)
     self.particles.bleeding:update(dt)
+    if shot then shot:update(dt) end
 
     -- Deklaration der lokalen Variablen
     local xpos, ypos =  self:position()
@@ -128,14 +129,17 @@ end
 function Playercutie:keypressed(key, u)
     -- Playercutie Jump
     if key == "s" or key == "down" then
-        self.body:applyLinearImpulse(0,1)
+        self.body:applyLinearImpulse(0, 1)
     elseif key == "w" or key == "up" then
         self.jumpactive = 1
         if self.jumpcount > 0 then
             self.body:applyLinearImpulse(0, -6)
             self.jumpcount = self.jumpcount - 1
         end
-    end
+    elseif key == "x" then
+        if shot then shot:shutdown() end
+        shot = Shot(self.body:getX()+20, self.body:getY()+20, 200, 300)
+    end 
 end
 
 function Playercutie:position()

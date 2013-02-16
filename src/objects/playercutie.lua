@@ -84,7 +84,7 @@ function Playercutie:update(dt)
         if self.jumpactive == 1 then
             self.maxyacc = -300
         elseif self.jumbactive == 0 then
-                self.maxyacc = -200
+            self.maxyacc = -200
         end
 
         -- Geschwindigkeitsbegrenzung für Playercutie
@@ -139,7 +139,7 @@ function Playercutie:keypressed(key, u)
     end
     if key == "x" then
         if shot.body then shot:shutdown() end
-        shot = Shot(self.body:getX()+20, self.body:getY()+20, cutie2.body:getX(), cutie2.body:getY())
+            shot = Shot(self.body:getX(), self.body:getY()-20, cutie2.body:getX(), cutie2.body:getY())
     end 
 end
 

@@ -91,7 +91,6 @@ function GameOverState:keypressed(key, u)
 end
 
 function GameOverState:restart()
-	playercutie:restart()
-	cutie2:restart()
+	main:restart()
 	stack:pop()
 end

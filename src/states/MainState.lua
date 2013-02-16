@@ -111,9 +111,15 @@ function MainState:draw()
     love.graphics.print("Enemy Cutie´s life: " .. cutie2.life, 840, 40, 0, 1, 1)
 end
 
+function MainState:restart()
+    playercutie:restart()
+    cutie2:restart() 
+    if shot.body then shot:shutdown() end
+end
 function MainState:reset()
     playercutie:reset()
     cutie2:reset()
+    if shot.body then shot:shutdown() end
 end
 
 
@@ -166,6 +172,7 @@ function beginContact(a, b, coll)
                 object2:loseLife(math.random(0, 5 + object1.cuteness))
             end
         end
+
         -- Bei Zusammentreffen von Cutie/Playercutie mit Shot, wird 20 schaden übermittelt und Shot zerstört
         if ((object1.__name == "Shot" or object1.__name == "Cutie") and (object2.__name == "Shot" or object1.__name == "Cutie")) then
             if object1.__name == "Cutie" then
@@ -179,8 +186,7 @@ function beginContact(a, b, coll)
             elseif object2.__name == "Shot" then
                 object2:shutdown()
             end
-        end
-        if ((object1.__name == "Shot" or object1.__name == "Playercutie") and (object2.__name == "Shot" or object2.__name == "Playercutie")) then
+        elseif ((object1.__name == "Shot" or object1.__name == "Playercutie") and (object2.__name == "Shot" or object2.__name == "Playercutie")) then
             if object1.__name == "Playercutie" then
                 object1:loseLife(20)
             elseif object2.__name == "Playercutie" then
@@ -189,6 +195,13 @@ function beginContact(a, b, coll)
             if object1.__name == "Shot" then
                 object1:shutdown()
             elseif object2.__name == "Shot" then
+                object2:shutdown()
+            end
+        -- Bei auftreffen mit Wall wird Shot zerstört
+        elseif ((object1.__name == "Shot" or object1.__name == "Wall") and (object2.__name == "Wall" or object2.__name == "Shot")) then
+            if object1.__name == "Shot" then
+                object1:shutdown()
+             elseif object2.__name == "Shot" then
                 object2:shutdown()
             end
         end
@@ -213,15 +226,6 @@ function beginContact(a, b, coll)
             elseif object2.__name == "Playercutie" then
                 local playercutiexv, playercutieyv = object2.body:getLinearVelocity()
                 object2.body:setLinearVelocity(playercutiexv, -200)
-            end
-        end
-
-        -- Bei auftreffen mit Wall wird Shot zerstört
-        if ((object1.__name == "Shot" or object1.__name == "Wall") and (object2.__name == "Wall" or object2.__name == "Shot")) then
-            if object1.__name == "Shot" then
-                object1:shutdown()
-             elseif object2.__name == "Shot" then
-                object2:shutdown()
             end
         end
     end

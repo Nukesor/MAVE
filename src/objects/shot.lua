@@ -9,8 +9,16 @@ function Shot:__init(x, y, xt, yt)
     self.fixture:setRestitution(1)
     self.particles = Particles()
     self.fixture:setUserData(self)
-    self.akat = xt - x
-    self.gkat = yt - y
+    if math.abs(xt-x) < 500 then
+        self.akat = xt - x
+        self.gkat = yt - y
+    elseif ((xt - x) > 500) then
+        self.akat = -(x - xt + 1000)
+        self.gkat = yt - y
+    elseif ((xt - x) < -500) then
+        self.akat = xt - x + 1000
+        self.gkat = yt - y
+    end
     self.hypo = math.sqrt(math.pow(self.gkat, 2)+math.pow(self.akat, 2))
     self.cos = self.gkat/self.hypo
     self.sin = self.akat/self.hypo
@@ -26,7 +34,7 @@ function Shot:update(dt)
         elseif levelchange < 0 then 
             self.body:setX(1000 + levelchange)
         end
-        self.body:setLinearVelocity((300*self.sin), (300*self.cos))
+        self.body:setLinearVelocity((800*self.sin), (800*self.cos))
     end
 end
 

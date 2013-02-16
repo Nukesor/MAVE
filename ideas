@@ -25,7 +25,7 @@ Komplette Ummodelierung des Spielprinzips:
 			Ak-47: 
 				Feuert regelmäßig einen Schuss linear in Richtung des Gegners. Schaden 1-2, 2 Sek-Takt?
 		Passiv:
-			Schild:
+			Fettschicht:
 				Fügt +20 Leben hinzu.
 			Rüstung: 
 				Fängt 1 Schaden ab.
@@ -36,7 +36,14 @@ Attribute:
 		- Mobbelligkeit: Wegstoßung, weniger Abbremsung? Alternativ hinzufügen von Masse.
 			-Masse könnte zu schnell op werden.
 - MONSTERBEAMZ
-
+- Attacken/Funktionen:
+	- Dashing
+	- Ausweichen durch Shield 
+	- Shooting nach Maus
+	- Explosives:
+		Fässer die bei Schuss explodieren
+		Granaten
+	- Hammer
 Juiciness:
 	Wobble bei Aufprall. dynamisch!
 	Wobble bei Upgrade, Freudensound

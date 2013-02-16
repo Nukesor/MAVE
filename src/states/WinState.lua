@@ -98,7 +98,6 @@ function WinState:keypressed(key, u)
 end
 
 function WinState:restart()
-	playercutie:restart()
-	cutie2:restart()
+	main:restart()
 	stack:pop()
 end

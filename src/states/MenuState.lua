@@ -8,39 +8,49 @@ require("core/state")
 MenuState = class("MenuState", State)
 
 function MenuState:__init()
-	love.graphics.setFont(resources.fonts.font1)
 	self.menupoints = {"Credits","Play","Exit"}
 	self.index = 1
 	self.runner = 0
-	self.x = 0
+	self.runner2 = 0
+	self.font = resources.fonts.big
 end
 
 function MenuState:load()
 	self.index = 1
-    love.graphics.setNewFont()
+    love.graphics.setFont(self.font)
 end
 
 
 function MenuState:update(dt)
-	self.runner = self.runner + dt/7
+	self.runner = self.runner + dt/10
 	if self.runner > 0.1 then
 		self.runner = -0.1
 	end
 	love.timer.sleep(0.05)
 	self.wobble = 1 + math.abs(self.runner)
+	self.runner2 = self.runner2 + dt/7
+	if self.runner2 > 0.1 then
+		self.runner2 = -0.1
+	end
+	self.yscale = 1 + math.abs(self.runner2)
 end
 
 
 function MenuState:draw()
+	love.graphics.setColor(255, 255, 255)
 	love.graphics.draw(resources.images.arena)
-	love.graphics.draw(resources.images.cutie2, 390, 200)
+	love.graphics.draw(resources.images.cutie2, love.graphics.getWidth()/2, 400, 0, 1, self.yscale, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
 
 	for i = 1, 3, 1 do
+		local scale = 1
+		local text = self.menupoints[i]
+		local x = i*(love.graphics.getWidth()/4)
 		if (i-1) == self.index then
-			love.graphics.print(self.menupoints[i], self.x+(i*250), 500, 0, 3*self.wobble-0.25, 3*self.wobble)
+			scale = self.wobble
 		else
-			love.graphics.print(self.menupoints[i], self.x+(i*250), 500, 0, 2*self.wobble-0.25, 2*self.wobble)
+			scale = self.wobble*0.8
 		end
+		love.graphics.print(text, x, 450, 0, scale-0.25, scale, self.font:getWidth(text)/2, self.font:getHeight(text)/2)
 	end
 end
 

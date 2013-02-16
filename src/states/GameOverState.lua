@@ -8,7 +8,6 @@ require("core/state")
 GameOverState =  class("GameOverState", State)
 
 function GameOverState:__init()
-	love.graphics.setFont(resources.fonts.font1)
 	self.runner = 0
 	self.wobble = 1
 	self.mode = 0
@@ -37,6 +36,7 @@ function GameOverState:update(dt)
 end
 
 function GameOverState:draw()
+	love.graphics.setColor(255, 255, 255)
 
 	love.graphics.draw(resources.images.arena)
 	love.graphics.draw(resources.images.cutie2, 390, 200)

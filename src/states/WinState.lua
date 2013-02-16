@@ -8,7 +8,6 @@ require("core/state")
 WinState =  class("WinState", State)
 
 function WinState:__init()
-	love.graphics.setFont(resources.fonts.font1)
 	self.runner = 0
 	self.wobble = 1
 	self.menupoints = {"Give a Cookie",  "Pet your Pet", "Exit"}
@@ -35,6 +34,7 @@ function WinState:update(dt)
 end
 
 function WinState:draw()
+	love.graphics.setColor(255, 255, 255)
 	love.graphics.draw(resources.images.arena)
 	love.graphics.draw(resources.images.cutie2, 390, 200)
 

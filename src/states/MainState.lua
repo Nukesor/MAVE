@@ -33,7 +33,7 @@ function MainState:__init()
 end
 
 function MainState:load()
-   love.graphics.setNewFont()
+   love.graphics.setFont(resources.fonts.default)
 end
 
 function MainState:update(dt)
@@ -77,13 +77,14 @@ function MainState:update(dt)
 end
 
 function MainState:draw()
+    love.graphics.setColor(255, 255, 255)
     
     -- Deklaration der lokalen Variablen
     local playercutiexv, playercutieyv = playercutie.body:getLinearVelocity()
     local cutie2xv, cutie2yv = cutie2.body:getLinearVelocity()
 
     -- Zeichnen der Grafiken
-    love.graphics.setColorMode("replace")
+    love.graphics.setColor(255, 255, 255)
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
     love.graphics.draw(resources.images.arena, 0, 0)
 
@@ -92,7 +93,7 @@ function MainState:draw()
     cutie2:draw()
 
     -- Zeichnen der Ebenen in Farbe Grau
-    love.graphics.setColorMode("modulate")
+    love.graphics.setColor(0, 0, 0)
     love.graphics.setColor(50, 50, 50)
     love.graphics.polygon("fill", plate1.body:getWorldPoints(plate1.shape:getPoints()))
     love.graphics.polygon("fill", plate2.body:getWorldPoints(plate2.shape:getPoints()))
@@ -101,7 +102,7 @@ function MainState:draw()
     love.graphics.polygon("fill", plate5.body:getWorldPoints(plate5.shape:getPoints()))
     love.graphics.polygon("fill", plate6.body:getWorldPoints(plate6.shape:getPoints()))
     love.graphics.polygon("fill", ground.body:getWorldPoints(ground.shape:getPoints()))
-    love.graphics.setColorMode("replace")
+    love.graphics.setColor(255, 255, 255)
 
     -- Zeichnen der Schriftzüge
     love.graphics.print("X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)

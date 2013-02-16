@@ -5,20 +5,31 @@ CreditsState = class("CreditsState", State)
 
 function CreditsState:__init()
 	self.bg = resources.images.arena
-	self.names = {"Code:\nArne Beer\nRafael Epplée", "Graphics:\nRafael Epplée", "Sounds:\nToenjes Peters", 
-					"Idea:\nPaul Bienkowski\nSven-Hendrik Haase\nHans-Ole Hatzel\nToenjes Peters\nRafael Epplée\nArne Beer"}
-	self.y = 60
+	self.names = {
+				{"Code:", "Arne Beer", "Rafael Epplée"}, 
+				{"Graphics:", "Rafael Epplée"}, 
+				{"Sounds:", "Toenjes Peters"},
+				{"Idea:", "Paul Bienkowski", "Sven-Hendrik Haase", "Hans-Ole Hatzel", "Toenjes Peters", "Rafael Epplée", "Arne Beer"}
+				}
 end
 
 function CreditsState:load()
-	love.graphics.setNewFont(20)
+	love.graphics.setFont(resources.fonts.default)
 end
 
 function CreditsState:draw()
+	love.graphics.setColor(255, 255, 255)
 	love.graphics.draw(self.bg, 0, 0)
 
+	love.graphics.setColor(0, 0, 0)
+	local y = 30
 	for i = 1, #self.names, 1 do
-		love.graphics.print(self.names[i], 50, self.y+(i*100))
+		y = y + resources.fonts.default:getHeight()
+		love.graphics.print(self.names[i][1], 50, y)
+		for a = 2, #self.names[i], 1 do
+			y = y + resources.fonts.default:getHeight()
+			love.graphics.print(self.names[i][a], 60, y)
+		end
 	end
 end
 

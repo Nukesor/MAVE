@@ -22,7 +22,8 @@ function love.load()
 
     resources:addSound("bounce1", 'data/sfx/bounce_low_level.ogg')
 
-    resources:addFont("font1", 'data/font/SwankyandMooMoo.ttf')
+    resources:addFont("default", "data/font/SwankyandMooMoo.ttf", 20)
+    resources:addFont("big", "data/font/SwankyandMooMoo.ttf", 60)
 
     resources:load()
     

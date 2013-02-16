@@ -96,10 +96,10 @@ end
 function Cutie:draw()
 
     -- Zeichnen des Cuties und der Particle
-    love.graphics.setColorMode("modulate")
+    love.graphics.setColor(0, 0, 0)
     love.graphics.draw(self.particles.hit, 0, 0)
     love.graphics.draw(self.particles.bleeding, 0, 0)
-    --love.graphics.setColorMode("replace")
+    --love.graphics.setColor(255, 255, 255)
     love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.1, self.scale, 140, 140)
 
     -- Cutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht

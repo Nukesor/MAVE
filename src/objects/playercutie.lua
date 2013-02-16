@@ -105,13 +105,13 @@ function Playercutie:update(dt)
 end
 
 function Playercutie:draw()
-    love.graphics.setColorMode("modulate")
+    love.graphics.setColor(0, 0, 0)
     love.graphics.draw(self.particles.hit, 0, 0)
     love.graphics.draw(self.particles.bleeding, 0, 0)
     if shot.body then
     love.graphics.circle("fill", shot.body:getX(), shot.body:getY(), shot.shape:getRadius())
     end
-    love.graphics.setColorMode("replace")
+    love.graphics.setColor(255, 255, 255)
     love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.1, self.scale, 140, 140)
 
     -- Playercutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht

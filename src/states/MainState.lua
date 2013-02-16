@@ -4,10 +4,12 @@ require("objects/wall")
 require("core/resources")
 require("core/helper")
 require("core/state")
+require("systems/renderSystem")
 
 MainState = class("MainState", State)
 
 function MainState:__init()
+    self.renderSystem = RenderSystem()
 	love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
     world:setCallbacks(beginContact,endContact)

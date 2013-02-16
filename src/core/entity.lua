@@ -1,6 +1,8 @@
 Entity = class("Entity")
 
-self.components = {}
+function Entity:__init()
+    self.components = {}
+end
 
 function Entity:addComponent(component)
     self.components[component.__name] = component

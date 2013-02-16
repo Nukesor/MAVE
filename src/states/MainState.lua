@@ -5,11 +5,19 @@ require("core/resources")
 require("core/helper")
 require("core/state")
 require("systems/renderSystem")
+require("core/entity")
+require("components/drawable")
+require("core/engine")
 
 MainState = class("MainState", State)
 
 function MainState:__init()
-    self.renderSystem = RenderSystem()
+    self.engine = Engine()
+    self.bg = Entity()
+    self.bg:addComponent(Drawable(resources.images.arena, 0, 0, 0, 1, 1, 0, 0))
+    self.engine:addSystem(RenderSystem(), "render")
+    self.engine:addEntity(self.bg)
+
 	love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
     world:setCallbacks(beginContact,endContact)
@@ -79,6 +87,8 @@ function MainState:update(dt)
 end
 
 function MainState:draw()
+    self.engine:draw()
+
     love.graphics.setColor(255, 255, 255)
     
     -- Deklaration der lokalen Variablen
@@ -88,7 +98,6 @@ function MainState:draw()
     -- Zeichnen der Grafiken
     love.graphics.setColor(255, 255, 255)
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
-    love.graphics.draw(resources.images.arena, 0, 0)
 
     -- Cutie Zeichnung und Drawfunktion
     playercutie:draw()

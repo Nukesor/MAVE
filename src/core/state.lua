@@ -1,3 +1,5 @@
+require("core/helper")
+
 State = class("State")
 
 State.renderBelow = false

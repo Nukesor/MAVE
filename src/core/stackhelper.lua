@@ -1,3 +1,5 @@
+require("core/helper")
+
 StackHelper = class("StackHelper")
 
 function StackHelper:__init()

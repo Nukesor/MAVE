@@ -1,9 +1,10 @@
-require("objects/cutie") 
-require("objects/playercutie") 
-require("objects/wall")
 require("core/resources")
 require("core/helper")
 require("core/state")
+
+require("objects/cutie") 
+require("objects/playercutie") 
+require("objects/wall")
 
 MenuState = class("MenuState", State)
 

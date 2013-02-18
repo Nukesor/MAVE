@@ -1,36 +1,59 @@
+require("core/helper")
+require("core/resources")
+require("core/state")
+require("core/entity")
+require("core/engine")
+
 require("objects/cutie")
 require("objects/playercutie") 
 require("objects/wall")
-require("core/resources")
-require("core/helper")
-require("core/state")
+
 require("systems/renderSystem")
-require("core/entity")
+require("systems/polygonSystem")
+
 require("components/drawable")
-require("core/engine")
+require("components/drawablepolygon")
 
 MainState = class("MainState", State)
 
 function MainState:__init()
-    self.engine = Engine()
-    self.bg = Entity()
-    self.bg:addComponent(Drawable(resources.images.arena, 0, 0, 0, 1, 1, 0, 0))
-    self.engine:addSystem(RenderSystem(), "render")
-    self.engine:addEntity(self.bg)
 
-	love.physics.setMeter(64)
+    love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
     world:setCallbacks(beginContact,endContact)
-	playercutie = Playercutie(333, 520, resources.images.cutie1)
-	cutie2 = Cutie(666, 520, resources.images.cutie0)
-	ground = Wall(world, 1000/2, 600, 1050, 10, true, "static")
-    ceiling = Wall(world, 1000/2, -50, 1050, 0, false)
-    plate1 = Wall(world, 20, 250, 10, 200, true, "static")
-    plate2 = Wall(world, 1000/2, 100, 200, 10, true, "static")
-    plate3 = Wall(world, 1000/2, 200, 300, 10, true, "static")
-    plate4 = Wall(world, 1000/2, 300, 400, 10, true, "static")
-    plate5 = Wall(world, 1000/2, 400, 500, 10, true, "static")
-    plate6 = Wall(world, 1000/2, 500, 600, 10, true, "static")
+    playercutie = Playercutie(333, 520, resources.images.cutie1)
+    cutie2 = Cutie(666, 520, resources.images.cutie0)
+
+    self.engine = Engine()
+    self.engine:addSystem(RenderSystem(), "render")
+    self.engine:addSystem(PolygonSystem(), "render")
+
+    self.bg = Entity()
+    self.bg:addComponent(Drawable(resources.images.arena, 0, 0, 0, 1, 1, 0, 0))
+    self.engine:addEntity(self.bg)
+
+    self.wall =  Entity()
+    self.wall:addComponent(DrawablePolygon(world, 1000/2, 600, 1050, 10, "static", true))
+    self.engine:addEntity(self.wall)
+
+    self.wall =  Entity()
+    self.wall:addComponent(DrawablePolygon(world, 1000/2, -50, 1050, 0, "static", true))
+    self.engine:addEntity(self.wall)
+
+    for i = 0, 6, 1 do 
+        local x = 100 + 100 * i
+        local y = 200 + 100 * i 
+        self.wall = Entity()
+        self.wall:addComponent(DrawablePolygon(world, 1000/2, x, y, 10, "static", true))
+        self.engine:addEntity(self.wall)
+    end
+
+    for i = 0, 2, 1 do
+        local y = 100 + i * 100
+        self.wall = Entity()
+        self.wall:addComponent(DrawablePolygon(world, 20, 250, 10, y, "static", true))
+        self.engine:addEntity(self.wall)
+    end
 
     -- Slowmospeed
     self.worldspeed = 1;
@@ -87,10 +110,6 @@ function MainState:update(dt)
 end
 
 function MainState:draw()
-    self.engine:draw()
-
-    love.graphics.setColor(255, 255, 255)
-    
     -- Deklaration der lokalen Variablen
     local playercutiexv, playercutieyv = playercutie.body:getLinearVelocity()
     local cutie2xv, cutie2yv = cutie2.body:getLinearVelocity()
@@ -100,20 +119,9 @@ function MainState:draw()
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
 
     -- Cutie Zeichnung und Drawfunktion
+    self.engine:draw()
     playercutie:draw()
     cutie2:draw()
-
-    -- Zeichnen der Ebenen in Farbe Grau
-    love.graphics.setColor(0, 0, 0)
-    love.graphics.setColor(50, 50, 50)
-    love.graphics.polygon("fill", plate1.body:getWorldPoints(plate1.shape:getPoints()))
-    love.graphics.polygon("fill", plate2.body:getWorldPoints(plate2.shape:getPoints()))
-    love.graphics.polygon("fill", plate3.body:getWorldPoints(plate3.shape:getPoints()))
-    love.graphics.polygon("fill", plate4.body:getWorldPoints(plate4.shape:getPoints()))
-    love.graphics.polygon("fill", plate5.body:getWorldPoints(plate5.shape:getPoints()))
-    love.graphics.polygon("fill", plate6.body:getWorldPoints(plate6.shape:getPoints()))
-    love.graphics.polygon("fill", ground.body:getWorldPoints(ground.shape:getPoints()))
-    love.graphics.setColor(255, 255, 255)
 
     -- Zeichnen der Schriftzüge
     love.graphics.print("X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)
@@ -208,8 +216,8 @@ function beginContact(a, b, coll)
             elseif object2.__name == "Shot" then
                 object2:shutdown()
             end
-        -- Bei auftreffen mit Wall wird Shot zerstört
-        elseif ((object1.__name == "Shot" or object1.__name == "Wall") and (object2.__name == "Wall" or object2.__name == "Shot")) then
+        -- Bei auftreffen mit DrawablePolygon wird Shot zerstört
+        elseif ((object1.__name == "Shot" or object1.__name == "DrawablePolygon") and (object2.__name == "DrawablePolygon" or object2.__name == "Shot")) then
             if object1.__name == "Shot" then
                 object1:shutdown()
              elseif object2.__name == "Shot" then
@@ -218,7 +226,7 @@ function beginContact(a, b, coll)
         end
 
         -- Hüpfen der Cuties auf einem bestimmten Level
-        if (( object1.__name == "Wall" or object1.__name == "Cutie") and (object2.__name == "Cutie" or object2.__name == "Wall")) then
+        if (( object1.__name == "DrawablePolygon" or object1.__name == "Cutie") and (object2.__name == "Cutie" or object2.__name == "DrawablePolygon")) then
             if object1.__name == "Cutie" then
                 local cutiexv, cutieyv = object1.body:getLinearVelocity()
                 object1.body:setLinearVelocity(cutiexv, -200)
@@ -229,7 +237,7 @@ function beginContact(a, b, coll)
         end
 
         -- Hüpfen des Playercuties auf einem bestimmten Level
-        if (( object1.__name == "Wall" or object1.__name == "Playercutie") and (object2.__name == "Playercutie" or object2.__name == "Wall")) then
+        if (( object1.__name == "DrawablePolygon" or object1.__name == "Playercutie") and (object2.__name == "Playercutie" or object2.__name == "DrawablePolygon")) then
             playercutie.jumpcount = 2
             if object1.__name == "Playercutie" then
                 local playercutiexv, playercutieyv = object1.body:getLinearVelocity()

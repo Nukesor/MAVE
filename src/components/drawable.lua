@@ -1,3 +1,5 @@
+require("core/helper")
+
 Drawable = class("Drawable")
 
 function Drawable:__init(image, x, y, r, sx, sy, ox, oy)

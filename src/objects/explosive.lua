@@ -1,4 +1,4 @@
-
+require("core/helper")
 
 Explosive = class("Explosive")
 

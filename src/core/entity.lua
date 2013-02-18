@@ -1,3 +1,5 @@
+require("core/helper")
+
 Entity = class("Entity")
 
 function Entity:__init()

@@ -1,3 +1,5 @@
+require("core/helper")
+
 System = class("System")
 
 function System:__init()

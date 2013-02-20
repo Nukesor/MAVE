@@ -11,6 +11,10 @@ function Cutie:__init(xs,ys, image)
     self.fixture:setUserData(self)
     self.particles = Particles()
     self.body:setMass(0.0192)
+
+    self.jumpactive = 0
+    self.maxyacc = -200
+    self.jumpcount = 2
     
     -- Startwerte
     self.scale= 0.3
@@ -24,6 +28,8 @@ function Cutie:__init(xs,ys, image)
     self.cuteness = 0
     self.mobbelity = 0
     self.lifebefore = 100
+
+    self.check = 0192
 end
 
 
@@ -65,6 +71,18 @@ function Cutie:update(dt)
             self.body:setX(1000 + levelchange)
         end
 
+        if self.yacc then
+            if self.yacc > 0 then
+                self.jumpactive = 0
+            end 
+        end
+        if self.jumpactive == 1 then
+            self.maxyacc = -300
+        elseif self.jumbactive == 0 then
+            self.maxyacc = -200
+        end
+
+
         -- Geschwindigkeitsbegrenzung für Cuties
         if yacc > 800 then
             self.body:setLinearVelocity(xacc, 800)
@@ -82,6 +100,69 @@ function Cutie:update(dt)
         end
 
         -- momentanes Pathfinding des Gegners
+--[[        if xpos >= 500 and (xpos-playercutiex) > 500 then
+            self.body:applyLinearImpulse( 0.5*speed, 0)
+        elseif playercutiex < xpos then
+            self.body:applyLinearImpulse( -0.5*speed, 0)
+        elseif xpos <= 500 and (playercutiex-xpos) > 500 then
+            self.body:applyLinearImpulse( -0.5*speed, 0)
+        elseif  xpos < playercutiex then
+            self.body:applyLinearImpulse( 0.5*speed, 0)
+        end --]]
+
+        -- Ki
+if ypos <= 600 then
+    height = 500
+    if ypos <= 500 then
+        height = 400
+        if ypos <= 500 then
+            height = 300
+            if ypos <= 300 then
+                height = 200
+                if ypos <= 200 then
+                    height = 100
+                end
+            end
+        end
+    end
+end
+
+
+    if playercutiey < height then
+        if self.check == 0 then
+            self.check = 1
+            if playercutiex >= 500 then
+                local direction = 1
+            elseif playercutiey <= 500 then
+                local direction = 0
+            end
+        end
+
+        if  xpos <= (200 + height -100) or xpos >= (1000 - 200 + height - 100) then
+            self.check = 0
+            if xpos >= 500 and (xpos-playercutiex) > 500 then
+                self.body:applyLinearImpulse( 0.5*speed, 0)
+            elseif playercutiex < xpos then
+                self.body:applyLinearImpulse( -0.5*speed, 0)
+            elseif xpos <= 500 and (playercutiex-xpos) > 500 then
+                self.body:applyLinearImpulse( -0.5*speed, 0)
+            elseif  xpos < playercutiex then
+                self.body:applyLinearImpulse( 0.5*speed, 0)
+            end
+            self.jumpactive = 1
+            if self.jumpcount > 0 then
+                self.body:applyLinearImpulse(0, -6)
+                self.jumpcount = self.jumpcount - 1
+            end
+
+        else
+            if direction == 1 then
+                self.body:applyLinearImpulse( 0.5*speed, 0)
+            elseif direction == 0 then
+                self.body:applyLinearImpulse( 0.5*speed, 0)
+            end
+        end
+    else
         if xpos >= 500 and (xpos-playercutiex) > 500 then
             self.body:applyLinearImpulse( 0.5*speed, 0)
         elseif playercutiex < xpos then
@@ -91,6 +172,10 @@ function Cutie:update(dt)
         elseif  xpos < playercutiex then
             self.body:applyLinearImpulse( 0.5*speed, 0)
         end
+     end
+
+
+
 end
 
 function Cutie:draw()

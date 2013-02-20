@@ -15,7 +15,6 @@ function Engine:addEntity(entity)
     for index, system in ipairs(self.allSystems) do
         local add = true
         for index, requiredComponent in ipairs(system:getRequiredComponents()) do
-            print(requiredComponent)
             if not entity.components[requiredComponent] then
                 add = false
             end

@@ -51,7 +51,7 @@ function MainState:__init()
     for i = 0, 2, 1 do
         local y = 100 + i * 100
         self.wall = Entity()
-        self.wall:addComponent(DrawablePolygon(world, 20, 250, 10, y, "static", true))
+        self.wall:addComponent(DrawablePolygon(world, 20, y, 10, 100, "static", true))
         self.engine:addEntity(self.wall)
     end
 
@@ -201,7 +201,6 @@ function beginContact(a, b, coll)
             end
             if object1.__name == "Shot" then
                 object1:shutdown()
-                print("heytest")
             elseif object2.__name == "Shot" then
                 object2:shutdown()
             end
@@ -227,6 +226,7 @@ function beginContact(a, b, coll)
 
         -- Hüpfen der Cuties auf einem bestimmten Level
         if (( object1.__name == "DrawablePolygon" or object1.__name == "Cutie") and (object2.__name == "Cutie" or object2.__name == "DrawablePolygon")) then
+            cutie2.jumpcount = 4
             if object1.__name == "Cutie" then
                 local cutiexv, cutieyv = object1.body:getLinearVelocity()
                 object1.body:setLinearVelocity(cutiexv, -200)

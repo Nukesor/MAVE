@@ -30,7 +30,7 @@ function MainState:__init()
     self.engine:addSystem(PolygonSystem(), "render")
 
     self.bg = Entity()
-    self.bg:addComponent(Drawable(resources.images.arena, 0, 0, 0, 1, 1, 0, 0))
+    self.bg:addComponent(Drawable(resources.images.arena, 0, 1, 1, 0, 0))
     self.bg:addComponent(Position(0, 0))
     self.engine:addEntity(self.bg)
 

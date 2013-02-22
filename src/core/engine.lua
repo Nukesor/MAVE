@@ -8,7 +8,6 @@ function Engine:__init()
     self.allSystems = {}
     self.logicSystems = {}
     self.renderSystems = {}
-    self.startupSystems= {}
 end
 
 function Engine:addEntity(entity)
@@ -45,11 +44,5 @@ end
 function Engine:draw()
     for index, system in ipairs(self.renderSystems) do
         system:update()
-    end
-end
-
-function Engine:startup()
-    for index, system in ipairs(self.startupSystems) do
-        system:startup()
     end
 end

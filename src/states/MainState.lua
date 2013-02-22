@@ -13,6 +13,7 @@ require("systems/polygonSystem")
 
 require("components/drawable")
 require("components/drawablepolygon")
+require("components/position")
 
 MainState = class("MainState", State)
 
@@ -30,6 +31,7 @@ function MainState:__init()
 
     self.bg = Entity()
     self.bg:addComponent(Drawable(resources.images.arena, 0, 0, 0, 1, 1, 0, 0))
+    self.bg:addComponent(Position(0, 0))
     self.engine:addEntity(self.bg)
 
     self.wall =  Entity()

@@ -15,16 +15,13 @@ function Engine:addEntity(entity)
     for index, system in ipairs(self.allSystems) do
         local add = true
         for index, requiredComponent in ipairs(system:getRequiredComponents()) do
-            print(requiredComponent)
             if not entity.components[requiredComponent] then
                 add = false
             end
         end
 
         if add == true then
-            for index, component in ipairs(system:getRequiredComponents()) do
-                system:addComponent(entity.components[component])
-            end
+            system:addEntity(entity)
         end
     end
     table.insert(self.entities, entity)

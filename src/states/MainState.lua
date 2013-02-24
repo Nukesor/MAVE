@@ -13,11 +13,12 @@ require("systems/polygonSystem")
 
 require("components/drawable")
 require("components/drawablepolygon")
+require("components/position")
+require("components/zindex")
 
 MainState = class("MainState", State)
 
 function MainState:__init()
-
     love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
     world:setCallbacks(beginContact,endContact)
@@ -29,7 +30,9 @@ function MainState:__init()
     self.engine:addSystem(PolygonSystem(), "render")
 
     self.bg = Entity()
-    self.bg:addComponent(Drawable(resources.images.arena, 0, 0, 0, 1, 1, 0, 0))
+    self.bg:addComponent(Drawable(resources.images.arena, 0, 1, 1, 0, 0))
+    self.bg:addComponent(Position(0, 0))
+    self.bg:addComponent(ZIndex(1))
     self.engine:addEntity(self.bg)
 
     self.wall =  Entity()

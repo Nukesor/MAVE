@@ -5,8 +5,9 @@ PolygonSystem = class("PolygonSystem", System)
 
 function PolygonSystem:update()
 	love.graphics.setColor(50, 50, 50)
-    for index, component in ipairs(self.targets) do
-        love.graphics.polygon("fill", component.body:getWorldPoints(component.shape:getPoints()))
+    for index, entity in ipairs(self.targets) do
+        local drawable = entity:getComponent("DrawablePolygon")
+        love.graphics.polygon("fill", drawable.body:getWorldPoints(drawable.shape:getPoints()))
     end
 end
 

@@ -36,25 +36,25 @@ function MainState:__init()
     self.engine:addEntity(self.bg)
 
     self.wall =  Entity()
-    self.wall:addComponent(DrawablePolygon(world, 1000/2, 580, 1050, 10, "static", true))
+    self.wall:addComponent(DrawablePolygon(world, 500, 580, 1050, 10, "static", true))
     self.engine:addEntity(self.wall)
 
     self.wall =  Entity()
-    self.wall:addComponent(DrawablePolygon(world, 1000/2, -50, 1050, 0, "static", true))
+    self.wall:addComponent(DrawablePolygon(world, 500, -50, 1050, 0, "static", true))
     self.engine:addEntity(self.wall)
 
-    for i = 0, 6, 1 do 
+    for i = 0, 4, 1 do 
         local x = 100 + 100 * i
         local y = 200 + 100 * i 
         self.wall = Entity()
-        self.wall:addComponent(DrawablePolygon(world, 1000/2, x, y, 10, "static", true))
+        self.wall:addComponent(DrawablePolygon(world, 500, x, y, 10, "static", true))
         self.engine:addEntity(self.wall)
     end
 
-    for i = 0, 2, 1 do
-        local y = 100 + i * 100
+    for i = 0, 1, 1 do
+        local y = 20 + i * 960
         self.wall = Entity()
-        self.wall:addComponent(DrawablePolygon(world, 20, y, 10, 100, "static", true))
+        self.wall:addComponent(DrawablePolygon(world, y, 200, 10, 200, "static", true))
         self.engine:addEntity(self.wall)
     end
 
@@ -114,6 +114,7 @@ end
 
 function MainState:draw()
     -- Deklaration der lokalen Variablen
+    local x, y = playercutie:position()
     local playercutiexv, playercutieyv = playercutie.body:getLinearVelocity()
     local cutie2xv, cutie2yv = cutie2.body:getLinearVelocity()
 
@@ -127,7 +128,7 @@ function MainState:draw()
     cutie2:draw()
 
     -- Zeichnen der Schriftzüge
-    love.graphics.print("X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)
+    love.graphics.print(string.format("%.2f ",x) ..  "    " .. "X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)
     love.graphics.print("X-Vel: " .. string.format("%.2f ",cutie2xv) .. ", Y-Vel: " .. string.format("%.2f ",cutie2yv), 800, 20,0,1,1)
     love.graphics.print("Your Cutie´s life: " .. playercutie.life, 20, 40, 0, 1, 1)
     love.graphics.print("Enemy Cutie´s life: " .. cutie2.life, 840, 40, 0, 1, 1)

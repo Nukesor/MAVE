@@ -50,8 +50,8 @@ function Playercutie:update(dt)
         end
 
         -- Wobble des Playercuties
-        if self.body:getY() > 585 then
-            self.scale = 0.1-((self.body:getY()-585)/100)
+        if self.body:getY() > 565 then
+            self.scale = 0.1-((self.body:getY()-565)/100)
         else
             self.scale = 0.1
         end
@@ -138,8 +138,10 @@ function Playercutie:keypressed(key, u)
         end
     end
     if key == "x" then
-        if shot.body then shot:shutdown() end
+        if shot.body then
+        else
             shot = Shot(self.body:getX(), self.body:getY()-20, cutie2.body:getX(), cutie2.body:getY())
+        end
     end 
 end
 

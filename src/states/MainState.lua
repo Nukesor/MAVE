@@ -36,7 +36,7 @@ function MainState:__init()
     self.engine:addEntity(self.bg)
 
     self.wall =  Entity()
-    self.wall:addComponent(DrawablePolygon(world, 1000/2, 600, 1050, 10, "static", true))
+    self.wall:addComponent(DrawablePolygon(world, 1000/2, 580, 1050, 10, "static", true))
     self.engine:addEntity(self.wall)
 
     self.wall =  Entity()

@@ -141,10 +141,10 @@ end
             end
         end
 
-        if  xpos <= (200 + (5-height/100)*50) or xpos >= (800 - (6-height/100)*50) then
+        if  xpos <= (200 + (5-height/100)*50) or xpos >= (800 - (5-height/100)*50) then
             self.check = 0
             self.body:applyLinearImpulse(0, -6)
-            if xpos > 300 then
+            if ypos > 300 then
                 if xpos >= 500 and (xpos-playercutiex) > 500 then
                     self.body:applyLinearImpulse( 0.5*speed, 0)
                 elseif playercutiex < xpos then
@@ -171,7 +171,48 @@ end
             if direction == 1 then
                 self.body:applyLinearImpulse( 0.5*speed, 0)
             elseif direction == 0 then
+                self.body:applyLinearImpulse( -0.5*speed, 0)
+            end
+        end
+
+    elseif playercutiey > height+100 then
+        if self.check == 0 then
+            self.check = 1
+            if playercutiex >= 500 then
+                local direction = 1
+            elseif playercutiex < 500 then
+                local direction = 0
+            end
+        end
+        if  ypos <= (350 - (height/100)*50) or xpos >= (650 + (height/100)*50) then
+            self.check = 0
+            if xpos > 300 then
+                if xpos >= 500 and (xpos-playercutiex) > 500 then
+                    self.body:applyLinearImpulse( 0.5*speed, 0)
+                elseif playercutiex < xpos then
+                    self.body:applyLinearImpulse( -0.5*speed, 0)
+                elseif xpos <= 500 and (playercutiex-xpos) > 500 then
+                    self.body:applyLinearImpulse( -0.5*speed, 0)
+                elseif  xpos < playercutiex then
+                    self.body:applyLinearImpulse( 0.5*speed, 0)
+                end
+            else
+                if playercutiex < xpos then
+                    self.body:applyLinearImpulse( -0.5*speed, 0)
+                elseif xpos < playercutiex then
+                    self.body:applyLinearImpulse( 0.5*speed, 0)
+                end
+            end 
+            --[[self.jumpactive = 1
+            if self.jumpcount > 0 then
+                self.body:applyLinearImpulse(0, -6)
+                self.jumpcount = self.jumpcount - 1
+            end --]]
+        else
+            if direction == 1 then
                 self.body:applyLinearImpulse( 0.5*speed, 0)
+            elseif direction == 0 then
+                self.body:applyLinearImpulse( -0.5*speed, 0)
             end
         end
     else

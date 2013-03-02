@@ -35,6 +35,7 @@ Attribute:
 		- Leicht zu implementieren
 		- Mobbelligkeit: Wegstoßung, weniger Abbremsung? Alternativ hinzufügen von Masse.
 			-Masse könnte zu schnell op werden.
+			
 - MONSTERBEAMZ
 - Attacken/Funktionen:
 	- Dashing
@@ -56,7 +57,4 @@ Sounds:
 Grafik:
 	Levels von hässlich zu cute, wie bei den cuties
 
-Grobentwürfe:
-
- Überlegung ob Playercutie nicht dauerhaft auf dem Boden sein sollte und nur die EnemyCuties hüpfen.
- 
+Grobentwürfe: 

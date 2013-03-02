@@ -4,11 +4,7 @@
 # Code
 - Camerashake verbessern mit
     - love.graphics.rotate(angle)
-- Ki für zwei Dimensionen
 - Nachsehen ob Abfrage an welcher Seite des Rechtecks die Kollision erfolgt möglich
-- Winkelabfrage zwischen zwei Bodys.
-- Playercutie buggt sich am anfang ein
-- Cuties kleben manchmal am boden.
 
 # GFX
 - Arena fertig

@@ -22,12 +22,18 @@ function MainState:__init()
     love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
     world:setCallbacks(beginContact,endContact)
-    playercutie = Playercutie(333, 520, resources.images.cutie1)
-    cutie2 = Cutie(666, 520, resources.images.cutie0)
 
     self.engine = Engine()
     self.engine:addSystem(RenderSystem(), "render")
     self.engine:addSystem(PolygonSystem(), "render")
+
+    playerEntity = Entity()
+    playercutie = Playercutie(333, 520, resources.images.cutie1, playerEntity)
+    self.engine:addEntity(playerEntity)
+
+    cutie2Entity = Entity()
+    cutie2 = Cutie(666, 520, resources.images.cutie0, cutie2Entity)
+    self.engine:addEntity(cutie2Entity)
 
     self.bg = Entity()
     self.bg:addComponent(Drawable(resources.images.arena, 0, 1, 1, 0, 0))

@@ -3,7 +3,7 @@ require("objects/particles")
 
 Cutie = class("Cutie")
 
-function Cutie:__init(xs,ys, image)
+function Cutie:__init(xs,ys, image, entity)
     self.body = love.physics.newBody(world, xs, ys, "dynamic")
     self.shape = love.physics.newCircleShape(9) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 

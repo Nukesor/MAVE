@@ -4,7 +4,12 @@ require("objects/shot")
 
 Playercutie = class("Playercutie")
 
-function Playercutie:__init(xs,ys, image)
+function Playercutie:__init(xs, ys, image, entity)
+    self.entity = entity
+    self.entity:addComponent(Position(xs, ys))
+    self.entity:addComponent(Drawable(image, 0, 0.1, 0.1, 140, 140))
+    self.entity:addComponent(ZIndex(100))
+
     self.body = love.physics.newBody(world, xs, ys, "dynamic")
     self.shape = love.physics.newCircleShape(9) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
@@ -39,69 +44,71 @@ function Playercutie:update(dt)
     if shot then shot:update(dt) end
 
     -- Deklaration der lokalen Variablen
-    local xpos, ypos =  self:position()
     local xacc, yacc = self.body:getLinearVelocity()
 
-        -- Cutienavigation left right
-        if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
-            playercutie.body:applyLinearImpulse(0.5, 0)
-        elseif love.keyboard.isDown("a") or love.keyboard.isDown("left") then
-            playercutie.body:applyLinearImpulse(-0.5, 0)
-        end
+    -- Cutienavigation left right
+    if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
+        playercutie.body:applyLinearImpulse(0.5, 0)
+    elseif love.keyboard.isDown("a") or love.keyboard.isDown("left") then
+        playercutie.body:applyLinearImpulse(-0.5, 0)
+    end
 
-        -- Wobble des Playercuties
-        if self.body:getY() > 565 then
-            self.scale = 0.1-((self.body:getY()-565)/100)
-        else
-            self.scale = 0.1
-        end
+    -- Wobble des Playercuties
+    if self.body:getY() > 560 then
+        self.entity:getComponent("Drawable").sy = 0.1-((self.body:getY()-560)/100)
+    else
+        self.entity:getComponent("Drawable").sy = 0.1
+    end
 
-        -- Particle effects des Playercuties
-        if self.life < self.lifebefore then
-            self.particles.hit:setPosition(self:position())
-            self.particles.hit:start()
-        end
-        if self.life < 20 then
-            self.particles.bleeding:setPosition(self:position())
-            self.particles.bleeding:start()
-        end
-        self.lifebefore = self.life
+    -- Particle effects des Playercuties
+    if self.life < self.lifebefore then
+        self.particles.hit:setPosition(self:position())
+        self.particles.hit:start()
+    end
+    if self.life < 20 then
+        self.particles.bleeding:setPosition(self:position())
+        self.particles.bleeding:start()
+    end
+    self.lifebefore = self.life
 
-        --  Implementation einer durchlaufbaren Welt
-        local levelchange = self.body:getX()
-        if levelchange > 1000 then
-            self.body:setX(levelchange - 1000)
-        elseif levelchange < 0 then 
-            self.body:setX(1000 + levelchange)
-        end
+    --  Implementation einer durchlaufbaren Welt
+    local levelchange = self.body:getX()
+    if levelchange > 1000 then
+        self.body:setX(levelchange - 1000)
+    elseif levelchange < 0 then 
+        self.body:setX(1000 + levelchange)
+    end
 
-        -- Begrenzung der Hüpfhöhe des Playercuties, außer bei Jumps
-        if self.yacc then
-            if self.yacc > 0 then
-                self.jumpactive = 0
-            end 
-        end
-        if self.jumpactive == 1 then
-            self.maxyacc = -300
-        elseif self.jumbactive == 0 then
-            self.maxyacc = -200
-        end
+    -- Begrenzung der Hüpfhöhe des Playercuties, außer bei Jumps
+    if self.yacc then
+        if self.yacc > 0 then
+            self.jumpactive = 0
+        end 
+    end
+    if self.jumpactive == 1 then
+        self.maxyacc = -300
+    elseif self.jumbactive == 0 then
+        self.maxyacc = -200
+    end
 
-        -- Geschwindigkeitsbegrenzung für Playercutie
-        if yacc > 800 then
-            self.body:setLinearVelocity(xacc, 800)
-            yacc = 800
-        elseif yacc < self.maxyacc then
-            self.body:setLinearVelocity(xacc, self.maxyacc)
-            yacc = self.maxyacc
-        end
-        if xacc > 500 then
-            self.body:setLinearVelocity(500, yacc)
-            xacc = 500
-        elseif xacc < -500 then
-            self.body:setLinearVelocity(-500, yacc)
-            xacc = 500
-        end
+    -- Geschwindigkeitsbegrenzung für Playercutie
+    if yacc > 800 then
+        self.body:setLinearVelocity(xacc, 800)
+        yacc = 800
+    elseif yacc < self.maxyacc then
+        self.body:setLinearVelocity(xacc, self.maxyacc)
+        yacc = self.maxyacc
+    end
+    if xacc > 500 then
+        self.body:setLinearVelocity(500, yacc)
+        xacc = 500
+    elseif xacc < -500 then
+        self.body:setLinearVelocity(-500, yacc)
+        xacc = 500
+    end
+
+    self.entity:getComponent("Position").x = self.body:getX()
+    self.entity:getComponent("Position").y = self.body:getY()
 end
 
 function Playercutie:draw()
@@ -112,7 +119,6 @@ function Playercutie:draw()
     love.graphics.circle("fill", shot.body:getX(), shot.body:getY(), shot.shape:getRadius())
     end
     love.graphics.setColor(255, 255, 255)
-    love.graphics.draw(self.image, self.body:getX(), self.body:getY(), 0, 0.1, self.scale, 140, 140)
 
     -- Playercutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht
     if self.body:getX() < 50 then 
@@ -146,8 +152,8 @@ function Playercutie:keypressed(key, u)
 end
 
 function Playercutie:position()
-    local xpos = self.body:getX()
-    local ypos = self.body:getY()
+    local xpos = self.entity:getComponent("Position").x
+    local ypos = self.entity:getComponent("Position").y
     return xpos, ypos
 end 
 

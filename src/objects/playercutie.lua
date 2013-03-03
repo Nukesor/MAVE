@@ -1,6 +1,7 @@
 require("core/helper")
 require("objects/particles")
 require("objects/shot")
+require("components/physics")
 
 Playercutie = class("Playercutie")
 
@@ -13,6 +14,9 @@ function Playercutie:__init(xs, ys, image, entity)
     self.body = love.physics.newBody(world, xs, ys, "dynamic")
     self.shape = love.physics.newCircleShape(9) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
+
+    self.entity:addComponent(Physics(self.body, self.fixture, self.shape))
+
     self.fixture:setRestitution(1)
     self.particles = Particles()
     self.fixture:setUserData(self)
@@ -23,7 +27,6 @@ function Playercutie:__init(xs, ys, image, entity)
     self.jumpcount = 2
 
     -- Startwerte
-    self.scale= 0.3
     self.startx = xs
     self.starty = ys
     self.image = image
@@ -53,12 +56,13 @@ function Playercutie:update(dt)
         playercutie.body:applyLinearImpulse(-0.5, 0)
     end
 
-    -- Wobble des Playercuties
+    --[[ Wobble des Playercuties
     if self.body:getY() > 560 then
         self.entity:getComponent("Drawable").sy = 0.1-((self.body:getY()-560)/100)
     else
         self.entity:getComponent("Drawable").sy = 0.1
     end
+    --]]
 
     -- Particle effects des Playercuties
     if self.life < self.lifebefore then
@@ -122,9 +126,9 @@ function Playercutie:draw()
 
     -- Playercutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht
     if self.body:getX() < 50 then 
-        love.graphics.draw(self.image, self.body:getX()+1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)
+        love.graphics.draw(self.image, self.body:getX()+1000, self.body:getY(), 0, 0.1, self.entity:getComponent("Drawable").sy, 140, 140)
     elseif self.body:getX() > 950 then
-        love.graphics.draw(self.image, self.body:getX()-1000, self.body:getY(), 0, 0.1, self.scale, 140, 140)
+        love.graphics.draw(self.image, self.body:getX()-1000, self.body:getY(), 0, 0.1, self.entity:getComponent("Drawable").sy, 140, 140)
     end
 end
 
@@ -174,6 +178,6 @@ function Playercutie:restart()
 end
 
 function Playercutie:shutdown()
-    self.fixture:destroy()
+    self.entity:getComponent("Physics").fixture:destroy()
     self.body:destroy()
 end

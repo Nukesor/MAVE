@@ -10,6 +10,7 @@ require("objects/wall")
 
 require("systems/renderSystem")
 require("systems/polygonSystem")
+require("systems/wobbleSystem")
 
 require("components/drawable")
 require("components/drawablepolygon")
@@ -26,6 +27,7 @@ function MainState:__init()
     self.engine = Engine()
     self.engine:addSystem(RenderSystem(), "render")
     self.engine:addSystem(PolygonSystem(), "render")
+    self.engine:addSystem(WobbleSystem(), "logic")
 
     playerEntity = Entity()
     playercutie = Playercutie(333, 520, resources.images.cutie1, playerEntity)
@@ -113,6 +115,7 @@ function MainState:update(dt)
     end
 
     -- Update Functions
+    self.engine:update()
     playercutie:update(dt)
     cutie2:update(dt)
 	world:update(dt, self.worldspeed)

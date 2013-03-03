@@ -5,7 +5,7 @@ RenderSystem = class("RenderSystem", System)
 
 function RenderSystem:update()
 	love.graphics.setColor(255, 255, 255)
-    for index, entity in pairs(self.targets) do
+    for index, entity in ipairs(self.targets) do
         local drawable = entity:getComponent("Drawable")
         local pos = entity:getComponent("Position")
         love.graphics.draw(drawable.image, pos.x, pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
@@ -17,5 +17,6 @@ function RenderSystem:getRequiredComponents()
 end
 
 function RenderSystem:addEntity(entity)
-    self.targets[entity:getComponent("ZIndex").index] = entity
+    table.insert(self.targets, entity)
+    table.sort(self.targets, function(a, b) return a:getComponent("ZIndex").index < b:getComponent("ZIndex").index end)
 end

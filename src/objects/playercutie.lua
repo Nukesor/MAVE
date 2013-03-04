@@ -56,21 +56,13 @@ function Playercutie:update(dt)
         playercutie.body:applyLinearImpulse(-0.5, 0)
     end
 
-    --[[ Wobble des Playercuties
-    if self.body:getY() > 560 then
-        self.entity:getComponent("Drawable").sy = 0.1-((self.body:getY()-560)/100)
-    else
-        self.entity:getComponent("Drawable").sy = 0.1
-    end
-    --]]
-
     -- Particle effects des Playercuties
     if self.life < self.lifebefore then
-        self.particles.hit:setPosition(self:position())
+        self.particles.hit:setPosition(self.body:getX(), self.body:getY())
         self.particles.hit:start()
     end
     if self.life < 20 then
-        self.particles.bleeding:setPosition(self:position())
+        self.particles.bleeding:setPosition(self.body:getX(), self.body:getY())
         self.particles.bleeding:start()
     end
     self.lifebefore = self.life
@@ -86,29 +78,8 @@ function Playercutie:update(dt)
     -- Begrenzung der Hüpfhöhe des Playercuties, außer bei Jumps
     if self.yacc then
         if self.yacc > 0 then
-            self.jumpactive = 0
+            self.jumpactive = 0          
         end 
-    end
-    if self.jumpactive == 1 then
-        self.maxyacc = -300
-    elseif self.jumbactive == 0 then
-        self.maxyacc = -200
-    end
-
-    -- Geschwindigkeitsbegrenzung für Playercutie
-    if yacc > 800 then
-        self.body:setLinearVelocity(xacc, 800)
-        yacc = 800
-    elseif yacc < self.maxyacc then
-        self.body:setLinearVelocity(xacc, self.maxyacc)
-        yacc = self.maxyacc
-    end
-    if xacc > 500 then
-        self.body:setLinearVelocity(500, yacc)
-        xacc = 500
-    elseif xacc < -500 then
-        self.body:setLinearVelocity(-500, yacc)
-        xacc = 500
     end
 
     self.entity:getComponent("Position").x = self.body:getX()

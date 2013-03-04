@@ -153,6 +153,7 @@ function MainState:restart()
     cutie2:restart() 
     if shot.body then shot:shutdown() end
 end
+
 function MainState:reset()
     playercutie:reset()
     cutie2:reset()
@@ -178,6 +179,8 @@ function MainState:keypressed(key, u)
         cutie2.life = 0
     elseif key == "b" then
         self.shaketimer = 0.5
+    elseif key == "y" then
+        self.engine:removeEntity(playerEntity)
     end
 end
 

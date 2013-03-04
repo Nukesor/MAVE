@@ -46,9 +46,6 @@ function Playercutie:update(dt)
     self.particles.bleeding:update(dt)
     if shot then shot:update(dt) end
 
-    -- Deklaration der lokalen Variablen
-    local xacc, yacc = self.body:getLinearVelocity()
-
     -- Cutienavigation left right
     if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
         playercutie.body:applyLinearImpulse(0.5, 0)
@@ -66,14 +63,6 @@ function Playercutie:update(dt)
         self.particles.bleeding:start()
     end
     self.lifebefore = self.life
-
-    --  Implementation einer durchlaufbaren Welt
-    local levelchange = self.body:getX()
-    if levelchange > 1000 then
-        self.body:setX(levelchange - 1000)
-    elseif levelchange < 0 then 
-        self.body:setX(1000 + levelchange)
-    end
 
     -- Begrenzung der Hüpfhöhe des Playercuties, außer bei Jumps
     if self.yacc then

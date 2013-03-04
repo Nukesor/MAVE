@@ -119,10 +119,10 @@ function MainState:update(dt)
     end
 
     -- Update Functions
-    self.engine:update()
+    self.engine:update(dt)
     playercutie:update(dt)
     cutie2:update(dt)
-	world:update(dt, self.worldspeed)
+	world:update(dt)
 end
 
 function MainState:draw()

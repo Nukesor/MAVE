@@ -1,7 +1,9 @@
 require("core/helper")
 require("objects/particles")
 require("objects/shot")
+
 require("components/physics")
+require("components/level")
 
 Playercutie = class("Playercutie")
 

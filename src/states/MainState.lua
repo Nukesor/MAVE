@@ -178,6 +178,8 @@ function MainState:keypressed(key, u)
         cutie2.life = 0
     elseif key == "b" then
         self.shaketimer = 0.5
+    elseif key == "y" then
+        self.engine:removeEntity(playerEntity)
     end
 end
 

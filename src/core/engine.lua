@@ -11,9 +11,9 @@ function Engine:__init()
 end
 
 function Engine:addEntity(entity)
-    for index, system in ipairs(self.allSystems) do
+    for index, system in pairs(self.allSystems) do
         local add = true
-        for index, requiredComponent in ipairs(system:getRequiredComponents()) do
+        for index, requiredComponent in pairs(system:getRequiredComponents()) do
             if not entity.components[requiredComponent] then
                 add = false
             end
@@ -24,6 +24,16 @@ function Engine:addEntity(entity)
         end
     end
     table.insert(self.entities, entity)
+end
+
+function Engine:removeEntity(entity)
+    for key, system in pairs(self.allSystems) do
+        for key2, systemEntity in pairs(system:getEntities()) do
+            if systemEntity == entity then    
+                system:removeEntity(entity)
+            end
+        end
+    end
 end
 
 function Engine:addSystem(system, type)

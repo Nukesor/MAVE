@@ -56,17 +56,17 @@ function MainState:__init()
     self.engine:addEntity(self.wall)
 
     for i = 0, 4, 1 do 
-        local x = 100 + 100 * i
-        local y = 200 + 100 * i 
+        local y = 100 + 100 * i
+        local xbreite = 200 + 100 * i 
         self.wall = Entity()
-        self.wall:addComponent(DrawablePolygon(world, 500, x, y, 10, "static", true))
+        self.wall:addComponent(DrawablePolygon(world, 500, y, xbreite, 10, "static", true))
         self.engine:addEntity(self.wall)
     end
 
     for i = 0, 1, 1 do
-        local y = 20 + i * 960
+        local x = 20 + i * 960
         self.wall = Entity()
-        self.wall:addComponent(DrawablePolygon(world, y, 200, 10, 200, "static", true))
+        self.wall:addComponent(DrawablePolygon(world, x, 200, 10, 200, "static", true))
         self.engine:addEntity(self.wall)
     end
 
@@ -145,6 +145,7 @@ function MainState:draw()
     love.graphics.print("X-Vel: " .. string.format("%.2f ",cutie2xv) .. ", Y-Vel: " .. string.format("%.2f ",cutie2yv), 800, 20,0,1,1)
     love.graphics.print("Your Cutie´s life: " .. playercutie.life, 20, 40, 0, 1, 1)
     love.graphics.print("Enemy Cutie´s life: " .. cutie2.life, 840, 40, 0, 1, 1)
+    love.graphics.print("Height: " .. height, 60, 80, 0, 1.5, 1.5)
 end
 
 function MainState:restart()

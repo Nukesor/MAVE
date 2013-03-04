@@ -152,6 +152,7 @@ function MainState:restart()
     cutie2:restart() 
     if shot.body then shot:shutdown() end
 end
+
 function MainState:reset()
     playercutie:reset()
     cutie2:reset()

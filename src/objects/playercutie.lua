@@ -10,6 +10,7 @@ function Playercutie:__init(xs, ys, image, entity)
     self.entity:addComponent(Position(xs, ys))
     self.entity:addComponent(Drawable(image, 0, 0.1, 0.1, 140, 140))
     self.entity:addComponent(ZIndex(100))
+    self.entity:addComponent(Level(0))
 
     self.body = love.physics.newBody(world, xs, ys, "dynamic")
     self.shape = love.physics.newCircleShape(9) 
@@ -23,7 +24,6 @@ function Playercutie:__init(xs, ys, image, entity)
     self.body:setMass(0.0192)
     -- Variablen für Jumpbegrenzung
     self.jumpactive = 0
-    self.maxyacc = -200
     self.jumpcount = 2
 
     -- Startwerte
@@ -32,7 +32,6 @@ function Playercutie:__init(xs, ys, image, entity)
     self.image = image
 
     -- Attribute
-    self.level = 0
     self.life = 100
     self.cuteness = 0
     self.mobbelity = 0

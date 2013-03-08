@@ -57,4 +57,10 @@ Sounds:
 Grafik:
 	Levels von hässlich zu cute, wie bei den cuties
 
-Grobentwürfe: 
+Steuerung:
+
+WAD: Bewegen nach oben/rechts/links
+S: Block
+Space: Slowmo starten/stoppen
+Linksklick: Spezialaktion (Schuss, C4 Platzieren...)
+Rechtsklick: Dash

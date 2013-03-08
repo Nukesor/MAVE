@@ -178,7 +178,7 @@ end
                 local direction = 0
             end
         end
-        if  xpos <= (390 - (height/100)*50) or xpos >= (610 + (height/100)*50) then
+        if  xpos < (390 - (height/100)*50) or xpos > (610 + (height/100)*50) then
             self.check = 0
             if ypos > 300 then
                 if xpos < playercutiex and (playercutiex - xpos) < 500 then

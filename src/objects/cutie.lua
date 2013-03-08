@@ -29,7 +29,7 @@ function Cutie:__init(xs,ys, image, entity)
     self.mobbelity = 0
     self.lifebefore = 100
 
-    self.check = 0192
+    self.check = 0
 end
 
 
@@ -112,17 +112,17 @@ function Cutie:update(dt)
 
         -- Ki
 if ypos <= 579 then
-    height = 500
+    self.height = 500
     if ypos <= 495 then
-        height = 400
+        self.height = 400
         if ypos <= 395 then
-            height = 300
+            self.height = 300
             if ypos <= 295 then
-                height = 200
+                self.height = 200
                 if ypos <= 195 then
-                    height = 100
+                    self.height = 100
                     if ypos <= 95 then
-                        height = 0
+                        self.height = 0
                     end
                 end
             end
@@ -131,17 +131,17 @@ if ypos <= 579 then
 end
 
 
-    if playercutiey < height then
+    if playercutiey < self.height then
         if self.check == 0 then
             self.check = 1
             if playercutiex > 500 then
-                local direction = 1
+                self.direction = 1
             elseif playercutiey < 500 then
-                local direction = 0
+                self.direction = 0
             end
         end
 
-        if  xpos <= (200 + (5-height/100)*50) or xpos >= (800 - (5-height/100)*50) then
+        if  xpos <= (200 + (5-self.height/100)*50) or xpos >= (800 - (5-self.height/100)*50) then
             self.check = 0
             self.body:applyLinearImpulse(0, -6)
             if ypos > 300 then
@@ -162,23 +162,23 @@ end
                 end
             end  
         else
-            if direction == 1 then
+            if self.direction == 1 then
                 self.body:applyLinearImpulse( 0.5*speed, 0)
-            elseif direction == 0 then
+            elseif self.direction == 0 then
                 self.body:applyLinearImpulse( -0.5*speed, 0)
             end
         end
 
-    elseif playercutiey > height+100 then
+    elseif playercutiey > (self.height+100) then
         if self.check == 0 then
             self.check = 1
             if playercutiex > 500 then
-                local direction = 1
+                self.direction = 1
             elseif playercutiex < 500 then
-                local direction = 0
+                self.direction = 0
             end
         end
-        if  xpos < (390 - (height/100)*50) or xpos > (610 + (height/100)*50) then
+        if  xpos < (390 - (self.height/100)*50) or xpos > (610 + (self.height/100)*50) then
             self.check = 0
             if ypos > 300 then
                 if xpos < playercutiex and (playercutiex - xpos) < 500 then
@@ -198,9 +198,12 @@ end
                 end
             end
         else
-            if direction == 1 then
+            print("rofl1.2")
+            print(self.check)
+            print(self.direction)
+            if self.direction == 1 then
                 self.body:applyLinearImpulse( 0.5*speed, 0)
-            elseif direction == 0 then
+            elseif self.direction == 0 then
                 self.body:applyLinearImpulse( -0.5*speed, 0)
             end
         end
@@ -224,9 +227,6 @@ end
             end
         end  
      end
-
-
-
 end
 
 function Cutie:draw()

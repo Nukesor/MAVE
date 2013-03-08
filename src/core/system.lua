@@ -7,7 +7,7 @@ function System:__init()
     self.targets = {}
 end
 
-function System:update() end
+function System:update(dt) end
 
 function System:getRequiredComponents() end
 

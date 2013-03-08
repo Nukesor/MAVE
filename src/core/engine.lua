@@ -45,9 +45,9 @@ function Engine:addSystem(system, type)
     table.insert(self.allSystems, system)
 end
 
-function Engine:update()
+function Engine:update(dt)
     for index, system in ipairs(self.logicSystems) do
-        system:update()
+        system:update(dt)
     end
 end
 

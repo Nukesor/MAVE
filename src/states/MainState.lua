@@ -17,6 +17,7 @@ require("components/drawable")
 require("components/drawablepolygon")
 require("components/position")
 require("components/zindex")
+require("components/isCutie")
 
 MainState = class("MainState", State)
 
@@ -34,6 +35,7 @@ function MainState:__init()
 
     playerEntity = Entity()
     playercutie = Playercutie(333, 520, resources.images.cutie1, playerEntity)
+    playerEntity:addComponent(IsCutie())
     engine:addEntity(playerEntity)
 
     cutie2Entity = Entity()

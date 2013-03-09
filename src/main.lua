@@ -36,7 +36,7 @@ function love.load()
     win = WinState()
     gameover = GameOverState()
     stack = StackHelper()
-    shot = Shot(-100, -100, 0, 0, 0, 0)
+    shot = Shot(-100, -100, 0, 0, Entity())
 
     stack:push(menu)
 end

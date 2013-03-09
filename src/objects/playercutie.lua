@@ -111,9 +111,9 @@ function Playercutie:keypressed(key, u)
     if key == "x" then
         if shot.body then
         else
-            local shotEntity = Entity()
-            engine:addEntity(shotEntity)
-            shot = Shot(self.body:getX(), self.body:getY()-20, cutie2.body:getX(), cutie2.body:getY(), shotEntity)
+            self.shotEntity = Entity()
+            shot = Shot(self.body:getX(), self.body:getY()-20, cutie2.body:getX(), cutie2.body:getY(), self.shotEntity)
+            engine:addEntity(self.shotEntity)
         end
     end 
 end

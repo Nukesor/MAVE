@@ -198,9 +198,6 @@ end
                 end
             end
         else
-            print("rofl1.2")
-            print(self.check)
-            print(self.direction)
             if self.direction == 1 then
                 self.body:applyLinearImpulse( 0.5*speed, 0)
             elseif self.direction == 0 then

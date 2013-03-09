@@ -22,7 +22,7 @@ function Playercutie:__init(xs, ys, image, entity)
 
     self.fixture:setRestitution(1)
     self.particles = Particles()
-    self.fixture:setUserData(self)
+    self.fixture:setUserData({self, self.entity})
     self.body:setMass(0.0192)
     -- Variablen für Jumpbegrenzung
     self.jumpactive = 0
@@ -111,7 +111,9 @@ function Playercutie:keypressed(key, u)
     if key == "x" then
         if shot.body then
         else
-            shot = Shot(self.body:getX(), self.body:getY()-20, cutie2.body:getX(), cutie2.body:getY())
+            local shotEntity = Entity()
+            engine:addEntity(shotEntity)
+            shot = Shot(self.body:getX(), self.body:getY()-20, cutie2.body:getX(), cutie2.body:getY(), shotEntity)
         end
     end 
 end

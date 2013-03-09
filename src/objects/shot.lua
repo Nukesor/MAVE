@@ -2,13 +2,13 @@ require("core/helper")
 
 Shot = class("Shot")
 
-function Shot:__init(x, y, xt, yt)
+function Shot:__init(x, y, xt, yt, entity)
     self.body = love.physics.newBody(world, x, y, "dynamic")
     self.shape = love.physics.newCircleShape(3) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 0) 
     self.fixture:setRestitution(1)
     self.particles = Particles()
-    self.fixture:setUserData(self)
+    self.fixture:setUserData({self, entity})
     if math.abs(xt-x) < 500 then
         self.akat = xt - x
         self.gkat = yt - y

@@ -6,7 +6,6 @@ require("core/engine")
 
 require("objects/cutie")
 require("objects/playercutie") 
-require("objects/wall")
 
 require("systems/renderSystem")
 require("systems/polygonSystem")
@@ -26,48 +25,48 @@ function MainState:__init()
     world = love.physics.newWorld(0, 9.81*64, true)
     world:setCallbacks(beginContact,endContact)
 
-    self.engine = Engine()
-    self.engine:addSystem(RenderSystem(), "render")
-    self.engine:addSystem(PolygonSystem(), "render")
-    self.engine:addSystem(WobbleSystem(), "logic")
-    self.engine:addSystem(MaxSpeedSystem(), "logic")
-    self.engine:addSystem(SideChangeSystem(), "logic")
+    engine = Engine()
+    engine:addSystem(RenderSystem(), "render")
+    engine:addSystem(PolygonSystem(), "render")
+    engine:addSystem(WobbleSystem(), "logic")
+    engine:addSystem(MaxSpeedSystem(), "logic")
+    engine:addSystem(SideChangeSystem(), "logic")
 
     playerEntity = Entity()
     playercutie = Playercutie(333, 520, resources.images.cutie1, playerEntity)
-    self.engine:addEntity(playerEntity)
+    engine:addEntity(playerEntity)
 
     cutie2Entity = Entity()
     cutie2 = Cutie(666, 520, resources.images.cutie0, cutie2Entity)
-    self.engine:addEntity(cutie2Entity)
+    engine:addEntity(cutie2Entity)
 
     self.bg = Entity()
     self.bg:addComponent(Drawable(resources.images.arena, 0, 1, 1, 0, 0))
     self.bg:addComponent(Position(0, 0))
     self.bg:addComponent(ZIndex(1))
-    self.engine:addEntity(self.bg)
+    engine:addEntity(self.bg)
 
     self.wall =  Entity()
-    self.wall:addComponent(DrawablePolygon(world, 500, 580, 1050, 10, "static", true))
-    self.engine:addEntity(self.wall)
+    self.wall:addComponent(DrawablePolygon(world, 500, 580, 1050, 10, "static", self.wall))
+    engine:addEntity(self.wall)
 
     self.wall =  Entity()
-    self.wall:addComponent(DrawablePolygon(world, 500, -50, 1050, 0, "static", true))
-    self.engine:addEntity(self.wall)
+    self.wall:addComponent(DrawablePolygon(world, 500, -50, 1050, 0, "static", self.wall))
+    engine:addEntity(self.wall)
 
     for i = 0, 4, 1 do 
         local y = 100 + 100 * i
         local xbreite = 200 + 100 * i 
         self.wall = Entity()
-        self.wall:addComponent(DrawablePolygon(world, 500, y, xbreite, 10, "static", true))
-        self.engine:addEntity(self.wall)
+        self.wall:addComponent(DrawablePolygon(world, 500, y, xbreite, 10, "static", self.wall))
+        engine:addEntity(self.wall)
     end
 
     for i = 0, 1, 1 do
         local x = 20 + i * 960
         self.wall = Entity()
-        self.wall:addComponent(DrawablePolygon(world, x, 200, 10, 200, "static", true))
-        self.engine:addEntity(self.wall)
+        self.wall:addComponent(DrawablePolygon(world, x, 200, 10, 200, "static", self.wall))
+        engine:addEntity(self.wall)
     end
 
     -- Slowmospeed
@@ -119,7 +118,7 @@ function MainState:update(dt)
     end
 
     -- Update Functions
-    self.engine:update(dt)
+    engine:update(dt)
     playercutie:update(dt)
     cutie2:update(dt)
 	world:update(dt)
@@ -136,7 +135,7 @@ function MainState:draw()
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
 
     -- Cutie Zeichnung und Drawfunktion
-    self.engine:draw()
+    engine:draw()
     playercutie:draw()
     cutie2:draw()
 
@@ -164,7 +163,6 @@ end
 function MainState:shutdown()
 	playercutie:shutdown()
 	cutie2:shutdown()
-	walls:shutdown()
 	world:destroy()
 end
 
@@ -180,7 +178,7 @@ function MainState:keypressed(key, u)
     elseif key == "b" then
         self.shaketimer = 0.5
     elseif key == "y" then
-        self.engine:removeEntity(playerEntity)
+        engine:removeEntity(playerEntity)
     end
 end
 
@@ -192,8 +190,11 @@ end
 
 --Collision function
 function beginContact(a, b, coll)
-    local object1 = a:getUserData()
-    local object2 = b:getUserData()
+    local object1 = a:getUserData()[1]
+    local object1Entity = a:getUserData()[2]
+    local object2 = b:getUserData()[1]
+    local object2Entity = b:getUserData()[2]
+
     if object1 and object2 then
         if (object1.__name == "Playercutie" or object1.__name == "Cutie") and (object2.__name == "Playercutie" or object2.__name == "Cutie") then
             love.audio.play(resources.sounds.bounce1)

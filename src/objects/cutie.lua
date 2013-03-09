@@ -8,7 +8,7 @@ function Cutie:__init(xs,ys, image, entity)
     self.shape = love.physics.newCircleShape(9) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
     self.fixture:setRestitution(1) 
-    self.fixture:setUserData(self)
+    self.fixture:setUserData({self, entity})
     self.particles = Particles()
     self.body:setMass(0.0192)
 

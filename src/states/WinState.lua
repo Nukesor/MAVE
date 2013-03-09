@@ -4,7 +4,6 @@ require("core/state")
 
 require("objects/cutie")
 require("objects/playercutie") 
-require("objects/wall")
 
 WinState =  class("WinState", State)
 

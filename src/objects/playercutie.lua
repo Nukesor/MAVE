@@ -45,7 +45,6 @@ function Playercutie:update(dt)
     -- Updatfunktionen
     self.particles.hit:update(dt)
     self.particles.bleeding:update(dt)
-    if shot then shot:update(dt) end
 
     -- Cutienavigation left right
     if love.keyboard.isDown("d") or love.keyboard.isDown("right") then

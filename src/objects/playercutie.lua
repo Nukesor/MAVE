@@ -4,15 +4,14 @@ require("objects/shot")
 
 require("components/physics")
 require("components/level")
+require("components/life")
+require("components/cuteness")
+require("components/mobbelity")
 
 Playercutie = class("Playercutie")
 
-function Playercutie:__init(xs, ys, image, entity)
-    self.entity = entity
-    self.entity:addComponent(Position(xs, ys))
-    self.entity:addComponent(Drawable(image, 0, 0.1, 0.1, 140, 140))
-    self.entity:addComponent(ZIndex(100))
-    self.entity:addComponent(Level(0))
+function Playercutie:__init(xs, ys, image)
+    self:createEntity(xs, ys, image)
 
     self.body = love.physics.newBody(world, xs, ys, "dynamic")
     self.shape = love.physics.newCircleShape(9) 
@@ -24,6 +23,7 @@ function Playercutie:__init(xs, ys, image, entity)
     self.particles = Particles()
     self.fixture:setUserData({self, self.entity})
     self.body:setMass(0.0192)
+    
     -- Variablen für Jumpbegrenzung
     self.jumpactive = 0
     self.jumpcount = 2
@@ -34,12 +34,19 @@ function Playercutie:__init(xs, ys, image, entity)
     self.image = image
 
     -- Attribute
-    self.life = 100
-    self.cuteness = 0
-    self.mobbelity = 0
     self.lifebefore = 100
 end
 
+function Playercutie:createEntity(xs, ys, image)
+    self.entity = Entity()
+    self.entity:addComponent(Position(xs, ys))
+    self.entity:addComponent(Drawable(image, 0, 0.1, 0.1, 140, 140))
+    self.entity:addComponent(ZIndex(100))
+    self.entity:addComponent(Level(0))
+    self.entity:addComponent(Life(100))
+    self.entity:addComponent(Cuteness(0))
+    self.entity:addComponent(Mobbelity(0))
+end
 
 function Playercutie:update(dt)
     -- Updatfunktionen
@@ -54,15 +61,15 @@ function Playercutie:update(dt)
     end
 
     -- Particle effects des Playercuties
-    if self.life < self.lifebefore then
+    if self.entity:getComponent("Life").life < self.lifebefore then
         self.particles.hit:setPosition(self.body:getX(), self.body:getY())
         self.particles.hit:start()
     end
-    if self.life < 20 then
+    if self.entity:getComponent("Life").life < 20 then
         self.particles.bleeding:setPosition(self.body:getX(), self.body:getY())
         self.particles.bleeding:start()
     end
-    self.lifebefore = self.life
+    self.lifebefore = self.entity:getComponent("Life").life
 
     -- Begrenzung der Hüpfhöhe des Playercuties, außer bei Jumps
     if self.yacc then
@@ -90,7 +97,7 @@ function Playercutie:draw()
 end
 
 function Playercutie:loseLife(damage)
-    self.life = self.life - damage
+    self.entity:getComponent("Life").life = self.entity:getComponent("Life").life - damage
 end
 
 function Playercutie:keypressed(key, u)
@@ -121,16 +128,16 @@ function Playercutie:position()
 end 
 
 function Playercutie:reset()
-    self.life = 100
-    self.mobbelity = 0
-    self.cuteness = 0
+    self.entity:getComponent("Life").life = 100
+    self.entity:getComponent("Mobbelity").mobbelity = 0
+    self.entity:getComponent("Cuteness").cuteness = 0
     self.body:setX(self.startx)
     self.body:setY(self.starty)
     self.body:setLinearVelocity(math.random(-70, 70), math.random(-40, 40))
 end
 
 function Playercutie:restart()
-    self.life = 100 + 10*self.mobbelity
+    self.entity:getComponent("Life").life = 100 + 10*self.entity:getComponent("Mobbelity").mobbelity
     self.body:setX(self.startx)
     self.body:setY(self.starty)
     self.body:setLinearVelocity(math.random(-70, 70), math.random(-40, 40))

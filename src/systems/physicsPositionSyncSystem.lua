@@ -1,3 +1,4 @@
+-- Synchronizes the Position Component with the Position of the Body Component, if an Entity has both.
 PhysicsPositionSyncSystem = class("PhysicsPositionSyncSystem", System)
 
 function PhysicsPositionSyncSystem:update(dt)

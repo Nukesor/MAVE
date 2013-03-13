@@ -35,8 +35,8 @@ function MainState:__init()
     engine:addSystem(SideChangeSystem(), "logic")
     engine:addSystem(PhysicsPositionSyncSystem(), "logic")
 
-    playerEntity = Entity()
-    playercutie = Playercutie(333, 520, resources.images.cutie1, playerEntity)
+    playercutie = Playercutie(333, 520, resources.images.cutie1)
+    playerEntity = playercutie.entity
     playerEntity:addComponent(IsCutie())
     engine:addEntity(playerEntity)
 
@@ -108,14 +108,14 @@ function MainState:update(dt)
     end
 
     -- Spiel-Ende und Pushen des jeweiligen Gamestates
-    if playercutie.life <= 0 or cutie2.life <= 0 then
+    if playercutie.entity:getComponent("Life").life <= 0 or cutie2.life <= 0 then
         self.shaketimer = 0
-        if playercutie.life <= 0 and cutie2.life <= 0 then
+        if playercutie.entity:getComponent("Life").life <= 0 and cutie2.life <= 0 then
             stack:push(gameover)
             gameover.mode = 1
         elseif cutie2.life <= 0 then
             stack:push(win)
-        elseif playercutie.life <= 0 then
+        elseif playercutie.entity:getComponent("Life").life <= 0 then
             stack:push(gameover)
             gameover.mode = 2
         end
@@ -146,7 +146,7 @@ function MainState:draw()
     -- Zeichnen der Schriftzüge
     love.graphics.print(string.format("%.2f ",x) ..  "    " .. "X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)
     love.graphics.print("X-Vel: " .. string.format("%.2f ",cutie2xv) .. ", Y-Vel: " .. string.format("%.2f ",cutie2yv), 800, 20,0,1,1)
-    love.graphics.print("Your Cutie´s life: " .. playercutie.life, 20, 40, 0, 1, 1)
+    love.graphics.print("Your Cutie´s life: " .. playercutie.entity:getComponent("Life").life, 20, 40, 0, 1, 1)
     love.graphics.print("Enemy Cutie´s life: " .. cutie2.life, 840, 40, 0, 1, 1)
     love.graphics.print((390 - (cutie2.height/100)*50), 60, 80, 0, 1.5, 1.5)
 end
@@ -173,11 +173,11 @@ end
 function MainState:keypressed(key, u)
     playercutie:keypressed(key, u)
     if key == "i" then
-        playercutie.life = 0
+        playercutie.entity:getComponent("Life").life = 0
     elseif key == "o" then
         cutie2.life = 0
     elseif key == "p" then
-        playercutie.life = 0
+        playercutie.entity:getComponent("Life").life = 0
         cutie2.life = 0
     elseif key == "b" then
         self.shaketimer = 0.5
@@ -203,18 +203,21 @@ function beginContact(a, b, coll)
         if (object1.__name == "Playercutie" or object1.__name == "Cutie") and (object2.__name == "Playercutie" or object2.__name == "Cutie") then
             love.audio.play(resources.sounds.bounce1)
 
+            if object1.cuteness then object1Cuteness = object1.cuteness else object1Cuteness = object1.entity:getComponent("Cuteness").cuteness end
+            if object2.cuteness then object2Cuteness = object2.cuteness else object2Cuteness = object2.entity:getComponent("Cuteness").cuteness end
+
             -- Schadensmodell
-            if math.random(0, 100 + 2*object2.cuteness) > 100 then
-                object1:loseLife(3*math.random(0, 5 + object2.cuteness))
+            if math.random(0, 100 + 2*object2Cuteness) > 100 then
+                object1:loseLife(3*math.random(0, 5 + object2Cuteness))
                 main.shaketimer = 0.25
             else
-                object1:loseLife(math.random(0, 5 + object2.cuteness))
+                object1:loseLife(math.random(0, 5 + object2Cuteness))
             end
-            if math.random(0, 100 + 2*object1.cuteness) > 100 then
-                object2:loseLife(3*math.random(0, 5 + object1.cuteness))
+            if math.random(0, 100 + 2*object1Cuteness) > 100 then
+                object2:loseLife(3*math.random(0, 5 + object1Cuteness))
                 main.shaketimer = 0.25
             else
-                object2:loseLife(math.random(0, 5 + object1.cuteness))
+                object2:loseLife(math.random(0, 5 + object1Cuteness))
             end
         end
 

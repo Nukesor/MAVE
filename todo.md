@@ -16,6 +16,7 @@ TODO
 ## Future
 
 ### Code
+- Wichtig: Wenn eine Component von einer Entity entfernt wird, Systemeinträge über die Engine updaten
 
 ### GFX
 - Backgrounds für GameOver-, Win-, und MenuState

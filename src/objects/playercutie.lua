@@ -70,9 +70,6 @@ function Playercutie:update(dt)
             self.jumpactive = 0          
         end 
     end
-
-    self.entity:getComponent("Position").x = self.body:getX()
-    self.entity:getComponent("Position").y = self.body:getY()
 end
 
 function Playercutie:draw()

@@ -13,6 +13,7 @@ require("systems/wobbleSystem")
 require("systems/maxSpeedSystem")
 require("systems/sideChangeSystem")
 require("systems/physicsPositionSyncSystem")
+require("systems/collisionDamageSystem")
 
 require("components/drawable")
 require("components/drawablepolygon")
@@ -25,7 +26,7 @@ MainState = class("MainState", State)
 function MainState:__init()
     love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
-    world:setCallbacks(beginContact,endContact)
+    world:setCallbacks(self:getCollisionFunction(),endContact)
 
     engine = Engine()
     engine:addSystem(RenderSystem(), "render")
@@ -34,6 +35,8 @@ function MainState:__init()
     engine:addSystem(MaxSpeedSystem(), "logic")
     engine:addSystem(SideChangeSystem(), "logic")
     engine:addSystem(PhysicsPositionSyncSystem(), "logic")
+    self.collisionSystem = CollisionDamageSystem()
+    engine:addSystem(self.collisionSystem, "logic")
 
     playercutie = Playercutie(333, 520, resources.images.cutie1)
     playerEntity = playercutie.entity
@@ -193,87 +196,96 @@ function MainState:keyreleased(key, u)
 end
 
 --Collision function
-function beginContact(a, b, coll)
-    local object1 = a:getUserData()[1]
-    local object1Entity = a:getUserData()[2]
-    local object2 = b:getUserData()[1]
-    local object2Entity = b:getUserData()[2]
+function MainState:getCollisionFunction()
+    local mainstate = self
+    return function(a, b, coll)
 
-    if object1 and object2 then
-        if (object1.__name == "Playercutie" or object1.__name == "Cutie") and (object2.__name == "Playercutie" or object2.__name == "Cutie") then
-            love.audio.play(resources.sounds.bounce1)
+        local object1 = a:getUserData()[1]
+        local object1Entity = a:getUserData()[2]
+        local object2 = b:getUserData()[1]
+        local object2Entity = b:getUserData()[2]
 
-            if object1.cuteness then object1Cuteness = object1.cuteness else object1Cuteness = object1.entity:getComponent("Cuteness").cuteness end
-            if object2.cuteness then object2Cuteness = object2.cuteness else object2Cuteness = object2.entity:getComponent("Cuteness").cuteness end
+        if object1 and object2 then
+            if (object1.__name == "Playercutie" or object1.__name == "Cutie") and (object2.__name == "Playercutie" or object2.__name == "Cutie") then
+                love.audio.play(resources.sounds.bounce1)
 
-            -- Schadensmodell
-            if math.random(0, 100 + 2*object2Cuteness) > 100 then
-                object1:loseLife(3*math.random(0, 5 + object2Cuteness))
-                main.shaketimer = 0.25
-            else
-                object1:loseLife(math.random(0, 5 + object2Cuteness))
-            end
-            if math.random(0, 100 + 2*object1Cuteness) > 100 then
-                object2:loseLife(3*math.random(0, 5 + object1Cuteness))
-                main.shaketimer = 0.25
-            else
-                object2:loseLife(math.random(0, 5 + object1Cuteness))
-            end
-        end
+                mainstate.collisionSystem:beginContact(a, b, coll)
 
-        -- Bei Zusammentreffen von Cutie/Playercutie mit Shot, wird 20 schaden übermittelt und Shot zerstört
-        if ((object1.__name == "Shot" or object1.__name == "Cutie") and (object2.__name == "Shot" or object1.__name == "Cutie")) then
-            if object1.__name == "Cutie" then
-                object1:loseLife(20)
-            elseif object2.__name == "Cutie" then
-                object2:loseLife(20)
-            end
-            if object1.__name == "Shot" then
-                object1:shutdown()
-            elseif object2.__name == "Shot" then
-                object2:shutdown()
-            end
-        elseif ((object1.__name == "Shot" or object1.__name == "Playercutie") and (object2.__name == "Shot" or object2.__name == "Playercutie")) then
-            if object1.__name == "Playercutie" then
-                object1:loseLife(20)
-            elseif object2.__name == "Playercutie" then
-                object2:loseLife(20)
-            end
-            if object1.__name == "Shot" then
-                object1:shutdown()
-            elseif object2.__name == "Shot" then
-                object2:shutdown()
-            end
-        -- Bei auftreffen mit DrawablePolygon wird Shot zerstört
-        elseif ((object1.__name == "Shot" or object1.__name == "DrawablePolygon") and (object2.__name == "DrawablePolygon" or object2.__name == "Shot")) then
-            if object1.__name == "Shot" then
-                object1:shutdown()
-             elseif object2.__name == "Shot" then
-                object2:shutdown()
-            end
-        end
+                --[[ 
+                local object1Cuteness, object2Cuteness
 
-        -- Hüpfen der Cuties auf einem bestimmten Level
-        if (( object1.__name == "DrawablePolygon" or object1.__name == "Cutie") and (object2.__name == "Cutie" or object2.__name == "DrawablePolygon")) then
-            cutie2.jumpcount = 4
-            if object1.__name == "Cutie" then
-                local cutiexv, cutieyv = object1.body:getLinearVelocity()
-                object1.body:setLinearVelocity(cutiexv, -200)
-            elseif object2.__name == "Cutie" then
-                local cutiexv, cutieyv = object2.body:getLinearVelocity()
-                object2.body:setLinearVelocity(cutiexv, -200)
-            end
-        end
+                if object1.cuteness then object1Cuteness = object1.cuteness else object1Cuteness = object1.entity:getComponent("Cuteness").cuteness end
+                if object2.cuteness then object2Cuteness = object2.cuteness else object2Cuteness = object2.entity:getComponent("Cuteness").cuteness end
 
-        -- Hüpfen des Playercuties auf einem bestimmten Level
-        if (( object1.__name == "DrawablePolygon" or object1.__name == "Playercutie") and (object2.__name == "Playercutie" or object2.__name == "DrawablePolygon")) then
-            playercutie.jumpcount = 2
-            if object1.__name == "Playercutie" then
-                local playercutiexv, playercutieyv = object1.body:getLinearVelocity()
-                object1.body:setLinearVelocity(playercutiexv, -200)
-            elseif object2.__name == "Playercutie" then
-                local playercutiexv, playercutieyv = object2.body:getLinearVelocity()
-                object2.body:setLinearVelocity(playercutiexv, -200)
+                -- Schadensmodell
+                if math.random(0, 100 + 2*object2Cuteness) > 100 then
+                    object1:loseLife(3*math.random(0, 5 + object2Cuteness))
+                    main.shaketimer = 0.25
+                else
+                    object1:loseLife(math.random(0, 5 + object2Cuteness))
+                end
+                if math.random(0, 100 + 2*object1Cuteness) > 100 then
+                    object2:loseLife(3*math.random(0, 5 + object1Cuteness))
+                    main.shaketimer = 0.25
+                else
+                    object2:loseLife(math.random(0, 5 + object1Cuteness))
+                end --]]
+            end
+
+            -- Bei Zusammentreffen von Cutie/Playercutie mit Shot, wird 20 schaden übermittelt und Shot zerstört
+            if ((object1.__name == "Shot" or object1.__name == "Cutie") and (object2.__name == "Shot" or object1.__name == "Cutie")) then
+                if object1.__name == "Cutie" then
+                    object1:loseLife(20)
+                elseif object2.__name == "Cutie" then
+                    object2:loseLife(20)
+                end
+                if object1.__name == "Shot" then
+                    object1:shutdown()
+                elseif object2.__name == "Shot" then
+                    object2:shutdown()
+                end
+            elseif ((object1.__name == "Shot" or object1.__name == "Playercutie") and (object2.__name == "Shot" or object2.__name == "Playercutie")) then
+                if object1.__name == "Playercutie" then
+                    object1:loseLife(20)
+                elseif object2.__name == "Playercutie" then
+                    object2:loseLife(20)
+                end
+                if object1.__name == "Shot" then
+                    object1:shutdown()
+                elseif object2.__name == "Shot" then
+                    object2:shutdown()
+                end
+            -- Bei auftreffen mit DrawablePolygon wird Shot zerstört
+            elseif ((object1.__name == "Shot" or object1.__name == "DrawablePolygon") and (object2.__name == "DrawablePolygon" or object2.__name == "Shot")) then
+                if object1.__name == "Shot" then
+                    object1:shutdown()
+                 elseif object2.__name == "Shot" then
+                    object2:shutdown()
+                end
+            end
+
+            -- Hüpfen der Cuties auf einem bestimmten Level
+            if (( object1.__name == "DrawablePolygon" or object1.__name == "Cutie") and (object2.__name == "Cutie" or object2.__name == "DrawablePolygon")) then
+                cutie2.jumpcount = 4
+                if object1.__name == "Cutie" then
+                    local cutiexv, cutieyv = object1.body:getLinearVelocity()
+                    object1.body:setLinearVelocity(cutiexv, -200)
+                elseif object2.__name == "Cutie" then
+                    local cutiexv, cutieyv = object2.body:getLinearVelocity()
+                    object2.body:setLinearVelocity(cutiexv, -200)
+                end
+            end
+
+            -- Hüpfen des Playercuties auf einem bestimmten Level
+            if (( object1.__name == "DrawablePolygon" or object1.__name == "Playercutie") and (object2.__name == "Playercutie" or object2.__name == "DrawablePolygon")) then
+                playercutie.jumpcount = 2
+                if object1.__name == "Playercutie" then
+                    local playercutiexv, playercutieyv = object1.body:getLinearVelocity()
+                    object1.body:setLinearVelocity(playercutiexv, -200)
+                elseif object2.__name == "Playercutie" then
+                    local playercutiexv, playercutieyv = object2.body:getLinearVelocity()
+                    object2.body:setLinearVelocity(playercutiexv, -200)
+                end
             end
         end
     end

@@ -11,54 +11,27 @@ function Engine:__init()
 end
 
 function Engine:addEntity(entity)
-    table.insert(self.entities, entity)
-    for index1, system in pairs(self.systems) do
-        local flag = 1
-        for index2, reqComp in pairs(system:requiredComponent()) do
-            if flag == 1 then
-                for index3, component in pairs(entity.components) do
-                    if component.__name == reqComp then
-                        flag = 1
-                        break
-                    else 
-                        flag = 0
-                    end
-                end
-            else
-                break
-            end
-            if index2 == #system:requiredComponent() and flag == 1 then
-                system:addEntity(entity)
+    for index, system in pairs(self.allSystems) do
+        local add = true
+        for index, requiredComponent in pairs(system:getRequiredComponents()) do
+            if not entity.components[requiredComponent] then
+                add = false
             end
         end
+
+        if add == true then
+            system:addEntity(entity)
+        end
     end
+    table.insert(self.entities, entity)
 end
 
 function Engine:removeEntity(entity)
-    for index1, target in pairs(self.systems) do
-        local flag = 1
-        for index2, reqcomponent in pairs(target:requiredComponent()) do
-            if flag == 1 then
-                for index3, component in pairs(entity.components) do
-                    if reqcomponent == component.__name then
-                        flag = 1
-                        break
-                    else
-                        flag = 0
-                    end
-                end
-            else
-                break
+    for key, system in pairs(self.allSystems) do
+        for key2, systemEntity in pairs(system:getEntities()) do
+            if systemEntity == entity then    
+                system:removeEntity(entity)
             end
-            if index2 == #target:requiredComponent() and flag == 1 then
-                target:removeEntity(entity)
-            end
-        end
-    end
-    for index, entity in pairs(self.entities) do
-        if entity == entity then
-            table.remove(self.entities, index)
-            break
         end
     end
 end

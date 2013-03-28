@@ -43,6 +43,7 @@ function Engine:addSystem(system, type)
         table.insert(self.logicSystems, system)
     end
     table.insert(self.allSystems, system)
+    return system
 end
 
 function Engine:update(dt)

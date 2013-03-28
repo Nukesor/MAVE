@@ -204,32 +204,12 @@ function MainState:getCollisionFunction()
         local object1Entity = a:getUserData()[2]
         local object2 = b:getUserData()[1]
         local object2Entity = b:getUserData()[2]
-
+        mainstate.collisionSystem:beginContact(a, b, coll)
+        mainstate.wobbleSystem:beginContact(a, b, coll)
+        
         if object1 and object2 then
             if (object1.__name == "Playercutie" or object1.__name == "Cutie") and (object2.__name == "Playercutie" or object2.__name == "Cutie") then
                 love.audio.play(resources.sounds.bounce1)
-
-                mainstate.collisionSystem:beginContact(a, b, coll)
-
-                --[[ 
-                local object1Cuteness, object2Cuteness
-
-                if object1.cuteness then object1Cuteness = object1.cuteness else object1Cuteness = object1.entity:getComponent("Cuteness").cuteness end
-                if object2.cuteness then object2Cuteness = object2.cuteness else object2Cuteness = object2.entity:getComponent("Cuteness").cuteness end
-
-                -- Schadensmodell
-                if math.random(0, 100 + 2*object2Cuteness) > 100 then
-                    object1:loseLife(3*math.random(0, 5 + object2Cuteness))
-                    main.shaketimer = 0.25
-                else
-                    object1:loseLife(math.random(0, 5 + object2Cuteness))
-                end
-                if math.random(0, 100 + 2*object1Cuteness) > 100 then
-                    object2:loseLife(3*math.random(0, 5 + object1Cuteness))
-                    main.shaketimer = 0.25
-                else
-                    object2:loseLife(math.random(0, 5 + object1Cuteness))
-                end --]]
             end
 
             -- Bei Zusammentreffen von Cutie/Playercutie mit Shot, wird 20 schaden übermittelt und Shot zerstört

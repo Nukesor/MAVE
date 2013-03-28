@@ -7,6 +7,7 @@ require("components/level")
 require("components/life")
 require("components/cuteness")
 require("components/mobbelity")
+require("components/bouncy")
 
 Playercutie = class("Playercutie")
 
@@ -46,6 +47,7 @@ function Playercutie:createEntity(xs, ys, image)
     self.entity:addComponent(Life(100))
     self.entity:addComponent(Cuteness(0))
     self.entity:addComponent(Mobbelity(0))
+    self.entity:addComponent(Bouncy(0.1))
 end
 
 function Playercutie:update(dt)
@@ -98,6 +100,7 @@ end
 
 function Playercutie:loseLife(damage)
     self.entity:getComponent("Life").life = self.entity:getComponent("Life").life - damage
+    print("playercutie:loselife called")
 end
 
 function Playercutie:keypressed(key, u)

@@ -245,6 +245,7 @@ end
 
 function Cutie:loseLife(damage)
     self.life = self.life - damage
+    print("cutie:loselife called")
 end
 
 function Cutie:position()

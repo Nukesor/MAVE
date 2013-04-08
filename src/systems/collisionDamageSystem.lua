@@ -36,6 +36,7 @@ function CollisionDamageSystem:beginContact(a, b, coll)
                 print("calling object 2 loseLife")
                 object2:loseLife(math.random(0, 5 + object1Cuteness))
             end
+            print("collision function ended")
         end
     end
 end

@@ -57,3 +57,7 @@ end
 function love.keyreleased(key, u)
     stack:current():keyreleased(key, u)
 end
+
+function love.mousepressed(x, y, button)
+    stack:current():mousepressed(x, y, button)
+end

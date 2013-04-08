@@ -14,12 +14,14 @@ require("systems/maxSpeedSystem")
 require("systems/sideChangeSystem")
 require("systems/physicsPositionSyncSystem")
 require("systems/collisionDamageSystem")
+require("systems/dashingSystem")
 
 require("components/drawable")
 require("components/drawablepolygon")
 require("components/position")
 require("components/zindex")
 require("components/isCutie")
+require("components/dashing")
 
 MainState = class("MainState", State)
 
@@ -37,6 +39,7 @@ function MainState:__init()
     engine:addSystem(PhysicsPositionSyncSystem(), "logic")
     self.collisionSystem = CollisionDamageSystem()
     engine:addSystem(self.collisionSystem, "logic")
+    self.dashingSystem = engine:addSystem(DashingSystem(), "logic")
 
     playercutie = Playercutie(333, 520, resources.images.cutie1)
     playerEntity = playercutie.entity
@@ -192,6 +195,15 @@ end
 function MainState:keyreleased(key, u)
     if key == "w" or key == "up" then
         playercutie.jumpactive = 0
+    end
+end
+
+function MainState:mousepressed(x, y, key)
+    if key == "r" and not playercutie.entity:getComponent("Dashing") then
+        local xBefore, yBefore = playercutie.entity:getComponent("Physics").body:getLinearVelocity()
+        playercutie.entity:addComponent(Dashing(xBefore, yBefore, {x=x, y=y}))
+    elseif key == "r" and playercutie.entity:getComponent("Dashing") then
+        playercutie.entity:removeComponent("Dashing")
     end
 end
 

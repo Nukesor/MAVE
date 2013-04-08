@@ -8,6 +8,7 @@ require("components/life")
 require("components/cuteness")
 require("components/mobbelity")
 require("components/bouncy")
+require("components/isPlayer")
 
 Playercutie = class("Playercutie")
 
@@ -48,6 +49,7 @@ function Playercutie:createEntity(xs, ys, image)
     self.entity:addComponent(Cuteness(0))
     self.entity:addComponent(Mobbelity(0))
     self.entity:addComponent(Bouncy(0.1))
+    self.entity:addComponent(IsPlayer())
 end
 
 function Playercutie:update(dt)

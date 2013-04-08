@@ -11,19 +11,7 @@ function Engine:__init()
 end
 
 function Engine:addEntity(entity)
-    for index, system in pairs(self.allSystems) do
-        local add = true
-        for index, requiredComponent in pairs(system:getRequiredComponents()) do
-            if not entity.components[requiredComponent] then
-                add = false
-            end
-        end
-
-        if add == true then
-            system:addEntity(entity)
-        end
-    end
-    table.insert(self.entities, entity)
+    self:refreshEntity(entity)
 end
 
 function Engine:removeEntity(entity)
@@ -55,5 +43,22 @@ end
 function Engine:draw()
     for index, system in ipairs(self.renderSystems) do
         system:update()
+    end
+end
+
+function Engine:refreshEntity(entity)
+    for index, system in pairs(self.allSystems) do
+        local add = true
+        for index, requiredComponent in pairs(system:getRequiredComponents()) do
+            if not entity.components[requiredComponent] then
+                add = false
+            end
+        end
+
+        if add == true then
+            system:addEntity(entity)
+        elseif add == false then
+            system:removeEntity(entity)
+        end
     end
 end

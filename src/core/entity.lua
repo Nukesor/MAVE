@@ -22,3 +22,7 @@ end
 function Entity:getComponent(name)
     return self.components[name]
 end
+
+function Entity:getComponents()
+    return self.components
+end

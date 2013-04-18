@@ -3,11 +3,14 @@ require("core/resources")
 require("core/state")
 require("core/entity")
 require("core/engine")
+require("core/event")
 
 require("objects/cutie")
 require("objects/playercutie") 
 require("objects/particles")
 require("objects/shot")
+
+require("core/events/keyPressed")
 
 require("systems/renderSystem")
 require("systems/polygonSystem")
@@ -23,7 +26,6 @@ require("components/drawablepolygon")
 require("components/position")
 require("components/zindex")
 require("components/dashing")
-
 require("components/physics")
 require("components/level")
 require("components/life")
@@ -186,6 +188,7 @@ function MainState:shutdown()
 end
 
 function MainState:keypressed(key, u)
+    engine:fireEvent(KeyPressed(key, u))
     playercutie:keypressed(key, u)
     if key == "i" then
         playercutie.entity:getComponent("Life").life = 0

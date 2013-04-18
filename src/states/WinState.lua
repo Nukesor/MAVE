@@ -20,7 +20,7 @@ function WinState:load()
 	self.index = 0
 	self.c1Stats = nil
 	self.c2Stats = nil
-	self.c1Stats = {playercutie.entity:getComponent("Life").life .. "/" .. (100+playercutie.entity:getComponent("Mobbelity").mobbelity*10), "0-".. 5+playercutie.entity:getComponent("Cuteness").cuteness, string.format("%.2f %%",((2*playercutie.entity:getComponent("Cuteness").cuteness/(100+2*playercutie.entity:getComponent("Cuteness").cuteness))*100))}
+	self.c1Stats = {playercutie.entity:getComponent("Life").life .. "/" .. (100+playercutie.entity:getComponent("CutieComponent").mobbelity*10), "0-".. 5+playercutie.entity:getComponent("CutieComponent").cuteness, string.format("%.2f %%",((2*playercutie.entity:getComponent("CutieComponent").cuteness/(100+2*playercutie.entity:getComponent("CutieComponent").cuteness))*100))}
 	self.c2Stats = {cutie2.life .. "/" .. (100+cutie2.mobbelity*10), "0-".. 5+cutie2.cuteness, string.format("%.2f %%",((2*cutie2.cuteness/(100+2*cutie2.cuteness))*100))}
 end
 
@@ -85,10 +85,10 @@ function WinState:keypressed(key, u)
 		playercutie.particles:reset()
 		cutie2.particles:reset()
 		if self.index == 0 then
-			playercutie.entity:getComponent("Mobbelity").mobbelity = playercutie.entity:getComponent("Mobbelity").mobbelity + 1
+			playercutie.entity:getComponent("CutieComponent").mobbelity = playercutie.entity:getComponent("CutieComponent").mobbelity + 1
 			self:restart()
 		elseif self.index == 1 then
-			playercutie.entity:getComponent("Cuteness").cuteness = playercutie.entity:getComponent("Cuteness").cuteness + 1
+			playercutie.entity:getComponent("CutieComponent").cuteness = playercutie.entity:getComponent("CutieComponent").cuteness + 1
 			self:restart()
 		elseif self.index == 2 then
 			stack:pop()

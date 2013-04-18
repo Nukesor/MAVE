@@ -4,7 +4,7 @@ require("core/system")
 RenderSystem = class("RenderSystem", System)
 
 function RenderSystem:__init()
-    self.targets = {}
+    self.__super.__init(self)
     self.invert = love.graphics.newPixelEffect([[
         vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 pixel_coords)
         {

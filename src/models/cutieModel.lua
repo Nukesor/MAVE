@@ -9,6 +9,7 @@ function CutieModel:__init(xs, ys, image)
     local body = love.physics.newBody(world, xs, ys, "dynamic")
     local shape = love.physics.newCircleShape(9)
     local fixture = love.physics.newFixture(body, shape, 1) 
+    fixture:setUserData(self)
 	
 	self:addComponent(Physics(body, fixture, shape))
     self:addComponent(Position(xs, ys))

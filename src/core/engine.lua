@@ -10,22 +10,29 @@ function Engine:__init()
     self.renderSystems = {}
 
     self.events = {}
+
+    self.entityIndex = 0
 end
 
 function Engine:addEntity(entity)
-    self.entities.entity = entity
+    self.entities[self.entityIndex] = entity
+    entity.index = self.entityIndex
+    self.entityIndex = self.entityIndex + 1
     self:refreshEntity(entity)
 end
 
 function Engine:removeEntity(entity)
-    for key, system in pairs(self.allSystems) do
-        for key2, systemEntity in pairs(system:getEntities()) do
-            if systemEntity == entity then    
-                system:removeEntity(entity)
+    if self.entities[entity.index] then
+        for key, system in pairs(self.allSystems) do
+            for key2, systemEntity in pairs(system:getEntities()) do
+                if systemEntity == entity then    
+                    system:removeEntity(entity)
+                end
             end
         end
+        self.entities[entity.index] = nil
+        entity.index = nil
     end
-    self.entities.entity = nil
 end
 
 function Engine:addSystem(system, type)
@@ -51,7 +58,7 @@ function Engine:draw()
 end
 
 function Engine:refreshEntity(entity)
-    if not self.entities.entity then
+    if not self.entities[entity.index] then
         return
     end
     for index, system in pairs(self.allSystems) do

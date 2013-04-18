@@ -14,7 +14,6 @@ end
 function Entity:removeComponent(name)
     if self.components[name] then
         self.components[name] = nil
-        print("removed " .. name)
     end
     engine:refreshEntity(self)
 end

@@ -37,7 +37,7 @@ require("components/isCutie")
 require("components/particleComponent")
 
 require("models/shotmodel")
-require("models/playercutiemodel")
+require("models/cutieModel")
 
 
 MainState = class("MainState", State)

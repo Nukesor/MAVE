@@ -1,8 +1,8 @@
 Dashing = class("Dashing")
 
-function Dashing:__init(xBefore, yBefore, targetPosition) 
+function Dashing:__init(startVelocity, startPosition, targetPosition) 
     self.time = 0
-    self.xVelocityBefore = xBefore
-    self.yVelocityBefore = yBefore
+    self.startVelocity = startVelocity
     self.targetPosition = targetPosition
+    self.startPosition = startPosition
 end

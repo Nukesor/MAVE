@@ -5,8 +5,8 @@ function DashingSystem:update(dt)
         local targetX = entity:getComponent("Dashing").targetPosition.x
         local targetY = entity:getComponent("Dashing").targetPosition.y
         local physics = entity:getComponent("Physics")
-        local playerX = physics.body:getX()
-        local playerY = physics.body:getY()
+        local playerX = entity:getComponent("Dashing").startPosition.x
+        local playerY = entity:getComponent("Dashing").startPosition.y
 
         targetX = targetX - playerX
         targetY = targetY - playerY
@@ -17,7 +17,7 @@ function DashingSystem:update(dt)
         physics.body:setLinearVelocity(targetX, targetY)
         entity:getComponent("Dashing").time = entity:getComponent("Dashing").time + dt
         if entity:getComponent("Dashing").time >= 0.5 then
-            physics.body:setLinearVelocity(entity:getComponent("Dashing").xVelocityBefore, entity:getComponent("Dashing").yVelocityBefore)
+            physics.body:setLinearVelocity(entity:getComponent("Dashing").startVelocity.x, entity:getComponent("Dashing").startVelocity.y)
             entity:removeComponent("Dashing")
         end
     end

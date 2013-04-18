@@ -200,8 +200,9 @@ end
 
 function MainState:mousepressed(x, y, key)
     if key == "r" and not playercutie.entity:getComponent("Dashing") then
-        local xBefore, yBefore = playercutie.entity:getComponent("Physics").body:getLinearVelocity()
-        playercutie.entity:addComponent(Dashing(xBefore, yBefore, {x=x, y=y}))
+        local xVelBefore, yVelBefore = playercutie.entity:getComponent("Physics").body:getLinearVelocity()
+        local xBefore, yBefore = playercutie.entity:getComponent("Physics").body:getPosition()
+        playercutie.entity:addComponent(Dashing({x=xVelBefore, y=yVelBefore}, {x=xBefore, y=yBefore}, {x=x, y=y}))
     elseif key == "r" and playercutie.entity:getComponent("Dashing") then
         playercutie.entity:removeComponent("Dashing")
     end

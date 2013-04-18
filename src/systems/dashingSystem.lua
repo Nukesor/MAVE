@@ -24,5 +24,5 @@ function DashingSystem:update(dt)
 end
 
 function DashingSystem:getRequiredComponents()
-    return {"isPlayer", "Physics", "Dashing"}
+    return {"IsPlayer", "Physics", "Dashing"}
 end

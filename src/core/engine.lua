@@ -8,9 +8,12 @@ function Engine:__init()
     self.allSystems = {}
     self.logicSystems = {}
     self.renderSystems = {}
+
+    self.events = {}
 end
 
 function Engine:addEntity(entity)
+    self.entities.entity = entity
     self:refreshEntity(entity)
 end
 
@@ -22,6 +25,7 @@ function Engine:removeEntity(entity)
             end
         end
     end
+    self.entities.entity = nil
 end
 
 function Engine:addSystem(system, type)
@@ -47,6 +51,9 @@ function Engine:draw()
 end
 
 function Engine:refreshEntity(entity)
+    if not self.entities.entity then
+        return
+    end
     for index, system in pairs(self.allSystems) do
         local add = true
         for index, requiredComponent in pairs(system:getRequiredComponents()) do

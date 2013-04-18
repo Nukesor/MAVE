@@ -6,6 +6,8 @@ require("core/engine")
 
 require("objects/cutie")
 require("objects/playercutie") 
+require("objects/particles")
+require("objects/shot")
 
 require("systems/renderSystem")
 require("systems/polygonSystem")
@@ -20,8 +22,15 @@ require("components/drawable")
 require("components/drawablepolygon")
 require("components/position")
 require("components/zindex")
-require("components/isCutie")
 require("components/dashing")
+
+require("components/physics")
+require("components/level")
+require("components/life")
+require("components/cutiecomponent")
+require("components/bouncy")
+require("components/isPlayer")
+require("components/isCutie")
 
 MainState = class("MainState", State)
 

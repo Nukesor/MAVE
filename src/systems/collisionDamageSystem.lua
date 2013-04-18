@@ -18,8 +18,8 @@ function CollisionDamageSystem:beginContact(a, b, coll)
 
             local object1Cuteness, object2Cuteness
 
-            if object1.cuteness then object1Cuteness = object1.cuteness else object1Cuteness = object1.entity:getComponent("Cuteness").cuteness end
-            if object2.cuteness then object2Cuteness = object2.cuteness else object2Cuteness = object2.entity:getComponent("Cuteness").cuteness end
+            if object1.cuteness then object1Cuteness = object1.cuteness else object1Cuteness = object1.entity:getComponent("CutieComponent").cuteness end
+            if object2.cuteness then object2Cuteness = object2.cuteness else object2Cuteness = object2.entity:getComponent("CutieComponent").cuteness end
 
             -- Schadensmodell
             if math.random(0, 100 + 2*object2Cuteness) > 100 then

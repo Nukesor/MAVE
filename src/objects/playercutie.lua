@@ -1,14 +1,4 @@
 require("core/helper")
-require("objects/particles")
-require("objects/shot")
-
-require("components/physics")
-require("components/level")
-require("components/life")
-require("components/cuteness")
-require("components/mobbelity")
-require("components/bouncy")
-require("components/isPlayer")
 
 Playercutie = class("Playercutie")
 
@@ -46,8 +36,7 @@ function Playercutie:createEntity(xs, ys, image)
     self.entity:addComponent(ZIndex(100))
     self.entity:addComponent(Level(0))
     self.entity:addComponent(Life(100))
-    self.entity:addComponent(Cuteness(0))
-    self.entity:addComponent(Mobbelity(0))
+    self.entity:addComponent(CutieComponent(0, 0, 1))
     self.entity:addComponent(Bouncy(0.1))
     self.entity:addComponent(IsPlayer())
 end
@@ -134,15 +123,15 @@ end
 
 function Playercutie:reset()
     self.entity:getComponent("Life").life = 100
-    self.entity:getComponent("Mobbelity").mobbelity = 0
-    self.entity:getComponent("Cuteness").cuteness = 0
+    self.entity:getComponent("CutieComponent").mobbelity = 0
+    self.entity:getComponent("CutieComponent").cuteness = 0
     self.body:setX(self.startx)
     self.body:setY(self.starty)
     self.body:setLinearVelocity(math.random(-70, 70), math.random(-40, 40))
 end
 
 function Playercutie:restart()
-    self.entity:getComponent("Life").life = 100 + 10*self.entity:getComponent("Mobbelity").mobbelity
+    self.entity:getComponent("Life").life = 100 + 10*self.entity:getComponent("CutieComponent").mobbelity
     self.body:setX(self.startx)
     self.body:setY(self.starty)
     self.body:setLinearVelocity(math.random(-70, 70), math.random(-40, 40))

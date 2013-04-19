@@ -10,7 +10,6 @@ GameOverState =  class("GameOverState", State)
 function GameOverState:__init()
 	self.runner = 0
 	self.wobble = 1
-	self.mode = 0
 	self.menupoints = {"Play Again", "Exit"}
 	self.List = {"Life: ", "Damage: ", "Crit-Chance: "}
 	self:load()

@@ -12,7 +12,7 @@ require("objects/particles")
 require("core/events/keyPressed")
 
 require("systems/drawableDrawSystem")
-require("systems/polygonSystem")
+require("systems/polygonDrawSystem")
 require("systems/wobbleSystem")
 require("systems/maxSpeedSystem")
 require("systems/sideChangeSystem")

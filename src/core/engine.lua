@@ -83,21 +83,21 @@ function Engine:refreshEntity(entity)
 end
 
 function Engine:addListener(eventName, listener)
-    if not self.events.eventName then
-        self.events.eventName = {}
+    if not self.events[eventName] then
+        self.events[eventName] = {}
     end
-    self.events.eventName.listener = listener
+    self.events[eventName][listener.__name] = listener
 end
 
 function Engine:removeListener(eventName, listener)
-    if self.events.eventName and self.events.eventName.listener then
-        self.events.eventName.listener = nil
+    if self.events[eventName] and self.events.eventName.listener then
+        self.events[eventName][listener.__name] = nil
     end
 end
 
 function Engine:fireEvent(event)
     if self.events[event.name] then
-        for k,v in self.events[event.name] do
+        for k,v in pairs(self.events[event.name]) do
             v:fireEvent(event)
         end
     end

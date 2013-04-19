@@ -6,27 +6,30 @@ require("core/engine")
 require("core/event")
 
 require("core/events/keyPressed")
+require("core/events/beginContact")
 
 -- Draw Systems
 require("systems/particleDrawSystem")
 require("systems/drawableDrawSystem")
 require("systems/polygonDrawSystem")
+require("systems/particleDrawSystem")
 -- Upgrade Systems
 require("systems/wobbleSystem")
 require("systems/maxSpeedSystem")
 require("systems/sideChangeSystem")
 require("systems/physicsPositionSyncSystem")
-require("systems/collisionDamageSystem")
 require("systems/dashingSystem")
 require("systems/particleDeleteSystem")
 -- Event Systems
 require("systems/mainKeySystem")
+require("systems/collisionDamageSystem")
+require("systems/collisionBounceSystem")
 -- 
-require("components/position")
 require("components/drawable")
 require("components/drawablepolygon")
 require("components/zindex")
 require("components/particleComponent")
+require("components/position")
 -- Cutie Components
 require("components/physics")
 require("components/level")
@@ -47,7 +50,7 @@ MainState = class("MainState", State)
 function MainState:__init()
     love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
-    world:setCallbacks(self:getCollisionFunction(),endContact)
+    world:setCallbacks(beginContact, endContact)
 
     engine = Engine()
     engine:addListener("KeyPressed", MainKeySystem())
@@ -61,6 +64,7 @@ function MainState:__init()
     engine:addSystem(PhysicsPositionSyncSystem(), "logic")
     engine:addSystem(ParticleDeleteSystem(), "logic")
 
+    CollisionBounceSystem()
     self.wobbleSystem = engine:addSystem(WobbleSystem(), "logic")
     self.collisionSystem = engine:addSystem(CollisionDamageSystem(), "logic")
     self.dashingSystem = engine:addSystem(DashingSystem(), "logic")
@@ -195,7 +199,9 @@ function MainState:mousepressed(x, y, key)
 end
 
 --Collision function
-function MainState:getCollisionFunction()
+function beginContact(a, b, coll)
+    engine:fireEvent(BeginContact(a, b, coll))
+end
  --[[   local mainstate = self
     return function(a, b, coll)
 
@@ -268,4 +274,3 @@ function MainState:getCollisionFunction()
             end
         end
     end]]
-end

@@ -7,7 +7,7 @@ function Engine:__init()
 
     self.allSystems = {}
     self.logicSystems = {}
-    self.renderSystems = {}
+    self.drawSystems = {}
 
     self.events = {}
 
@@ -38,8 +38,8 @@ end
 
 
 function Engine:addSystem(system, type)
-    if type == "render" then
-        table.insert(self.renderSystems, system)
+    if type == "draw" then
+        table.insert(self.drawSystems, system)
     elseif type == "logic" then
         table.insert(self.logicSystems, system)
     end
@@ -56,7 +56,7 @@ end
 
 
 function Engine:draw()
-    for index, system in ipairs(self.renderSystems) do
+    for index, system in ipairs(self.drawSystems) do
         system:update()
     end
 end

@@ -1,9 +1,9 @@
 require("core/helper")
 require("core/system")
 
-PolygonSystem = class("PolygonSystem", System)
+PolygonDrawSystem = class("PolygonDrawSystem", System)
 
-function PolygonSystem:update()
+function PolygonDrawSystem:update()
 	love.graphics.setColor(50, 50, 50)
     for index, entity in ipairs(self.targets) do
         local drawable = entity:getComponent("DrawablePolygon")
@@ -11,6 +11,6 @@ function PolygonSystem:update()
     end
 end
 
-function PolygonSystem:getRequiredComponents()
+function PolygonDrawSystem:getRequiredComponents()
     return {"DrawablePolygon"}
 end

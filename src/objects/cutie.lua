@@ -41,8 +41,8 @@ function Cutie:update(dt)
     -- Deklaration der lokalen Variablen
     local xpos, ypos =  self:position()
     local xacc, yacc = self.body:getLinearVelocity()
-    local playercutiex, playercutiey = playercutie:position()
-    local playercutiexv, playercutieyv = playercutie.body:getLinearVelocity()
+    local playercutiex, playercutiey = playercutie:getComponent("Position").x, playercutie:getComponent("Position").y
+    local playercutiexv, playercutieyv = playercutie:getComponent("Physics").body:getLinearVelocity()
     local speed = main.worldspeed
 
         -- Wobble des Cuties
@@ -99,16 +99,6 @@ function Cutie:update(dt)
             xacc = 500
         end
 
-        -- momentanes Pathfinding des Gegners
---[[        if xpos >= 500 and (xpos-playercutiex) > 500 then
-            self.body:applyLinearImpulse( 0.5*speed, 0)
-        elseif playercutiex < xpos then
-            self.body:applyLinearImpulse( -0.5*speed, 0)
-        elseif xpos <= 500 and (playercutiex-xpos) > 500 then
-            self.body:applyLinearImpulse( -0.5*speed, 0)
-        elseif  xpos < playercutiex then
-            self.body:applyLinearImpulse( 0.5*speed, 0)
-        end --]]
 
         -- Ki
 if ypos <= 579 then

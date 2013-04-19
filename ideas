@@ -64,3 +64,10 @@ Steuerung:
 	Space: Slowmo starten/stoppen
 	Linksklick: Spezialaktion (Schuss, C4 Platzieren...)
 	Rechtsklick: Dash
+
+
+
+Kram für Arne:
+
+	ShotDrawSystem Funktion steht in der Playercutie
+	Shot braucht neues System.

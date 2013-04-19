@@ -20,8 +20,8 @@ function WinState:load()
 	self.index = 0
 	self.c1Stats = nil
 	self.c2Stats = nil
-	self.c1Stats = {playercutie.entity:getComponent("Life").life .. "/" .. (100+playercutie.entity:getComponent("CutieComponent").mobbelity*10), "0-".. 5+playercutie.entity:getComponent("CutieComponent").cuteness, string.format("%.2f %%",((2*playercutie.entity:getComponent("CutieComponent").cuteness/(100+2*playercutie.entity:getComponent("CutieComponent").cuteness))*100))}
-	self.c2Stats = {cutie2.life .. "/" .. (100+cutie2.mobbelity*10), "0-".. 5+cutie2.cuteness, string.format("%.2f %%",((2*cutie2.cuteness/(100+2*cutie2.cuteness))*100))}
+	--self.c1Stats = {playercutie.entity:getComponent("Life").life .. "/" .. (100+playercutie.entity:getComponent("CutieComponent").mobbelity*10), "0-".. 5+playercutie.entity:getComponent("CutieComponent").cuteness, string.format("%.2f %%",((2*playercutie.entity:getComponent("CutieComponent").cuteness/(100+2*playercutie.entity:getComponent("CutieComponent").cuteness))*100))}
+	--self.c2Stats = {cutie2.life .. "/" .. (100+cutie2.mobbelity*10), "0-".. 5+cutie2.cuteness, string.format("%.2f %%",((2*cutie2.cuteness/(100+2*cutie2.cuteness))*100))}
 end
 
 function WinState:update(dt)

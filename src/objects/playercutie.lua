@@ -4,11 +4,9 @@ Playercutie = class("Playercutie")
 
 function Playercutie:__init(xs, ys, image)
     self:createEntity(xs, ys, image)
-
     self.body = love.physics.newBody(world, xs, ys, "dynamic")
     self.shape = love.physics.newCircleShape(9) 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1) 
-
     self.entity:addComponent(Physics(self.body, self.fixture, self.shape))
 
     self.fixture:setRestitution(1)
@@ -76,9 +74,6 @@ function Playercutie:draw()
     love.graphics.setColor(0, 0, 0)
     love.graphics.draw(self.particles.hit, 0, 0)
     love.graphics.draw(self.particles.bleeding, 0, 0)
-    if shot.body then
-    love.graphics.circle("fill", shot.body:getX(), shot.body:getY(), shot.shape:getRadius())
-    end
     love.graphics.setColor(255, 255, 255)
 
     -- Playercutie wird bei Seitenwechsel kurzzeitig auf beiden Seiten gezeichnet, sodass der Übergang flüssig von statten geht
@@ -105,14 +100,6 @@ function Playercutie:keypressed(key, u)
             self.jumpcount = self.jumpcount - 1
         end
     end
-    if key == "x" then
-        if shot.body then
-        else
-            self.shotEntity = Entity()
-            shot = Shot(self.body:getX(), self.body:getY()-20, cutie2.body:getX(), cutie2.body:getY(), self.shotEntity)
-            engine:addEntity(self.shotEntity)
-        end
-    end 
 end
 
 function Playercutie:position()

@@ -14,6 +14,7 @@ function Engine:addEntity(entity)
     self:refreshEntity(entity)
 end
 
+
 function Engine:removeEntity(entity)
     for key, system in pairs(self.allSystems) do
         for key2, systemEntity in pairs(system:getEntities()) do
@@ -23,6 +24,7 @@ function Engine:removeEntity(entity)
         end
     end
 end
+
 
 function Engine:addSystem(system, type)
     if type == "render" then
@@ -34,17 +36,20 @@ function Engine:addSystem(system, type)
     return system
 end
 
+
 function Engine:update(dt)
     for index, system in ipairs(self.logicSystems) do
         system:update(dt)
     end
 end
 
+
 function Engine:draw()
     for index, system in ipairs(self.renderSystems) do
         system:update()
     end
 end
+
 
 function Engine:refreshEntity(entity)
     for index, system in pairs(self.allSystems) do

@@ -20,6 +20,7 @@ function love.load()
     resources:addImage("cutie5", 'data/gfx/cutie-5.png')
     resources:addImage("blood1", 'data/gfx/blood1.png')
     resources:addImage("arena", 'data/gfx/arena.png')
+    resources:addImage("shot", 'data/gfx/shot.png')
 
     resources:addSound("bounce1", 'data/sfx/bounce_low_level.ogg')
 
@@ -36,8 +37,7 @@ function love.load()
     win = WinState()
     gameover = GameOverState()
     stack = StackHelper()
-    shot = Shot(-100, -100, 0, 0, Entity())
-
+    
     stack:push(menu)
 end
 

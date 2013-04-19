@@ -7,7 +7,6 @@ require("core/engine")
 require("objects/cutie")
 require("objects/playercutie") 
 require("objects/particles")
-require("objects/shot")
 
 require("systems/renderSystem")
 require("systems/polygonSystem")
@@ -17,6 +16,8 @@ require("systems/sideChangeSystem")
 require("systems/physicsPositionSyncSystem")
 require("systems/collisionDamageSystem")
 require("systems/dashingSystem")
+require("systems/particleDeleteSystem")
+require("systems/particleDrawSystem")
 
 require("components/drawable")
 require("components/drawablepolygon")
@@ -31,6 +32,11 @@ require("components/cutiecomponent")
 require("components/bouncy")
 require("components/isPlayer")
 require("components/isCutie")
+require("components/particleComponent")
+
+require("models/shotmodel")
+require("models/playercutiemodel")
+
 
 MainState = class("MainState", State)
 
@@ -42,22 +48,24 @@ function MainState:__init()
     engine = Engine()
     engine:addSystem(RenderSystem(), "render")
     engine:addSystem(PolygonSystem(), "render")
+    engine:addSystem(ParticleDrawSystem(), "render")
     self.wobbleSystem = engine:addSystem(WobbleSystem(), "logic")
     engine:addSystem(MaxSpeedSystem(), "logic")
     engine:addSystem(SideChangeSystem(), "logic")
     engine:addSystem(PhysicsPositionSyncSystem(), "logic")
+    engine:addSystem(ParticleDeleteSystem(), "logic")
     self.collisionSystem = CollisionDamageSystem()
     engine:addSystem(self.collisionSystem, "logic")
     self.dashingSystem = engine:addSystem(DashingSystem(), "logic")
+ 
 
-    playercutie = Playercutie(333, 520, resources.images.cutie1)
-    playerEntity = playercutie.entity
-    playerEntity:addComponent(IsCutie())
-    engine:addEntity(playerEntity)
+    playercutie = CutieModel(333, 520, resources.images.cutie1)
+    playercutie:addComponent(IsPlayer())
+    engine:addEntity(playercutie)
 
-    cutie2Entity = Entity()
-    cutie2 = Cutie(666, 520, resources.images.cutie0, cutie2Entity)
-    engine:addEntity(cutie2Entity)
+    cutie = CutieModel(666, 520, resources.images.cutie2)
+    cutie:addComponent(IsCutie())
+    engine:addEntity(cutie)
 
     self.bg = Entity()
     self.bg:addComponent(Drawable(resources.images.arena, 0, 1, 1, 0, 0))
@@ -123,7 +131,7 @@ function MainState:update(dt)
     end
 
     -- Spiel-Ende und Pushen des jeweiligen Gamestates
-    if playercutie.entity:getComponent("Life").life <= 0 or cutie2.life <= 0 then
+    --[[ if playercutie.entity:getComponent("Life").life <= 0 or cutie2.life <= 0 then
         self.shaketimer = 0
         if playercutie.entity:getComponent("Life").life <= 0 and cutie2.life <= 0 then
             stack:push(gameover)
@@ -134,20 +142,18 @@ function MainState:update(dt)
             stack:push(gameover)
             gameover.mode = 2
         end
-    end
+    end]]
 
     -- Update Functions
     engine:update(dt)
-    playercutie:update(dt)
-    cutie2:update(dt)
 	world:update(dt)
 end
 
 function MainState:draw()
     -- Deklaration der lokalen Variablen
-    local x, y = playercutie:position()
-    local playercutiexv, playercutieyv = playercutie.body:getLinearVelocity()
-    local cutie2xv, cutie2yv = cutie2.body:getLinearVelocity()
+    local x, y = playercutie:getComponent("Position").x, playercutie:getComponent("Position").y
+    local playercutiexv, playercutieyv = playercutie:getComponent("Physics").body:getLinearVelocity()
+    local cutie2xv, cutie2yv =  cutie:getComponent("Physics").body:getLinearVelocity()
 
     -- Zeichnen der Grafiken
     love.graphics.setColor(255, 255, 255)
@@ -155,71 +161,60 @@ function MainState:draw()
 
     -- Cutie Zeichnung und Drawfunktion
     engine:draw()
-    playercutie:draw()
-    cutie2:draw()
 
     -- Zeichnen der Schriftzüge
     love.graphics.print(string.format("%.2f ",x) ..  "    " .. "X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)
     love.graphics.print("X-Vel: " .. string.format("%.2f ",cutie2xv) .. ", Y-Vel: " .. string.format("%.2f ",cutie2yv), 800, 20,0,1,1)
-    love.graphics.print("Your Cutie´s life: " .. playercutie.entity:getComponent("Life").life, 20, 40, 0, 1, 1)
-    love.graphics.print("Enemy Cutie´s life: " .. cutie2.life, 840, 40, 0, 1, 1)
-    love.graphics.print((390 - (cutie2.height/100)*50), 60, 80, 0, 1.5, 1.5)
+    love.graphics.print("Your Cutie´s life: " .. playercutie:getComponent("Life").life, 20, 40, 0, 1, 1)
+    love.graphics.print("Enemy Cutie´s life: " .. cutie:getComponent("Life").life, 840, 40, 0, 1, 1)
+--    love.graphics.print((390 - (cutie2.height/100)*50), 60, 80, 0, 1.5, 1.5)
 end
 
 function MainState:restart()
-    playercutie:restart()
-    cutie2:restart() 
-    if shot.body then shot:shutdown() end
 end
 
 function MainState:reset()
-    playercutie:reset()
-    cutie2:reset()
-    if shot.body then shot:shutdown() end
 end
 
 
 function MainState:shutdown()
-	playercutie:shutdown()
-	cutie2:shutdown()
 	world:destroy()
 end
 
 function MainState:keypressed(key, u)
-    playercutie:keypressed(key, u)
     if key == "i" then
         playercutie.entity:getComponent("Life").life = 0
-    elseif key == "o" then
-        cutie2.life = 0
     elseif key == "p" then
-        playercutie.entity:getComponent("Life").life = 0
-        cutie2.life = 0
+        playercutie:getComponent("Life").life = 0
+        cutie:getComponent("Life").life = 0
     elseif key == "b" then
         self.shaketimer = 0.5
     elseif key == "y" then
-        engine:removeEntity(playerEntity)
+        engine:removeEntity(playercutie)
+    elseif key == "x" then
+        engine:addEntity(ShotModel(playercutie.entity:getComponent("Position").x, (playercutie.entity:getComponent("Position").y + 50), love.mouse.getPosition()))
     end
 end
 
 function MainState:keyreleased(key, u)
     if key == "w" or key == "up" then
-        playercutie.jumpactive = 0
+--      playercutie.jumpactive = 0
     end
 end
 
 function MainState:mousepressed(x, y, key)
     if key == "r" and not playercutie.entity:getComponent("Dashing") then
-        local xVelBefore, yVelBefore = playercutie.entity:getComponent("Physics").body:getLinearVelocity()
-        local xBefore, yBefore = playercutie.entity:getComponent("Physics").body:getPosition()
-        playercutie.entity:addComponent(Dashing({x=xVelBefore, y=yVelBefore}, {x=xBefore, y=yBefore}, {x=x, y=y}))
+        local xVelBefore, yVelBefore = playercutie:getComponent("Physics").body:getLinearVelocity()
+        local xBefore, yBefore = playercutie:getComponent("Physics").body:getPosition()
+        playercutie:addComponent(Dashing({x=xVelBefore, y=yVelBefore}, {x=xBefore, y=yBefore}, {x=x, y=y}))
     elseif key == "r" and playercutie.entity:getComponent("Dashing") then
-        playercutie.entity:removeComponent("Dashing")
+        playercutie:removeComponent("Dashing")
     end
 end
 
 --Collision function
 function MainState:getCollisionFunction()
-    local mainstate = self
+ --[[   local mainstate = self
     return function(a, b, coll)
 
         local object1 = a:getUserData()[1]
@@ -290,5 +285,5 @@ function MainState:getCollisionFunction()
                 end
             end
         end
-    end
+    end]]
 end

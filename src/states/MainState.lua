@@ -10,6 +10,7 @@ require("objects/playercutie")
 require("objects/particles")
 
 require("core/events/keyPressed")
+require("core/events/beginContact")
 
 require("systems/renderSystem")
 require("systems/polygonSystem")
@@ -21,6 +22,7 @@ require("systems/collisionDamageSystem")
 require("systems/dashingSystem")
 require("systems/particleDeleteSystem")
 require("systems/particleDrawSystem")
+require("systems/collisionBounceSystem")
 
 require("components/drawable")
 require("components/drawablepolygon")
@@ -45,7 +47,7 @@ MainState = class("MainState", State)
 function MainState:__init()
     love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
-    world:setCallbacks(self:getCollisionFunction(),endContact)
+    world:setCallbacks(beginContact, endContact)
 
     engine = Engine()
     engine:addSystem(RenderSystem(), "render")
@@ -56,6 +58,7 @@ function MainState:__init()
     engine:addSystem(SideChangeSystem(), "logic")
     engine:addSystem(PhysicsPositionSyncSystem(), "logic")
     engine:addSystem(ParticleDeleteSystem(), "logic")
+    CollisionBounceSystem()
     self.collisionSystem = CollisionDamageSystem()
     engine:addSystem(self.collisionSystem, "logic")
     self.dashingSystem = engine:addSystem(DashingSystem(), "logic")
@@ -213,7 +216,9 @@ function MainState:mousepressed(x, y, key)
 end
 
 --Collision function
-function MainState:getCollisionFunction()
+function beginContact(a, b, coll)
+    engine:fireEvent(BeginContact(a, b, coll))
+end
  --[[   local mainstate = self
     return function(a, b, coll)
 
@@ -286,4 +291,3 @@ function MainState:getCollisionFunction()
             end
         end
     end]]
-end

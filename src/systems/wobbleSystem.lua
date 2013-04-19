@@ -3,9 +3,9 @@ WobbleSystem = class("WobbleSystem", System)
 function WobbleSystem:update() 
     for key, entity in pairs(self.targets) do
         local drawable = entity:getComponent("Drawable")
-        local bouncy = entity:getComponent("Bouncy")
-        if drawable.sy < bouncy.default then
-            drawable.sy = drawable.sy + (bouncy.default / 70)
+        local wobbly = entity:getComponent("Wobbly")
+        if drawable.sy < wobbly.default then
+            drawable.sy = drawable.sy + (wobbly.default / 70)
         end
     end
 end
@@ -18,13 +18,13 @@ function WobbleSystem:beginContact(a, b, coll)
 end
 
 function WobbleSystem:getRequiredComponents()
-    return {"Drawable", "Bouncy"}
+    return {"Drawable", "Wobbly"}
 end
 
 function WobbleSystem:updateSy(entity)
-    if entity and entity:getComponent("Drawable") and entity:getComponent("Bouncy") then
+    if entity and entity:getComponent("Drawable") and entity:getComponent("Wobbly") then
         local drawable = entity:getComponent("Drawable")
-        local bouncy = entity:getComponent("Bouncy")
-        drawable.sy = 3*(bouncy.default / 4)
+        local wobbly = entity:getComponent("Wobbly")
+        drawable.sy = 3*(wobbly.default / 4)
     end
 end

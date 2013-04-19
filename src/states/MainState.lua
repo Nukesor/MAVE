@@ -31,13 +31,13 @@ require("components/physics")
 require("components/level")
 require("components/life")
 require("components/cutiecomponent")
-require("components/bouncy")
+require("components/wobbly")
 require("components/isPlayer")
 require("components/isCutie")
 require("components/particleComponent")
 
 require("models/shotmodel")
-require("models/playercutiemodel")
+require("models/cutieModel")
 
 
 MainState = class("MainState", State)

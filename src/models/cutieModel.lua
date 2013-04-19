@@ -1,6 +1,6 @@
 require("core/helper")
 
-CutieModel = class("PlayerCutieModel", Entity)
+CutieModel = class("CutieModel", Entity)
 
 function CutieModel:__init(xs, ys, image)
 	
@@ -9,6 +9,7 @@ function CutieModel:__init(xs, ys, image)
     local body = love.physics.newBody(world, xs, ys, "dynamic")
     local shape = love.physics.newCircleShape(9)
     local fixture = love.physics.newFixture(body, shape, 1) 
+    fixture:setUserData(self)
 	
 	self:addComponent(Physics(body, fixture, shape))
     self:addComponent(Position(xs, ys))
@@ -17,7 +18,7 @@ function CutieModel:__init(xs, ys, image)
     self:addComponent(Level(0))
     self:addComponent(Life(100))
     self:addComponent(CutieComponent(0, 0, 1))
-    self:addComponent(Bouncy(0.1))
+    self:addComponent(Wobbly(0.1))
     body:setMass(0.0192)
 
 end

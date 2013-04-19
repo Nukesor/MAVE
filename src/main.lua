@@ -7,7 +7,7 @@ require("states/MenuState")
 require("states/WinState")
 require("states/GameOverState")
 require("states/CreditsState")
-
+require("states/PauseState")
 
 
 function love.load()
@@ -24,6 +24,13 @@ function love.load()
 
     resources:addSound("bounce1", 'data/sfx/bounce_low_level.ogg')
 
+    resources:addFont("seventeen", "data/font/SwankyandMooMoo.ttf", 17)
+    resources:addFont("twenty", "data/font/SwankyandMooMoo.ttf", 20)
+    resources:addFont("twentyfive", "data/font/SwankyandMooMoo.ttf", 25)
+    resources:addFont("thirty", "data/font/SwankyandMooMoo.ttf", 30)
+    resources:addFont("forty", "data/font/SwankyandMooMoo.ttf", 40)
+    resources:addFont("fifty", "data/font/SwankyandMooMoo.ttf", 60)
+    
     resources:addFont("default", "data/font/SwankyandMooMoo.ttf", 20)
     resources:addFont("big", "data/font/SwankyandMooMoo.ttf", 60)
 
@@ -36,6 +43,7 @@ function love.load()
     menu = MenuState()
     win = WinState()
     gameover = GameOverState()
+    pause = PauseState()
     stack = StackHelper()
     
     stack:push(menu)

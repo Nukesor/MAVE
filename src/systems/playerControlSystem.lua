@@ -8,12 +8,9 @@ function PlayerControlSystem:fireEvent(event)
     if event.key == "s" or event.key == "down" then
         playercutie:getComponent("Physics").body:applyLinearImpulse(0, 1)
     elseif event.key == "w" or event.key == "up" then
-        playercutie:getComponent("Physics").body:applyLinearImpulse(0, -6)
-
---[[        self.jumpactive = 1
-        if self.jumpcount > 0 then
-            playercutie.getComponent("Physics").body:applyLinearImpulse(0, -6)
-            self.jumpcount = self.jumpcount - 1
-        end]]
+        if playercutie:getComponent("IsPlayer").jumpcount > 0 then
+            playercutie:getComponent("Physics").body:applyLinearImpulse(0, -6)
+            playercutie:getComponent("IsPlayer").jumpcount = playercutie:getComponent("IsPlayer").jumpcount - 1
+        end
     end
 end

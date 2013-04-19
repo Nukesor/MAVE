@@ -2,9 +2,6 @@ require("core/resources")
 require("core/helper")
 require("core/state")
 
-require("objects/cutie") 
-require("objects/playercutie") 
-
 MenuState = class("MenuState", State)
 
 function MenuState:__init()

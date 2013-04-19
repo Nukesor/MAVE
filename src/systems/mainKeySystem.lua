@@ -8,7 +8,9 @@ function MainKeySystem:fireEvent(event)
     if event.key == "i" then
         playercutie:getComponent("Life").life = 0
     elseif event.key == "p" then
-    	stack:push(pause)
+        local canvas = love.graphics.newScreenshot()
+        screenshot = love.graphics.newImage(canvas)
+        stack:push(pause)
     elseif event.key == "b" then
         main.shaketimer = 0.5
     elseif event.key == "y" then

@@ -17,6 +17,8 @@ require("systems/particleDrawSystem")
 require("systems/sideChangeSystem")
 require("systems/physicsPositionSyncSystem")
 require("systems/particleDeleteSystem")
+require("systems/enemyTrackingSystem")
+require("systems/speedLimitSystem")
 --CutieManipulation Upgrade Systems
 require("systems/playerMoveSystem")
 require("systems/wobbleSystem")
@@ -41,6 +43,7 @@ require("components/wobbly")
 require("components/dashing")
 require("components/isPlayer")
 require("components/isEnemy")
+require("components/enemyComponent")
 
 -- Models
 require("models/shotmodel")
@@ -67,7 +70,8 @@ function MainState:__init()
     engine:addSystem(PhysicsPositionSyncSystem(), "logic")
     engine:addSystem(ParticleDeleteSystem(), "logic")
     engine:addSystem(PlayerMoveSystem(), "logic")
-
+    engine:addSystem(EnemyTrackingSystem(), "logic")
+    engine:addSystem(SpeedLimitSystem(), "logic")
     CollisionSelectSystem()
     self.wobbleSystem = engine:addSystem(WobbleSystem(), "logic")
     self.dashingSystem = engine:addSystem(DashingSystem(), "logic")
@@ -119,6 +123,7 @@ function MainState:__init()
     -- Temporärer Cutie
     cutie = CutieModel(666, 520, resources.images.cutie2)
     cutie:addComponent(IsEnemy())
+    cutie:addComponent(EnemyComponent())
     engine:addEntity(cutie)
 
 end

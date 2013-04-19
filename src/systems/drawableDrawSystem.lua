@@ -21,14 +21,13 @@ function DrawableDrawSystem:update()
         local pos = entity:getComponent("Position")
         -- Enable for teh lulz
         --love.graphics.setPixelEffect(self.invert)
-        love.graphics.draw(drawable.image, pos.x, pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
-        love.graphics.setPixelEffect()
-        
         if pos.x < 50 then 
             love.graphics.draw(drawable.image, pos.x+1000, pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
-        elseif pos.y > 950 then
+        elseif pos.x > 950 then
             love.graphics.draw(drawable.image, pos.x-1000, pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
         end
+        love.graphics.draw(drawable.image, pos.x, pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
+        love.graphics.setPixelEffect()
     end
 end
 

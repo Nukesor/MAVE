@@ -1,7 +1,5 @@
 Fragen:
 
-Nachschauen, ob bei Collision beide Möglichkeiten durchgenommen werden. Also ob nicht extra: if (a =nr.1 and b = nr.2 )  or (a =  nr2  and b =  nr1) sondern nur (a = nr. 1 and b = nr. 2) geschrieben werden muss.
-
 Ideen:
 
 Komplette Ummodelierung des Spielprinzips:

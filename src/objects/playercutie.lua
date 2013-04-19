@@ -86,7 +86,6 @@ end
 
 function Playercutie:loseLife(damage)
     self.entity:getComponent("Life").life = self.entity:getComponent("Life").life - damage
-    print("playercutie:loselife called")
 end
 
 function Playercutie:keypressed(key, u)

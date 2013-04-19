@@ -158,18 +158,13 @@ function MainState:draw()
     local cutie2xv, cutie2yv =  cutie:getComponent("Physics").body:getLinearVelocity()
 
     -- Zeichnen der Grafiken
-    love.graphics.setColor(255, 255, 255)
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
 
-    -- Cutie Zeichnung und Drawfunktion
     engine:draw()
 
     -- Zeichnen der Schriftzüge
     love.graphics.print(string.format("%.2f ",x) ..  "    " .. "X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)
-    love.graphics.print("X-Vel: " .. string.format("%.2f ",cutie2xv) .. ", Y-Vel: " .. string.format("%.2f ",cutie2yv), 800, 20,0,1,1)
     love.graphics.print("Your Cutie´s life: " .. playercutie:getComponent("Life").life, 20, 40, 0, 1, 1)
-    love.graphics.print("Enemy Cutie´s life: " .. cutie:getComponent("Life").life, 840, 40, 0, 1, 1)
---    love.graphics.print((390 - (cutie2.height/100)*50), 60, 80, 0, 1.5, 1.5)
 end
 
 function MainState:restart()

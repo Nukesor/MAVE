@@ -23,5 +23,5 @@ function MaxSpeedSystem:update()
 end
 
 function MaxSpeedSystem:getRequiredComponents()
-    return {"Physics", "IsCutie"}
+    return {"Physics", "CutieComponent"}
 end

@@ -22,23 +22,22 @@ require("systems/dashingSystem")
 require("systems/particleDeleteSystem")
 -- Event Systems
 require("systems/mainKeySystem")
-require("systems/collisionDamageSystem")
-require("systems/collisionBounceSystem")
+require("systems/collisionSelectSystem")
 -- 
 require("components/drawable")
 require("components/drawablepolygon")
-require("components/zindex")
+require("components/zIndex")
 require("components/particleComponent")
 require("components/position")
 -- Cutie Components
 require("components/physics")
 require("components/level")
 require("components/life")
-require("components/cutiecomponent")
+require("components/cutieComponent")
 require("components/wobbly")
 require("components/dashing")
 require("components/isPlayer")
-require("components/isCutie")
+require("components/isEnemy")
 
 -- Models
 require("models/shotmodel")
@@ -64,9 +63,8 @@ function MainState:__init()
     engine:addSystem(PhysicsPositionSyncSystem(), "logic")
     engine:addSystem(ParticleDeleteSystem(), "logic")
 
-    CollisionBounceSystem()
+    CollisionSelectSystem()
     self.wobbleSystem = engine:addSystem(WobbleSystem(), "logic")
-    self.collisionSystem = engine:addSystem(CollisionDamageSystem(), "logic")
     self.dashingSystem = engine:addSystem(DashingSystem(), "logic")
  
     -- Player erstellung
@@ -115,7 +113,7 @@ function MainState:__init()
 
     -- Temporärer Cutie
     cutie = CutieModel(666, 520, resources.images.cutie2)
-    cutie:addComponent(IsCutie())
+    cutie:addComponent(IsEnemy())
     engine:addEntity(cutie)
 
 end

@@ -1,14 +1,15 @@
 require("collisions/bounceCollision")
+require("collisions/collisionDamageSystem")
 
 CollisionSelectSystem = class("CollisionDetectSystem", System)
 
 function CollisionSelectSystem:__init()
     self.conditions = {}
 
-    engine:addListener("BeginContact", self)
-
     local bounce = BounceCollision()
     self:addCollisionAction(bounce.component1, bounce.component2, bounce.action)
+    local damage = CollisionDamageSystem()
+    self:addCollisionAction(damage.component1, damage.component2, damage.action)
 end
 
 function CollisionSelectSystem:addCollisionAction(component1, component2, action)

@@ -4,11 +4,13 @@ require("core/system")
 ParticleDeleteSystem = class("ParticleDeleteSystem", System)
 
 function ParticleDeleteSystem:update(dt)
-	for index, particle in pairs(self.targets) do
-		particle.components.ParticleComponent.timer = particle.components.ParticleComponent.timer - dt
-		particle.components.ParticleComponent.hit:update(dt)
-		if particle.components.ParticleComponent.timer < 0 then
-			engine:removeEntity(particle)
+	for index, entity in pairs(self.targets) do
+		entity.components.ParticleComponent.hit:update(dt)
+		if entity:getComponent("TimeComponent") then
+			entity.components.TimeComponent.timer = entity.components.TimeComponent.timer - dt
+			if entity.components.TimeComponent.timer < 0 then
+				engine:removeEntity(entity)
+			end
 		end
 	end
 end

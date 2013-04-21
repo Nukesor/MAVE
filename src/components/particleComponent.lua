@@ -21,5 +21,4 @@ function ParticleComponent:__init(image, maxparticles, rate, startspeed, endspee
 	self.hit:setDirection(direction)
 	self.hit:setSpread(spread)
 	self.hit:stop()
-	self.timer = lifetime + maxpartlife + 0.2
 end

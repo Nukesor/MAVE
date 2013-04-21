@@ -6,7 +6,7 @@ MainKeySystem = class("MainKeySystem", System)
 function MainKeySystem:fireEvent(event)
 	-- Playercutie Jump
     if event.key == "i" then
-        playercutie:getComponent("Life").life = 0
+        playercutie:getComponent("Life").life = 20
     elseif event.key == "p" then
         local canvas = love.graphics.newScreenshot()
         screenshot = love.graphics.newImage(canvas)
@@ -16,6 +16,8 @@ function MainKeySystem:fireEvent(event)
     elseif event.key == "y" then
         engine:removeEntity(playercutie)
     elseif event.key == "x" then
-        engine:addEntity(ShotModel(playercutie.entity:getComponent("Position").x, (playercutie.entity:getComponent("Position").y + 50), love.mouse.getPosition()))
+        local shot = ShotModel(playercutie:getComponent("Position").x, (playercutie:getComponent("Position").y + 50), love.mouse.getPosition())
+        shot:getComponent("Physics").fixture:setUserData(shot)
+        engine:addEntity(shot)
     end
 end

@@ -48,14 +48,14 @@ function GameOverState:draw()
 		love.graphics.print(self.List[i], 780, y, 0, 1, 1 )
 	end
 
-	for i = 1, 3, 1 do 
+	--[[for i = 1, 3, 1 do 
 		local y = 100 + (i-1) * 15
 		love.graphics.print(self.c1Stats[i], 180, y, 0, 1, 1 )
 	end
 	for i = 1, 3, 1 do 
 		local y = 100 + (i-1) * 15
 		love.graphics.print(self.c2Stats[i], 860, y, 0, 1, 1 )
-	end
+	end	]]
 
 	-- Zeichnen des Menüs
 	for i = 1, 2, 1 do
@@ -76,10 +76,9 @@ function GameOverState:keypressed(key, u)
 			self.index = 1
 		end
 	elseif key == "return" then
-		playercutie.particles:reset()
-		cutie2.particles:reset()
+		-- Hier kommt noch ParticleSystemreset dazu
 		if self.index == 1 then
-			self:restart()
+
 		elseif self.index == 2 then
 			stack:pop()
 			stack:pop()
@@ -88,6 +87,5 @@ function GameOverState:keypressed(key, u)
 end
 
 function GameOverState:restart()
-	main:restart()
 	stack:pop()
 end

@@ -3,11 +3,11 @@ PhysicsPositionSyncSystem = class("PhysicsPositionSyncSystem", System)
 
 function PhysicsPositionSyncSystem:update(dt)
     for k, entity in pairs(self.targets) do
-        entity:getComponent("Position").x = entity:getComponent("Physics").body:getX()
-        entity:getComponent("Position").y = entity:getComponent("Physics").body:getY()
+        entity:getComponent("PositionComponent").x = entity:getComponent("PhysicsComponent").body:getX()
+        entity:getComponent("PositionComponent").y = entity:getComponent("PhysicsComponent").body:getY()
     end
 end
 
 function PhysicsPositionSyncSystem:getRequiredComponents()
-    return {"Physics", "Position"}
+    return {"PhysicsComponent", "PositionComponent"}
 end

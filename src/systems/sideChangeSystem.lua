@@ -2,7 +2,7 @@ SideChangeSystem = class("SideChangeSystem", System)
 
 function SideChangeSystem:update()
     for key, entity in pairs(self.targets) do
-        local body = entity:getComponent("Physics").body
+        local body = entity:getComponent("PhysicsComponent").body
         local x = body:getX()
         if x > 1000 then
             body:setX(x - 1000)
@@ -13,5 +13,5 @@ function SideChangeSystem:update()
 end
 
 function SideChangeSystem:getRequiredComponents()
-    return {"Physics"}
+    return {"PhysicsComponent"}
 end

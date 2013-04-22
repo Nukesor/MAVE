@@ -10,9 +10,9 @@ function ShotModel:__init(x, y, xt, yt)
     local fixture = love.physics.newFixture(body, shape, 0)  
         fixture:setRestitution(1)  
         body:setMass(0)
-    self:addComponent(Physics(body, fixture, shape ))
-    self:addComponent(Position())
-    self:addComponent(Drawable(resources.images.shot, 0, 1, 1, 5, 5))
+    self:addComponent(PhysicsComponent(body, fixture, shape ))
+    self:addComponent(PositionComponent())
+    self:addComponent(DrawableComponent(resources.images.shot, 0, 1, 1, 5, 5))
     self:addComponent(ZIndex(99))
     local akat, gkat
     if math.abs(xt-x) < 500 then

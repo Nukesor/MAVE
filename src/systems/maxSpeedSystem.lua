@@ -2,7 +2,7 @@ MaxSpeedSystem = class("MaxSpeedSystem", System)
 
 function MaxSpeedSystem:update()
     for key, entity in pairs(self.targets) do
-        local body = entity:getComponent("Physics").body
+        local body = entity:getComponent("PhysicsComponent").body
         local xacc, yacc = body:getLinearVelocity()
 
         if yacc > 800 then
@@ -23,5 +23,5 @@ function MaxSpeedSystem:update()
 end
 
 function MaxSpeedSystem:getRequiredComponents()
-    return {"Physics", "CutieComponent"}
+    return {"PhysicsComponent", "CutieComponent"}
 end

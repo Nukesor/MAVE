@@ -17,8 +17,8 @@ end
 function DrawableDrawSystem:update()
 	love.graphics.setColor(255, 255, 255)
     for index, entity in ipairs(self.targets) do
-        local drawable = entity:getComponent("Drawable")
-        local pos = entity:getComponent("Position")
+        local drawable = entity:getComponent("DrawableComponent")
+        local pos = entity:getComponent("PositionComponent")
         -- Enable for teh lulz
         --love.graphics.setPixelEffect(self.invert)
         if pos.x < 50 then 
@@ -32,7 +32,7 @@ function DrawableDrawSystem:update()
 end
 
 function DrawableDrawSystem:getRequiredComponents()
-    return {"Drawable", "Position", "ZIndex"}
+    return {"DrawableComponent", "PositionComponent", "ZIndex"}
 end
 
 function DrawableDrawSystem:addEntity(entity)

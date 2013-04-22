@@ -1,7 +1,7 @@
 require("core/helper")
 require("core/system")
 
-CollisionDamageSystem = class("CollisionDamageSystem", System)
+CollisionDamageSystem = class("CollisionDamageSystem")
 
 function CollisionDamageSystem:__init()
     self.component1 = "IsPlayer"
@@ -30,7 +30,7 @@ function CollisionDamageSystem.action(entities)
         blood = Entity()
         blood:addComponent(ParticleComponent(resources.images.blood1, 50, 30, 20, 10, 0.3, 0.2, 
                                                 255, 0, 0, 255, 200, 0, 0, 255, 
-                                                entity1:getComponent("Position").x, entity1:getComponent("Position").y, 0.3, 0.4, 0.5, 0, 360, 
+                                                entity1:getComponent("PositionComponent").x, entity1:getComponent("PositionComponent").y, 0.3, 0.4, 0.5, 0, 360, 
                                                 0, 360, 50, 100))
         blood:addComponent(TimeComponent(0.3, 0.5))
         engine:addEntity(blood)

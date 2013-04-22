@@ -1,8 +1,8 @@
 require("core/helper")
 
-Drawable = class("Drawable")
+DrawableComponent = class("DrawableComponent")
 
-function Drawable:__init(image, r, sx, sy, ox, oy)
+function DrawableComponent:__init(image, r, sx, sy, ox, oy)
     self.image = image
     self.r = r
     self.sx = sx

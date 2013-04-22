@@ -2,11 +2,11 @@ DashingSystem = class("DashingSystem", System)
 
 function DashingSystem:update(dt)
     for key, entity in pairs(self.targets) do
-        local targetX = entity:getComponent("Dashing").targetPosition.x
-        local targetY = entity:getComponent("Dashing").targetPosition.y
-        local physics = entity:getComponent("Physics")
-        local playerX = entity:getComponent("Dashing").startPosition.x
-        local playerY = entity:getComponent("Dashing").startPosition.y
+        local targetX = entity:getComponent("DashingComponent").targetPosition.x
+        local targetY = entity:getComponent("DashingComponent").targetPosition.y
+        local physics = entity:getComponent("PhysicsComponent")
+        local playerX = entity:getComponent("DashingComponent").startPosition.x
+        local playerY = entity:getComponent("DashingComponent").startPosition.y
 
         targetX = targetX - playerX
         targetY = targetY - playerY
@@ -15,14 +15,13 @@ function DashingSystem:update(dt)
         targetY = targetY/length
 
         physics.body:setLinearVelocity(targetX, targetY)
-        entity:getComponent("Dashing").time = entity:getComponent("Dashing").time + dt
-        if entity:getComponent("Dashing").time >= 0.5 then
-            physics.body:setLinearVelocity(entity:getComponent("Dashing").startVelocity.x, entity:getComponent("Dashing").startVelocity.y)
-            entity:removeComponent("Dashing")
+        entity:getComponent("DashingComponent").time = entity:getComponent("DashingComponent").time + dt
+        if entity:getComponent("DashingComponent").time >= 0.5 then
+            entity:removeComponent("DashingComponent")
         end
     end
 end
 
 function DashingSystem:getRequiredComponents()
-    return {"IsPlayer", "Physics", "Dashing"}
+    return {"IsPlayer", "PhysicsComponent", "DashingComponent"}
 end

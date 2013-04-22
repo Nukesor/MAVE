@@ -9,12 +9,12 @@ function BleedingDetectSystem:update(dt)
 			if not entity:getComponent("ParticleComponent") then
 				entity:addComponent(ParticleComponent(resources.images.blood1, 50, 30, 20, 10, 0.3, 0.2, 
                                                 255, 0, 0, 255, 200, 0, 0, 255, 
-                                                entity:getComponent("Position").x, entity:getComponent("Position").y, -1, 0.4, 0.5, 0, 360, 
+                                                entity:getComponent("PositionComponent").x, entity:getComponent("PositionComponent").y, -1, 0.4, 0.5, 0, 360, 
                                                 0, 0, 50, 100))
 				entity:getComponent("ParticleComponent").hit:start()
 				print("kick")
 			end
-			entity:getComponent("ParticleComponent").hit:setPosition(entity:getComponent("Position").x, entity:getComponent("Position").y)
+			entity:getComponent("ParticleComponent").hit:setPosition(entity:getComponent("PositionComponent").x, entity:getComponent("PositionComponent").y)
 		end
 	end
 end

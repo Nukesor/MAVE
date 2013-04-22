@@ -4,7 +4,6 @@ require("core/state")
 require("core/entity")
 require("core/engine")
 require("core/event")
-
 require("core/events/keyPressed")
 require("core/events/beginContact")
 
@@ -30,22 +29,24 @@ require("systems/mainKeySystem")
 require("systems/collisionSelectSystem")
 require("systems/playerControlSystem")
 -- 
-require("components/drawable")
-require("components/drawablePolygon")
+require("components/drawableComponent")
+require("components/drawablePolygonComponent")
 require("components/zIndex")
 require("components/particleComponent")
 require("components/timeComponent")
-require("components/position")
+require("components/positionComponent")
 -- Cutie Components
-require("components/physics")
-require("components/level")
+require("components/physicsComponent")
+require("components/levelComponent")
 require("components/life")
 require("components/cutieComponent")
-require("components/wobbly")
-require("components/dashing")
+require("components/wobblyComponent")
+require("components/dashingComponent")
+require("components/enemyComponent")
+
+require("components/isShot")
 require("components/isPlayer")
 require("components/isEnemy")
-require("components/enemyComponent")
 
 -- Models
 require("models/shotmodel")
@@ -86,31 +87,31 @@ function MainState:__init()
 
     -- Background und Umgebungselemente
     self.bg = Entity()
-    self.bg:addComponent(Drawable(resources.images.arena, 0, 1, 1, 0, 0))
-    self.bg:addComponent(Position(0, 0))
+    self.bg:addComponent(DrawableComponent(resources.images.arena, 0, 1, 1, 0, 0))
+    self.bg:addComponent(PositionComponent(0, 0))
     self.bg:addComponent(ZIndex(1))
     engine:addEntity(self.bg)
 
     self.wall =  Entity()
-    self.wall:addComponent(DrawablePolygon(world, 500, 580, 1050, 10, "static", self.wall))
+    self.wall:addComponent(DrawablePolygonComponent(world, 500, 580, 1050, 10, "static", self.wall))
     engine:addEntity(self.wall)
 
     self.wall =  Entity()
-    self.wall:addComponent(DrawablePolygon(world, 500, -50, 1050, 0, "static", self.wall))
+    self.wall:addComponent(DrawablePolygonComponent(world, 500, -50, 1050, 0, "static", self.wall))
     engine:addEntity(self.wall)
 
     for i = 0, 4, 1 do 
         local y = 100 + 100 * i
         local xbreite = 200 + 100 * i 
         self.wall = Entity()
-        self.wall:addComponent(DrawablePolygon(world, 500, y, xbreite, 10, "static", self.wall))
+        self.wall:addComponent(DrawablePolygonComponent(world, 500, y, xbreite, 10, "static", self.wall))
         engine:addEntity(self.wall)
     end
 
     for i = 0, 1, 1 do
         local x = 20 + i * 960
         self.wall = Entity()
-        self.wall:addComponent(DrawablePolygon(world, x, 200, 10, 200, "static", self.wall))
+        self.wall:addComponent(DrawablePolygonComponent(world, x, 200, 10, 200, "static", self.wall))
         engine:addEntity(self.wall)
     end
 
@@ -168,9 +169,9 @@ end
 
 function MainState:draw()
     -- Deklaration der lokalen Variablen
-    local x, y = playercutie:getComponent("Position").x, playercutie:getComponent("Position").y
-    local playercutiexv, playercutieyv = playercutie:getComponent("Physics").body:getLinearVelocity()
-    local cutie2xv, cutie2yv =  cutie:getComponent("Physics").body:getLinearVelocity()
+    local x, y = playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y
+    local playercutiexv, playercutieyv = playercutie:getComponent("PhysicsComponent").body:getLinearVelocity()
+    local cutie2xv, cutie2yv =  cutie:getComponent("PhysicsComponent").body:getLinearVelocity()
 
     -- Zeichnen der Grafiken
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
@@ -194,18 +195,16 @@ function MainState:shutdown()
 end
 
 function MainState:keypressed(key, u)
-
     engine:fireEvent(KeyPressed(key, u))
 end
 
 
 function MainState:mousepressed(x, y, key)
-    if key == "r" and not playercutie:getComponent("Dashing") then
-        local xVelBefore, yVelBefore = playercutie:getComponent("Physics").body:getLinearVelocity()
-        local xBefore, yBefore = playercutie:getComponent("Physics").body:getPosition()
-        playercutie:addComponent(Dashing({x=xVelBefore, y=yVelBefore}, {x=xBefore, y=yBefore}, {x=x, y=y}))
-    elseif key == "r" and playercutie:getComponent("Dashing") then
-        playercutie:removeComponent("Dashing")
+    if key == "r" and not playercutie:getComponent("DashingComponent") then
+        local xBefore, yBefore = playercutie:getComponent("PhysicsComponent").body:getPosition()
+        playercutie:addComponent(DashingComponent({x=xBefore, y=yBefore}, {x=x, y=y}))
+    elseif key == "r" and playercutie:getComponent("DashingComponent") then
+        playercutie:removeComponent("DashingComponent")
     end
 end
 

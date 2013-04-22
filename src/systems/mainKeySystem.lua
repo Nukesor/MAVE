@@ -1,3 +1,4 @@
+
 require("core/helper")
 require("core/system")
 
@@ -16,8 +17,8 @@ function MainKeySystem:fireEvent(event)
     elseif event.key == "y" then
         engine:removeEntity(playercutie)
     elseif event.key == "x" then
-        local shot = ShotModel(playercutie:getComponent("Position").x, (playercutie:getComponent("Position").y + 50), love.mouse.getPosition())
-        shot:getComponent("Physics").fixture:setUserData(shot)
+        local shot = ShotModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y + 50), love.mouse.getPosition())
+        shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
         engine:addEntity(shot)
     end
 end

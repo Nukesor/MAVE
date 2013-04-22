@@ -124,11 +124,11 @@ function MainState:__init()
     self.shakeY = 0
     self.shaketimer = 0
 
-    -- Temporärer Cutie
+    --[[ Temporärer Cutie
     cutie = CutieModel(666, 520, resources.images.cutie2)
     cutie:addComponent(IsEnemy())
     cutie:addComponent(EnemyComponent())
-    engine:addEntity(cutie)
+    engine:addEntity(cutie)]]
 
 end
 
@@ -171,7 +171,6 @@ function MainState:draw()
     -- Deklaration der lokalen Variablen
     local x, y = playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y
     local playercutiexv, playercutieyv = playercutie:getComponent("PhysicsComponent").body:getLinearVelocity()
-    local cutie2xv, cutie2yv =  cutie:getComponent("PhysicsComponent").body:getLinearVelocity()
 
     -- Zeichnen der Grafiken
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end

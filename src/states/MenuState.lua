@@ -70,7 +70,6 @@ function MenuState:keypressed(key, u)
 			stack:push(credits)
 		elseif self.index == 1 then
 			stack:push(main)
-			stack:current():reset()
 		elseif self.index == 2 then
 			love.event.push("quit")
 		end

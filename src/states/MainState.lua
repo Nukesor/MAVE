@@ -159,6 +159,8 @@ function MainState:update(dt)
 
     -- Spiel-Ende und Pushen des jeweiligen Gamestates
     if playercutie:getComponent("LifeComponent").life <= 0 then
+        local canvas = love.graphics.newScreenshot()
+        screenshot = love.graphics.newImage(canvas)
         self.shaketimer = 0
         stack:push(gameover)
     end
@@ -184,14 +186,11 @@ function MainState:draw()
 end
 
 function MainState:restart()
-end
-
-function MainState:reset()
-end
-
-
-function MainState:shutdown()
 	world:destroy()
+    for index, value in pairs(engine.entities) do
+        engine:removeEntity(value)
+    end
+    self:__init()
 end
 
 function MainState:keypressed(key, u)
@@ -212,75 +211,3 @@ end
 function beginContact(a, b, coll)
     engine:fireEvent(BeginContact(a, b, coll))
 end
- --[[   local mainstate = self
-    return function(a, b, coll)
-
-        local object1 = a:getUserData()[1]
-        local object1Entity = a:getUserData()[2]
-        local object2 = b:getUserData()[1]
-        local object2Entity = b:getUserData()[2]
-        mainstate.collisionSystem:beginContact(a, b, coll)
-        mainstate.wobbleSystem:beginContact(a, b, coll)
-        
-        if object1 and object2 then
-            if (object1.__name == "Playercutie" or object1.__name == "Cutie") and (object2.__name == "Playercutie" or object2.__name == "Cutie") then
-                love.audio.play(resources.sounds.bounce1)
-            end
-
-            -- Bei Zusammentreffen von Cutie/Playercutie mit Shot, wird 20 schaden übermittelt und Shot zerstört
-            if ((object1.__name == "Shot" or object1.__name == "Cutie") and (object2.__name == "Shot" or object1.__name == "Cutie")) then
-                if object1.__name == "Cutie" then
-                    object1:loseLife(20)
-                elseif object2.__name == "Cutie" then
-                    object2:loseLife(20)
-                end
-                if object1.__name == "Shot" then
-                    object1:shutdown()
-                elseif object2.__name == "Shot" then
-                    object2:shutdown()
-                end
-            elseif ((object1.__name == "Shot" or object1.__name == "Playercutie") and (object2.__name == "Shot" or object2.__name == "Playercutie")) then
-                if object1.__name == "Playercutie" then
-                    object1:loseLife(20)
-                elseif object2.__name == "Playercutie" then
-                    object2:loseLife(20)
-                end
-                if object1.__name == "Shot" then
-                    object1:shutdown()
-                elseif object2.__name == "Shot" then
-                    object2:shutdown()
-                end
-            -- Bei auftreffen mit DrawablePolygon wird Shot zerstört
-            elseif ((object1.__name == "Shot" or object1.__name == "DrawablePolygon") and (object2.__name == "DrawablePolygon" or object2.__name == "Shot")) then
-                if object1.__name == "Shot" then
-                    object1:shutdown()
-                 elseif object2.__name == "Shot" then
-                    object2:shutdown()
-                end
-            end
-
-            -- Hüpfen der Cuties auf einem bestimmten Level
-            if (( object1.__name == "DrawablePolygon" or object1.__name == "Cutie") and (object2.__name == "Cutie" or object2.__name == "DrawablePolygon")) then
-                cutie2.jumpcount = 4
-                if object1.__name == "Cutie" then
-                    local cutiexv, cutieyv = object1.body:getLinearVelocity()
-                    object1.body:setLinearVelocity(cutiexv, -200)
-                elseif object2.__name == "Cutie" then
-                    local cutiexv, cutieyv = object2.body:getLinearVelocity()
-                    object2.body:setLinearVelocity(cutiexv, -200)
-                end
-            end
-
-            -- Hüpfen des Playercuties auf einem bestimmten Level
-            if (( object1.__name == "DrawablePolygon" or object1.__name == "Playercutie") and (object2.__name == "Playercutie" or object2.__name == "DrawablePolygon")) then
-                playercutie.jumpcount = 2
-                if object1.__name == "Playercutie" then
-                    local playercutiexv, playercutieyv = object1.body:getLinearVelocity()
-                    object1.body:setLinearVelocity(playercutiexv, -200)
-                elseif object2.__name == "Playercutie" then
-                    local playercutiexv, playercutieyv = object2.body:getLinearVelocity()
-                    object2.body:setLinearVelocity(playercutiexv, -200)
-                end
-            end
-        end
-    end]]

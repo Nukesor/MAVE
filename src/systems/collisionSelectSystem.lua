@@ -31,8 +31,6 @@ function CollisionSelectSystem:fireEvent(event)
 
     for k,v in pairs(e1:getComponents()) do
         for key,val in pairs(e2:getComponents()) do
-            print(val.__name)
-            print(v.__name)
             if self.conditions[k] then
                 if self.conditions[k][key] then self.conditions[k][key]({entity1=e1, entity2=e2}) end
             elseif self.conditions[key] then

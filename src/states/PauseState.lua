@@ -66,6 +66,7 @@ function PauseState:keypressed(key, unicode)
 		if self.index == 1 then
 			stack:pop()
 			stack:pop()
+			main:restart()
 		elseif self.index == 2 then
 			self.flag = false
 		elseif self.index == 3 then

@@ -10,6 +10,8 @@ function MainKeySystem:fireEvent(event)
         playercutie:getComponent("LifeComponent").life = 10
     elseif event.key == "u" then
         playercutie:getComponent("LifeComponent").life = 0
+    elseif event.key == "o" then
+        cutie:getComponent("LifeComponent").life = 0
     elseif event.key == "p" then
         local canvas = love.graphics.newScreenshot()
         screenshot = love.graphics.newImage(canvas)

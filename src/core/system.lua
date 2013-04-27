@@ -24,5 +24,14 @@ function System:removeEntity(entity)
 end
 
 function System:addEntity(entity)
-    table.insert(self.targets, entity)
+    local flag = false
+    for index, value in pairs(self.targets) do
+        if value == entity then
+            flag = true
+            break
+        end
+    end
+    if flag ==  false then
+        table.insert(self.targets, entity)
+    end
 end

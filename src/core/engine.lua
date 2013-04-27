@@ -34,14 +34,15 @@ function Engine:removeEntity(entity)
         self.entities[entity.index] = nil
         entity.index = nil
     end
+    self.entityIndex = self.entityIndex - 1
 end
 
 
-function Engine:addSystem(system, type)
+function Engine:addSystem(system, type, index)
     if type == "draw" then
         table.insert(self.drawSystems, system)
     elseif type == "logic" then
-        table.insert(self.logicSystems, system)
+        self.logicSystems[index] = system
     end
     table.insert(self.allSystems, system)
     return system

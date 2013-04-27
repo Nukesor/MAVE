@@ -10,7 +10,7 @@ function GameOverState:load()
 	self.flag = true
 	self.index = 2
 	self.shades = 250
-	self.runner = -0.4
+	self.runner = 0
 end
 
 function GameOverState:update(dt)
@@ -30,7 +30,7 @@ function GameOverState:update(dt)
 	elseif self.flag == false then
 		self.runner = self.runner - dt*5
 	end
-	if self.shades > 250 and self.runner < -0.4 then 
+	if self.runner < 0 then 
 		if self.index == 1 then
 			stack:pop()
 			stack:pop()
@@ -48,17 +48,17 @@ function GameOverState:draw()
 	love.graphics.setColor(255, 255, 255, self.shades)
 	love.graphics.draw(screenshot, 0, 0)
 
-	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.setColor(255, 255, 255, 255*self.runner)
 	love.graphics.setFont(resources.fonts.big)
 	love.graphics.print("GAME OVER", 370, 200)
 	for i, v in pairs(self.menulist) do
 		local scroll = i * 200 + 50
 		if i == self.index then
 			love.graphics.setFont(resources.fonts.forty)
-			love.graphics.print(v, scroll*self.runner, 400)
+			love.graphics.print(v, scroll, 400)
 		else
 			love.graphics.setFont(resources.fonts.thirty)
-			love.graphics.print(v, scroll*self.runner, 400)
+			love.graphics.print(v, scroll, 400)
 		end
 	end
 	love.graphics.setFont(resources.fonts.thirty)

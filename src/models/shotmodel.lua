@@ -4,7 +4,6 @@ ShotModel = class("ShotModel", Entity)
 
 function ShotModel:__init(x, y, xt, yt)
     
-    self.components = {}
     self.__super.__init(self)
     self.damage = 5
     local body = love.physics.newBody(world, x, y, "dynamic")
@@ -19,18 +18,11 @@ function ShotModel:__init(x, y, xt, yt)
     self:addComponent(ZIndex(99))
     
     local akat, gkat
-    if math.abs(xt-x) < 500 then
         akat = xt - x
         gkat = yt - y
-    elseif ((xt - x) > 500) then
-        akat = -(x - xt + 1000)
-        gkat = yt - y
-    elseif ((xt - x) < -500) then
-        akat = xt - x + 1000
-        gkat = yt - y
-    end
+
     local hypo = math.sqrt(math.pow(gkat, 2) + math.pow(akat, 2))
     local cos = gkat/hypo
     local sin = akat/hypo
-    body:setLinearVelocity((600 * sin), (600 * cos))
+    body:setLinearVelocity((800 * sin), (800 * cos))
 end

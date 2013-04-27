@@ -20,6 +20,7 @@ require("systems/particleDeleteSystem")
 require("systems/enemyTrackingSystem")
 require("systems/speedLimitSystem")
 require("systems/bleedingDetectSystem")
+require("systems/shotDeleteSystem")
 --CutieManipulation Upgrade Systems
 require("systems/playerMoveSystem")
 require("systems/wobbleSystem")
@@ -82,6 +83,7 @@ function MainState:__init()
     self.wobbleSystem = engine:addSystem(WobbleSystem(), "logic", 9)
     self.dashingSystem = engine:addSystem(DashingSystem(), "logic", 10)
     engine:addSystem(CutieDeleteSystem(), "logic", 11)
+    engine:addSystem(ShotDeleteSystem(), "logic", 12)
  
     -- Player erstellung
     playercutie = CutieModel(333, 520, resources.images.cutie1)

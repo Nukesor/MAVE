@@ -33,8 +33,9 @@ function Engine:removeEntity(entity)
         end
         self.entities[entity.index] = nil
         entity.index = nil
+--        self.entityIndex = self.entityIndex - 1   -- Warum zur Hölle kackt hier das Spiel ab?
+        print(self.entityIndex)
     end
-    self.entityIndex = self.entityIndex - 1
 end
 
 

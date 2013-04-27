@@ -20,7 +20,8 @@ function MainKeySystem:fireEvent(event)
         main.shaketimer = 0.5
     elseif event.key == "y" then
         engine:removeEntity(playercutie)
-    elseif event.key == "x" then
+    end
+    if event.key == "x" then
         local shot = ShotModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y - 20), love.mouse.getPosition())
         shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
         engine:addEntity(shot)

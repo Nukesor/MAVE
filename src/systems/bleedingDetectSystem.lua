@@ -5,7 +5,7 @@ BleedingDetectSystem = class("BleedingDetectSystem", System)
 
 function BleedingDetectSystem:update(dt)
 	for index, entity in pairs(self.targets) do
-		if entity:getComponent("Life").life <= 20 then
+		if entity:getComponent("LifeComponent").life <= 20 then
 			if not entity:getComponent("ParticleComponent") then
 				entity:addComponent(ParticleComponent(resources.images.blood1, 50, 30, 20, 10, 0.3, 0.2, 
                                                 255, 0, 0, 255, 200, 0, 0, 255, 
@@ -20,5 +20,5 @@ function BleedingDetectSystem:update(dt)
 end
 
 function BleedingDetectSystem:getRequiredComponents()
-	return{"CutieComponent", "Life"}
+	return{"CutieComponent", "LifeComponent"}
 end

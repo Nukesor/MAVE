@@ -5,6 +5,7 @@ ShotModel = class("ShotModel", Entity)
 function ShotModel:__init(x, y, xt, yt)
     
     self.components = {}
+    self.damage = 5
     local body = love.physics.newBody(world, x, y, "dynamic")
     local shape = love.physics.newCircleShape(3) 
     local fixture = love.physics.newFixture(body, shape, 0)  

@@ -1,5 +1,5 @@
 require("collisions/bounceCollision")
-require("collisions/collisionDamageSystem")
+require("collisions/collisionDamage")
 
 CollisionSelectSystem = class("CollisionDetectSystem", System)
 
@@ -8,7 +8,7 @@ function CollisionSelectSystem:__init()
 
     local bounce = BounceCollision()
     self:addCollisionAction(bounce.component1, bounce.component2, bounce.action)
-    local damage = CollisionDamageSystem()
+    local damage = CollisionDamage()
     self:addCollisionAction(damage.component1, damage.component2, damage.action)
 end
 

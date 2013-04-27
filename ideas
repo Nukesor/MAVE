@@ -63,4 +63,14 @@ Steuerung:
 	Linksklick: Spezialaktion (Schuss, C4 Platzieren...)
 	Rechtsklick: Dash
 
-	
+
+
+Allgemeines DamageSystem:
+	Shot bekommt life, alles bekommt life.
+	Im DamageSystem wird generell das Verhalten von 2 Entities die miteinander kollidieren bestimmt. 
+		Dann würde man für den Shot ein System machen, bei dem es gelöscht wird, nachdem es mit einer Entity kollidiert, die keine Lifecomponent hat. 
+		Sobald die zweite Entity eine LIfecomponentn besitzt, wir automatisch der Schaden übermittelt.
+		HIer muss man allerdings aufpassen, da man auch den zweiten Fall mit reinnehmen muss. Es wird nur einmal gefired. Außerdem iset zu beachten, dass wir in dieses System alle Particlesystems reinpacken müssten . 
+		Auflösungen werden allgemein Verfasst.
+
+GameoverState mit hintergrundbild des momentanen Games. Definitiv cooler. 

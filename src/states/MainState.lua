@@ -124,11 +124,11 @@ function MainState:__init()
     self.shakeY = 0
     self.shaketimer = 0
 
-    --[[ Temporärer Cutie
+    --Temporärer Cutie
     cutie = CutieModel(666, 520, resources.images.cutie2)
     cutie:addComponent(IsEnemy())
     cutie:addComponent(EnemyComponent())
-    engine:addEntity(cutie)]]
+    engine:addEntity(cutie)
 
 end
 
@@ -157,7 +157,7 @@ function MainState:update(dt)
     end
 
     -- Spiel-Ende und Pushen des jeweiligen Gamestates
-    if playercutie:getComponent("Life").life <= 0 then
+    if playercutie:getComponent("LifeComponent").life <= 0 then
         self.shaketimer = 0
         stack:push(gameover)
     end
@@ -179,7 +179,7 @@ function MainState:draw()
 
     -- Zeichnen der Schriftzüge
     love.graphics.print(string.format("%.2f ",x) ..  "    " .. "X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)
-    love.graphics.print("Your Cutie´s life: " .. playercutie:getComponent("Life").life, 20, 40, 0, 1, 1)
+    love.graphics.print("Your Cutie´s life: " .. playercutie:getComponent("LifeComponent").life, 20, 40, 0, 1, 1)
 end
 
 function MainState:restart()

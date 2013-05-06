@@ -91,11 +91,11 @@ function MainState:__init()
     engine:addEntity(playercutie)
 
     -- Background und Umgebungselemente
-    self.bg = Entity()
+--[[    self.bg = Entity()
     self.bg:addComponent(DrawableComponent(resources.images.arena, 0, 1, 1, 0, 0))
     self.bg:addComponent(PositionComponent(0, 0))
     self.bg:addComponent(ZIndex(1))
-    engine:addEntity(self.bg)
+    engine:addEntity(self.bg) ]]
 
     self.wall =  Entity()
     self.wall:addComponent(DrawablePolygonComponent(world, 500, 580, 1050, 10, "static", self.wall))

@@ -34,8 +34,3 @@ end
 function DrawableDrawSystem:getRequiredComponents()
     return {"DrawableComponent", "PositionComponent", "ZIndex"}
 end
-
-function DrawableDrawSystem:addEntity(entity)
-    table.insert(self.targets, entity)
-    table.sort(self.targets, function(a, b) return a:getComponent("ZIndex").index < b:getComponent("ZIndex").index end)
-end

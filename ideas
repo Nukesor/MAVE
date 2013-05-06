@@ -64,6 +64,13 @@ Steuerung:
 	Rechtsklick: Dash
 
 
+Einbauen einer GameplayComponent:
+	- Diese GameplayComponent würde alle möglichen Sachen beinhalten
+		Eine Globale Variable, um von jedem System aus zugriff auf die verschiedenen Felder zu haben. Diese werden extrem häufig gebraucht.
+		- Playergold, Playerkills, Playerlevel
+		- Respawntimer, Leveldetails, Gegnerstärken
+		- Itemsystem, Gesamtgold, 
+
 
 Allgemeines DamageSystem:
 	Shot bekommt life, alles bekommt life.
@@ -72,5 +79,3 @@ Allgemeines DamageSystem:
 		Sobald die zweite Entity eine LIfecomponentn besitzt, wir automatisch der Schaden übermittelt.
 		HIer muss man allerdings aufpassen, da man auch den zweiten Fall mit reinnehmen muss. Es wird nur einmal gefired. Außerdem iset zu beachten, dass wir in dieses System alle Particlesystems reinpacken müssten . 
 		Auflösungen werden allgemein Verfasst.
-
-GameoverState mit hintergrundbild des momentanen Games. Definitiv cooler. 

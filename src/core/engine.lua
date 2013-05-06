@@ -16,14 +16,14 @@ end
 
 function Engine:addEntity(entity)
     self.entities[self.entityIndex] = entity
-    entity.index = self.entityIndex
+    entity.id = self.entityIndex
     self.entityIndex = self.entityIndex + 1
     self:refreshEntity(entity)
 end
 
 
 function Engine:removeEntity(entity)
-    if self.entities[entity.index] then
+    if self.entities[entity.id] then
         for key, system in pairs(self.allSystems) do
             for key2, systemEntity in pairs(system:getEntities()) do
                 if systemEntity == entity then    
@@ -31,8 +31,7 @@ function Engine:removeEntity(entity)
                 end
             end
         end
-        self.entities[entity.index] = nil
-        entity.index = nil
+        self.entities[entity.id] = nil
     end
 end
 
@@ -63,20 +62,27 @@ end
 
 
 function Engine:refreshEntity(entity)
-    if not self.entities[entity.index] then
+    if not self.entities[entity.id] then
         return
     end
     for index, system in pairs(self.allSystems) do
         local add = true
-        for index, requiredComponent in pairs(system:getRequiredComponents()) do
-            if not entity.components[requiredComponent] then
+        local remove = false
+        for index2, target in pairs(system:getEntities()) do
+            if target == entity then
                 add = false
             end
         end
+        for index3, requiredComponent in pairs(system:getRequiredComponents()) do
+            if not entity.components[requiredComponent] then
+                add = false
+                remove = true
+            end
+        end
 
-        if add == true then
+        if add then
             system:addEntity(entity)
-        elseif add == false then
+        elseif remove then
             system:removeEntity(entity)
         end
     end

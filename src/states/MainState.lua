@@ -84,18 +84,19 @@ function MainState:__init()
     self.dashingSystem = engine:addSystem(DashingSystem(), "logic", 10)
     engine:addSystem(CutieDeleteSystem(), "logic", 11)
     engine:addSystem(ShotDeleteSystem(), "logic", 12)
- 
-    -- Player erstellung
-    playercutie = CutieModel(333, 520, resources.images.cutie1)
-    playercutie:addComponent(IsPlayer())
-    engine:addEntity(playercutie)
 
     -- Background und Umgebungselemente
---[[    self.bg = Entity()
+    self.bg = Entity()
     self.bg:addComponent(DrawableComponent(resources.images.arena, 0, 1, 1, 0, 0))
     self.bg:addComponent(PositionComponent(0, 0))
     self.bg:addComponent(ZIndex(1))
-    engine:addEntity(self.bg) ]]
+    engine:addEntity(self.bg)
+
+    -- Player erstellung
+    playercutie = CutieModel(333, 520, resources.images.cutie1)
+    playercutie:addComponent(IsPlayer())
+    playercutie:addComponent(ZIndex(2))
+    engine:addEntity(playercutie)
 
     self.wall =  Entity()
     self.wall:addComponent(DrawablePolygonComponent(world, 500, 580, 1050, 10, "static", self.wall))
@@ -133,6 +134,7 @@ function MainState:__init()
     cutie = CutieModel(666, 520, resources.images.cutie2)
     cutie:addComponent(IsEnemy())
     cutie:addComponent(EnemyComponent())
+    cutie:addComponent(ZIndex(3))
     engine:addEntity(cutie)
 
 end

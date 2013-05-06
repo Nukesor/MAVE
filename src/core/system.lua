@@ -15,23 +15,11 @@ function System:getEntities()
     return self.targets
 end
 
+
 function System:removeEntity(entity)
-    for key, systemEntity in pairs(self.targets) do
-        if systemEntity == entity then
-            table.remove(self.targets, key)
-        end
-    end
+    self.targets[entity.id] = nil
 end
 
 function System:addEntity(entity)
-    local flag = false
-    for index, value in pairs(self.targets) do
-        if value == entity then
-            flag = true
-            break
-        end
-    end
-    if flag ==  false then
-        table.insert(self.targets, entity)
-    end
+    self.targets[entity.id] = entity
 end

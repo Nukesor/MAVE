@@ -21,6 +21,7 @@ require("systems/enemyTrackingSystem")
 require("systems/speedLimitSystem")
 require("systems/bleedingDetectSystem")
 require("systems/shotDeleteSystem")
+require("systems/enemySpawnSystem")
 --CutieManipulation Upgrade Systems
 require("systems/playerMoveSystem")
 require("systems/wobbleSystem")
@@ -84,6 +85,7 @@ function MainState:__init()
     self.dashingSystem = engine:addSystem(DashingSystem(), "logic", 10)
     engine:addSystem(CutieDeleteSystem(), "logic", 11)
     engine:addSystem(ShotDeleteSystem(), "logic", 12)
+    engine:addSystem(EnemySpawnSystem(), "logic", 13)
 
     -- Background und Umgebungselemente
     self.bg = Entity()
@@ -95,7 +97,6 @@ function MainState:__init()
     -- Player erstellung
     playercutie = CutieModel(333, 520, resources.images.cutie1)
     playercutie:addComponent(IsPlayer())
-    playercutie:addComponent(ZIndex(2))
     engine:addEntity(playercutie)
 
     self.wall =  Entity()
@@ -137,6 +138,9 @@ function MainState:__init()
     cutie:addComponent(ZIndex(3))
     engine:addEntity(cutie)
 
+    self.spawntimer = 0
+    fire = false
+
 end
 
 function MainState:load()
@@ -169,6 +173,17 @@ function MainState:update(dt)
         screenshot = love.graphics.newImage(canvas)
         self.shaketimer = 0
         stack:push(gameover)
+    end
+
+    if fire == true then
+        self.spawntimer = 0
+        fire = false
+    end
+
+    self.spawntimer = self.spawntimer + dt
+
+    if self.spawntimer > 2ww then 
+        fire = true
     end
 
     -- Update Functions

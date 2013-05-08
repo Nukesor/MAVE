@@ -18,7 +18,7 @@ TODO
 - Möglichkeit für Systeme implementieren, gar keine Entities als Targets zu haben
 
 ### GFX
-- Backgrounds für GameOver-, Win-, und MenuState
+- Backgrounds für MenuState
 - Neuen Font suchen, der nicht so beschissen ist
 
 ### Sonstiges
@@ -50,4 +50,14 @@ stack traceback:
         core/stackhelper.lua:49: in function 'update'
         main.lua:54: in function 'update'
         [string "boot.lua"]:407: in function <[string "boot.lua"]:373>
+        [C]: in function 'xpcall'
+
+- Nach GameOerState return zu Menu
+
+Error: states/MenuState.lua:48: attempt to perform arithmetic on field 'wobble' (a nil value)
+stack traceback:
+        states/MenuState.lua:48: in function 'draw'
+        core/stackhelper.lua:43: in function 'draw'
+        main.lua:58: in function 'draw'
+        [string "boot.lua"]:410: in function <[string "boot.lua"]:373>
         [C]: in function 'xpcall'

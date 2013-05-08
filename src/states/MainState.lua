@@ -5,6 +5,9 @@ require("core/state")
 require("core/entity")
 require("core/engine")
 require("core/event")
+
+--Events
+require("core/events/mousePressed")
 require("core/events/keyPressed")
 require("core/events/beginContact")
 
@@ -32,7 +35,8 @@ require("systems/cutieDeleteSystem")
 require("systems/mainKeySystem")
 require("systems/collisionSelectSystem")
 require("systems/playerControlSystem")
--- 
+require("systems/mainMousePressedSystem")
+
 require("components/drawableComponent")
 require("components/drawablePolygonComponent")
 require("components/zIndex")
@@ -68,6 +72,7 @@ function MainState:__init()
     engine:addListener("KeyPressed", MainKeySystem())
     engine:addListener("KeyPressed", PlayerControlSystem())
     engine:addListener("BeginContact", CollisionSelectSystem())
+    engine:addListener("MousePressed", MainMousePressedSystem())
 
     engine:addSystem(DrawableDrawSystem(), "draw")
     engine:addSystem(PolygonDrawSystem(), "draw")
@@ -87,12 +92,12 @@ function MainState:__init()
     engine:addSystem(ShotDeleteSystem(), "logic", 12)
     engine:addSystem(EnemySpawnSystem(), "logic", 13)
 
-    -- Background und Umgebungselemente
+    --[[ Background und Umgebungselemente
     self.bg = Entity()
     self.bg:addComponent(DrawableComponent(resources.images.arena, 0, 1, 1, 0, 0))
     self.bg:addComponent(PositionComponent(0, 0))
     self.bg:addComponent(ZIndex(1))
-    engine:addEntity(self.bg)
+    engine:addEntity(self.bg) --]]
 
     -- Player erstellung
     playercutie = CutieModel(333, 520, resources.images.cutie1)
@@ -131,16 +136,10 @@ function MainState:__init()
     self.shakeY = 0
     self.shaketimer = 0
 
-    --Temporärer Cutie
-    cutie = CutieModel(666, 520, resources.images.cutie2)
-    cutie:addComponent(IsEnemy())
-    cutie:addComponent(EnemyComponent())
-    cutie:addComponent(ZIndex(3))
-    engine:addEntity(cutie)
 
+    -- Temporärer Bullshit. Debugkram und Test
     self.spawntimer = 0
     fire = false
-
 end
 
 function MainState:load()
@@ -182,7 +181,7 @@ function MainState:update(dt)
 
     self.spawntimer = self.spawntimer + dt
 
-    if self.spawntimer > 2ww then 
+    if self.spawntimer > 2 then 
         fire = true
     end
 
@@ -219,13 +218,8 @@ function MainState:keypressed(key, u)
 end
 
 
-function MainState:mousepressed(x, y, key)
-    if key == "r" and not playercutie:getComponent("DashingComponent") then
-        local xBefore, yBefore = playercutie:getComponent("PhysicsComponent").body:getPosition()
-        playercutie:addComponent(DashingComponent({x=xBefore, y=yBefore}, {x=x, y=y}))
-    elseif key == "r" and playercutie:getComponent("DashingComponent") then
-        playercutie:removeComponent("DashingComponent")
-    end
+function MainState:mousepressed(x, y, button)
+    engine:fireEvent(MousePressed(x, y, button))
 end
 
 --Collision function

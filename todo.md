@@ -15,9 +15,11 @@ TODO
 
 ### Code
 - Schadenssystem ausfeilen
+- Lebensleiste
 
 ### GFX
 - Wolkenplattformen (evtl particle system?)
+- Lebensleiste
 
 ## Future
 
@@ -36,8 +38,8 @@ TODO
 ## BUGS
 - Fehler Tritt auf, wenn Playercutie destroyed werden soll. 	
 
-	Error: states/MainState.lua:210: A body has escaped Memoizer!
-		stack traceback:
+        Error: states/MainState.lua:210: A body has escaped Memoizer!
+                stack traceback:
         [C]: in function 'destroy'
         states/MainState.lua:210: in function 'restart'
         states/GameOverState.lua:39: in function 'update'

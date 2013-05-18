@@ -11,8 +11,8 @@ end
 function CollisionDamage.action(entities)
     local entity1 = entities.entity1   
     local entity2 = entities.entity2
-    local entity2Cuteness = entity2:getComponent("CutieComponent").cuteness
     local entity1Cuteness = entity1:getComponent("CutieComponent").cuteness
+    local entity2Cuteness = entity2:getComponent("CutieComponent").cuteness
 
     -- Schadensmodell
     if math.random(0, 100 + 2*entity2Cuteness) > 100 then

@@ -11,6 +11,14 @@ TODO
 - Arena fertig
 - Menubuttons
 
+## Version 0.2
+
+### Code
+- Schadenssystem ausfeilen
+
+### GFX
+- Wolkenplattformen (evtl particle system?)
+
 ## Future
 
 ### Code

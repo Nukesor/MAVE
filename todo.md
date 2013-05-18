@@ -14,8 +14,9 @@ TODO
 ## Future
 
 ### Code
-- Wichtig: Wenn eine Component von einer Entity entfernt wird, Systemeinträge über die Engine updaten
-- Möglichkeit für Systeme implementieren, gar keine Entities als Targets zu haben
+- Wichtig: Wenn eine Component von einer Entity entfernt wird, Systemeinträge über die Engine updaten #done, oder?
+- Möglichkeit für Systeme implementieren, gar keine Entities als Targets zu haben #done, oder?
+- Fullscreen support
 
 ### GFX
 - Backgrounds für MenuState
@@ -39,8 +40,8 @@ TODO
 
 - Fehler tritt auf, bei Collision von Enemycutie und Shot. Nicht immer, nicht reproduzierbar.
 
-Error: collisions/shotCutieCollision.lua:13: attempt to index a nil value
-stack traceback:
+        Error: collisions/shotCutieCollision.lua:13: attempt to index a nil value
+        stack traceback:
         collisions/shotCutieCollision.lua:13: in function <collisions/shotCutieCollision.lua:10>
         systems/collisionSelectSystem.lua:35: in function 'fireEvent'
         core/engine.lua:107: in function 'fireEvent'
@@ -54,8 +55,8 @@ stack traceback:
 
 - Nach GameOerState return zu Menu
 
-Error: states/MenuState.lua:48: attempt to perform arithmetic on field 'wobble' (a nil value)
-stack traceback:
+        Error: states/MenuState.lua:48: attempt to perform arithmetic on field 'wobble' (a nil value)
+        stack traceback:
         states/MenuState.lua:48: in function 'draw'
         core/stackhelper.lua:43: in function 'draw'
         main.lua:58: in function 'draw'

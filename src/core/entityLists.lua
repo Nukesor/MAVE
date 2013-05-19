@@ -4,7 +4,7 @@ EntityLists = class("Entitylists")
 
 function EntityLists:__init()
 	self.IsEnemy = {}
-	self.IsShot = {}
+	self.ShotComponent = {}
 end
 
 function EntityLists:addEntity(entity)

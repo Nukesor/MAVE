@@ -4,7 +4,7 @@ ShotWallCollision = class("ShotWallCollision")
 
 function ShotWallCollision:__init()
 self.component1 = "DrawablePolygonComponent"
-self.component2 = "IsShot"
+self.component2 = "ShotComponent"
 end
 
 function ShotWallCollision:action(entities)

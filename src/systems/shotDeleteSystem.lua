@@ -12,5 +12,5 @@ function ShotDeleteSystem:update()
 end
 
 function ShotDeleteSystem:getRequiredComponents()
-	return {"IsShot"}
+	return {"ShotComponent"}
 end

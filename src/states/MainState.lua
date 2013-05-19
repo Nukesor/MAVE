@@ -54,7 +54,7 @@ require("components/dashingComponent")
 require("components/enemyComponent")
 require("components/explosionComponent")
 
-require("components/isShot")
+require("components/shotComponent")
 require("components/isPlayer")
 require("components/isEnemy")
 

@@ -27,6 +27,7 @@ TODO
 - Wichtig: Wenn eine Component von einer Entity entfernt wird, Systemeinträge über die Engine updaten #done, oder?
 - Möglichkeit für Systeme implementieren, gar keine Entities als Targets zu haben #done, oder?
 - Fullscreen support
+- ShakeSystem
 
 ### GFX
 - Backgrounds für MenuState

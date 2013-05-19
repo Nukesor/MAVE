@@ -5,7 +5,7 @@ function BounceCollision:__init()
     self.component2 = "CutieComponent"
 end
 
-function BounceCollision.action(entities)
+function BounceCollision:action(entities)
     local cutie = entities.entity2
 
     local cutiexv, cutieyv = cutie:getComponent("PhysicsComponent").body:getLinearVelocity()

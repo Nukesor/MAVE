@@ -9,7 +9,7 @@ function Engine:__init()
     self.logicSystems = {}
     self.drawSystems = {}
 
-    self.events = {}
+    self.eventListeners = {}
 
     self.entityIndex = 0
 end
@@ -87,21 +87,21 @@ end
 
 -- Event stuff
 function Engine:addListener(eventName, listener)
-    if not self.events[eventName] then
-        self.events[eventName] = {}
+    if not self.eventListeners[eventName] then
+        self.eventListeners[eventName] = {}
     end
-    self.events[eventName][listener.__name] = listener
+    self.eventListeners[eventName][listener.__name] = listener
 end
 
 function Engine:removeListener(eventName, listener)
-    if self.events[eventName] and self.events.eventName.listener then
-        self.events[eventName][listener.__name] = nil
+    if self.eventListeners[eventName] and self.eventListeners.eventName.listener then
+        self.eventListeners[eventName][listener.__name] = nil
     end
 end
 
 function Engine:fireEvent(event)
-    if self.events[event.name] then
-        for k,v in pairs(self.events[event.name]) do
+    if self.eventListeners[event.name] then
+        for k,v in pairs(self.eventListeners[event.name]) do
             v:fireEvent(event)
         end
     end

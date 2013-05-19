@@ -28,6 +28,7 @@ TODO
 - Möglichkeit für Systeme implementieren, gar keine Entities als Targets zu haben #done, oder?
 - Fullscreen support
 - ShakeSystem
+- SlowMotionSystem (?)
 
 ### GFX
 - Backgrounds für MenuState

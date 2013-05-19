@@ -20,6 +20,7 @@ TODO
 ### GFX
 - Wolkenplattformen (evtl particle system?)
 - Lebensleiste
+- Blutpartikel
 
 ## Future
 

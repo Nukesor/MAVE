@@ -1,6 +1,7 @@
 Fragen:
 
 - Momentan ermoeglicht cuteness mehr schaden, macht ihn aber nicht zwingend hoeher. Soll das geaendert werden?
+- helper.lua in etwas aussagekraeftigeres umbenennen, z.B. objectOrientation.lua oder class.lua oder so?
 
 Ideen:
 

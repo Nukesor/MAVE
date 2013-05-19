@@ -1,5 +1,10 @@
 WobbleSystem = class("WobbleSystem", System)
 
+function WobbleSystem:__init()
+    self.__super.__init(self)
+    engine:addListener("BeginContact", self)
+end
+
 function WobbleSystem:update() 
     for key, entity in pairs(self.targets) do
         local drawable = entity:getComponent("DrawableComponent")
@@ -10,9 +15,9 @@ function WobbleSystem:update()
     end
 end
 
-function WobbleSystem:beginContact(a, b, coll)
-    local entityA = a:getUserData()[2]
-    local entityB = b:getUserData()[2]
+function WobbleSystem:fireEvent(event)
+    local entityA = event.a:getUserData()
+    local entityB = event.b:getUserData()
     self:updateSy(entityA)
     self:updateSy(entityB)
 end

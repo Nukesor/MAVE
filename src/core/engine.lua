@@ -22,7 +22,6 @@ function Engine:addEntity(entity)
     EntityLists:addEntity(entity)
 end
 
-
 function Engine:removeEntity(entity)
     if self.entities[entity.id] then
         for key, system in pairs(self.allSystems) do
@@ -37,7 +36,6 @@ function Engine:removeEntity(entity)
     EntityLists:removeEntity(entity)
 end
 
-
 function Engine:addSystem(system, type, index)
     if type == "draw" then
         table.insert(self.drawSystems, system)
@@ -48,20 +46,17 @@ function Engine:addSystem(system, type, index)
     return system
 end
 
-
 function Engine:update(dt)
     for index, system in ipairs(self.logicSystems) do
         system:update(dt)
     end
 end
 
-
 function Engine:draw()
     for index, system in ipairs(self.drawSystems) do
         system:update()
     end
 end
-
 
 function Engine:refreshEntity(entity)
     if not self.entities[entity.id] then
@@ -90,6 +85,7 @@ function Engine:refreshEntity(entity)
     end
 end
 
+-- Event stuff
 function Engine:addListener(eventName, listener)
     if not self.events[eventName] then
         self.events[eventName] = {}

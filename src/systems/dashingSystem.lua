@@ -20,7 +20,7 @@ function DashingSystem:update(dt)
 
         -- update timer. if dashed for long enough, remove the component
         entity:getComponent("DashingComponent").time = entity:getComponent("DashingComponent").time + dt
-        if entity:getComponent("DashingComponent").time >= 0.3 then
+        if entity:getComponent("DashingComponent").time >= 0.15 then
             entity:removeComponent("DashingComponent")
         end
     end

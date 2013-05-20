@@ -20,7 +20,7 @@ function EnemySpawnSystem:update(dt)
 	if self.fire == true then
 			local height = math.random(300, 500)
 			local cutie
-			cutie = CutieModel(0, height, resources.images.cutie2)
+			cutie = CutieModel(0, height, resources.images.cutie2, 10)
 		    cutie:addComponent(IsEnemy())
 		    engine:addEntity(cutie)
 	end

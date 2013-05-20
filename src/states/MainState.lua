@@ -103,7 +103,7 @@ function MainState:__init()
     engine:addEntity(self.bg) --]]
 
     -- Player erstellung
-    playercutie = CutieModel(333, 520, resources.images.cutie1)
+    playercutie = CutieModel(333, 520, resources.images.cutie1, 100)
     playercutie:addComponent(IsPlayer())
     engine:addEntity(playercutie)
 

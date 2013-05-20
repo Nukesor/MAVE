@@ -2,7 +2,7 @@ require("core/helper")
 
 CutieModel = class("CutieModel", Entity)
 
-function CutieModel:__init(xs, ys, image)
+function CutieModel:__init(xs, ys, image, life)
 	
     self.__super.__init(self)
     
@@ -15,7 +15,7 @@ function CutieModel:__init(xs, ys, image)
     self:addComponent(PositionComponent(xs, ys))
     self:addComponent(DrawableComponent(image, 0, 0.1, 0.1, 140, 140))
     self:addComponent(LevelComponent(0))
-    self:addComponent(LifeComponent(100))
+    self:addComponent(LifeComponent(life))
     self:addComponent(ZIndex(2))
     self:addComponent(CutieComponent(0, 0, 1))
     self:addComponent(WobblyComponent(0.1))

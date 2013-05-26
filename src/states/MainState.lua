@@ -5,7 +5,6 @@ require("core/state")
 require("core/entity")
 require("core/engine")
 require("core/event")
-require("core/entityLists")
 
 --Events
 require("core/events/mousePressed")
@@ -17,46 +16,63 @@ require("systems/particleDrawSystem")
 require("systems/drawableDrawSystem")
 require("systems/polygonDrawSystem")
 require("systems/particleDrawSystem")
+
 -- Upgrade Systems
 require("systems/sideChangeSystem")
 require("systems/physicsPositionSyncSystem")
 require("systems/particleDeleteSystem")
-require("systems/enemyTrackingSystem")
-require("systems/speedLimitSystem")
 require("systems/bleedingDetectSystem")
-require("systems/shotDeleteSystem")
-require("systems/enemySpawnSystem")
+require("systems/bodyDestroySystem")
+
 --CutieManipulation Upgrade Systems
-require("systems/playerMoveSystem")
+        --All
 require("systems/wobbleSystem")
 require("systems/maxSpeedSystem")
-require("systems/dashingSystem")
+require("systems/speedLimitSystem")
 require("systems/cutieDeleteSystem")
+        --Enemy
+require("systems/enemySpawnSystem")
+require("systems/enemyTrackingSystem")
+        --Player
+require("systems/playerMoveSystem")
+require("systems/dashingSystem")
+
 -- Event Systems
 require("systems/mainKeySystem")
 require("systems/collisionSelectSystem")
 require("systems/playerControlSystem")
 require("systems/mainMousePressedSystem")
+require("systems/explosionSystem")
 
+--GraphicComponents
 require("components/drawableComponent")
 require("components/drawablePolygonComponent")
 require("components/zIndex")
 require("components/particleComponent")
-require("components/timeComponent")
-require("components/positionComponent")
--- Cutie Components
+
+-- PhysicsCompoents
 require("components/physicsComponent")
+require("components/positionComponent")
+require("components/destroyComponent")
+
+-- Cutie Components
 require("components/levelComponent")
 require("components/lifeComponent")
 require("components/cutieComponent")
 require("components/wobblyComponent")
 require("components/dashingComponent")
 require("components/enemyComponent")
-require("components/explosionComponent")
 
-require("components/shotComponent")
+--IdentifierComponents
+require("components/isShot")
 require("components/isPlayer")
 require("components/isEnemy")
+
+-- Other Components
+require("components/explosionComponent")
+require("components/damageComponent")
+require("components/timeComponent")
+require("components/shotComponent")
 
 -- Models
 require("models/shotmodel")
@@ -71,11 +87,11 @@ function MainState:__init()
     world:setCallbacks(beginContact, endContact)
 
     engine = Engine()
-    entitylist = EntityLists()
     engine:addListener("KeyPressed", MainKeySystem())
     engine:addListener("KeyPressed", PlayerControlSystem())
     engine:addListener("BeginContact", CollisionSelectSystem())
     engine:addListener("MousePressed", MainMousePressedSystem())
+    engine:addListener("ExplosionEvent", ExplosionSystem())
 
     engine:addSystem(DrawableDrawSystem(), "draw")
     engine:addSystem(PolygonDrawSystem(), "draw")
@@ -92,7 +108,7 @@ function MainState:__init()
     self.wobbleSystem = engine:addSystem(WobbleSystem(), "logic", 9)
     self.dashingSystem = engine:addSystem(DashingSystem(), "logic", 10)
     engine:addSystem(CutieDeleteSystem(), "logic", 11)
-    engine:addSystem(ShotDeleteSystem(), "logic", 12)
+    engine:addSystem(BodyDestroySystem(), "logic", 12)
     engine:addSystem(EnemySpawnSystem(), "logic", 13)
 
     -- Background und Umgebungselemente
@@ -139,10 +155,13 @@ function MainState:__init()
     self.shakeY = 0
     self.shaketimer = 0
 
+    -- Testinit für Barrel. Temporäre Entity für Debugging etc.
+    barrel = Entity()
+    barrel:addComponent(PositionComponent(200, 300))
+    barrel:addComponent(ExplosionComponent(200, 300))
 
-    -- Temporärer Bullshit. Debugkram und Test
-    self.spawntimer = 0
-    fire = false
+    self.exptimer = 0
+    self.epxtimertr = true
 end
 
 function MainState:load()
@@ -180,6 +199,15 @@ function MainState:update(dt)
     -- Update Functions
     engine:update(dt)
 	world:update(dt)
+
+    --Testfunktion des Explosionsystems
+    if self.epxtimertr == true then
+        self.exptimer = self.exptimer + dt
+    end
+    if self.exptimer > 20 then
+        engine:fireEvent(ExplosionEvent(barrel))
+        self.epxtimertr = false
+    end
 end
 
 function MainState:draw()

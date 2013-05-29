@@ -4,6 +4,7 @@ require("core/system")
 ExplosionSystem = class("ExplosionSystem")
 
 function ExplosionSystem:fireEvent(event)
+	print("check")
 	local entity = event.entity
 	for i, v in pairs(engine.IsEnemy) do 
 		local exp = entity:getComponent("PositionComponent")

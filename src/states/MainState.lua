@@ -10,6 +10,7 @@ require("core/event")
 require("core/events/mousePressed")
 require("core/events/keyPressed")
 require("core/events/beginContact")
+require("core/events/explosionEvent")
 
 -- Draw Systems
 require("systems/particleDrawSystem")
@@ -156,12 +157,12 @@ function MainState:__init()
     self.shaketimer = 0
 
     -- Testinit für Barrel. Temporäre Entity für Debugging etc.
-    barrel = Entity()
-    barrel:addComponent(PositionComponent(200, 300))
-    barrel:addComponent(ExplosionComponent(200, 300))
+    self.barrel = Entity()
+    self.barrel:addComponent(PositionComponent(200, 300))
+    self.barrel:addComponent(ExplosionComponent(200, 1000))
 
     self.exptimer = 0
-    self.epxtimertr = true
+    self.exptimertr = true
 end
 
 function MainState:load()
@@ -201,12 +202,12 @@ function MainState:update(dt)
 	world:update(dt)
 
     --Testfunktion des Explosionsystems
-    if self.epxtimertr == true then
+    if self.exptimertr == true then
         self.exptimer = self.exptimer + dt
     end
-    if self.exptimer > 20 then
-        engine:fireEvent(ExplosionEvent(barrel))
-        self.epxtimertr = false
+    if self.exptimer > 2 and self.exptimertr == true then
+        engine:fireEvent(ExplosionEvent(self.barrel))
+        self.exptimertr = false
     end
 end
 

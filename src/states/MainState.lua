@@ -112,7 +112,7 @@ function MainState:__init()
     engine:addSystem(BodyDestroySystem(), "logic", 12)
     engine:addSystem(EnemySpawnSystem(), "logic", 13)
 
-    -- Background und Umgebungselemente
+    --[[ Background und Umgebungselemente
     self.bg = Entity()
     self.bg:addComponent(DrawableComponent(resources.images.arena, 0, 1, 1, 0, 0))
     self.bg:addComponent(PositionComponent(0, 0))
@@ -158,8 +158,8 @@ function MainState:__init()
 
     -- Testinit für Barrel. Temporäre Entity für Debugging etc.
     self.barrel = Entity()
-    self.barrel:addComponent(PositionComponent(500, 300))
-    self.barrel:addComponent(ExplosionComponent(200, 100))
+    self.barrel:addComponent(PositionComponent(500, 100))
+    self.barrel:addComponent(ExplosionComponent(200, 300))
 
     self.exptimer = 0
     self.exptimertr = true
@@ -207,7 +207,7 @@ function MainState:update(dt)
     end
     if self.exptimer > 2 and self.exptimertr == true then
         engine:fireEvent(ExplosionEvent(self.barrel))
-        self.exptimertr = true
+        self.exptimertr = false
     end
 end
 

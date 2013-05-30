@@ -158,8 +158,8 @@ function MainState:__init()
 
     -- Testinit für Barrel. Temporäre Entity für Debugging etc.
     self.barrel = Entity()
-    self.barrel:addComponent(PositionComponent(200, 300))
-    self.barrel:addComponent(ExplosionComponent(200, 1000))
+    self.barrel:addComponent(PositionComponent(500, 300))
+    self.barrel:addComponent(ExplosionComponent(200, 100))
 
     self.exptimer = 0
     self.exptimertr = true
@@ -199,7 +199,7 @@ function MainState:update(dt)
 
     -- Update Functions
     engine:update(dt)
-	world:update(dt)
+    world:update(dt)
 
     --Testfunktion des Explosionsystems
     if self.exptimertr == true then
@@ -207,7 +207,7 @@ function MainState:update(dt)
     end
     if self.exptimer > 2 and self.exptimertr == true then
         engine:fireEvent(ExplosionEvent(self.barrel))
-        self.exptimertr = false
+        self.exptimertr = true
     end
 end
 
@@ -227,7 +227,7 @@ function MainState:draw()
 end
 
 function MainState:restart()
-	world:destroy()
+    world:destroy()
     for index, value in pairs(engine.entities) do
         engine:removeEntity(value)
     end

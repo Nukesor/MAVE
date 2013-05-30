@@ -5,7 +5,7 @@ require("core/system")
 MainKeySystem = class("MainKeySystem", System)
 
 function MainKeySystem:fireEvent(event)
-	-- Playercutie Jump
+    -- Playercutie Jump
     if event.key == "o" then
         playercutie:getComponent("LifeComponent").life = 0
     elseif event.key == "p" then

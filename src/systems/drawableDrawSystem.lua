@@ -15,7 +15,7 @@ function DrawableDrawSystem:__init()
 end
 
 function DrawableDrawSystem:update()
-	love.graphics.setColor(255, 255, 255)
+    love.graphics.setColor(255, 255, 255)
     for index, entity in ipairs(self.targets) do
         local drawable = entity:getComponent("DrawableComponent")
         local pos = entity:getComponent("PositionComponent")

@@ -84,14 +84,14 @@ Global Entity für Datensicherung:
 
 
 
-EntityList = class("EntityList")
+EntityLists = class("Entitylist")
 
 function Entitylist:__init()
 	self.IsEnemy = {}
 	self.IsShot = {}
 end
 
-function EntityList:checkEntity(entity)
+function EntityLists:checkEntity(entity)
 	for index, component in pairs(entity.components) do
 		if self.[component.__name] then
 			table.insert(self.IsEnemy, entity)
@@ -99,13 +99,13 @@ function EntityList:checkEntity(entity)
 	end
 end
 
-function EntityList:returnGroup(String)
+function EntityLists:returnGroup(String)
 	if self.[String] then
 		return self.[String]
 	end
 end
 
-function EntityList:removeEntity(entity)
+function EntityLists:removeEntity(entity)
 	for index, component in pairs(entity.components) do
 		if self.[component.__name] then
 			table.remove(self.IsEnemy, entity)

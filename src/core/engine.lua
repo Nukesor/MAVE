@@ -19,6 +19,7 @@ function Engine:addEntity(entity)
     entity.id = self.entityIndex
     self.entityIndex = self.entityIndex + 1
     self:refreshEntity(entity)
+    EntityLists:addEntity(entity)
 end
 
 
@@ -33,6 +34,7 @@ function Engine:removeEntity(entity)
         end
         self.entities[entity.id] = nil
     end
+    EntityLists:removeEntity(entity)
 end
 
 

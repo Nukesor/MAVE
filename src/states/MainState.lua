@@ -5,6 +5,7 @@ require("core/state")
 require("core/entity")
 require("core/engine")
 require("core/event")
+require("core/entityLists")
 
 --Events
 require("core/events/mousePressed")
@@ -70,6 +71,7 @@ function MainState:__init()
     world:setCallbacks(beginContact, endContact)
 
     engine = Engine()
+    entitylist = EntityLists()
     engine:addListener("KeyPressed", MainKeySystem())
     engine:addListener("KeyPressed", PlayerControlSystem())
     engine:addListener("BeginContact", CollisionSelectSystem())
@@ -93,7 +95,7 @@ function MainState:__init()
     engine:addSystem(ShotDeleteSystem(), "logic", 12)
     engine:addSystem(EnemySpawnSystem(), "logic", 13)
 
-    --[[ Background und Umgebungselemente
+    -- Background und Umgebungselemente
     self.bg = Entity()
     self.bg:addComponent(DrawableComponent(resources.images.arena, 0, 1, 1, 0, 0))
     self.bg:addComponent(PositionComponent(0, 0))

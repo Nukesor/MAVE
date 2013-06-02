@@ -6,7 +6,7 @@ EnemyTrackingSystem = class("EnemyTrackingSystem", System)
 function EnemyTrackingSystem:update(dt)
 	for index, entity in pairs(self.targets) do
 		local height
-		local enemy=entity:getComponent("EnemyComponent")
+		local enemy=entity:getComponent("IsEnemy")
 	    local playercutiex, playercutiey = playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y
     	local xpos, ypos = entity:getComponent("PositionComponent").x, entity:getComponent("PositionComponent").y
     	local speed = main.worldspeed
@@ -128,5 +128,5 @@ function EnemyTrackingSystem:update(dt)
 end
 
 function EnemyTrackingSystem:getRequiredComponents()
-	return{"IsEnemy", "EnemyComponent"}
+	return{"IsEnemy"}
 end

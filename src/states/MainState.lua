@@ -51,6 +51,7 @@ require("components/cutieComponent")
 require("components/wobblyComponent")
 require("components/dashingComponent")
 require("components/enemyComponent")
+require("components/explosionComponent")
 
 require("components/isShot")
 require("components/isPlayer")
@@ -172,17 +173,6 @@ function MainState:update(dt)
         screenshot = love.graphics.newImage(canvas)
         self.shaketimer = 0
         stack:push(gameover)
-    end
-
-    if fire == true then
-        self.spawntimer = 0
-        fire = false
-    end
-
-    self.spawntimer = self.spawntimer + dt
-
-    if self.spawntimer > 2 then 
-        fire = true
     end
 
     -- Update Functions

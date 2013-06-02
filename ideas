@@ -63,15 +63,6 @@ Steuerung:
 	Linksklick: Spezialaktion (Schuss, C4 Platzieren...)
 	Rechtsklick: Dash
 
-
-Einbauen einer GameplayComponent:
-	- Diese GameplayComponent würde alle möglichen Sachen beinhalten
-		Eine Globale Variable, um von jedem System aus zugriff auf die verschiedenen Felder zu haben. Diese werden extrem häufig gebraucht.
-		- Playergold, Playerkills, Playerlevel
-		- Respawntimer, Leveldetails, Gegnerstärken
-		- Itemsystem, Gesamtgold, 
-
-
 Allgemeines DamageSystem:
 	Shot bekommt life, alles bekommt life.
 	Im DamageSystem wird generell das Verhalten von 2 Entities die miteinander kollidieren bestimmt. 
@@ -79,3 +70,45 @@ Allgemeines DamageSystem:
 		Sobald die zweite Entity eine LIfecomponentn besitzt, wir automatisch der Schaden übermittelt.
 		HIer muss man allerdings aufpassen, da man auch den zweiten Fall mit reinnehmen muss. Es wird nur einmal gefired. Außerdem iset zu beachten, dass wir in dieses System alle Particlesystems reinpacken müssten . 
 		Auflösungen werden allgemein Verfasst.
+
+
+Global Entity für Datensicherung:
+
+
+		Jo Rafael. Wir müssen uns mal absprechen. Und zwar ist es momentan relativ wichtig zu wissen, ob wir jetzt mit einer globalen Gameplay Component arbeiten oder ob wir weiterhin nur mit lokalem Kram arbeiten und Entities nur über den Engine erreichen. Ich müsste jetzt z.B. ein System schreiben, welches explosons abdeckt. Dafür müsste man allderings einmal durch alle enemies durchiterieren. Entweder muss ich dafür extra ein neues System mit requiredComponents() return {"IsEnemy"} end machen oder einfach eine Table, in der alle Enemies sind. Ich würde eigentlich eher zur Table mit den Enemies tendieren, da wir diese bestimmt noch häufiger brauchen, wollte das dann aber doch mit dir abklären. Außerdem könnten wir da noch Kram wie, Gold, Inventory, Statistics und so nen scheiß reinpacken. Und wir müssen uns noch ein System überlegen, nach dem die Enemies spawnen und nach dem unser Spiel funktionieren soll. Haben wir jetzt ein durchgehendes Spiel, bei dem die Gegner immer stärker werden und das man pausieren kann um einzukaufen oder wollen wir mit Waves arbeiten, bei dem die Gegner hardcoded in Tabellen stehen. Hat alles seine Vor und Nachteile.  
+
+
+	Gerüst:
+
+		System, das jedes Mal, wenn eine Entity dem System hinzugefügt wird eine Typabfrage durchführt. Wenn eine bestimmte Entity vorhanden ist, wird sie in eine Liste eingetragen. Außerdem beinhaltet dieses System eine Methode, die als Parameter einen String übergeben bekommt und die Liste der jeweiligen Entitygruppe zurückgibt. 
+
+
+
+EntityList = class("EntityList")
+
+function Entitylist:__init()
+	self.IsEnemy = {}
+	self.IsShot = {}
+end
+
+function EntityList:checkEntity(entity)
+	for index, component in pairs(entity.components) do
+		if self.[component.__name] then
+			table.insert(self.IsEnemy, entity)
+		end
+	end
+end
+
+function EntityList:returnGroup(String)
+	if self.[String] then
+		return self.[String]
+	end
+end
+
+function EntityList:removeEntity(entity)
+	for index, component in pairs(entity.components) do
+		if self.[component.__name] then
+			table.remove(self.IsEnemy, entity)
+		end
+	end
+end

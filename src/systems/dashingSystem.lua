@@ -23,5 +23,5 @@ function DashingSystem:update(dt)
 end
 
 function DashingSystem:getRequiredComponents()
-    return {"IsPlayer", "PhysicsComponent", "DashingComponent"}
+    return {"PhysicsComponent", "DashingComponent"}
 end

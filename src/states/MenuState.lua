@@ -80,7 +80,5 @@ function MenuState:keypressed(key, u)
         elseif self.index == 2 then
             love.event.push("quit")
         end
-    elseif key == "escape" then
-        love.event.push("quit")
     end
 end

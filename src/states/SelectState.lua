@@ -81,7 +81,5 @@ function SelectState:keypressed(key, u)
         elseif self.index == 2 then
             stack:pop()
         end
-    elseif key == "escape" then
-        love.event.push("quit")
     end
 end

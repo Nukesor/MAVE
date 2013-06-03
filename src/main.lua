@@ -8,6 +8,7 @@ require("states/WinState")
 require("states/GameOverState")
 require("states/CreditsState")
 require("states/PauseState")
+require("states/SelectState")
 
 
 function love.load()
@@ -44,6 +45,7 @@ function love.load()
     win = WinState()
     gameover = GameOverState()
     pause = PauseState()
+    select = SelectState()
     stack = StackHelper()
     
     stack:push(menu)

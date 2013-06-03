@@ -2,23 +2,23 @@ require("core/resources")
 require("core/helper")
 require("core/state")
 
-MenuState = class("MenuState", State)
+SelectState = class("SelectState", State)
 
-function MenuState:__init()
-    self.menupoints = {"Credits","Play","Exit"}
+function SelectState:__init()
+    self.menupoints = {"Level 1","Level 2","Main Menu"}
     self.index = 1
     self.runner = 0
     self.runner2 = 0
     self.font = resources.fonts.big
 end
 
-function MenuState:load()
+function SelectState:load()
     self.index = 1
     love.graphics.setFont(self.font)
 end
 
 
-function MenuState:update(dt)
+function SelectState:update(dt)
     self.runner = self.runner + dt/10
     if self.runner > 0.1 then
         self.runner = -0.1
@@ -40,10 +40,11 @@ function MenuState:update(dt)
 end
 
 
-function MenuState:draw()
+function SelectState:draw()
     love.graphics.setColor(255, 255, 255)
     --love.graphics.draw(resources.images.arena)
-    love.graphics.draw(resources.images.cutie2, love.graphics.getWidth()/2, 400, 0, 1, self.yscale, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
+    love.graphics.draw(resources.images.cutie3, love.graphics.getWidth()/2, 400, 0, 1, self.yscale, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
+    love.graphics.print("Select a level", 100, 50, 0, 1, 1, 0, 0)
 
     for i = 1, 3, 1 do
         local scale = 1
@@ -59,7 +60,7 @@ function MenuState:draw()
 end
 
 
-function MenuState:keypressed(key, u)
+function SelectState:keypressed(key, u)
     if key == "right" or key ==  "d" then
         if self.index < 2 then
             self.index = self.index + 1
@@ -74,11 +75,11 @@ function MenuState:keypressed(key, u)
         end
     elseif key == "return" then
         if self.index == 0 then
-            stack:push(credits)
+            stack:push(main)
         elseif self.index == 1 then
-            stack:push(select)
+            stack:push(main)
         elseif self.index == 2 then
-            love.event.push("quit")
+            stack:pop()
         end
     elseif key == "escape" then
         love.event.push("quit")

@@ -17,10 +17,15 @@ function ExplosionSystem:fireEvent(event)
         DestroyBody(entity)
     end
     explo = Entity()
-    explo:addComponent(ParticleComponent(resources.images.blood1, 400, 400, (entity:getComponent("ExplosionComponent").radius*3), (entity:getComponent("ExplosionComponent").radius*3), 2.0, 2.3, 
+    local radius = entity:getComponent("ExplosionComponent").radius
+    explo:addComponent(ParticleComponent(resources.images.blood1, 400, 400, (radius*2.5-50), (radius*2.5), 2.0, 2.3, 
                                             220, 100, 0, 80, 220, 0, 0, 140, 
-                                            exp.x, exp.y, 0.2, 0.2, 0.3, 0, 360, 
-                                            0, 360, 50, 100))
+                                            exp.x, exp.y, 0.6, 0.5, 0.6, 0, 360, 
+                                            0, 360, (radius*-7.5), (radius*-7.5)))
+    explo.components.ParticleComponent.hit:setColors(255, 255, 255, 255,
+                                                    255, 255, 0, 255,
+                                                    200, 0, 0, 255,
+                                                    255, 100, 0, 255)
     engine:addEntity(explo)
     explo.components.ParticleComponent.hit:start()
 end

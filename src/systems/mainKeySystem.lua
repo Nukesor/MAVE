@@ -25,6 +25,5 @@ function MainKeySystem:fireEvent(event)
         local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y - 20), love.mouse.getPosition())
         grenade:getComponent("PhysicsComponent").fixture:setUserData(grenade)
         engine:addEntity(grenade)
-        print("kick1")
     end
 end

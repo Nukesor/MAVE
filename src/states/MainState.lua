@@ -24,6 +24,7 @@ require("systems/physicsPositionSyncSystem")
 require("systems/particleDeleteSystem")
 require("systems/bleedingDetectSystem")
 require("systems/bodyDestroySystem")
+require("systems/grenadeSystem")
 
 --CutieManipulation Upgrade Systems
         --All
@@ -68,16 +69,19 @@ require("components/enemyComponent")
 require("components/isShot")
 require("components/isPlayer")
 require("components/isEnemy")
+require("components/isGrenade")
 
 -- Other Components
 require("components/explosionComponent")
 require("components/damageComponent")
 require("components/timeComponent")
+require("components/timerComponent")
 require("components/shotComponent")
 
 -- Models
 require("models/shotmodel")
 require("models/cutieModel")
+require("models/grenadeModel")
 
 
 MainState = class("MainState", State)
@@ -111,8 +115,9 @@ function MainState:__init()
     engine:addSystem(CutieDeleteSystem(), "logic", 11)
     engine:addSystem(BodyDestroySystem(), "logic", 12)
     engine:addSystem(EnemySpawnSystem(), "logic", 13)
+    engine:addSystem(GrenadeSystem(), "logic", 14)
 
-    --[[ Background und Umgebungselemente
+    -- Background und Umgebungselemente
     self.bg = Entity()
     self.bg:addComponent(DrawableComponent(resources.images.arena, 0, 1, 1, 0, 0))
     self.bg:addComponent(PositionComponent(0, 0))
@@ -158,7 +163,7 @@ function MainState:__init()
 
     -- Testinit für Barrel. Temporäre Entity für Debugging etc.
     self.barrel = Entity()
-    self.barrel:addComponent(PositionComponent(500, 100))
+    self.barrel:addComponent(PositionComponent(500, 300))
     self.barrel:addComponent(ExplosionComponent(200, 300))
 
     self.exptimer = 0

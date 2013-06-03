@@ -12,9 +12,9 @@ function ExplosionSystem:fireEvent(event)
             v:getComponent("LifeComponent").life = v:getComponent("LifeComponent").life - entity:getComponent("ExplosionComponent").damage
         end
     end
-    --engine:removeEntity(entity)
+    engine:removeEntity(entity)
     explo = Entity()
-    explo:addComponent(ParticleComponent(resources.images.blood1, 10000, 30000, (entity:getComponent("ExplosionComponent").radius*3), (entity:getComponent("ExplosionComponent").radius*3), 1.0, 1.3, 
+    explo:addComponent(ParticleComponent(resources.images.blood1, 400, 400, (entity:getComponent("ExplosionComponent").radius*3), (entity:getComponent("ExplosionComponent").radius*3), 2.0, 2.3, 
                                             220, 100, 0, 80, 220, 0, 0, 140, 
                                             exp.x, exp.y, 0.2, 0.2, 0.3, 0, 360, 
                                             0, 360, 50, 100))

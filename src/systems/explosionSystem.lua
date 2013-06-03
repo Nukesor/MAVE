@@ -13,6 +13,9 @@ function ExplosionSystem:fireEvent(event)
         end
     end
     engine:removeEntity(entity)
+    if entity.components.PhysicsComponent then
+        DestroyBody(entity)
+    end
     explo = Entity()
     explo:addComponent(ParticleComponent(resources.images.blood1, 400, 400, (entity:getComponent("ExplosionComponent").radius*3), (entity:getComponent("ExplosionComponent").radius*3), 2.0, 2.3, 
                                             220, 100, 0, 80, 220, 0, 0, 140, 

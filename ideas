@@ -21,7 +21,7 @@ Komplette Ummodelierung des Spielprinzips:
 			- Gegner droppen Gold
 
 	Itemsystem: 
-		Waffen und Passive Items kaufbar für Geld. (Eventuell schwierig so zu implementieren, dass es gut aussieht...)
+		Waffen und Passive Items kaueflich für Geld. (Eventuell schwierig so zu implementieren, dass es gut aussieht...)
 		Aktiv: 
 			Ak-47: 
 				Feuert regelmäßig einen Schuss linear in Richtung des Gegners. Schaden 1-2, 2 Sek-Takt?

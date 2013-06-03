@@ -30,12 +30,19 @@ function MenuState:update(dt)
         self.runner2 = -0.1
     end
     self.yscale = 1 + math.abs(self.runner2)
+
+    local mousex, mousey = love.mouse.getPosition()
+    if (mousey > 450 ) and (mousey < 500) then
+        if (mousex > 1) and (mousex < 1) then
+            self.index = 1
+        end
+    end
 end
 
 
 function MenuState:draw()
     love.graphics.setColor(255, 255, 255)
-    love.graphics.draw(resources.images.arena)
+    --love.graphics.draw(resources.images.arena)
     love.graphics.draw(resources.images.cutie2, love.graphics.getWidth()/2, 400, 0, 1, self.yscale, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
 
     for i = 1, 3, 1 do

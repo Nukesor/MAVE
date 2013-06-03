@@ -29,9 +29,9 @@ function CollisionDamage:action(entities)
 
     -- Check who will deal the damage
     if e2Speed > e1Speed then
-        self:dealDamage(e1)                
+        self:dealDamage(e1, e2)             
     elseif e1Speed > e2Speed then
-        self:dealDamage(e2)
+        self:dealDamage(e2, e1)
     end
 
     -- Blutpartikel
@@ -45,8 +45,8 @@ function CollisionDamage:action(entities)
     blood.components.ParticleComponent.hit:start()
 end
 
-function CollisionDamage:dealDamage(entity)
-    local entityCuteness = entity:getComponent("CutieComponent").cuteness
+function CollisionDamage:dealDamage(entity, entity2)
+    local entityCuteness = entity2:getComponent("CutieComponent").cuteness
     local damage = math.random(0, 5 + entityCuteness)
 
     -- Critical hit?

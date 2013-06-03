@@ -48,9 +48,7 @@ function WobbleSystem:setNewSy(entity, speed)
         local wobbly = entity:getComponent("WobblyComponent")
         local maxSpeed = 1000
         drawable.sy = wobbly.default - (wobbly.default / 4) * (speed / maxSpeed)
-        print(wobbly.default, drawable.sy)
         if speed > 1000 then
-            print(speed)
         end
     end
 end

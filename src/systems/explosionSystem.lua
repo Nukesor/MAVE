@@ -25,7 +25,7 @@ function ExplosionSystem:fireEvent(event)
     explo.components.ParticleComponent.hit:setColors(255, 255, 255, 255,
                                                     255, 255, 0, 255,
                                                     200, 0, 0, 255,
-                                                    255, 100, 0, 255)
+                                                    255, 100, 0, 155)
     engine:addEntity(explo)
     explo.components.ParticleComponent.hit:start()
 end

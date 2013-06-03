@@ -1,10 +1,10 @@
 default: build run
 
 clean:
-	@[[ ! -e game.love ]] || rm game.love
+	@[[ ! -e MAVE.love ]] || rm MAVE.love
 	@[[ ! -e pkg ]] || rm -r pkg		
 
-build:
+build: clean
 	@zip -r -0 MAVE.love data/*
 	@cd src/ && zip -r ../MAVE.love *
 

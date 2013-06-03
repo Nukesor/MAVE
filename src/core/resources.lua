@@ -4,12 +4,12 @@ Resources = class("Resources")
 
 function Resources:__init()
     
-	self.imageQueue = {}
+    self.imageQueue = {}
     self.musicQueue = {}
     self.soundQueue = {}
     self.fontQueue= {}
 
-	self.images = {}
+    self.images = {}
     self.music = {}
     self.sounds = {}
     self.fonts = {}

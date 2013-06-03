@@ -5,7 +5,7 @@ require("core/system")
 MainKeySystem = class("MainKeySystem", System)
 
 function MainKeySystem:fireEvent(event)
-	-- Playercutie Jump
+    -- Playercutie Jump
     if event.key == "o" then
         playercutie:getComponent("LifeComponent").life = 0
     elseif event.key == "p" then
@@ -21,5 +21,9 @@ function MainKeySystem:fireEvent(event)
         local shot = ShotModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y - 20), love.mouse.getPosition())
         shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
         engine:addEntity(shot)
+    elseif event.key == "g" then
+        local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y - 20), love.mouse.getPosition())
+        grenade:getComponent("PhysicsComponent").fixture:setUserData(grenade)
+        engine:addEntity(grenade)
     end
 end

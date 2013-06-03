@@ -4,13 +4,7 @@ TODO
 ## Version 0.1
 
 ### Code
-- Möglichkeit, mehrere Cutiegegner zu spawnen
 - Maussupport im Menu
-<<<<<<< HEAD
-- Wichtig: Wenn eine Component von einer Entity entfernt wird, Systemeinträge über die Engine updaten
-- Möglichkeit für Systeme implementieren, gar keine Entities als Targets zu haben
-- Packaging der Systems
-=======
 
 ### GFX
 - Arena fertig
@@ -18,30 +12,25 @@ TODO
 
 ## Version 0.2
 
-### Code
-- Schadenssystem ausfeilen
-- Lebensleiste
-
 ### GFX
-- Wolkenplattformen (evtl particle system?)
+- Wolkenplattformen (evtl particle system?). Ne man. particleSystems sehen zu unbeständig aus, da bekommst du Augenkrebs. lieber pngs
 - Lebensleiste
 - Blutpartikel
-
-## Future
-
-### Code
-- Wichtig: Wenn eine Component von einer Entity entfernt wird, Systemeinträge über die Engine updaten #done, oder?
-- Möglichkeit für Systeme implementieren, gar keine Entities als Targets zu haben #done, oder?
-- Fullscreen support
-- ShakeSystem
-- SlowMotionSystem (?)
->>>>>>> bf661489fe83f7ad743aabe827bfd325907acc86
-
-### GFX
 - Arena fertig
 - Menubuttons
 - Backgrounds für MenuState
 - Neuen Font suchen, der nicht so beschissen ist
+- Explosives Fass
+- Granate
+- Gewehr
+- Schild ? Oder wollen wir das als normales Schild bloss mit love zeichnen?
+
+### Code
+- Fullscreen support
+- SlowMotionSystem (?)
+- Schadenssystem ausfeilen
+- Lebensleiste
+- 
 
 ### Sonstiges
 - Lizenz raussuchen

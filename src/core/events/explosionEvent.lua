@@ -3,5 +3,6 @@ require("core/helper")
 ExplosionEvent = class("ExplosionEvent", Event)
 
 function ExplosionEvent:__init(entity)
-	self.entity = entity
+    self.__super.__init(self, self.__name)
+    self.entity = entity
 end

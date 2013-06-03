@@ -10,6 +10,7 @@ require("core/event")
 require("core/events/mousePressed")
 require("core/events/keyPressed")
 require("core/events/beginContact")
+require("core/events/explosionEvent")
 
 -- Draw Systems
 require("systems/particleDrawSystem")
@@ -23,6 +24,7 @@ require("systems/physicsPositionSyncSystem")
 require("systems/particleDeleteSystem")
 require("systems/bleedingDetectSystem")
 require("systems/bodyDestroySystem")
+require("systems/grenadeSystem")
 
 --CutieManipulation Upgrade Systems
         --All
@@ -67,16 +69,19 @@ require("components/enemyComponent")
 require("components/isShot")
 require("components/isPlayer")
 require("components/isEnemy")
+require("components/isGrenade")
 
 -- Other Components
 require("components/explosionComponent")
 require("components/damageComponent")
 require("components/timeComponent")
+require("components/timerComponent")
 require("components/shotComponent")
 
 -- Models
 require("models/shotmodel")
 require("models/cutieModel")
+require("models/grenadeModel")
 
 
 MainState = class("MainState", State)
@@ -110,6 +115,7 @@ function MainState:__init()
     engine:addSystem(CutieDeleteSystem(), "logic", 11)
     engine:addSystem(BodyDestroySystem(), "logic", 12)
     engine:addSystem(EnemySpawnSystem(), "logic", 13)
+    engine:addSystem(GrenadeSystem(), "logic", 14)
 
     -- Background und Umgebungselemente
     self.bg = Entity()
@@ -154,14 +160,6 @@ function MainState:__init()
     self.shakeX = 0
     self.shakeY = 0
     self.shaketimer = 0
-
-    -- Testinit für Barrel. Temporäre Entity für Debugging etc.
-    barrel = Entity()
-    barrel:addComponent(PositionComponent(200, 300))
-    barrel:addComponent(ExplosionComponent(200, 300))
-
-    self.exptimer = 0
-    self.epxtimertr = true
 end
 
 function MainState:load()
@@ -198,16 +196,7 @@ function MainState:update(dt)
 
     -- Update Functions
     engine:update(dt)
-	world:update(dt)
-
-    --Testfunktion des Explosionsystems
-    if self.epxtimertr == true then
-        self.exptimer = self.exptimer + dt
-    end
-    if self.exptimer > 20 then
-        engine:fireEvent(ExplosionEvent(barrel))
-        self.epxtimertr = false
-    end
+    world:update(dt)
 end
 
 function MainState:draw()
@@ -226,7 +215,7 @@ function MainState:draw()
 end
 
 function MainState:restart()
-	world:destroy()
+    world:destroy()
     for index, value in pairs(engine.entities) do
         engine:removeEntity(value)
     end

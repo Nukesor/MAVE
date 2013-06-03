@@ -73,7 +73,4 @@ function PauseState:keypressed(key, unicode)
             love.event.quit()
         end
     end
-    if key == "p" or key == "escape" then 
-        self.flag = false
-    end
 end

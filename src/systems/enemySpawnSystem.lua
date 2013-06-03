@@ -28,7 +28,7 @@ function EnemySpawnSystem:update(dt)
 
     if self.fire == true then
         self.spawntimer = 0
-        self.fire = false
+        self.fire = true
     end
 end
 

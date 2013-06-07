@@ -76,7 +76,7 @@ function MenuState:keypressed(key, u)
         if self.index == 0 then
             stack:push(credits)
         elseif self.index == 1 then
-            stack:push(select)
+            stack:push(selectstate)
         elseif self.index == 2 then
             love.event.push("quit")
         end

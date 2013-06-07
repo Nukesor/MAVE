@@ -5,7 +5,7 @@ require("core/state")
 SelectState = class("SelectState", State)
 
 function SelectState:__init()
-    self.menupoints = {"Level 1","Level 2","Main Menu"}
+    self.menupoints = {"Level 1","Level 2", "Shop","Main Menu"}
     self.index = 1
     self.runner = 0
     self.runner2 = 0
@@ -46,7 +46,7 @@ function SelectState:draw()
     love.graphics.draw(resources.images.cutie3, love.graphics.getWidth()/2, 400, 0, 1, self.yscale, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
     love.graphics.print("Select a level", 100, 50, 0, 1, 1, 0, 0)
 
-    for i = 1, 3, 1 do
+    for i = 1, 4, 1 do
         local scale = 1
         local text = self.menupoints[i]
         local x = i*(love.graphics.getWidth()/4)
@@ -62,16 +62,16 @@ end
 
 function SelectState:keypressed(key, u)
     if key == "right" or key ==  "d" then
-        if self.index < 2 then
+        if self.index < 3 then
             self.index = self.index + 1
-        elseif self.index == 2 then
+        elseif self.index == 3 then
             self.index = 0
         end
     elseif key == "left" or key == "a" then
         if self.index > 0 then
             self.index = self.index -1
         elseif self.index == 0 then
-            self.index = 2
+            self.index = 3
         end
     elseif key == "return" then
         if self.index == 0 then
@@ -80,6 +80,8 @@ function SelectState:keypressed(key, u)
             stack:push(main)
         elseif self.index == 2 then
             stack:pop()
+        elseif self.index == 3 then
+            stack:push(shop)
         end
     end
 end

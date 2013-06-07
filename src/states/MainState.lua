@@ -13,63 +13,67 @@ require("core/events/beginContact")
 require("core/events/explosionEvent")
 
 -- Draw Systems
-require("systems/particleDrawSystem")
-require("systems/drawableDrawSystem")
-require("systems/polygonDrawSystem")
-require("systems/particleDrawSystem")
+require("systems/draw/drawableDrawSystem")
+require("systems/draw/polygonDrawSystem")
 
--- Upgrade Systems
-require("systems/sideChangeSystem")
-require("systems/physicsPositionSyncSystem")
-require("systems/particleDeleteSystem")
-require("systems/bleedingDetectSystem")
-require("systems/bodyDestroySystem")
-require("systems/grenadeSystem")
+-- Particle Systems
+require("systems/particle/particleDrawSystem")
+require("systems/particle/particleDeleteSystem")
+
+-- Physics Systems
+require("systems/physic/speedLimitSystem")
+require("systems/physic/maxSpeedSystem")
+require("systems/physic/sideChangeSystem")
+require("systems/physic/physicsPositionSyncSystem")
+require("systems/physic/bodyDestroySystem")
 
 --CutieManipulation Upgrade Systems
-        --All
-require("systems/wobbleSystem")
-require("systems/maxSpeedSystem")
-require("systems/speedLimitSystem")
-require("systems/cutieDeleteSystem")
+        --Cutie
+require("systems/cutie/wobbleSystem")
+require("systems/cutie/cutieDeleteSystem")
+require("systems/cutie/bleedingDetectSystem")
         --Enemy
-require("systems/enemySpawnSystem")
-require("systems/enemyTrackingSystem")
+require("systems/enemy/enemySpawnSystem")
+require("systems/enemy/enemyTrackingSystem")
         --Player
-require("systems/playerMoveSystem")
-require("systems/dashingSystem")
+require("systems/player/grenadeSystem")
+require("systems/player/playerMoveSystem")
+require("systems/player/dashingSystem")
 
+-- Pressed Event Systems
+require("systems/pressedevent/mainKeySystem")
+require("systems/pressedevent/playerControlSystem")
+require("systems/pressedevent/mainMousePressedSystem")
 -- Event Systems
-require("systems/mainKeySystem")
-require("systems/collisionSelectSystem")
-require("systems/playerControlSystem")
-require("systems/mainMousePressedSystem")
-require("systems/explosionSystem")
+require("systems/event/collisionSelectSystem")
+require("systems/event/explosionSystem")
 
 --GraphicComponents
-require("components/drawableComponent")
-require("components/drawablePolygonComponent")
-require("components/zIndex")
-require("components/particleComponent")
+require("components/graphic/drawableComponent")
+require("components/graphic/drawablePolygonComponent")
+require("components/graphic/zIndex")
+
+-- Particle Component
+require("components/particle/particleComponent")
 
 -- PhysicsCompoents
-require("components/physicsComponent")
-require("components/positionComponent")
-require("components/destroyComponent")
+require("components/physic/physicsComponent")
+require("components/physic/positionComponent")
+require("components/physic/destroyComponent")
 
 -- Cutie Components
-require("components/levelComponent")
-require("components/lifeComponent")
-require("components/cutieComponent")
-require("components/wobblyComponent")
-require("components/dashingComponent")
-require("components/enemyComponent")
+require("components/cutie/levelComponent")
+require("components/cutie/lifeComponent")
+require("components/cutie/cutieComponent")
+require("components/cutie/wobblyComponent")
+require("components/cutie/dashingComponent")
+require("components/cutie/enemyComponent")
 
 --IdentifierComponents
-require("components/isShot")
-require("components/isPlayer")
-require("components/isEnemy")
-require("components/isGrenade")
+require("components/identifier/isShot")
+require("components/identifier/isPlayer")
+require("components/identifier/isEnemy")
+require("components/identifier/isGrenade")
 
 -- Other Components
 require("components/explosionComponent")
@@ -87,6 +91,11 @@ require("models/grenadeModel")
 MainState = class("MainState", State)
 
 function MainState:__init()
+
+end
+
+function MainState:load()
+   love.graphics.setFont(resources.fonts.default)
     love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
     world:setCallbacks(beginContact, endContact)
@@ -160,10 +169,6 @@ function MainState:__init()
     self.shakeX = 0
     self.shakeY = 0
     self.shaketimer = 0
-end
-
-function MainState:load()
-   love.graphics.setFont(resources.fonts.default)
 end
 
 function MainState:update(dt)

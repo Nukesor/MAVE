@@ -1,13 +1,18 @@
 BoxClickSystem = class("BoxClickSystem", System)
 
-function BoxClickSystem:mouseclicked(x, y, button)
-	for index, value in pairs(self.targets) do
-		if button == 'l' then
-			if (x >= value:getComponent("PositionComponent").x) and (x <= (value:getComponent("PositionComponent").x + value:getComponent("BoxComponent").length)) then
+function BoxClickSystem:fireEvent(event)
+	local x = event.x 
+	local y = event.y  
+	local button = event.button
+	if button == "l" then
+		for index, value in pairs(self.targets) do
+			if (x >= value:getComponent("PositionComponent").x) and (x <= (value:getComponent("PositionComponent").x + value:getComponent("BoxComponent").width)) then
 				if (y >= value:getComponent("PositionComponent").y) and (y <= (value:getComponent("PositionComponent").y + value:getComponent("BoxComponent").height)) then
-					self:getSelectedBox():getComponent("BoxComponent").selected = false
+					if self:getSelectedBox() then
+						self:getSelectedBox():getComponent("BoxComponent").selected = false
+					end
 					value:getComponent("BoxComponent").selected = true
-					value:getComponent("BoxComponent").func()
+					value:getComponent("BoxComponent"):func()
 				end
 			end	
 		end

@@ -1,20 +1,21 @@
 BoxNavigationSystem = class("BoxNavigationSystem", System)
 
 function BoxNavigationSystem:init()
-	self.super.__init(self)
-
+	self.__super.__init(self)
 end
 
-function BoxNavigationSystem:keypressed(key, unicode)
+function BoxNavigationSystem:fireEvent(event)
+	local key = event.key
+	local u = event.u
     if key == "left" or key == "a" then
-        self:getSelectedBox():getComponent("BoxComponent").selected = false
-        self:getSelectedBox():getComponent("BoxComponent").linked[1]:getComponent("BoxComponent").selected = true
-    
-    else if key == "right" or key == "d" then
-   	    self:getSelectedBox():getComponent("BoxComponent").selected = false
-        self:getSelectedBox():getComponent("BoxComponent").linked[2]:getComponent("BoxComponent").selected = true
-
-    else if key == "return" then
+    	local box = self:getSelectedBox()
+        box:getComponent("BoxComponent").selected = false
+        box:getComponent("BoxComponent").linked[1]:getComponent("BoxComponent").selected = true
+    elseif key == "right" or key == "d" then
+    	local box = self:getSelectedBox()
+   	    box:getComponent("BoxComponent").selected = false
+        box:getComponent("BoxComponent").linked[2]:getComponent("BoxComponent").selected = true
+    elseif key == "return" then
 		self:getSelectedBox():getComponent("BoxComponent").func()
     end
 end

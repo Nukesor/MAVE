@@ -9,7 +9,7 @@ end
 
 function System:update(dt) end
 
-function System:getRequiredComponents() end
+function System:getRequiredComponents() return {} end
 
 function System:getEntities()
     return self.targets

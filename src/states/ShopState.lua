@@ -12,14 +12,15 @@ require("core/events/mousePressed")
 require("core/events/keyPressed")
 
 -- BoxComponents
-require("components/boxComponent")
-require("components/positionComponent")
+require("components/userinterface/stringComponent")
+require("components/userinterface/boxComponent")
+require("components/physic/positionComponent")
 
 -- Systems
-require("systems/boxClickSystem")
-require("systems/boxDrawSystem")
-require("systems/boxHoverSystem")
-require("systems/boxNavigationSystem")
+require("systems/userinterface/boxClickSystem")
+require("systems/userinterface/boxDrawSystem")
+require("systems/userinterface/boxHoverSystem")
+require("systems/userinterface/boxNavigationSystem")
 
 
 ShopState = class("ShopState", State)

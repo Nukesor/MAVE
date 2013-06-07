@@ -77,7 +77,6 @@ require("components/identifier/isGrenade")
 
 -- Other Components
 require("components/explosionComponent")
-require("components/damageComponent")
 require("components/timeComponent")
 require("components/timerComponent")
 require("components/shotComponent")

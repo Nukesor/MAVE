@@ -6,18 +6,13 @@ TODO
 ### Code
 - Möglichkeit, mehrere Cutiegegner zu spawnen
 - Maussupport im Menu
+- Wichtig: Wenn eine Component von einer Entity entfernt wird, Systemeinträge über die Engine updaten
+- Möglichkeit für Systeme implementieren, gar keine Entities als Targets zu haben
+- Packaging der Systems
 
 ### GFX
 - Arena fertig
 - Menubuttons
-
-## Future
-
-### Code
-- Wichtig: Wenn eine Component von einer Entity entfernt wird, Systemeinträge über die Engine updaten
-- Möglichkeit für Systeme implementieren, gar keine Entities als Targets zu haben
-
-### GFX
 - Backgrounds für MenuState
 - Neuen Font suchen, der nicht so beschissen ist
 

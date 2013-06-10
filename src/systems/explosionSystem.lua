@@ -1,24 +1,16 @@
 require("core/helper")
 require("core/system")
 
-ExplosionSystem = class("ExplosionSystem", System)
+ExplosionSystem = class("ExplosionSystem")
 
-function ExplosionSystem:__init()
-	for index, value in pairs(self.targets) do
-		for i, v in pairs(engine.entities) do 
-			if v.getComponent("IsEnemy") then
-				local exp = value:getComponent("ExplosionComponent")
-				local enemypos = v:getComponent("PositionComponent")
-				if (math.sqrt((enemypos.x-exp.x)^2 + (enemypos.y-exp.y)^2)) < exp.radius then
-					v.components.LifeComponent.life = v.components.LifeComponent.life - exp.damage
-				end
-			end
+function ExplosionSystem:fireEvent(event)
+	local entity = event.entity
+	for i, v in pairs(engine.IsEnemy) do 
+		local exp = entity:getComponent("PositionComponent")
+		local enemypos = v:getComponent("PositionComponent")
+		if (math.sqrt((enemypos.x-exp.x)^2 + (enemypos.y-exp.y)^2)) < entity:getComponent("ExplosionComponent").radius then
+			v:getComponent("LifeComponent").life = v:getComponent("LifeComponent").life - entity:getComponent("ExplosionComponent").damage
 		end
-		engine:removeEntity(value)
 	end
-end
-
-
-function ExplosionSystem:getRequiredComponents()
-	return {"ExplosionComponent"}
+	engine:removeEntity(entity)
 end

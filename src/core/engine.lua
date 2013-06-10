@@ -4,6 +4,7 @@ Engine = class("Engine")
 
 function Engine:__init() 
     self.entities = {}
+    self.entityIndex = 0
 
     self.allSystems = {}
     self.logicSystems = {}
@@ -11,7 +12,8 @@ function Engine:__init()
 
     self.events = {}
 
-    self.entityIndex = 0
+    self.IsEnemy = {}
+    self.IsShot = {}
 end
 
 function Engine:addEntity(entity)
@@ -19,9 +21,14 @@ function Engine:addEntity(entity)
     entity.id = self.entityIndex
     self.entityIndex = self.entityIndex + 1
     self:refreshEntity(entity)
-    EntityLists:addEntity(entity)
-end
 
+    -- Eingliederung der Entity in die jeweilige ComponentList
+    for index, component in pairs(entity.components) do
+        if self[component.__name] then
+            table.insert(self[component.__name], entity)
+        end
+    end
+end 
 
 function Engine:removeEntity(entity)
     if self.entities[entity.id] then
@@ -34,7 +41,17 @@ function Engine:removeEntity(entity)
         end
         self.entities[entity.id] = nil
     end
-    EntityLists:removeEntity(entity)
+
+    -- Löschen der jeweiligen Entity aus der ComponentList
+    for index, component in pairs(entity.components) do
+        if self[component.__name] then
+            for index2, ent in pairs(self[component.__name]) do
+                if entity == ent then 
+                    table.remove(self[component.__name], index2)
+                end
+            end
+        end
+    end
 end
 
 

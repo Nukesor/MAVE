@@ -5,12 +5,12 @@ ShotModel = class("ShotModel", Entity)
 function ShotModel:__init(x, y, xt, yt)
     
     self.__super.__init(self)
-    self.damage = 5
     local body = love.physics.newBody(world, x, y, "dynamic")
     local shape = love.physics.newCircleShape(1) 
     local fixture = love.physics.newFixture(body, shape, 0)  
         fixture:setRestitution(1)  
         body:setMass(0)
+    self:addComponent(DamageComponent(100))
     self:addComponent(PhysicsComponent(body, fixture, shape ))
     self:addComponent(PositionComponent())
     self:addComponent(DrawableComponent(resources.images.shot, 0, 1, 1, 5, 5))

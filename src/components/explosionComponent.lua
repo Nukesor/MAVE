@@ -1,8 +1,6 @@
 ExplosionComponent = class("ExplosionComponent")
 
-function ExplosionComponent:__init(x, y, Damage, Radius)
-	self.x = x
-	self.y = y
+function ExplosionComponent:__init(Damage, Radius)
 	self.damage = Damage
 	self.radius = Radius
 end

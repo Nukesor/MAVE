@@ -6,12 +6,8 @@ MainKeySystem = class("MainKeySystem", System)
 
 function MainKeySystem:fireEvent(event)
 	-- Playercutie Jump
-    if event.key == "i" then
-        playercutie:getComponent("LifeComponent").life = 10
-    elseif event.key == "u" then
+    if event.key == "o" then
         playercutie:getComponent("LifeComponent").life = 0
-    elseif event.key == "o" then
-        cutie:getComponent("LifeComponent").life = 0
     elseif event.key == "p" then
         local canvas = love.graphics.newScreenshot()
         screenshot = love.graphics.newImage(canvas)

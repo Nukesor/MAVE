@@ -1,5 +1,10 @@
 Fragen:
 
+- Momentan ermoeglicht cuteness mehr schaden, macht ihn aber nicht zwingend hoeher. Soll das geaendert werden?
+- helper.lua in etwas aussagekraeftigeres umbenennen, z.B. objectOrientation.lua oder class.lua oder so?
+- ALTER, love2d hat ein event-module..
+- CollisionSelectSystem erlaubt nur ein Collision-Objekt pro Kombination
+
 Ideen:
 
 Komplette Ummodelierung des Spielprinzips:
@@ -72,6 +77,3 @@ Allgemeines DamageSystem:
 		DeleteComponent? Bauen einer Art Garbage Collector für Entites? Interessante Idee. Das würde den Destroy der Entities aus den CollisionCallbacks in die Main:update ziehen, was in jedem Fall besser ist, da hiermit Fehler vermieden werden, da Callback und Update parallel laufen. ensure functions für Callback-functions? Ist es möglich eine Entity zu killen, während sie noch in einem Callback steckt? Grund für bisherige Bugs?
 
 			Die SplatterParticles müssten in die Collisions eingeschlossen werden oder in das DeleteSystem, was allerdings in gewissem Maße die Idee des Garbage Collectors vernichten würde. Lieber Trennung. Ist es möglich eine andere kombination zu finden, sodass die Particle Systems selbst erkennen was los ist. Vor dem GarbageCollector ein ScanningSystem dazwischenschalten? Wäre übersichtlich, aber Umständlich. Außerdem mehr Updatefunktionen. Performance!
-
-
-git commit -m "ExplosionComponent, ExplosionSystem and ExplosionEvent added. Mainstate tidied up. Some debug code in Mainstate(everything is commented and marked). Some nice Ideas added."

@@ -3,8 +3,8 @@ require("core/helper")
 ShotCutieCollision = class("ShotCutieCollision")
 
 function ShotCutieCollision:__init()
-self.component1 = "IsShot"
-self.component2 = "CutieComponent"
+    self.component1 = "ShotComponent"
+    self.component2 = "CutieComponent"
 end
 
 function ShotCutieCollision.action(entities)

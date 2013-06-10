@@ -10,7 +10,7 @@ function Engine:__init()
     self.logicSystems = {}
     self.drawSystems = {}
 
-    self.events = {}
+    self.eventListeners = {}
 
     self.IsEnemy = {}
     self.IsShot = {}
@@ -54,7 +54,6 @@ function Engine:removeEntity(entity)
     end
 end
 
-
 function Engine:addSystem(system, type, index)
     if type == "draw" then
         table.insert(self.drawSystems, system)
@@ -65,20 +64,17 @@ function Engine:addSystem(system, type, index)
     return system
 end
 
-
 function Engine:update(dt)
     for index, system in ipairs(self.logicSystems) do
         system:update(dt)
     end
 end
 
-
 function Engine:draw()
     for index, system in ipairs(self.drawSystems) do
         system:update()
     end
 end
-
 
 function Engine:refreshEntity(entity)
     if not self.entities[entity.id] then
@@ -107,22 +103,23 @@ function Engine:refreshEntity(entity)
     end
 end
 
+-- Event stuff
 function Engine:addListener(eventName, listener)
-    if not self.events[eventName] then
-        self.events[eventName] = {}
+    if not self.eventListeners[eventName] then
+        self.eventListeners[eventName] = {}
     end
-    self.events[eventName][listener.__name] = listener
+    self.eventListeners[eventName][listener.__name] = listener
 end
 
 function Engine:removeListener(eventName, listener)
-    if self.events[eventName] and self.events.eventName.listener then
-        self.events[eventName][listener.__name] = nil
+    if self.eventListeners[eventName] and self.eventListeners.eventName.listener then
+        self.eventListeners[eventName][listener.__name] = nil
     end
 end
 
 function Engine:fireEvent(event)
-    if self.events[event.name] then
-        for k,v in pairs(self.events[event.name]) do
+    if self.eventListeners[event.name] then
+        for k,v in pairs(self.eventListeners[event.name]) do
             v:fireEvent(event)
         end
     end

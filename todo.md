@@ -6,9 +6,36 @@ TODO
 ### Code
 - Möglichkeit, mehrere Cutiegegner zu spawnen
 - Maussupport im Menu
+<<<<<<< HEAD
 - Wichtig: Wenn eine Component von einer Entity entfernt wird, Systemeinträge über die Engine updaten
 - Möglichkeit für Systeme implementieren, gar keine Entities als Targets zu haben
 - Packaging der Systems
+=======
+
+### GFX
+- Arena fertig
+- Menubuttons
+
+## Version 0.2
+
+### Code
+- Schadenssystem ausfeilen
+- Lebensleiste
+
+### GFX
+- Wolkenplattformen (evtl particle system?)
+- Lebensleiste
+- Blutpartikel
+
+## Future
+
+### Code
+- Wichtig: Wenn eine Component von einer Entity entfernt wird, Systemeinträge über die Engine updaten #done, oder?
+- Möglichkeit für Systeme implementieren, gar keine Entities als Targets zu haben #done, oder?
+- Fullscreen support
+- ShakeSystem
+- SlowMotionSystem (?)
+>>>>>>> bf661489fe83f7ad743aabe827bfd325907acc86
 
 ### GFX
 - Arena fertig
@@ -22,8 +49,8 @@ TODO
 ## BUGS
 - Fehler Tritt auf, wenn Playercutie destroyed werden soll. 	
 
-	Error: states/MainState.lua:210: A body has escaped Memoizer!
-		stack traceback:
+        Error: states/MainState.lua:210: A body has escaped Memoizer!
+                stack traceback:
         [C]: in function 'destroy'
         states/MainState.lua:210: in function 'restart'
         states/GameOverState.lua:39: in function 'update'
@@ -34,8 +61,8 @@ TODO
 
 - Fehler tritt auf, bei Collision von Enemycutie und Shot. Nicht immer, nicht reproduzierbar.
 
-Error: collisions/shotCutieCollision.lua:13: attempt to index a nil value
-stack traceback:
+        Error: collisions/shotCutieCollision.lua:13: attempt to index a nil value
+        stack traceback:
         collisions/shotCutieCollision.lua:13: in function <collisions/shotCutieCollision.lua:10>
         systems/collisionSelectSystem.lua:35: in function 'fireEvent'
         core/engine.lua:107: in function 'fireEvent'
@@ -49,8 +76,8 @@ stack traceback:
 
 - Nach GameOerState return zu Menu
 
-Error: states/MenuState.lua:48: attempt to perform arithmetic on field 'wobble' (a nil value)
-stack traceback:
+        Error: states/MenuState.lua:48: attempt to perform arithmetic on field 'wobble' (a nil value)
+        stack traceback:
         states/MenuState.lua:48: in function 'draw'
         core/stackhelper.lua:43: in function 'draw'
         main.lua:58: in function 'draw'

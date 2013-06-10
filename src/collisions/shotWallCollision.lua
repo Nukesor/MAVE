@@ -3,8 +3,8 @@ require("core/helper")
 ShotWallCollision = class("ShotWallCollision")
 
 function ShotWallCollision:__init()
-self.component1 = "DrawablePolygonComponent"
-self.component2 = "ShotComponent"
+	self.component1 = "DrawablePolygonComponent"
+	self.component2 = "IsShot"
 end
 
 function ShotWallCollision:action(entities)

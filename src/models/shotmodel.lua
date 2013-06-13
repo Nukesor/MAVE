@@ -10,12 +10,12 @@ function ShotModel:__init(x, y, xt, yt)
     local fixture = love.physics.newFixture(body, shape, 0)  
         fixture:setRestitution(1)  
         body:setMass(0)
-    self:addComponent(DamageComponent(100))
     self:addComponent(PhysicsComponent(body, fixture, shape ))
     self:addComponent(PositionComponent())
     self:addComponent(DrawableComponent(resources.images.shot, 0, 1, 1, 5, 5))
     self:addComponent(IsShot())
     self:addComponent(ZIndex(99))
+    self:addComponent(DamageComponent(20))
     body:setGravityScale(0.1)
     local akat, gkat
         akat = xt - x

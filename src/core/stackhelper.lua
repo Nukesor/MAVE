@@ -27,7 +27,7 @@ function StackHelper:pop()
     if self:current() then 
         table.remove(self.states, #self.states)
     end
-        self:current():load()
+    self:current():load()
 end
 
 

@@ -47,28 +47,3 @@ TODO
         main.lua:54: in function 'update'
         [string "boot.lua"]:407: in function <[string "boot.lua"]:373>
         [C]: in function 'xpcall'
-
-- Fehler tritt auf, bei Collision von Enemycutie und Shot. Nicht immer, nicht reproduzierbar.
-
-        Error: collisions/shotCutieCollision.lua:13: attempt to index a nil value
-        stack traceback:
-        collisions/shotCutieCollision.lua:13: in function <collisions/shotCutieCollision.lua:10>
-        systems/collisionSelectSystem.lua:35: in function 'fireEvent'
-        core/engine.lua:107: in function 'fireEvent'
-        states/MainState.lua:233: in function <states/MainState.lua:232>
-        [C]: in function 'update'
-        states/MainState.lua:191: in function 'update'
-        core/stackhelper.lua:49: in function 'update'
-        main.lua:54: in function 'update'
-        [string "boot.lua"]:407: in function <[string "boot.lua"]:373>
-        [C]: in function 'xpcall'
-
-- Nach GameOerState return zu Menu
-
-        Error: states/MenuState.lua:48: attempt to perform arithmetic on field 'wobble' (a nil value)
-        stack traceback:
-        states/MenuState.lua:48: in function 'draw'
-        core/stackhelper.lua:43: in function 'draw'
-        main.lua:58: in function 'draw'
-        [string "boot.lua"]:410: in function <[string "boot.lua"]:373>
-        [C]: in function 'xpcall'

@@ -79,7 +79,7 @@ require("components/identifier/isGrenade")
 require("components/explosionComponent")
 require("components/timeComponent")
 require("components/timerComponent")
-require("components/shotComponent")
+require("components/damageComponent")
 
 -- Models
 require("models/shotmodel")
@@ -94,7 +94,7 @@ function MainState:__init()
 end
 
 function MainState:load()
-   love.graphics.setFont(resources.fonts.default)
+    love.graphics.setFont(resources.fonts.default)
     love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
     world:setCallbacks(beginContact, endContact)

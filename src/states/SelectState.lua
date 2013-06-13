@@ -44,12 +44,12 @@ function SelectState:draw()
     love.graphics.setColor(255, 255, 255)
     --love.graphics.draw(resources.images.arena)
     love.graphics.draw(resources.images.cutie3, love.graphics.getWidth()/2, 400, 0, 1, self.yscale, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
-    love.graphics.print("Select a level", 100, 50, 0, 1, 1, 0, 0)
+    love.graphics.print("Select a level or start SHOPPING", love.graphics.getWidth()/2 - resources.fonts.big:getWidth("Select a Level or start SHOPPING")/2, 50, 0, 1, 1, 0, 0)
 
     for i = 1, 4, 1 do
         local scale = 1
         local text = self.menupoints[i]
-        local x = i*(love.graphics.getWidth()/4)
+        local x = i*love.graphics.getWidth()/5
         if (i-1) == self.index then
             scale = self.wobble
         else
@@ -79,9 +79,9 @@ function SelectState:keypressed(key, u)
         elseif self.index == 1 then
             stack:push(main)
         elseif self.index == 2 then
-            stack:pop()
-        elseif self.index == 3 then
             stack:push(shop)
+        elseif self.index == 3 then
+            stack:pop()
         end
     end
 end

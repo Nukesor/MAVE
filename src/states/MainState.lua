@@ -1,4 +1,4 @@
-require("core/helper")
+require("core/class")
 require("core/physicshelper")
 require("core/resources")
 require("core/state")

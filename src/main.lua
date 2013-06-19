@@ -1,6 +1,6 @@
 require("core/resources")
 require("core/stackhelper")
-require("core/helper")
+require("core/class")
 
 require("states/MainState")
 require("states/MenuState")

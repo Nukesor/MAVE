@@ -1,4 +1,4 @@
-require("core/helper")
+require("core/class")
 
 Resources = class("Resources")
 

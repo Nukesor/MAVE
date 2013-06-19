@@ -1,4 +1,4 @@
-require("core/helper")
+require("core/class")
 require("core/system")
 
 BleedingDetectSystem = class("BleedingDetectSystem", System)

@@ -1,4 +1,4 @@
-require("core/helper")
+require("core/class")
 require("core/system")
 
 EnemyTrackingSystem = class("EnemyTrackingSystem", System)

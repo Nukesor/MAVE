@@ -1,5 +1,5 @@
 require("core/resources")
-require("core/helper")
+require("core/class")
 require("core/state")
 
 MenuState = class("MenuState", State)

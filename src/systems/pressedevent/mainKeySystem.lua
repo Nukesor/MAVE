@@ -1,5 +1,5 @@
 
-require("core/helper")
+require("core/class")
 require("core/system")
 
 MainKeySystem = class("MainKeySystem", System)

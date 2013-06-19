@@ -1,4 +1,4 @@
-require("core/helper")
+require("core/class")
 
 function DestroyBody(entity)
     local physics = entity:getComponent("PhysicsComponent")

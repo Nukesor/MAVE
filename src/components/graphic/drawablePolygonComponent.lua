@@ -1,5 +1,3 @@
-require("core/class")
-
 DrawablePolygonComponent = class("DrawablePolygonComponent")
 
 function DrawablePolygonComponent:__init(wold, x, y, l, h, type, entity)

@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 SpeedLimitSystem = class("SpeedLimitSystem", System)
 
 function SpeedLimitSystem:update(dt)

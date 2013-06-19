@@ -1,5 +1,3 @@
-require("core/class")
-
 CutieComponent = class("CutieComponent")
 
 function CutieComponent:__init(cuteness, mobbelity, level)

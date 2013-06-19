@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 CutieDeleteSystem = class("CutieDeleteSystem", System)
 
 function CutieDeleteSystem:update()

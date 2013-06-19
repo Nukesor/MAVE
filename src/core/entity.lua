@@ -1,5 +1,3 @@
-require("core/class")
-
 Entity = class("Entity")
 
 function Entity:__init()

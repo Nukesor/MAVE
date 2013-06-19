@@ -1,5 +1,5 @@
-require("core/class")
-require("core/system")
+
+
 
 ExplosionSystem = class("ExplosionSystem")
 

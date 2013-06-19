@@ -1,5 +1,3 @@
-require("core/class")
-
 GameOverState = class("GameOverState", State)
 
 function GameOverState:__init()

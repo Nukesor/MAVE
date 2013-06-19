@@ -1,5 +1,3 @@
-require("core/class")
-
 State = class("State")
 
 State.renderBelow = false

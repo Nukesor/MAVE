@@ -1,5 +1,3 @@
-require("core/class")
-
 StackHelper = class("StackHelper")
 
 function StackHelper:__init()

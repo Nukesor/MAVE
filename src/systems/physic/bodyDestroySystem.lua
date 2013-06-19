@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 BodyDestroySystem = class("BodyDestroySystem", System)
 
 function BodyDestroySystem:update()

@@ -1,5 +1,3 @@
-require("core/class")
-
 ShotModel = class("ShotModel", Entity)
 
 function ShotModel:__init(x, y, xt, yt)

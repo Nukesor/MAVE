@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 MainMousePressedSystem = class("MainMousePressedSystem")
 
 function MainMousePressedSystem:fireEvent(event)

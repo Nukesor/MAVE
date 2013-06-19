@@ -1,7 +1,3 @@
-require("core/resources")
-require("core/class")
-require("core/state")
-
 SelectState = class("SelectState", State)
 
 function SelectState:__init()

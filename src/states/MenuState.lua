@@ -1,7 +1,3 @@
-require("core/resources")
-require("core/class")
-require("core/state")
-
 MenuState = class("MenuState", State)
 
 function MenuState:__init()

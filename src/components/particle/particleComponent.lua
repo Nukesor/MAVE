@@ -1,5 +1,3 @@
-require("core/class")
-
 ParticleComponent = class("ParticleComponent")
 
 function ParticleComponent:__init(image, maxparticles, rate, startspeed, endspeed, startsize, endsize, 

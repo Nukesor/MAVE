@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 BleedingDetectSystem = class("BleedingDetectSystem", System)
 
 function BleedingDetectSystem:update(dt)

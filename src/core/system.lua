@@ -1,5 +1,3 @@
-require("core/class")
-
 System = class("System")
 
 function System:__init()

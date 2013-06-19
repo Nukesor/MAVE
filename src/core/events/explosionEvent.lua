@@ -1,5 +1,3 @@
-require("core/class")
-
 ExplosionEvent = class("ExplosionEvent", Event)
 
 function ExplosionEvent:__init(entity)

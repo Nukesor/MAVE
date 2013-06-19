@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 EnemyTrackingSystem = class("EnemyTrackingSystem", System)
 
 function EnemyTrackingSystem:update(dt)

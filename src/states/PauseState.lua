@@ -1,5 +1,3 @@
-require("core/class")
-
 PauseState = class("PauseState", State)
 
 function PauseState:__init()

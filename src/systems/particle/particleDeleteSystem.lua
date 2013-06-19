@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 ParticleDeleteSystem = class("ParticleDeleteSystem", System)
 
 function ParticleDeleteSystem:update(dt)

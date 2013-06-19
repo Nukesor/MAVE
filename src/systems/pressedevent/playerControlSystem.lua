@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 PlayerControlSystem = class("PlayerControlSystem", System)
 
 function PlayerControlSystem:fireEvent(event)

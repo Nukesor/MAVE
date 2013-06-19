@@ -1,5 +1,3 @@
-require("core/class")
-
 Engine = class("Engine")
 
 function Engine:__init() 

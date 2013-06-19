@@ -1,5 +1,3 @@
-require("core/class")
-
 ShotWallCollision = class("ShotWallCollision")
 
 function ShotWallCollision:__init()

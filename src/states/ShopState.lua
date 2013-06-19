@@ -1,5 +1,3 @@
-require("core/class")
-require("core/system")
 require("core/physicshelper")
 require("core/resources")
 require("core/state")

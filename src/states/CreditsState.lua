@@ -1,6 +1,3 @@
-require("core/class")
-require("core/resources")
-
 CreditsState = class("CreditsState", State)
 
 function CreditsState:__init()

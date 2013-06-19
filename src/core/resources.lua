@@ -1,5 +1,3 @@
-require("core/class")
-
 Resources = class("Resources")
 
 function Resources:__init()

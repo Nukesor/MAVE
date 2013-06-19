@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 PolygonDrawSystem = class("PolygonDrawSystem", System)
 
 function PolygonDrawSystem:update(dt)

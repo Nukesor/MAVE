@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 CollisionDamage = class("CollisionDamage")
 
 function CollisionDamage:__init()

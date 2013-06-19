@@ -1,7 +1,3 @@
-
-require("core/class")
-require("core/system")
-
 MainKeySystem = class("MainKeySystem", System)
 
 function MainKeySystem:fireEvent(event)

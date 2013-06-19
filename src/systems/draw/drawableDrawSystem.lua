@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 DrawableDrawSystem = class("DrawableDrawSystem", System)
 
 function DrawableDrawSystem:__init()

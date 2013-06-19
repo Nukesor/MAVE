@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 EnemySpawnSystem = class("EnemySpawnSystem", System)
 
 function EnemySpawnSystem:__init()

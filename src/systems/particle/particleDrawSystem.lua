@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 ParticleDrawSystem = class("ParticleDrawSystem", System)
 
 function ParticleDrawSystem:update()

@@ -1,6 +1,3 @@
-require("core/class")
-require("core/system")
-
 PlayerMoveSystem = class("PlayerMoveSystem", System)
 
 function PlayerMoveSystem:update(dt)

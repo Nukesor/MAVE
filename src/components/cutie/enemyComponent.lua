@@ -1,5 +1,3 @@
-require("core/class")
-
 EnemyComponent = class("EnemyComponent")
 
 function EnemyComponent:__init()

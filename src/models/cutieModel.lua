@@ -1,5 +1,3 @@
-require("core/class")
-
 CutieModel = class("CutieModel", Entity)
 
 function CutieModel:__init(xs, ys, image, life)

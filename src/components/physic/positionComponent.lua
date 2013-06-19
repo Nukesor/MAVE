@@ -1,5 +1,3 @@
-require("core/class")
-
 PositionComponent = class("PositionComponent")
 
 function PositionComponent:__init(x, y)

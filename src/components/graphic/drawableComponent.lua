@@ -1,5 +1,3 @@
-require("core/class")
-
 DrawableComponent = class("DrawableComponent")
 
 function DrawableComponent:__init(image, r, sx, sy, ox, oy)

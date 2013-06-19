@@ -1,8 +1,3 @@
-require("core/resources")
-require("core/class")
-require("core/state")
-
-
 WinState =  class("WinState", State)
 
 function WinState:__init()

@@ -4,6 +4,7 @@ require("core/state")
 require("core/entity")
 require("core/engine")
 require("core/event")
+require("core/system")
 
 --Events
 require("core/events/mousePressed")

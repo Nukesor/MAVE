@@ -24,7 +24,7 @@ require("systems/userinterface/boxNavigationSystem")
 ShopState = class("ShopState", State)
 
 function ShopState:__init()
-    self.font = resources.fonts.default
+    self.font = resources.fonts.forty
 end
 
 function ShopState:load()
@@ -43,45 +43,51 @@ function ShopState:load()
     self.backup = nil
     self.backupone = nil
 
+    -- item boxes
+    for i = 1, 10, 1 do
+        local width = 5
+        local boxwidth = 150
+        local boxheight = 75
 
-    --item boxes
-    for i = 1, 3, 1 do
-        y = 50
-        x = 50 + 150 * (i-1)
+        -- Die Boxes werden dynamisch eingefuegt
+        y = 50 + (math.floor((i-1)/width)*100)
+        x = 25 + 200 * ((i-1)-math.floor((i-1)/width)*5)
         local box = Entity()
         if i==1 then
-            box:addComponent(BoxComponent(100, 40, {nil, nil}, function() return stack:pop() end, "item"))
-        elseif i==3 then
-            box:addComponent(BoxComponent(100, 40, {box, backupone}, function() stack:pop() end, "item"))
+            box:addComponent(BoxComponent(boxwidth, boxheight, {nil, nil}, function() return stack:pop() end, "item"))
+        elseif i==10 then
+            box:addComponent(BoxComponent(boxwidth, boxheight, {box, backupone}, function() stack:pop() end, "item"))
             self.backupone:getComponent("BoxComponent").linked[1] = box 
             self.backup:getComponent("BoxComponent").linked[2] = box 
         else
-            box:addComponent(BoxComponent(100, 40, {box, nil}, function() stack:pop() end, "item"))
+            box:addComponent(BoxComponent(boxwidth, boxheight, {box, nil}, function() stack:pop() end, "item"))
             self.backup:getComponent("BoxComponent").linked[1] = box 
         end
+
+        -- Hier wird der Zeilenumbruch ab einer bestimmten Anzahl von Items angesetzt.
         box:addComponent(PositionComponent(x, y))
-        engine:addEntity(box)
         if i == 1 then 
             self.backupone = box
         end
         self.backup = box
+        engine:addEntity(box)
     end
 
     self.backup = nil
     self.backupone = nil
     -- menu boxes
     for i = 1, 3, 1 do
-        y = 300
-        x = 50 + 200 * (i-1)
+        y = 500
+        x = love.graphics.getWidth()/4 * (i)
         local box = Entity()
         if i == 1 then
-            box:addComponent(BoxComponent(100, 40, {nil, nil}, function() return stack:pop() end, "menu", "zurueck"))
+            box:addComponent(BoxComponent(100, 40, {nil, nil}, function() return stack:pop() end, "menu", "Back", resources.fonts.forty))
             box:getComponent("BoxComponent").selected = true
         elseif i == 2 then
-            box:addComponent(BoxComponent(100, 40, {self.backup, nil}, function() stack:pop() end, "menu", "zurueck"))
+            box:addComponent(BoxComponent(100, 40, {self.backup, nil}, function() stack:pop() end, "menu", "Back", resources.fonts.forty))
             self.backup:getComponent("BoxComponent").linked[2] = box 
         elseif i == 3 then
-            box:addComponent(BoxComponent(100, 40, {self.backup, self.backupone}, function() love.event.quit() end, "menu", "Exit"))
+            box:addComponent(BoxComponent(100, 40, {self.backup, self.backupone}, function() love.event.quit() end, "menu", "Exit", resources.fonts.forty))
             self.backupone:getComponent("BoxComponent").linked[1] = box 
             self.backup:getComponent("BoxComponent").linked[2] = box 
         end

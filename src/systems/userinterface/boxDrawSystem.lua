@@ -9,12 +9,12 @@ end
 function BoxDrawSystem:update(dt)
 
 	if self.direction == true then
-		self.scale = self.scale + 0.005
+		self.scale = self.scale + 0.003
 		if self.scale > 1.2 then
 			self.direction = false
 		end
 	else
-		self.scale = self.scale - 0.005
+		self.scale = self.scale - 0.003
 		if self.scale < 1 then
 			self.direction = true
 		end
@@ -30,10 +30,11 @@ function BoxDrawSystem:update(dt)
 			love.graphics.rectangle("fill", position.x+2, position.y+2, box.width-4, box.height-4)
 		elseif box.typ == "menu" then
 			love.graphics.setColor(255, 255, 255, 255)
+			love.graphics.setFont(box.font)
 			if box.selected == true then
-				love.graphics.print(box.string, position.x, position.y, 0, self.scale, self.scale)
+				love.graphics.print(box.string, position.x - box.font:getWidth(box.string)/2, position.y - box.font:getHeight(box.string)/2, 0, self.scale, self.scale)
 			else
-				love.graphics.print(box.string, position.x, position.y)
+				love.graphics.print(box.string, position.x - box.font:getWidth(box.string)/2, position.y - box.font:getHeight(box.string)/2)
 			end
 		end
 	end

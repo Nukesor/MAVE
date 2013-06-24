@@ -47,3 +47,6 @@ TODO
         main.lua:54: in function 'update'
         [string "boot.lua"]:407: in function <[string "boot.lua"]:373>
         [C]: in function 'xpcall'
+
+
+Gui Draw + scaling update problem. kein dt in draw. draw nach update auslagen ?

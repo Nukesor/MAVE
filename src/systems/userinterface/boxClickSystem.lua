@@ -12,7 +12,7 @@ function BoxClickSystem:fireEvent(event)
 						self:getSelectedBox():getComponent("BoxComponent").selected = false
 					end
 					value:getComponent("BoxComponent").selected = true
-					value:getComponent("BoxComponent"):func()
+					value:getComponent("FunctionComponent"):func()
 				end
 			end	
 		end

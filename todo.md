@@ -30,7 +30,7 @@ TODO
 - SlowMotionSystem (?)
 - Schadenssystem ausfeilen
 - Lebensleiste
-- 
+- Dynamische Schussposition fuer granaten und shots. 
 
 ### Sonstiges
 - Lizenz raussuchen

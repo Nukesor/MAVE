@@ -13,6 +13,8 @@ require("core/events/keyPressed")
 require("components/userinterface/stringComponent")
 require("components/userinterface/boxComponent")
 require("components/physic/positionComponent")
+require("components/userinterface/functionComponent")
+require("components/userinterface/imageComponent")
 
 -- Systems
 require("systems/userinterface/boxClickSystem")
@@ -54,14 +56,26 @@ function ShopState:load()
         x = 25 + 200 * ((i-1)-math.floor((i-1)/width)*5)
         local box = Entity()
         if i==1 then
-            box:addComponent(BoxComponent(boxwidth, boxheight, {nil, nil}, function() return stack:pop() end, "item"))
+            box:addComponent(BoxComponent(boxwidth, boxheight, {nil, nil}, "item"))
+             box:addComponent(FunctionComponent(function ()
+                                                    stack:pop()
+                                                end
+                                                    ))      
         elseif i==10 then
-            box:addComponent(BoxComponent(boxwidth, boxheight, {box, backupone}, function() stack:pop() end, "item"))
+            box:addComponent(BoxComponent(boxwidth, boxheight, {box, backupone}, "item"))
+            box:addComponent(FunctionComponent(function ()
+                                                    stack:pop()
+                                                end
+                                                    ))
             self.backupone:getComponent("BoxComponent").linked[1] = box 
             self.backup:getComponent("BoxComponent").linked[2] = box 
         else
-            box:addComponent(BoxComponent(boxwidth, boxheight, {box, nil}, function() stack:pop() end, "item"))
-            self.backup:getComponent("BoxComponent").linked[1] = box 
+            box:addComponent(BoxComponent(boxwidth, boxheight, {box, nil}, "item"))
+            box:addComponent(FunctionComponent(function ()
+                                                    stack:pop()
+                                                end
+                                                    ))
+            self.backup:getComponent("BoxComponent").linked[1] = box
         end
 
         -- Hier wird der Zeilenumbruch ab einer bestimmten Anzahl von Items angesetzt.
@@ -81,13 +95,25 @@ function ShopState:load()
         x = love.graphics.getWidth()/4 * (i)
         local box = Entity()
         if i == 1 then
-            box:addComponent(BoxComponent(100, 40, {nil, nil}, function() return stack:pop() end, "menu", "Back", resources.fonts.forty))
+            box:addComponent(BoxComponent(100, 40, {nil, nil}, "menu"))
+            box:addComponent(StringComponent("Back", resources.fonts.forty))
+            box:addComponent(FunctionComponent( function()
+                                                     return stack:pop() 
+                                                end))
             box:getComponent("BoxComponent").selected = true
         elseif i == 2 then
-            box:addComponent(BoxComponent(100, 40, {self.backup, nil}, function() stack:pop() end, "menu", "Back", resources.fonts.forty))
+            box:addComponent(BoxComponent(100, 40, {self.backup, nil}, "menu"))
+            box:addComponent(StringComponent("Back", resources.fonts.forty))
+            box:addComponent(FunctionComponent( function()
+                                                     return stack:pop() 
+                                                end))
             self.backup:getComponent("BoxComponent").linked[2] = box 
         elseif i == 3 then
-            box:addComponent(BoxComponent(100, 40, {self.backup, self.backupone}, function() love.event.quit() end, "menu", "Exit", resources.fonts.forty))
+            box:addComponent(BoxComponent(100, 40, {self.backup, self.backupone}, "menu"))
+            box:addComponent(StringComponent("Exit", resources.fonts.forty))
+            box:addComponent(FunctionComponent( function()
+                                                     return love.event.quit() 
+                                                end))
             self.backupone:getComponent("BoxComponent").linked[1] = box 
             self.backup:getComponent("BoxComponent").linked[2] = box 
         end

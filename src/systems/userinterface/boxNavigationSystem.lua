@@ -13,17 +13,15 @@ function BoxNavigationSystem:fireEvent(event)
 	local key = event.key
 	local u = event.u
     if key == "left" or key == "a" then
-    	local box = self.selectedBox
-        box:getComponent("BoxComponent").selected = false
-        box:getComponent("BoxComponent").linked[1]:getComponent("BoxComponent").selected = true
-        self.selectedBox = box:getComponent("BoxComponent").linked[1]
+    	self:changeSelected(1)
     elseif key == "right" or key == "d" then
-    	local box = self.selectedBox
-   	    box:getComponent("BoxComponent").selected = false
-        box:getComponent("BoxComponent").linked[2]:getComponent("BoxComponent").selected = true
-        self.selectedBox = box:getComponent("BoxComponent").linked[2]
+    	self:changeSelected(2)
+    elseif key == "up" or key == "w" then
+    	self:changeSelected(3)
+    elseif key == "down" or key == "s" then
+    	self:changeSelected(4)
     elseif key == "return" then
-		self:getSelectedBox():getComponent("BoxComponent").func()
+		self:getSelectedBox():getComponent("FunctionComponent").func()
     end
 end
 
@@ -37,4 +35,11 @@ function BoxNavigationSystem:getSelectedBox()
 			return value
 		end
 	end
+end
+
+function BoxNavigationSystem:changeSelected(link) 
+		local box = self.selectedBox
+   	    box:getComponent("BoxComponent").selected = false
+        box:getComponent("BoxComponent").linked[link]:getComponent("BoxComponent").selected = true
+        self.selectedBox = box:getComponent("BoxComponent").linked[link]
 end

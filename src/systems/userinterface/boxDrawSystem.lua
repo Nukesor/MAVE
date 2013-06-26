@@ -28,10 +28,17 @@ function BoxDrawSystem:update(dt)
 			boxstring = value:getComponent("StringComponent")
 			end
 		if box.typ == "item" then	
+			if value:getComponent("ImageComponent") then
+				love.graphics.draw(value:getComponent("ImageComponent").image, position.x, position.y)
+			end
 			love.graphics.setColor(200, 50, 0, 255)
 			love.graphics.rectangle("line", position.x, position.y, box.width, box.height)
 			love.graphics.setColor(100, 100, 100, 100)
 			love.graphics.rectangle("fill", position.x+2, position.y+2, box.width-4, box.height-4)
+			if box.selected == true then
+				love.graphics.setColor(255, 255, 255, 50)
+				love.graphics.rectangle("fill", position.x, position.y, box.width, box.height)
+			end
 		elseif box.typ == "menu" then
 			love.graphics.setColor(255, 255, 255, 255)
 			love.graphics.setFont(boxstring.font)

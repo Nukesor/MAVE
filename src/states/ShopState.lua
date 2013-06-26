@@ -42,54 +42,57 @@ function ShopState:load()
     engine:addSystem(boxclick)
     engine:addSystem(boxnavigation)
 
-    self.backup = nil
-    self.backupone = nil
+    self.boxnumber = 10
+    self.menunumber = 3
+    self.boxes = {}
+    self.menuboxes = {}
+    self.width = 5
 
-    -- item boxes
-    for i = 1, 10, 1 do
-        local width = 5
+    -- Dynamische Erstellung der Item boxes
+    for i = 1, self.boxnumber, 1 do
+
         local boxwidth = 150
         local boxheight = 75
+        local box
 
-        -- Die Boxes werden dynamisch eingefuegt
-        y = 50 + (math.floor((i-1)/width)*100)
-        x = 25 + 200 * ((i-1)-math.floor((i-1)/width)*5)
-        local box = Entity()
-        if i==1 then
+        -- Berrechnung der Position und Zeilenumbruch nach i == self.width Boxes
+        y = 50 + (math.floor((i-1)/self.width)*100)
+        x = 25 + 200 * ((i-1)-math.floor((i-1)/self.width)*5)
+        if i == self.boxnumber then
+            box = Entity()
+            box:addComponent(BoxComponent(boxwidth, boxheight, {self.boxes[i-1], nil}, "item"))
+            box:addComponent(FunctionComponent(function ()
+                                                       stack:pop()
+                                                end
+                                                    ))
+            self.boxes[1]:getComponent("BoxComponent").linked[1] = box 
+            box:getComponent("BoxComponent").linked[2] = self.boxes[1] 
+            self.boxes[i-1]:getComponent("BoxComponent").linked[2] = box
+            table.insert(self.boxes, box)
+
+        elseif i == 1 then 
+            box = Entity()
             box:addComponent(BoxComponent(boxwidth, boxheight, {nil, nil}, "item"))
-             box:addComponent(FunctionComponent(function ()
-                                                    stack:pop()
-                                                end
-                                                    ))      
-        elseif i==10 then
-            box:addComponent(BoxComponent(boxwidth, boxheight, {box, backupone}, "item"))
             box:addComponent(FunctionComponent(function ()
-                                                    stack:pop()
+                                                       stack:pop()
                                                 end
                                                     ))
-            self.backupone:getComponent("BoxComponent").linked[1] = box 
-            self.backup:getComponent("BoxComponent").linked[2] = box 
-        else
-            box:addComponent(BoxComponent(boxwidth, boxheight, {box, nil}, "item"))
-            box:addComponent(FunctionComponent(function ()
-                                                    stack:pop()
-                                                end
-                                                    ))
-            self.backup:getComponent("BoxComponent").linked[1] = box
-        end
+            table.insert(self.boxes, box)
 
-        -- Hier wird der Zeilenumbruch ab einer bestimmten Anzahl von Items angesetzt.
-        box:addComponent(PositionComponent(x, y))
-        if i == 1 then 
-            self.backupone = box
+        else
+            box = Entity()
+            box:addComponent(BoxComponent(boxwidth, boxheight, {self.boxes[i-1],nil}, "item"))
+            box:addComponent(FunctionComponent(function ()
+                                                    stack:pop()
+                                                end
+                                                    ))
+            self.boxes[i-1]:getComponent("BoxComponent").linked[2] = box
+            table.insert(self.boxes, box)
         end
-        self.backup = box
+        box:addComponent(PositionComponent(x, y))
         engine:addEntity(box)
     end
-
-    self.backup = nil
-    self.backupone = nil
-    -- menu boxes
+    -- Erstellung der MenuBoxes
     for i = 1, 3, 1 do
         y = 500
         x = love.graphics.getWidth()/4 * (i)
@@ -101,32 +104,57 @@ function ShopState:load()
                                                      return stack:pop() 
                                                 end))
             box:getComponent("BoxComponent").selected = true
-        elseif i == 2 then
-            box:addComponent(BoxComponent(100, 40, {self.backup, nil}, "menu"))
-            box:addComponent(StringComponent("Back", resources.fonts.forty))
-            box:addComponent(FunctionComponent( function()
-                                                     return stack:pop() 
-                                                end))
-            self.backup:getComponent("BoxComponent").linked[2] = box 
+            table.insert(self.menuboxes, box)
         elseif i == 3 then
-            box:addComponent(BoxComponent(100, 40, {self.backup, self.backupone}, "menu"))
+            box:addComponent(BoxComponent(100, 40, {self.menuboxes[i-1], nil}, "menu"))
             box:addComponent(StringComponent("Exit", resources.fonts.forty))
             box:addComponent(FunctionComponent( function()
                                                      return love.event.quit() 
                                                 end))
-            self.backupone:getComponent("BoxComponent").linked[1] = box 
-            self.backup:getComponent("BoxComponent").linked[2] = box 
+
+            self.menuboxes[1]:getComponent("BoxComponent").linked[1] = box 
+            box:getComponent("BoxComponent").linked[2] = self.menuboxes[1] 
+            self.menuboxes[i-1]:getComponent("BoxComponent").linked[2] = box
+            table.insert(self.menuboxes, box)
+        else
+
+            box:addComponent(BoxComponent(100, 40, {self.menuboxes[i-1], nil}, "menu"))
+            box:addComponent(StringComponent("Back", resources.fonts.forty))
+            box:addComponent(FunctionComponent( function()
+                                                     return stack:pop() 
+                                                end))
+            self.menuboxes[i-1]:getComponent("BoxComponent").linked[2] = box
+            table.insert(self.menuboxes, box)
         end
         box:addComponent(PositionComponent(x, y))
         engine:addEntity(box)
-        if i == 1 then 
-            self.backupone = box
-        end
-        self.backup = box
     end
-    self.index = 1
+
+    -- Verlinkung der MenuBoxes mit normalen Boxes
+    for i, box in ipairs(self.menuboxes) do
+        box:getComponent("BoxComponent").linked[3] = self.boxes[8]
+        box:getComponent("BoxComponent").linked[4] = self.boxes[3]
+    end
+
+    --Verlinkung der Boxen unter und uebereinander und Verlinkung mit Menuboxes
+    for i, box in ipairs(self.boxes) do
+        if self.boxes[i-self.width] and (i - self.width) >= 0 then
+            box:getComponent("BoxComponent").linked[3] = self.boxes[i - self.width]
+        elseif (i - self.width) < 1 and self.boxes[i - self.width + self.boxnumber] then
+            box:getComponent("BoxComponent").linked[3] = self.menuboxes[2]
+        end
+
+        if self.boxes[i + self.width] and (i + self.width) <= self.boxnumber then
+                box:getComponent("BoxComponent").linked[4] = self.boxes[(i+self.width)]
+        elseif (i + self.width) > self.boxnumber and self.boxes[i + self.width - self.boxnumber] then
+            box:getComponent("BoxComponent").linked[4] = self.menuboxes[2]
+        end
+    end
+
     love.graphics.setFont(self.font)
 end
+
+
 
 
 function ShopState:update(dt)

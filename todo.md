@@ -29,9 +29,13 @@ TODO
 - Lebensleiste
 - Dynamische Schussposition fuer granaten und shots. 
 - Menu Wobble in Systems bauen. Images den Parameter "wobble" mitgeben, um zu drawen. 
+- Shop System bauen 
+    - Table fuer Waffen erstellen, Funktion schreiben, die sich den Status aus der Tabelle holt.
+    - ItemComponent fuer Playercutie erstellen und mit Tabelle verlinken
+
 
 ## BUGS
-- Fehler Tritt auf, wenn Playercutie destroyed werden soll. 	
+- Fehler Tritt auf, wenn Playercutie destroyed werden soll.
 
         Error: states/MainState.lua:210: A body has escaped Memoizer!
                 stack traceback:

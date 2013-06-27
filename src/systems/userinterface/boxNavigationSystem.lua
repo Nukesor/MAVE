@@ -6,10 +6,6 @@ function BoxNavigationSystem:init()
 end
 
 function BoxNavigationSystem:fireEvent(event)
-	if self.selectedBox == nil then
-		self.selectedBox = self:getSelectedBox()
-	end
-
 	local key = event.key
 	local u = event.u
     if key == "left" or key == "a" then
@@ -38,8 +34,7 @@ function BoxNavigationSystem:getSelectedBox()
 end
 
 function BoxNavigationSystem:changeSelected(link) 
-		local box = self.selectedBox
+		local box = self:getSelectedBox()
    	    box:getComponent("BoxComponent").selected = false
         box:getComponent("BoxComponent").linked[link]:getComponent("BoxComponent").selected = true
-        self.selectedBox = box:getComponent("BoxComponent").linked[link]
 end

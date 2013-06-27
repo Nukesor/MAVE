@@ -15,6 +15,7 @@ require("core/events/explosionEvent")
 -- Draw Systems
 require("systems/draw/drawableDrawSystem")
 require("systems/draw/polygonDrawSystem")
+require("systems/draw/lifebarSystem")
 
 -- Particle Systems
 require("systems/particle/particleDrawSystem")
@@ -109,6 +110,7 @@ function MainState:load()
     engine:addSystem(DrawableDrawSystem(), "draw")
     engine:addSystem(PolygonDrawSystem(), "draw")
     engine:addSystem(ParticleDrawSystem(), "draw")
+    engine:addSystem(LifebarSystem(), "draw")
     
     engine:addSystem(MaxSpeedSystem(), "logic", 1)
     engine:addSystem(SideChangeSystem(), "logic", 2)
@@ -214,6 +216,7 @@ function MainState:draw()
     engine:draw()
 
     -- Zeichnen der Schriftzüge
+    love.graphics.setColor(255, 255, 255, 255)
     love.graphics.print(string.format("%.2f ",x) ..  "    " .. "X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)
     love.graphics.print("Your Cutie´s life: " .. playercutie:getComponent("LifeComponent").life, 20, 40, 0, 1, 1)
 end

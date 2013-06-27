@@ -24,11 +24,8 @@ TODO
 
 ### Code
 - Fullscreen support
-- SlowMotionSystem (?)
+- SlowMotionSystem (?) Wie zur hoelle willste das machen? Alle Systems werden im Engine ausgefuehrt, welcher zu der Zeit schon die dt uebergeben hat. Was du machen willst, waere ziemlicher Brainfuck, da man zwischen den update Call vom Engine ein System basteln muesste. Dann wuerden wir Slowmo fest im Engine verankern und das ist glaube ich nicht die Idee vom Engine oder? 
 - Schadenssystem ausfeilen
-- Lebensleiste
-- Dynamische Schussposition fuer granaten und shots. 
-- Menu Wobble in Systems bauen. Images den Parameter "wobble" mitgeben, um zu drawen. 
 - Shop System bauen 
     - Table fuer Waffen erstellen, Funktion schreiben, die sich den Status aus der Tabelle holt.
     - ItemComponent fuer Playercutie erstellen und mit Tabelle verlinken

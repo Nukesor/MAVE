@@ -57,10 +57,9 @@ function MenuState:load()
             box:addComponent(BoxComponent(100, 40, {nil, nil}, "menu"))
             box:addComponent(StringComponent("Credits", resources.fonts.forty))
             box:addComponent(FunctionComponent( function()
-                                                     stack:push(selectstate)
+                                                     stack:push(credits)
                                                 end))
             box:addComponent(MenuWobblyComponent())
-            box:getComponent("BoxComponent").selected = true
             table.insert(self.menuboxes, box)
         elseif i == 3 then
             box:addComponent(BoxComponent(100, 40, {self.menuboxes[i-1], nil}, "menu"))
@@ -82,6 +81,7 @@ function MenuState:load()
                                                 end))
             box:addComponent(MenuWobblyComponent())
             self.menuboxes[i-1]:getComponent("BoxComponent").linked[2] = box
+            box:getComponent("BoxComponent").selected = true
             table.insert(self.menuboxes, box)
         end
         box:addComponent(PositionComponent(x, y))

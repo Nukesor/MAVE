@@ -1,7 +1,7 @@
 BoxHoverSystem = class("BoxHoverSystem", System)
 
 function BoxHoverSystem:__init()
-	self.__super.__init(self)
+	
 end
 
 function BoxHoverSystem:update(dt)

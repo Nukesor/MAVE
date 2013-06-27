@@ -1,7 +1,7 @@
 BoxDrawSystem = class("BoxDrawSystem", System)
 
 function BoxDrawSystem:__init()
-	self.__super.__init(self)
+	
 	self.direction = true
 end
 

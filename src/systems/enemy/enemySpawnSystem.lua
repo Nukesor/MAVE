@@ -1,7 +1,7 @@
 EnemySpawnSystem = class("EnemySpawnSystem", System)
 
 function EnemySpawnSystem:__init()
-    self.__super.__init(self)
+    
     self.spawntimer = 0
     self.fire = false
 end

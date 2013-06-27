@@ -1,7 +1,7 @@
 BoxNavigationSystem = class("BoxNavigationSystem", System)
 
 function BoxNavigationSystem:init()
-	self.__super.__init(self)
+	
 	self.selectedBox = nil
 end
 

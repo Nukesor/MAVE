@@ -1,7 +1,7 @@
 WobbleSystem = class("WobbleSystem", System)
 
 function WobbleSystem:__init()
-    self.__super.__init(self)
+    
     engine:addListener("BeginContact", self)
 end
 

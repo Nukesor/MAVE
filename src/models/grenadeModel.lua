@@ -2,7 +2,7 @@ GrenadeModel = class("GrenadeModel", Entity)
 
 function GrenadeModel:__init(x, y, xt, yt)
 
-    self.__super.__init(self)
+    
 
     local akat, gkat
         akat = xt - x

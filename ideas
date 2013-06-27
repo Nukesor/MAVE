@@ -68,5 +68,3 @@ Steuerung:
 	Rechtsklick: Dash
 
 Allgemeines Damagesystem waere der Horror, da man alle Entities mit DamageComponent und LifeComponent ausstatten wuerde und fuer alle Collisions dieses Typs wuerde es ueber ein einziges System laufen. Das waere der Horror in MonsterCodeform. Lieber fuer jede einzelne Collision, die Bedeutung hat eine eigene Collision bauen. Besseres Handling, schoenere Uebersichtlichkeit. 
-
-git commit -m "Engine draw function now calls System:draw(), Systems rewritten. MenuWobblyComponent and System implemented. Nice Wobble"

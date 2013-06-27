@@ -24,12 +24,13 @@ TODO
 
 ### Code
 - Fullscreen support
-- SlowMotionSystem (?) Wie zur hoelle willste das machen? Alle Systems werden im Engine ausgefuehrt, welcher zu der Zeit schon die dt uebergeben hat. Was du machen willst, waere ziemlicher Brainfuck, da man zwischen den update Call vom Engine ein System basteln muesste. Dann wuerden wir Slowmo fest im Engine verankern und das ist glaube ich nicht die Idee vom Engine oder? 
+    - SlowMotionSystem (?) Wie zur hoelle willste das machen? Alle Systems werden im Engine ausgefuehrt, welcher zu der Zeit schon die dt uebergeben hat. Was du machen willst, waere ziemlicher Brainfuck, da man zwischen den update Call vom Engine ein System basteln muesste. Dann wuerden wir Slowmo fest im Engine verankern und das ist glaube ich nicht die Idee vom Engine oder? 
 - Schadenssystem ausfeilen
+- Menufunctions extern in ne Table reinpacken und ein Boxmodel erstellen. 2 Boxmodels. Einmal fuer menu und einemal fuer item. Fertiges Layout fuer den Shop entwerfen.
 - Shop System bauen 
     - Table fuer Waffen erstellen, Funktion schreiben, die sich den Status aus der Tabelle holt.
     - ItemComponent fuer Playercutie erstellen und mit Tabelle verlinken
-
+- Grenade Rotation
 
 ## BUGS
 - Fehler Tritt auf, wenn Playercutie destroyed werden soll.
@@ -43,6 +44,3 @@ TODO
         main.lua:54: in function 'update'
         [string "boot.lua"]:407: in function <[string "boot.lua"]:373>
         [C]: in function 'xpcall'
-
-
-Gui Draw + scaling update problem. kein dt in draw. draw nach update auslagen ?

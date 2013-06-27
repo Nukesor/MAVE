@@ -10,7 +10,7 @@ function EnemySpawnSystem:update(dt)
 
     self.spawntimer = self.spawntimer + dt
 
-    if self.spawntimer > 6 then 
+    if self.spawntimer > 3 then 
         self.fire = true
     end
 
@@ -18,7 +18,7 @@ function EnemySpawnSystem:update(dt)
             local height = math.random(300, 500)
             local cutie
 
-            cutie = CutieModel(0, height, resources.images.cutie2, 100)
+            cutie = CutieModel(0, height, resources.images.cutie2, 15)
             cutie:addComponent(IsEnemy())
             engine:addEntity(cutie)
     end

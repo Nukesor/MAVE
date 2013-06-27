@@ -28,6 +28,10 @@ require("systems/physic/sideChangeSystem")
 require("systems/physic/physicsPositionSyncSystem")
 require("systems/physic/bodyDestroySystem")
 
+--Weapon Systems
+require("systems/weapon/grenadeRotationSystem")
+require("systems/weapon/grenadeSystem")
+
 --CutieManipulation Upgrade Systems
         --Cutie
 require("systems/cutie/wobbleSystem")
@@ -37,7 +41,6 @@ require("systems/cutie/bleedingDetectSystem")
 require("systems/enemy/enemySpawnSystem")
 require("systems/enemy/enemyTrackingSystem")
         --Player
-require("systems/player/grenadeSystem")
 require("systems/player/playerMoveSystem")
 require("systems/player/dashingSystem")
 
@@ -126,6 +129,7 @@ function MainState:load()
     engine:addSystem(BodyDestroySystem(), "logic", 12)
     engine:addSystem(EnemySpawnSystem(), "logic", 13)
     engine:addSystem(GrenadeSystem(), "logic", 14)
+    engine:addSystem(GrenadeRotationSystem(), "logic", 15)
 
     -- Background und Umgebungselemente
     self.bg = Entity()

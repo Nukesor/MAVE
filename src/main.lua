@@ -24,6 +24,7 @@ function love.load()
     resources:addImage("blood1", 'data/gfx/blood1.png')
     resources:addImage("arena", 'data/gfx/arena.png')
     resources:addImage("shot", 'data/gfx/shot.png')
+    resources:addImage("grenade", 'data/gfx/grenade.png')
 
     resources:addSound("bounce1", 'data/sfx/bounce_low_level.ogg')
 

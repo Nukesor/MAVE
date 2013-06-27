@@ -25,6 +25,11 @@ function DrawableDrawSystem:draw()
         end
         love.graphics.draw(drawable.image, pos.x, pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
         love.graphics.setPixelEffect()
+        --debug
+        if entity:getComponent("IsGrenade") then
+            love.graphics.setColor(0,0,0,255)
+            love.graphics.circle("fill", pos.x, pos.y, 5)
+        end
     end
 end
 

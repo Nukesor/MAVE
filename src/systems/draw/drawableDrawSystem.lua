@@ -11,7 +11,7 @@ function DrawableDrawSystem:__init()
     ]])
 end
 
-function DrawableDrawSystem:update()
+function DrawableDrawSystem:draw()
     love.graphics.setColor(255, 255, 255)
     for index, entity in ipairs(self.targets) do
         local drawable = entity:getComponent("DrawableComponent")

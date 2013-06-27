@@ -70,7 +70,7 @@ end
 
 function Engine:draw()
     for index, system in ipairs(self.drawSystems) do
-        system:update()
+        system:draw()
     end
 end
 

@@ -1,80 +1,113 @@
+require("core/physicshelper")
+require("core/resources")
+require("core/state")
+require("core/entity")
+require("core/engine")
+require("core/event")
+
+--Events
+require("core/events/mousePressed")
+require("core/events/keyPressed")
+
+-- BoxComponents
+require("components/userinterface/stringComponent")
+require("components/userinterface/boxComponent")
+require("components/physic/positionComponent")
+require("components/userinterface/functionComponent")
+require("components/userinterface/imageComponent")
+require("components/userinterface/menuWobblyComponent")
+
+-- Systems
+require("systems/userinterface/boxClickSystem")
+require("systems/userinterface/boxDrawSystem")
+require("systems/userinterface/boxHoverSystem")
+require("systems/userinterface/boxNavigationSystem")
+require("systems/userinterface/menuWobblySystem")
+
+
 MenuState = class("MenuState", State)
 
 function MenuState:__init()
-    self.menupoints = {"Credits","Play","Exit"}
-    self.index = 1
-    self.runner = 0
-    self.runner2 = 0
     self.font = resources.fonts.big
 end
 
 function MenuState:load()
-    self.index = 1
+
+    engine = Engine()
+    local boxnavigation = BoxNavigationSystem()
+    local boxclick = BoxClickSystem()
+    engine:addListener("KeyPressed", boxnavigation)
+    engine:addListener("MousePressed", boxclick)
+
+    engine:addSystem(BoxHoverSystem(), "logic", 1)
+    engine:addSystem(MenuWobblySystem(), "logic", 2)
+    engine:addSystem(BoxDrawSystem(), "draw")
+    engine:addSystem(DrawableDrawSystem(), "draw")
+    engine:addSystem(boxclick)
+    engine:addSystem(boxnavigation)
+
+    self.menunumber = 3
+    self.menuboxes = {}
+
+    for i = 1, 3, 1 do
+        y = 500
+        x = love.graphics.getWidth()/4 * (i)
+        local box = Entity()
+        if i == 1 then
+            box:addComponent(BoxComponent(100, 40, {nil, nil}, "menu"))
+            box:addComponent(StringComponent("Credits", resources.fonts.forty))
+            box:addComponent(FunctionComponent( function()
+                                                     stack:push(selectstate)
+                                                end))
+            box:addComponent(MenuWobblyComponent())
+            box:getComponent("BoxComponent").selected = true
+            table.insert(self.menuboxes, box)
+        elseif i == 3 then
+            box:addComponent(BoxComponent(100, 40, {self.menuboxes[i-1], nil}, "menu"))
+            box:addComponent(StringComponent("Exit", resources.fonts.forty))
+            box:addComponent(FunctionComponent( function()
+                                                     love.event.quit()
+                                                end))
+            box:addComponent(MenuWobblyComponent())
+            self.menuboxes[1]:getComponent("BoxComponent").linked[1] = box 
+            box:getComponent("BoxComponent").linked[2] = self.menuboxes[1] 
+            self.menuboxes[i-1]:getComponent("BoxComponent").linked[2] = box
+            table.insert(self.menuboxes, box)
+        else
+
+            box:addComponent(BoxComponent(100, 40, {self.menuboxes[i-1], nil}, "menu"))
+            box:addComponent(StringComponent("Play", resources.fonts.forty))
+            box:addComponent(FunctionComponent( function()
+                                                     stack:push(selectstate)
+                                                end))
+            box:addComponent(MenuWobblyComponent())
+            self.menuboxes[i-1]:getComponent("BoxComponent").linked[2] = box
+            table.insert(self.menuboxes, box)
+        end
+        box:addComponent(PositionComponent(x, y))
+        engine:addEntity(box)
+    end
+
     love.graphics.setFont(self.font)
 end
 
 
 function MenuState:update(dt)
-    self.runner = self.runner + dt/10
-    if self.runner > 0.1 then
-        self.runner = -0.1
-    end
-    love.timer.sleep(0.05)
-    self.wobble = 1 + math.abs(self.runner)
-    self.runner2 = self.runner2 + dt/7
-    if self.runner2 > 0.1 then
-        self.runner2 = -0.1
-    end
-    self.yscale = 1 + math.abs(self.runner2)
-
-    local mousex, mousey = love.mouse.getPosition()
-    if (mousey > 450 ) and (mousey < 500) then
-        if (mousex > 1) and (mousex < 1) then
-            self.index = 1
-        end
-    end
+    engine:update(dt)
 end
 
 
 function MenuState:draw()
     love.graphics.setColor(255, 255, 255)
-    --love.graphics.draw(resources.images.arena)
-    love.graphics.draw(resources.images.cutie2, love.graphics.getWidth()/2, 400, 0, 1, self.yscale, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
-
-    for i = 1, 3, 1 do
-        local scale = 1
-        local text = self.menupoints[i]
-        local x = i*(love.graphics.getWidth()/4)
-        if (i-1) == self.index then
-            scale = self.wobble
-        else
-            scale = self.wobble*0.8
-        end
-        love.graphics.print(text, x, 450, 0, scale-0.25, scale, self.font:getWidth(text)/2, self.font:getHeight(text)/2)
-    end
+    love.graphics.draw(resources.images.cutie2, love.graphics.getWidth()/2, 400, 0, 1, 1, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
+    engine:draw()
 end
 
 
 function MenuState:keypressed(key, u)
-    if key == "right" or key ==  "d" then
-        if self.index < 2 then
-            self.index = self.index + 1
-        elseif self.index == 2 then
-            self.index = 0
-        end
-    elseif key == "left" or key == "a" then
-        if self.index > 0 then
-            self.index = self.index -1
-        elseif self.index == 0 then
-            self.index = 2
-        end
-    elseif key == "return" then
-        if self.index == 0 then
-            stack:push(credits)
-        elseif self.index == 1 then
-            stack:push(selectstate)
-        elseif self.index == 2 then
-            love.event.push("quit")
-        end
-    end
+    engine:fireEvent(KeyPressed(key, u))
+end
+
+function MenuState:mousepressed(x, y, button)
+    engine:fireEvent(MousePressed(x, y, button))
 end

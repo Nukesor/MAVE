@@ -1,6 +1,6 @@
 PolygonDrawSystem = class("PolygonDrawSystem", System)
 
-function PolygonDrawSystem:update(dt)
+function PolygonDrawSystem:draw()
     love.graphics.setColor(50, 50, 50)
     for index, entity in pairs(self.targets) do
         love.graphics.polygon("fill", entity:getComponent("DrawablePolygonComponent").body:getWorldPoints(entity:getComponent("DrawablePolygonComponent").shape:getPoints()))

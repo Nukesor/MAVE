@@ -3,9 +3,6 @@ TODO
 
 ## Version 0.1
 
-### Code
-- Maussupport im Menu
-
 ### GFX
 - Arena fertig
 - Menubuttons
@@ -31,9 +28,7 @@ TODO
 - Schadenssystem ausfeilen
 - Lebensleiste
 - Dynamische Schussposition fuer granaten und shots. 
-
-### Sonstiges
-- Lizenz raussuchen
+- Menu Wobble in Systems bauen. Images den Parameter "wobble" mitgeben, um zu drawen. 
 
 ## BUGS
 - Fehler Tritt auf, wenn Playercutie destroyed werden soll. 	

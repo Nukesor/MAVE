@@ -15,12 +15,14 @@ require("components/userinterface/boxComponent")
 require("components/physic/positionComponent")
 require("components/userinterface/functionComponent")
 require("components/userinterface/imageComponent")
+require("components/userinterface/menuWobblyComponent")
 
 -- Systems
 require("systems/userinterface/boxClickSystem")
 require("systems/userinterface/boxDrawSystem")
 require("systems/userinterface/boxHoverSystem")
 require("systems/userinterface/boxNavigationSystem")
+require("systems/userinterface/menuWobblySystem")
 
 
 ShopState = class("ShopState", State)
@@ -38,6 +40,7 @@ function ShopState:load()
     engine:addListener("MousePressed", boxclick)
 
     engine:addSystem(BoxHoverSystem(), "logic", 1)
+    engine:addSystem(MenuWobblySystem(), "logic", 2)
     engine:addSystem(BoxDrawSystem(), "draw")
     engine:addSystem(boxclick)
     engine:addSystem(boxnavigation)
@@ -103,6 +106,7 @@ function ShopState:load()
             box:addComponent(FunctionComponent( function()
                                                      return stack:pop() 
                                                 end))
+            box:addComponent(MenuWobblyComponent())
             box:getComponent("BoxComponent").selected = true
             table.insert(self.menuboxes, box)
         elseif i == 3 then
@@ -111,7 +115,7 @@ function ShopState:load()
             box:addComponent(FunctionComponent( function()
                                                      return love.event.quit() 
                                                 end))
-
+            box:addComponent(MenuWobblyComponent())
             self.menuboxes[1]:getComponent("BoxComponent").linked[1] = box 
             box:getComponent("BoxComponent").linked[2] = self.menuboxes[1] 
             self.menuboxes[i-1]:getComponent("BoxComponent").linked[2] = box
@@ -123,6 +127,7 @@ function ShopState:load()
             box:addComponent(FunctionComponent( function()
                                                      return stack:pop() 
                                                 end))
+            box:addComponent(MenuWobblyComponent())
             self.menuboxes[i-1]:getComponent("BoxComponent").linked[2] = box
             table.insert(self.menuboxes, box)
         end

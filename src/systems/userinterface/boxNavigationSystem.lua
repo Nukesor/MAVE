@@ -25,6 +25,7 @@ function BoxNavigationSystem:getRequiredComponents()
 	return {"BoxComponent"}
 end
 
+-- Holt sich die momentan selektierte Box
 function BoxNavigationSystem:getSelectedBox()
 	for index, value in pairs(self.targets) do
 		if value:getComponent("BoxComponent").selected == true then 
@@ -33,6 +34,7 @@ function BoxNavigationSystem:getSelectedBox()
 	end
 end
 
+-- Setzt die verlinkte Entity auf selected und die momentan selektierte auf false. Aufbau der Table {links, rechts, oben, unten}
 function BoxNavigationSystem:changeSelected(link) 
 		local box = self:getSelectedBox()
    	    box:getComponent("BoxComponent").selected = false

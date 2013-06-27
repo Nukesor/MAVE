@@ -7,6 +7,8 @@ function MainMousePressedSystem:fireEvent(event)
         end
         local targetX, targetY = event.x, event.y 
         local xBefore, yBefore = playercutie:getComponent("PhysicsComponent").body:getPosition()
+
+        -- Adds a DashingComponent to the PlayerCutie
         playercutie:addComponent(DashingComponent({x=xBefore, y=yBefore}, {x=targetX, y=targetY}))
     end
 end

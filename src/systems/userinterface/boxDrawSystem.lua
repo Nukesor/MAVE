@@ -2,31 +2,24 @@ BoxDrawSystem = class("BoxDrawSystem", System)
 
 function BoxDrawSystem:__init()
 	self.__super.__init(self)
-	self.scale = 1
 	self.direction = true
 end
 
-function BoxDrawSystem:update(dt)
-
-	if self.direction == true then
-		self.scale = self.scale + 0.003
-		if self.scale > 1.2 then
-			self.direction = false
-		end
-	else
-		self.scale = self.scale - 0.003
-		if self.scale < 1 then
-			self.direction = true
-		end
-	end
+function BoxDrawSystem:draw()
 
 	for index, value in pairs(self.targets) do
 		local position = value:getComponent("PositionComponent")
 		local box = value:getComponent("BoxComponent")
 		local boxstring
+		local scale
+		if value:getComponent("MenuWobblyComponent") then
+			scale = value:getComponent("MenuWobblyComponent").scale
+		end
 		if value:getComponent("StringComponent") then
 			boxstring = value:getComponent("StringComponent")
-			end
+		end
+
+		-- Drawfunktion for Boxes
 		if box.typ == "item" then	
 			if value:getComponent("ImageComponent") then
 				love.graphics.draw(value:getComponent("ImageComponent").image, position.x, position.y)
@@ -39,13 +32,19 @@ function BoxDrawSystem:update(dt)
 				love.graphics.setColor(255, 255, 255, 50)
 				love.graphics.rectangle("fill", position.x, position.y, box.width, box.height)
 			end
+
+		-- Drawfunktion for Menuboxes
 		elseif box.typ == "menu" then
 			love.graphics.setColor(255, 255, 255, 255)
 			love.graphics.setFont(boxstring.font)
 			if box.selected == true then
-				love.graphics.print(boxstring.string, position.x - boxstring.font:getWidth(boxstring.string)/2, position.y - boxstring.font:getHeight(boxstring.string)/2, 0, self.scale, self.scale)
+				if scale ~= nil then
+					love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, scale + 0.5, scale + 0.5, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
+				else
+					love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, scale, scale, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
+				end
 			else
-				love.graphics.print(boxstring.string, position.x - boxstring.font:getWidth(boxstring.string)/2, position.y - boxstring.font:getHeight(boxstring.string)/2)
+				love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, scale, scale, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
 			end
 		end
 	end

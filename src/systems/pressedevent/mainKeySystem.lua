@@ -14,10 +14,12 @@ function MainKeySystem:fireEvent(event)
         engine:removeEntity(playercutie)
     end
     if event.key == "x" then
+        -- Erstellt ein neues Shotmodel
         local shot = ShotModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y - 20), love.mouse.getPosition())
         shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
         engine:addEntity(shot)
     elseif event.key == "g" then
+        -- Generates a new Grenademodel
         local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y - 20), love.mouse.getPosition())
         grenade:getComponent("PhysicsComponent").fixture:setUserData(grenade)
         engine:addEntity(grenade)

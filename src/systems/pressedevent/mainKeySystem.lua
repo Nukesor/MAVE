@@ -2,27 +2,12 @@ MainKeySystem = class("MainKeySystem", System)
 
 function MainKeySystem:fireEvent(event)
     -- Playercutie Jump
-    if event.key == "o" then
-        playercutie:getComponent("LifeComponent").life = 0
-    elseif event.key == "p" or event.key == "escape" then
+    if event.key == "p" or event.key == "escape" then
         local canvas = love.graphics.newScreenshot()
         screenshot = love.graphics.newImage(canvas)
         stack:push(pause)
     elseif event.key == "b" then
         main.shaketimer = 0.5
-    elseif event.key == "y" then
-        engine:removeEntity(playercutie)
-    end
-    if event.key == "x" then
-        -- Erstellt ein neues Shotmodel
-        local shot = ShotModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y), love.mouse.getPosition())
-        shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
-        engine:addEntity(shot)
-    elseif event.key == "g" then
-        -- Generates a new Grenademodel
-        local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y), love.mouse.getPosition())
-        grenade:getComponent("PhysicsComponent").fixture:setUserData(grenade)
-        engine:addEntity(grenade)
     end
     if tonumber(event.key) then
         if gameplay.items[tonumber(event.key)] then

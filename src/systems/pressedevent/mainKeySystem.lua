@@ -12,7 +12,6 @@ function MainKeySystem:fireEvent(event)
     if tonumber(event.key) then
         if gameplay.items[tonumber(event.key)] then
             playercutie:getComponent("ItemComponent").item = gameplay.items[tonumber(event.key)]
-            print(tonumber(event.key))
         end
     end
 end

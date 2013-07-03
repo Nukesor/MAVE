@@ -24,4 +24,10 @@ function MainKeySystem:fireEvent(event)
         grenade:getComponent("PhysicsComponent").fixture:setUserData(grenade)
         engine:addEntity(grenade)
     end
+    if tonumber(event.key) then
+        if gameplay.items[tonumber(event.key)] then
+            playercutie:getComponent("ItemComponent").item = gameplay.items[tonumber(event.key)]
+            print(tonumber(event.key))
+        end
+    end
 end

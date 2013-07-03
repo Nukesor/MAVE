@@ -44,12 +44,13 @@ Attribute:
 	- Shooting nach Maus
 	- Explosives:
 		Fässer die bei Schuss explodieren
-		Granaten
 	- Hammer
 
 Juiciness:
 	Wobble bei Aufprall. dynamisch!
 	Wobble bei Upgrade, Freudensound
+	Granaten werden bei Waffenauswahl in der Hand gehalten und sozusagen nach vorne geschleudert. Potentiell nervig von der Implementation, dass die Animation nahtlos zur tatsaechlichen Bodyerstellung einhergeht.
+
 
 Sounds:
 	Treffersound: Zufällige Soundauswahl
@@ -66,5 +67,3 @@ Steuerung:
 	Space: Slowmo starten/stoppen
 	Linksklick: Spezialaktion (Schuss, C4 Platzieren...)
 	Rechtsklick: Dash
-
-Allgemeines Damagesystem waere der Horror, da man alle Entities mit DamageComponent und LifeComponent ausstatten wuerde und fuer alle Collisions dieses Typs wuerde es ueber ein einziges System laufen. Das waere der Horror in MonsterCodeform. Lieber fuer jede einzelne Collision, die Bedeutung hat eine eigene Collision bauen. Besseres Handling, schoenere Uebersichtlichkeit. 

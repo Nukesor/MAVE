@@ -1,9 +1,7 @@
 CutieModel = class("CutieModel", Entity)
 
 function CutieModel:__init(xs, ys, image, life)
-    
-    
-    
+
     local body = love.physics.newBody(world, xs, ys, "dynamic")
     local shape = love.physics.newCircleShape(9)
     local fixture = love.physics.newFixture(body, shape, 1) 
@@ -17,6 +15,7 @@ function CutieModel:__init(xs, ys, image, life)
     self:addComponent(ZIndex(2))
     self:addComponent(CutieComponent(0, 0, 1))
     self:addComponent(WobblyComponent(0.1))
+    self:addComponent(ItemComponent(nil))
     body:setMass(0.0192)
 
 end

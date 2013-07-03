@@ -1,9 +1,7 @@
 GrenadeModel = class("GrenadeModel", Entity)
 
 function GrenadeModel:__init(x, y, xt, yt)
-
     
-
     local akat, gkat
         akat = xt - x
         gkat = yt - y
@@ -22,7 +20,7 @@ function GrenadeModel:__init(x, y, xt, yt)
     self:addComponent(DrawableComponent(resources.images.grenade, 0, 0.07, 0.07, 110, 110))
     self:addComponent(IsGrenade())
     self:addComponent(ExplosionComponent(40, 200))
-    self:addComponent(TimerComponent(10))
+    self:addComponent(TimerComponent(1.5))
     self:addComponent(ZIndex(99))
 
     body:setLinearVelocity((300 * sin), (300 * cos))

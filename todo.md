@@ -30,7 +30,7 @@ TODO
 - Shop System bauen 
     - Table fuer Waffen erstellen, Funktion schreiben, die sich den Status aus der Tabelle holt.
     - ItemComponent fuer Playercutie erstellen und mit Tabelle verlinken
-- Grenade Rotation
+- Dynamische Drawuebergangfunktion fuer verschiedene Imagegroeszen.
 
 ## BUGS
 - Fehler Tritt auf, wenn Playercutie destroyed werden soll.

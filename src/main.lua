@@ -1,6 +1,7 @@
 require("core/class")
 require("core/resources")
 require("core/stackhelper")
+require("core/gameplay")
 
 require("core/state")
 require("states/MainState")
@@ -51,7 +52,8 @@ function love.load()
     selectstate = SelectState()
     stack = StackHelper()
     shop = ShopState()
-    
+    gameplay = Gameplay()
+
     stack:push(menu)
 end
 

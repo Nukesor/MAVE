@@ -72,6 +72,7 @@ require("components/cutie/cutieComponent")
 require("components/cutie/wobblyComponent")
 require("components/cutie/dashingComponent")
 require("components/cutie/enemyComponent")
+require("components/cutie/itemComponent")
 
 --IdentifierComponents
 require("components/identifier/isShot")

@@ -1,6 +1,7 @@
 require("core/class")
 require("core/resources")
 require("core/stackhelper")
+require("core/gameplay")
 
 require("core/state")
 require("states/MainState")
@@ -23,6 +24,7 @@ function love.load()
     resources:addImage("cutie5", 'data/gfx/cutie-5.png')
     resources:addImage("blood1", 'data/gfx/blood1.png')
     resources:addImage("arena", 'data/gfx/arena.png')
+    resources:addImage("level1", 'data/gfx/level1.png')
     resources:addImage("shot", 'data/gfx/shot.png')
     resources:addImage("grenade", 'data/gfx/grenade.png')
 
@@ -51,7 +53,8 @@ function love.load()
     selectstate = SelectState()
     stack = StackHelper()
     shop = ShopState()
-    
+    gameplay = Gameplay()
+
     stack:push(menu)
 end
 

@@ -10,7 +10,7 @@ TODO
 ## Version 0.2
 
 ### GFX
-- Wolkenplattformen (evtl particle system?). Ne man. particleSystems sehen zu unbeständig aus, da bekommst du Augenkrebs. lieber pngs
+- Wolkenplattformen 
 - Lebensleiste
 - Blutpartikel
 - Arena fertig
@@ -18,19 +18,31 @@ TODO
 - Backgrounds für MenuState
 - Neuen Font suchen, der nicht so beschissen ist
 - Explosives Fass
-- Granate
+- Mine
 - Gewehr
 - Schild ? Oder wollen wir das als normales Schild bloss mit love zeichnen?
 
 ### Code
-- Fullscreen support
-    - SlowMotionSystem (?) Wie zur hoelle willste das machen? Alle Systems werden im Engine ausgefuehrt, welcher zu der Zeit schon die dt uebergeben hat. Was du machen willst, waere ziemlicher Brainfuck, da man zwischen den update Call vom Engine ein System basteln muesste. Dann wuerden wir Slowmo fest im Engine verankern und das ist glaube ich nicht die Idee vom Engine oder? 
-- Schadenssystem ausfeilen
-- Menufunctions extern in ne Table reinpacken und ein Boxmodel erstellen. 2 Boxmodels. Einmal fuer menu und einemal fuer item. Fertiges Layout fuer den Shop entwerfen.
+
+Shop/Menus:
 - Shop System bauen 
     - Table fuer Waffen erstellen, Funktion schreiben, die sich den Status aus der Tabelle holt.
     - ItemComponent fuer Playercutie erstellen und mit Tabelle verlinken
-- Grenade Rotation
+- Boxmodel erstellen. 2 Boxmodels. Einmal fuer menu und einemal fuer item. Fertiges Layout fuer den Shop entwerfen.
+
+Ingame:
+
+- Schadenssystem ausfeilen
+- Dynamische Drawuebergangfunktion fuer verschiedene Imagegroeszen.
+- Mine einbauen. Proximity
+- Schuss loest explosives aus.
+
+Engine/ Core:
+- Dynamische Erstellung und updaten
+ der Entitylists im Engine
+- Gamestack problem beheben, bei pop wird current():load() ausgefuehrt. Alle pop ersetzen durch pop pop push auszer es wird anders vorrausgesetzt
+- Fullscreen support
+
 
 ## BUGS
 - Fehler Tritt auf, wenn Playercutie destroyed werden soll.

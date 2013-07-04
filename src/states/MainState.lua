@@ -72,6 +72,7 @@ require("components/cutie/cutieComponent")
 require("components/cutie/wobblyComponent")
 require("components/cutie/dashingComponent")
 require("components/cutie/enemyComponent")
+require("components/cutie/itemComponent")
 
 --IdentifierComponents
 require("components/identifier/isShot")
@@ -133,7 +134,7 @@ function MainState:load()
 
     -- Background und Umgebungselemente
     self.bg = Entity()
-    self.bg:addComponent(DrawableComponent(resources.images.arena, 0, 1, 1, 0, 0))
+    self.bg:addComponent(DrawableComponent(resources.images.level1, 0, 1, 1, 0, 0))
     self.bg:addComponent(PositionComponent(0, 0))
     self.bg:addComponent(ZIndex(1))
     engine:addEntity(self.bg) --]]

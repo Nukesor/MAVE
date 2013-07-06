@@ -30,7 +30,7 @@ require("systems/physic/bodyDestroySystem")
 
 --Weapon Systems
 require("systems/weapon/grenadeRotationSystem")
-require("systems/weapon/grenadeSystem")
+require("systems/weapon/explosionSystem")
 
 --CutieManipulation Upgrade Systems
         --Cutie
@@ -50,7 +50,7 @@ require("systems/pressedevent/playerControlSystem")
 require("systems/pressedevent/mainMousePressedSystem")
 -- Event Systems
 require("systems/event/collisionSelectSystem")
-require("systems/event/explosionSystem")
+require("systems/event/explosionEventSystem")
 
 --GraphicComponents
 require("components/graphic/drawableComponent")
@@ -73,6 +73,7 @@ require("components/cutie/wobblyComponent")
 require("components/cutie/dashingComponent")
 require("components/cutie/enemyComponent")
 require("components/cutie/itemComponent")
+require("components/cutie/goldComponent")
 
 --IdentifierComponents
 require("components/identifier/isShot")
@@ -109,7 +110,7 @@ function MainState:load()
     engine:addListener("KeyPressed", PlayerControlSystem())
     engine:addListener("BeginContact", CollisionSelectSystem())
     engine:addListener("MousePressed", MainMousePressedSystem())
-    engine:addListener("ExplosionEvent", ExplosionSystem())
+    engine:addListener("ExplosionEvent", ExplosionEventSystem())
 
     engine:addSystem(DrawableDrawSystem(), "draw")
     engine:addSystem(PolygonDrawSystem(), "draw")
@@ -129,7 +130,7 @@ function MainState:load()
     engine:addSystem(CutieDeleteSystem(), "logic", 11)
     engine:addSystem(BodyDestroySystem(), "logic", 12)
     engine:addSystem(EnemySpawnSystem(), "logic", 13)
-    engine:addSystem(GrenadeSystem(), "logic", 14)
+    engine:addSystem(ExplosionSystem(), "logic", 14)
     engine:addSystem(GrenadeRotationSystem(), "logic", 15)
 
     -- Background und Umgebungselemente

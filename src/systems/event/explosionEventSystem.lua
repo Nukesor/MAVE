@@ -1,6 +1,6 @@
-ExplosionSystem = class("ExplosionSystem")
+ExplosionEventSystem = class("ExplosionEventSystem")
 
-function ExplosionSystem:fireEvent(event)
+function ExplosionEventSystem:fireEvent(event)
     local entity = event.entity
     local exp = entity:getComponent("PositionComponent")
     for i, v in pairs(engine:getEntitylist("IsEnemy")) do 
@@ -16,7 +16,7 @@ function ExplosionSystem:fireEvent(event)
     end
     explo = Entity()
     local radius = entity:getComponent("ExplosionComponent").radius
-    explo:addComponent(ParticleComponent(resources.images.blood1, 400, 400, (radius*2.5-50), (radius*2.5), 2.0, 2.3, 
+    explo:addComponent(ParticleComponent(resources.images.blood1, 400, 400, (radius*3-50), (radius*3), 2.0, 2.3, 
                                             220, 100, 0, 80, 220, 0, 0, 140, 
                                             exp.x, exp.y, 0.6, 0.5, 0.6, 0, 360, 
                                             0, 360, (radius*-7.5), (radius*-7.5)))

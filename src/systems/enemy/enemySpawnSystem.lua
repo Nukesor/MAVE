@@ -20,6 +20,7 @@ function EnemySpawnSystem:update(dt)
 
             cutie = CutieModel(0, height, resources.images.cutie2, 15)
             cutie:addComponent(IsEnemy())
+            cutie:addComponent(GoldComponent(10))
             engine:addEntity(cutie)
     end
 

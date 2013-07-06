@@ -2,7 +2,7 @@ Gameplay = class("Gameplay")
 
 function Gameplay:__init()
 	self.time = 0
-	self.Highscore = 0
+	self.highscore = 0
 	self.level = 1
 	self.kills = 0
 

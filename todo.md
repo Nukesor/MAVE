@@ -36,11 +36,9 @@ Ingame:
 - Schadenssystem ausfeilen
 - Dynamische Drawuebergangfunktion fuer verschiedene Imagegroeszen.
 - Mine einbauen. Proximity
-- Schuss loest explosives aus.
 
 Engine/ Core:
-- Dynamische Erstellung und updaten
- der Entitylists im Engine
+- Dynamische Erstellung und updaten der Entitylists im Engine
 - Gamestack problem beheben, bei pop wird current():load() ausgefuehrt. Alle pop ersetzen durch pop pop push auszer es wird anders vorrausgesetzt
 - Fullscreen support
 

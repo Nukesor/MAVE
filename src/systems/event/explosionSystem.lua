@@ -3,7 +3,7 @@ ExplosionSystem = class("ExplosionSystem")
 function ExplosionSystem:fireEvent(event)
     local entity = event.entity
     local exp = entity:getComponent("PositionComponent")
-    for i, v in pairs(engine.IsEnemy) do 
+    for i, v in pairs(engine:getEntitylist("IsEnemy")) do 
         local enemypos = v:getComponent("PositionComponent")
         if (math.sqrt((enemypos.x-exp.x)^2 + (enemypos.y-exp.y)^2)) < entity:getComponent("ExplosionComponent").radius then
             v:getComponent("LifeComponent").life = v:getComponent("LifeComponent").life - entity:getComponent("ExplosionComponent").damage

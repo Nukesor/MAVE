@@ -9,9 +9,6 @@ function Engine:__init()
     self.drawSystems = {}
 
     self.eventListeners = {}
-
-    self.IsEnemy = {}
-    self.IsShot = {}
 end
 
 function Engine:addEntity(entity)
@@ -92,7 +89,6 @@ function Engine:refreshEntity(entity)
                 remove = true
             end
         end
-
         if add then
             system:addEntity(entity)
         elseif remove then
@@ -120,5 +116,22 @@ function Engine:fireEvent(event)
         for k,v in pairs(self.eventListeners[event.name]) do
             v:fireEvent(event)
         end
+    end
+end
+
+function Engine:getEntitylist(component)
+    if self[component] then
+        return self[component]
+    else
+        self[component] = {}
+        for index, entity in pairs(self.entities) do
+            for index2, components in pairs(entity.components) do
+                if components.__name == component then
+                    table.insert(self[component], entity)
+                    break
+                end
+            end
+        end
+        return self[component]
     end
 end

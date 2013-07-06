@@ -29,6 +29,7 @@ Shop/Menus:
     - Table fuer Waffen erstellen, Funktion schreiben, die sich den Status aus der Tabelle holt.
     - ItemComponent fuer Playercutie erstellen und mit Tabelle verlinken
 - Boxmodel erstellen. 2 Boxmodels. Einmal fuer menu und einemal fuer item. Fertiges Layout fuer den Shop entwerfen.
+- Images dynamisch auf Menu runterscalen. Funktion dafuer raussuchen. 
 
 Ingame:
 
@@ -44,15 +45,4 @@ Engine/ Core:
 - Fullscreen support
 
 
-## BUGS
-- Fehler Tritt auf, wenn Playercutie destroyed werden soll.
-
-        Error: states/MainState.lua:210: A body has escaped Memoizer!
-                stack traceback:
-        [C]: in function 'destroy'
-        states/MainState.lua:210: in function 'restart'
-        states/GameOverState.lua:39: in function 'update'
-        core/stackhelper.lua:49: in function 'update'
-        main.lua:54: in function 'update'
-        [string "boot.lua"]:407: in function <[string "boot.lua"]:373>
-        [C]: in function 'xpcall'
+## Bugs

@@ -2,6 +2,7 @@ require("collisions/bounceCollision")
 require("collisions/collisionDamage")
 require("collisions/shotCutieCollision")
 require("collisions/shotWallCollision")
+require("collisions/explosionShotCollision")
 
 CollisionSelectSystem = class("CollisionDetectSystem", System)
 
@@ -16,6 +17,8 @@ function CollisionSelectSystem:__init()
     self:addCollisionAction(shotcutie.component1, shotcutie.component2, shotcutie)
     local shotwall = ShotWallCollision()
     self:addCollisionAction(shotwall.component1, shotwall.component2, shotwall)
+    local shotexplosive = ExplosionShotCollision()
+    self:addCollisionAction(shotexplosive.component1, shotexplosive.component2, shotexplosive)
 end
 
 function CollisionSelectSystem:addCollisionAction(component1, component2, object)

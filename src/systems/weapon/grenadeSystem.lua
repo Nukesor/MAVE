@@ -1,5 +1,6 @@
 GrenadeSystem = class("GrenadeSystem", System)
 
+--ExplosionSystem Rename
 function GrenadeSystem:update(dt)
 	for index, value in pairs(self.targets) do
 		value.components.TimerComponent.time = value.components.TimerComponent.time - dt
@@ -10,5 +11,5 @@ function GrenadeSystem:update(dt)
 end
 
 function GrenadeSystem:getRequiredComponents()
-	return {"IsGrenade"}
+	return {"TimerComponent", "ExplosionComponent"}
 end

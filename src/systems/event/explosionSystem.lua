@@ -1,6 +1,3 @@
-
-
-
 ExplosionSystem = class("ExplosionSystem")
 
 function ExplosionSystem:fireEvent(event)
@@ -12,9 +9,10 @@ function ExplosionSystem:fireEvent(event)
             v:getComponent("LifeComponent").life = v:getComponent("LifeComponent").life - entity:getComponent("ExplosionComponent").damage
         end
     end
-    engine:removeEntity(entity)
     if entity.components.PhysicsComponent then
         DestroyBody(entity)
+    else
+    engine:removeEntity(entity)
     end
     explo = Entity()
     local radius = entity:getComponent("ExplosionComponent").radius

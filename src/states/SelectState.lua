@@ -77,7 +77,7 @@ function SelectState:keypressed(key, u)
         elseif self.index == 2 then
             stack:push(shop)
         elseif self.index == 3 then
-            stack:pop()
+            stack:popload()
         end
     end
 end

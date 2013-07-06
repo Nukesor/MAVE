@@ -25,9 +25,15 @@ function StackHelper:pop()
     if self:current() then 
         table.remove(self.states, #self.states)
     end
-    self:current():load()
 end
 
+function StackHelper:popload()
+    if self:current() then
+        table.remove(self.states, #self.states)
+    end
+    self:current():load()
+end
+ 
 
 function StackHelper:draw()
     for i = 0, #self.states-1 , 1 do

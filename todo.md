@@ -30,6 +30,7 @@ Shop/Menus:
     - ItemComponent fuer Playercutie erstellen und mit Tabelle verlinken
 - Boxmodel erstellen. 2 Boxmodels. Einmal fuer menu und einemal fuer item. Fertiges Layout fuer den Shop entwerfen.
 - Images dynamisch auf Menu runterscalen. Funktion dafuer raussuchen. 
+- Umstellen des SelectStates auf EntitySystem
 
 Ingame:
 
@@ -38,7 +39,6 @@ Ingame:
 - Mine einbauen. Proximity
 
 Engine/ Core:
-- Dynamische Erstellung und updaten der Entitylists im Engine
 - Gamestack problem beheben, bei pop wird current():load() ausgefuehrt. Alle pop ersetzen durch pop pop push auszer es wird anders vorrausgesetzt
 - Fullscreen support
 

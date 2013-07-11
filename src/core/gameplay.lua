@@ -40,6 +40,13 @@ function Gameplay:__init()
 
 		end}
 	}
+
+    self.selectMenu = {
+    {function () stack:push(main) end , "Level1"},
+    {function () stack:push(main) end , "Level2"},
+    {function () stack:push(shop) end , "Shop"},
+    {function () stack:popload() end, "Main Menu"}
+    }
 end
 
 

@@ -6,13 +6,9 @@ function BoxClickSystem:fireEvent(event)
 	local button = event.button
 	if button == "l" then
 		for index, value in pairs(self.targets) do
-			-- Falls die Maus ueber irgendeiner Box schwebt, waehrend geklickt wird, wird diese auf selected gesetzt und die verlinkte Funktion gecasted.
+			-- Falls die Maus ueber irgendeiner Box schwebt, waehrend geklickt wird, wird die verlinkte Funktion gecasted.
 			if (x >= value:getComponent("PositionComponent").x) and (x <= (value:getComponent("PositionComponent").x + value:getComponent("BoxComponent").width)) then
 				if (y >= value:getComponent("PositionComponent").y) and (y <= (value:getComponent("PositionComponent").y + value:getComponent("BoxComponent").height)) then
-					if self:getSelectedBox() then
-						self:getSelectedBox():getComponent("BoxComponent").selected = false
-					end
-					value:getComponent("BoxComponent").selected = true
 					value:getComponent("FunctionComponent"):func()
 				end
 			end	

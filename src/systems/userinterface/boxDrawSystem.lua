@@ -6,7 +6,6 @@ function BoxDrawSystem:__init()
 end
 
 function BoxDrawSystem:draw()
-
 	for index, value in pairs(self.targets) do
 		local position = value:getComponent("PositionComponent")
 		local box = value:getComponent("BoxComponent")

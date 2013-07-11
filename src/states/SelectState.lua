@@ -1,4 +1,3 @@
-require("core/physicshelper")
 require("core/resources")
 require("core/state")
 require("core/entity")
@@ -71,7 +70,7 @@ function SelectState:load()
         end
         engine:addEntity(box)
     end
-    self:linkBoxes(self.menuboxes)
+    sortMenu(self.menuboxes)
     love.graphics.setFont(self.font)
 end
 
@@ -95,20 +94,4 @@ end
 
 function SelectState:mousepressed(x, y, button)
     engine:fireEvent(MousePressed(x, y, button))
-end
-
-
-function SelectState:linkBoxes(table) 
-    for index, box in pairs(table) do
-        if index == 1 then
-            box:getComponent("BoxComponent").linked[1] = table[#table]
-            box:getComponent("BoxComponent").linked[2] = table[index+1]
-        elseif index == #table then
-            box:getComponent("BoxComponent").linked[1] = table[index-1]
-            box:getComponent("BoxComponent").linked[2] = table[1]
-        else
-            box:getComponent("BoxComponent").linked[1] = table[index-1]
-            box:getComponent("BoxComponent").linked[2] = table[index+1]
-        end
-    end
 end

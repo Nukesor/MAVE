@@ -2,6 +2,7 @@ require("core/class")
 require("core/resources")
 require("core/stackhelper")
 require("core/gameplay")
+require("core/util")
 
 require("core/state")
 require("states/MainState")

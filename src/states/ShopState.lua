@@ -1,4 +1,3 @@
-require("core/physicshelper")
 require("core/resources")
 require("core/state")
 require("core/entity")

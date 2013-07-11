@@ -47,7 +47,7 @@ function GameOverState:draw()
     love.graphics.draw(screenshot, 0, 0)
 
     love.graphics.setColor(255, 255, 255, 255*self.runner)
-    love.graphics.setFont(resources.fonts.big)
+    love.graphics.setFont(resources.fonts.sixty)
     love.graphics.print("GAME OVER", 370, 200)
     for i, v in pairs(self.menulist) do
         local scroll = i * 200 + 50

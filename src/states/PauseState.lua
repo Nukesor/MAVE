@@ -1,73 +1,53 @@
 PauseState = class("PauseState", State)
 
 function PauseState:__init()
-    self.menulist = {"Main Menu", "Resume", "Exit"}
+    self.font = resources.fonts.thirty
 end
 
 function PauseState:load()
-    self.flag = true
-    self.index = 2
-    self.shades = 250
-    self.runner = -0.5
+    engine = Engine()
+    local boxnavigation = BoxNavigationSystem()
+    local boxclick = BoxClickSystem()
+    engine:addListener("KeyPressed", boxnavigation)
+    engine:addListener("MousePressed", boxclick)
+
+    engine:addSystem(BoxHoverSystem(), "logic", 1)
+    engine:addSystem(MenuWobblySystem(), "logic", 2)
+    engine:addSystem(BoxDrawSystem(), "draw")
+    engine:addSystem(DrawableDrawSystem(), "draw")
+    engine:addSystem(boxclick)
+    engine:addSystem(boxnavigation)
+
+    self.menunumber = 3
+    self.menuboxes = {}
+
+    for i = 1, self.menunumber, 1 do
+        y = (i-1) * 120 + 100
+        x = 120
+        local box
+        if i == 1 then
+            box = BoxModel(100, 40, x, y, "menu", gameplay.pauseMenu[i][2], self.font, gameplay.pauseMenu[i][1], true)
+        else
+            box = BoxModel(100, 40, x, y, "menu", gameplay.pauseMenu[i][2], self.font, gameplay.pauseMenu[i][1], false)
+        end
+        engine:addEntity(box)
+    end
+    sortMenu(self.menuboxes)
+    love.graphics.setFont(self.font)
 end
 
 function PauseState:update(dt)
-    if self.flag == true and self.shades > 100 then
-        self.shades = self.shades - dt * 280
-    elseif self.flag == false then
-        self.shades = self.shades + dt * 380
-        if self.shades > 255 then
-            self.shades = 255
-        end
-    end
-    if self.flag == true and self.runner < 1 then
-        self.runner = self.runner + dt*3
-        if self.runner > 1 then
-            self.runner = 1
-        end
-    elseif self.flag == false then
-        self.runner = self.runner - dt*5
-    end
-    if self.shades > 250 and self.runner < -0.4 then 
-        stack:pop()
-    end
+    engine:update(dt)
 end
 
 function PauseState:draw()
-    love.graphics.setColor(255, 255, 255, self.shades)
-    love.graphics.draw(screenshot, 0, 0)
-
-    love.graphics.setColor(255, 255, 255, 255)
-    for i, v in pairs(self.menulist) do
-        local scroll = i * 80 +20
-        if i == self.index then
-            love.graphics.setFont(resources.fonts.forty)
-            love.graphics.print(v, 120, scroll*self.runner)
-        else
-            love.graphics.setFont(resources.fonts.thirty)
-            love.graphics.print(v, 120, scroll*self.runner)
-        end
-    end
-    love.graphics.setFont(resources.fonts.thirty)
+    engine:draw()
 end
 
 function PauseState:keypressed(key, unicode)
-    if key == "up" or key == "w" then
-        self.index = self.index -1
-        if self.index < 1 then self.index = 3 end
-    end
-    if key == "down" or key == "s" then
-        self.index = self.index + 1
-        if self.index > 3 then self.index = 1 end
-    end
-    if key == "return" then
-        if self.index == 1 then
-            stack:pop()
-            stack:popload()
-        elseif self.index == 2 then
-            self.flag = false
-        elseif self.index == 3 then
-            love.event.quit()
-        end
-    end
+    engine:fireEvent(KeyPressed(key,unicode))
+end
+
+function PauseState:mousepressed(x, y, button)
+    engine:fireEvent(MousePressed(x, y, button))
 end

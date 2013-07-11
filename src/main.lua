@@ -35,11 +35,8 @@ function love.load()
     resources:addFont("twentyfive", "data/font/SwankyandMooMoo.ttf", 25)
     resources:addFont("thirty", "data/font/SwankyandMooMoo.ttf", 30)
     resources:addFont("forty", "data/font/SwankyandMooMoo.ttf", 40)
-    resources:addFont("fifty", "data/font/SwankyandMooMoo.ttf", 60)
+    resources:addFont("sixty", "data/font/SwankyandMooMoo.ttf", 60)
     
-    resources:addFont("default", "data/font/SwankyandMooMoo.ttf", 20)
-    resources:addFont("big", "data/font/SwankyandMooMoo.ttf", 60)
-
     resources:load()
     
     love.graphics.setMode(1000, 600, false, true, 0) -- Fensteroberfläche

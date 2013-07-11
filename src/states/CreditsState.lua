@@ -11,7 +11,7 @@ function CreditsState:__init()
 end
 
 function CreditsState:load()
-    love.graphics.setFont(resources.fonts.default)
+    love.graphics.setFont(resources.fonts.twenty)
 end
 
 function CreditsState:draw()
@@ -21,10 +21,10 @@ function CreditsState:draw()
     love.graphics.setColor(0, 0, 0)
     local y = 30
     for i = 1, #self.names, 1 do
-        y = y + resources.fonts.default:getHeight()
+        y = y + resources.fonts.twenty:getHeight()
         love.graphics.print(self.names[i][1], 50, y)
         for a = 2, #self.names[i], 1 do
-            y = y + resources.fonts.default:getHeight()
+            y = y + resources.fonts.twenty:getHeight()
             love.graphics.print(self.names[i][a], 60, y)
         end
     end

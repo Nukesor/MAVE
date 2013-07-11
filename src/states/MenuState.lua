@@ -53,9 +53,9 @@ function MenuState:load()
         x = love.graphics.getWidth()/4 * (i) - 50
         local box
         if i == 2 then
-            box = BoxModel(100, 40, x, y, "menu", gameplay.mainMenu[i][2], resources.fonts.forty, gameplay.mainMenu[i][1], true)
+            box = BoxModel(100, 40, x, y, "menu", gameplay.mainMenu[i][2], self.font, gameplay.mainMenu[i][1], true)
         else
-            box = BoxModel(100, 40, x, y, "menu", gameplay.mainMenu[i][2], resources.fonts.forty, gameplay.mainMenu[i][1], false)
+            box = BoxModel(100, 40, x, y, "menu", gameplay.mainMenu[i][2], self.font, gameplay.mainMenu[i][1], false)
         end
         engine:addEntity(box)
     end

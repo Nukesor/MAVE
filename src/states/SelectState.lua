@@ -29,7 +29,7 @@ require("models/boxModel")
 SelectState = class("SelectState", State)
 
 function SelectState:__init()
-    self.font = resources.fonts.big
+    self.font = resources.fonts.forty
 end
 
 function SelectState:load()
@@ -59,9 +59,9 @@ function SelectState:load()
         x = love.graphics.getWidth()/5 * (i) - 50
         local box
         if i == 2 then
-            box = BoxModel(100, 40, x, y, "menu", gameplay.selectMenu[i][2], resources.fonts.forty, gameplay.selectMenu[i][1], true)
+            box = BoxModel(100, 40, x, y, "menu", gameplay.selectMenu[i][2], self.font, gameplay.selectMenu[i][1], true)
         else
-            box = BoxModel(100, 40, x, y, "menu", gameplay.selectMenu[i][2], resources.fonts.forty, gameplay.selectMenu[i][1], false)
+            box = BoxModel(100, 40, x, y, "menu", gameplay.selectMenu[i][2], self.font, gameplay.selectMenu[i][1], false)
         end
         engine:addEntity(box)
     end
@@ -79,7 +79,7 @@ function SelectState:draw()
     engine:draw()
     love.graphics.setColor(255, 255, 255)
     love.graphics.draw(resources.images.cutie3, love.graphics.getWidth()/2, 400, 0, 1, self.yscale, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
-    love.graphics.print("Select a level or start SHOPPING", love.graphics.getWidth()/2 - resources.fonts.big:getWidth("Select a Level or start SHOPPING")/2, 50, 0, 1, 1, 0, 0)
+    love.graphics.print("Select a level or start SHOPPING", love.graphics.getWidth()/2 - resources.fonts.sixty:getWidth("Select a Level or start SHOPPING")/2, 50, 0, 1, 1, 0, 0)
 end
 
 

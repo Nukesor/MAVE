@@ -60,6 +60,13 @@ function Gameplay:__init()
     {function () stack:pop() 
                  stack:push(main) end, "Play"}
     }
+
+    self.pauseMenu = {
+    {function () stack:pop()
+                stack:popload() end, "Main Menu"},
+    {function () stack:pop() end, "Return"},
+    {function () love.event.quit() end, "Exit"}
+    }
 end
 
 

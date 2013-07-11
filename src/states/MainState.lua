@@ -99,7 +99,7 @@ function MainState:__init()
 end
 
 function MainState:load()
-    love.graphics.setFont(resources.fonts.default)
+    love.graphics.setFont(resources.fonts.twenty)
     love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
     world:setCallbacks(beginContact, endContact)

@@ -45,9 +45,7 @@ function ShopState:load()
     engine:addSystem(boxnavigation)
 
     self.boxnumber = 10
-    self.menunumber = 3
     self.boxes = {}
-    self.menuboxes = {}
     self.width = 5
 
     -- Dynamische Erstellung der Item boxes
@@ -94,43 +92,23 @@ function ShopState:load()
         box:addComponent(PositionComponent(x, y))
         engine:addEntity(box)
     end
-    -- Erstellung der MenuBoxes
-    for i = 1, 3, 1 do
-        y = 500
-        x = love.graphics.getWidth()/4 * (i)
-        local box = Entity()
-        if i == 1 then
-            box:addComponent(BoxComponent(100, 40, {nil, nil}, "menu"))
-            box:addComponent(StringComponent("Back", resources.fonts.forty))
-            box:addComponent(FunctionComponent( function()
-                                                     return stack:popload() 
-                                                end))
-            box:addComponent(MenuWobblyComponent())
-            box:getComponent("BoxComponent").selected = true
-            table.insert(self.menuboxes, box)
-        elseif i == 3 then
-            box:addComponent(BoxComponent(100, 40, {self.menuboxes[i-1], nil}, "menu"))
-            box:addComponent(StringComponent("Exit", resources.fonts.forty))
-            box:addComponent(FunctionComponent( function()
-                                                     return love.event.quit() 
-                                                end))
-            box:addComponent(MenuWobblyComponent())
-            self.menuboxes[1]:getComponent("BoxComponent").linked[1] = box 
-            box:getComponent("BoxComponent").linked[2] = self.menuboxes[1] 
-            self.menuboxes[i-1]:getComponent("BoxComponent").linked[2] = box
-            table.insert(self.menuboxes, box)
-        else
 
-            box:addComponent(BoxComponent(100, 40, {self.menuboxes[i-1], nil}, "menu"))
-            box:addComponent(StringComponent("Back", resources.fonts.forty))
-            box:addComponent(FunctionComponent( function()
-                                                     return stack:popload() 
-                                                end))
-            box:addComponent(MenuWobblyComponent())
-            self.menuboxes[i-1]:getComponent("BoxComponent").linked[2] = box
-            table.insert(self.menuboxes, box)
-        end
-        box:addComponent(PositionComponent(x, y))
+
+    -- Erstellung der MenuBoxes
+    self.menunumber = 3
+    self.menuboxes = {}
+
+    for i = 1, self.menunumber, 1 do
+        y = 500
+        x = love.graphics.getWidth()/4 * (i) - 50
+        local box
+        if i == 2 then
+            box = BoxModel(100, 40, x, y, "menu", gameplay.shopMenu[i][2], resources.fonts.forty, gameplay.shopMenu[i][1], true)
+        else
+            box = BoxModel(100, 40, x, y, "menu", gameplay.shopMenu[i][2], resources.fonts.forty, gameplay.shopMenu[i][1], false)
+        end        
+        sortMenu(self.menuboxes)
+
         engine:addEntity(box)
     end
 

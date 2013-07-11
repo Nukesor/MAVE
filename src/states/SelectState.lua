@@ -29,15 +29,10 @@ require("models/boxModel")
 SelectState = class("SelectState", State)
 
 function SelectState:__init()
-    self.menupoints = {"Level 1","Level 2", "Shop","Main Menu"}
-    self.index = 1
-    self.runner = 0
-    self.runner2 = 0
     self.font = resources.fonts.big
 end
 
 function SelectState:load()
-    self.index = 1
     love.graphics.setFont(self.font)
 end
 

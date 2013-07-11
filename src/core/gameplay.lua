@@ -47,6 +47,19 @@ function Gameplay:__init()
     {function () stack:push(shop) end , "Shop"},
     {function () stack:popload() end, "Main Menu"}
     }
+
+    self.mainMenu = {
+    {function () stack:push(credits) end, "Credits"},
+    {function () stack:push(selectstate) end, "Play"},
+    {function () love.event.quit() end, "Exit"}
+    }
+
+    self.shopMenu = {
+    {function () stack:popload() end, "Back"},
+    {function () stack:popload() end, "Back"},
+    {function () stack:pop() 
+                 stack:push(main) end, "Play"}
+    }
 end
 
 

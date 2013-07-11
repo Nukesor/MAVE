@@ -36,7 +36,9 @@ end
 
 -- Setzt die verlinkte Entity auf selected und die momentan selektierte auf false. Aufbau der Table {links, rechts, oben, unten}
 function BoxNavigationSystem:changeSelected(link) 
-		local box = self:getSelectedBox()
+	local box = self:getSelectedBox()
+    if box:getComponent("BoxComponent").linked[link] then
    	    box:getComponent("BoxComponent").selected = false
         box:getComponent("BoxComponent").linked[link]:getComponent("BoxComponent").selected = true
+    end
 end

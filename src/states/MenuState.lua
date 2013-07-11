@@ -27,7 +27,7 @@ require("systems/userinterface/menuWobblySystem")
 MenuState = class("MenuState", State)
 
 function MenuState:__init()
-    self.font = resources.fonts.big
+    self.font = resources.fonts.forty
 end
 
 function MenuState:load()
@@ -48,44 +48,18 @@ function MenuState:load()
     self.menunumber = 3
     self.menuboxes = {}
 
-    for i = 1, 3, 1 do
+    for i = 1, self.menunumber, 1 do
         y = 500
-        x = love.graphics.getWidth()/4 * (i)
-        local box = Entity()
-        if i == 1 then
-            box:addComponent(BoxComponent(100, 40, {nil, nil}, "menu"))
-            box:addComponent(StringComponent("Credits", resources.fonts.forty))
-            box:addComponent(FunctionComponent( function()
-                                                     stack:push(credits)
-                                                end))
-            box:addComponent(MenuWobblyComponent())
-            table.insert(self.menuboxes, box)
-        elseif i == 3 then
-            box:addComponent(BoxComponent(100, 40, {self.menuboxes[i-1], nil}, "menu"))
-            box:addComponent(StringComponent("Exit", resources.fonts.forty))
-            box:addComponent(FunctionComponent( function()
-                                                     love.event.quit()
-                                                end))
-            box:addComponent(MenuWobblyComponent())
-            self.menuboxes[1]:getComponent("BoxComponent").linked[1] = box 
-            box:getComponent("BoxComponent").linked[2] = self.menuboxes[1] 
-            self.menuboxes[i-1]:getComponent("BoxComponent").linked[2] = box
-            table.insert(self.menuboxes, box)
+        x = love.graphics.getWidth()/4 * (i) - 50
+        local box
+        if i == 2 then
+            box = BoxModel(100, 40, x, y, "menu", gameplay.mainMenu[i][2], resources.fonts.forty, gameplay.mainMenu[i][1], true)
         else
-
-            box:addComponent(BoxComponent(100, 40, {self.menuboxes[i-1], nil}, "menu"))
-            box:addComponent(StringComponent("Play", resources.fonts.forty))
-            box:addComponent(FunctionComponent( function()
-                                                     stack:push(selectstate)
-                                                end))
-            box:addComponent(MenuWobblyComponent())
-            self.menuboxes[i-1]:getComponent("BoxComponent").linked[2] = box
-            box:getComponent("BoxComponent").selected = true
-            table.insert(self.menuboxes, box)
+            box = BoxModel(100, 40, x, y, "menu", gameplay.mainMenu[i][2], resources.fonts.forty, gameplay.mainMenu[i][1], false)
         end
-        box:addComponent(PositionComponent(x, y))
         engine:addEntity(box)
     end
+    sortMenu(self.menuboxes)
 
     love.graphics.setFont(self.font)
 end

@@ -40,6 +40,6 @@ Ingame:
 
 Engine/ Core:
 - Fullscreen support
-
+- Addlistener Aufruf in der init des jeweiligen Systems
 
 ## Bugs

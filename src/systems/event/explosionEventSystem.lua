@@ -3,7 +3,7 @@ ExplosionEventSystem = class("ExplosionEventSystem")
 function ExplosionEventSystem:fireEvent(event)
     local entity = event.entity
     local exp = entity:getComponent("PositionComponent")
-    for i, v in pairs(engine:getEntitylist("IsEnemy")) do 
+    for i, v in pairs(stack:current().engine:getEntitylist("IsEnemy")) do 
         local enemypos = v:getComponent("PositionComponent")
         if (math.sqrt((enemypos.x-exp.x)^2 + (enemypos.y-exp.y)^2)) < entity:getComponent("ExplosionComponent").radius then
             v:getComponent("LifeComponent").life = v:getComponent("LifeComponent").life - entity:getComponent("ExplosionComponent").damage
@@ -12,7 +12,7 @@ function ExplosionEventSystem:fireEvent(event)
     if entity.components.PhysicsComponent then
         DestroyBody(entity)
     else
-    engine:removeEntity(entity)
+    stack:current().engine:removeEntity(entity)
     end
     explo = Entity()
     local radius = entity:getComponent("ExplosionComponent").radius
@@ -24,6 +24,6 @@ function ExplosionEventSystem:fireEvent(event)
                                                     255, 255, 0, 255,
                                                     200, 0, 0, 255,
                                                     255, 100, 0, 155)
-    engine:addEntity(explo)
+    stack:current().engine:addEntity(explo)
     explo.components.ParticleComponent.hit:start()
 end

@@ -32,18 +32,18 @@ end
 
 function MenuState:load()
 
-    engine = Engine()
+    self.engine = Engine()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
-    engine:addListener("KeyPressed", boxnavigation)
-    engine:addListener("MousePressed", boxclick)
+    self.engine:addListener("KeyPressed", boxnavigation)
+    self.engine:addListener("MousePressed", boxclick)
 
-    engine:addSystem(BoxHoverSystem(), "logic", 1)
-    engine:addSystem(MenuWobblySystem(), "logic", 2)
-    engine:addSystem(BoxDrawSystem(), "draw")
-    engine:addSystem(DrawableDrawSystem(), "draw")
-    engine:addSystem(boxclick)
-    engine:addSystem(boxnavigation)
+    self.engine:addSystem(BoxHoverSystem(), "logic", 1)
+    self.engine:addSystem(MenuWobblySystem(), "logic", 2)
+    self.engine:addSystem(BoxDrawSystem(), "draw")
+    self.engine:addSystem(DrawableDrawSystem(), "draw")
+    self.engine:addSystem(boxclick)
+    self.engine:addSystem(boxnavigation)
 
     self.menunumber = 3
     self.menuboxes = {}
@@ -57,7 +57,7 @@ function MenuState:load()
         else
             box = BoxModel(100, 40, x, y, "menu", gameplay.mainMenu[i][2], self.font, gameplay.mainMenu[i][1], false)
         end
-        engine:addEntity(box)
+        self.engine:addEntity(box)
     end
     sortMenu(self.menuboxes)
 
@@ -66,21 +66,21 @@ end
 
 
 function MenuState:update(dt)
-    engine:update(dt)
+    self.engine:update(dt)
 end
 
 
 function MenuState:draw()
     love.graphics.setColor(255, 255, 255)
     love.graphics.draw(resources.images.cutie2, love.graphics.getWidth()/2, 400, 0, 1, 1, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
-    engine:draw()
+    self.engine:draw()
 end
 
 
 function MenuState:keypressed(key, u)
-    engine:fireEvent(KeyPressed(key, u))
+    self.engine:fireEvent(KeyPressed(key, u))
 end
 
 function MenuState:mousepressed(x, y, button)
-    engine:fireEvent(MousePressed(x, y, button))
+    self.engine:fireEvent(MousePressed(x, y, button))
 end

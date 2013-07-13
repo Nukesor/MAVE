@@ -6,7 +6,7 @@ function ParticleDeleteSystem:update(dt)
         if entity:getComponent("TimeComponent") then
             entity.components.TimeComponent.timer = entity.components.TimeComponent.timer - dt
             if entity.components.TimeComponent.timer < 0 then
-                engine:removeEntity(entity)
+                stack:current().engine:removeEntity(entity)
             end
         end
     end

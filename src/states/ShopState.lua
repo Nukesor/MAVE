@@ -32,17 +32,17 @@ end
 
 function ShopState:load()
 
-    engine = Engine()
+    self.engine = Engine()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
-    engine:addListener("KeyPressed", boxnavigation)
-    engine:addListener("MousePressed", boxclick)
+    self.engine:addListener("KeyPressed", boxnavigation)
+    self.engine:addListener("MousePressed", boxclick)
 
-    engine:addSystem(BoxHoverSystem(), "logic", 1)
-    engine:addSystem(MenuWobblySystem(), "logic", 2)
-    engine:addSystem(BoxDrawSystem(), "draw")
-    engine:addSystem(boxclick)
-    engine:addSystem(boxnavigation)
+    self.engine:addSystem(BoxHoverSystem(), "logic", 1)
+    self.engine:addSystem(MenuWobblySystem(), "logic", 2)
+    self.engine:addSystem(BoxDrawSystem(), "draw")
+    self.engine:addSystem(boxclick)
+    self.engine:addSystem(boxnavigation)
 
     self.boxnumber = 10
     self.boxes = {}
@@ -90,7 +90,7 @@ function ShopState:load()
             table.insert(self.boxes, box)
         end
         box:addComponent(PositionComponent(x, y))
-        engine:addEntity(box)
+        self.engine:addEntity(box)
     end
 
 
@@ -109,7 +109,7 @@ function ShopState:load()
         end        
         sortMenu(self.menuboxes)
 
-        engine:addEntity(box)
+        self.engine:addEntity(box)
     end
 
     -- Verlinkung der MenuBoxes mit normalen Boxes
@@ -140,19 +140,19 @@ end
 
 
 function ShopState:update(dt)
-    engine:update(dt)
+    self.engine:update(dt)
 end
 
 
 function ShopState:draw()
-    engine:draw()
+    self.engine:draw()
 end
 
 
 function ShopState:keypressed(key, u)
-    engine:fireEvent(KeyPressed(key, u))
+    self.engine:fireEvent(KeyPressed(key, u))
 end
 
 function ShopState:mousepressed(x, y, button)
-    engine:fireEvent(MousePressed(x, y, button))
+    self.engine:fireEvent(MousePressed(x, y, button))
 end

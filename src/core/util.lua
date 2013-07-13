@@ -1,7 +1,7 @@
 function DestroyBody(entity)
     local physics = entity:getComponent("PhysicsComponent")
     physics.body:destroy()
-    engine:removeEntity(entity)
+    stack:current().engine:removeEntity(entity)
 end
 
 function distanceBetween(pos1, pos2)

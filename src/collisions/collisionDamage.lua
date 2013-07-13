@@ -38,7 +38,7 @@ function CollisionDamage:action(entities)
                                             e1:getComponent("PositionComponent").x, e1:getComponent("PositionComponent").y, 0.3, 0.4, 0.5, 0, 360, 
                                             0, 360, 50, 100))
     blood:addComponent(TimeComponent(0.3, 0.5))
-    engine:addEntity(blood)
+    stack:current().engine:addEntity(blood)
     blood.components.ParticleComponent.hit:start()
 end
 

@@ -5,18 +5,18 @@ function PauseState:__init()
 end
 
 function PauseState:load()
-    engine = Engine()
+    self.engine = Engine()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
-    engine:addListener("KeyPressed", boxnavigation)
-    engine:addListener("MousePressed", boxclick)
+    self.engine:addListener("KeyPressed", boxnavigation)
+    self.engine:addListener("MousePressed", boxclick)
 
-    engine:addSystem(BoxHoverSystem(), "logic", 1)
-    engine:addSystem(MenuWobblySystem(), "logic", 2)
-    engine:addSystem(BoxDrawSystem(), "draw")
-    engine:addSystem(DrawableDrawSystem(), "draw")
-    engine:addSystem(boxclick)
-    engine:addSystem(boxnavigation)
+    self.engine:addSystem(BoxHoverSystem(), "logic", 1)
+    self.engine:addSystem(MenuWobblySystem(), "logic", 2)
+    self.engine:addSystem(BoxDrawSystem(), "draw")
+    self.engine:addSystem(DrawableDrawSystem(), "draw")
+    self.engine:addSystem(boxclick)
+    self.engine:addSystem(boxnavigation)
 
     self.menunumber = 3
     self.menuboxes = {}
@@ -30,24 +30,24 @@ function PauseState:load()
         else
             box = BoxModel(100, 40, x, y, "menu", gameplay.pauseMenu[i][2], self.font, gameplay.pauseMenu[i][1], false)
         end
-        engine:addEntity(box)
+        self.engine:addEntity(box)
     end
     sortMenu(self.menuboxes)
     love.graphics.setFont(self.font)
 end
 
 function PauseState:update(dt)
-    engine:update(dt)
+    self.engine:update(dt)
 end
 
 function PauseState:draw()
-    engine:draw()
+    self.engine:draw()
 end
 
 function PauseState:keypressed(key, unicode)
-    engine:fireEvent(KeyPressed(key,unicode))
+    self.engine:fireEvent(KeyPressed(key,unicode))
 end
 
 function PauseState:mousepressed(x, y, button)
-    engine:fireEvent(MousePressed(x, y, button))
+    self.engine:fireEvent(MousePressed(x, y, button))
 end

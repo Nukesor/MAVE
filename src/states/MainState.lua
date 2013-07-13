@@ -104,67 +104,67 @@ function MainState:load()
     world = love.physics.newWorld(0, 9.81*64, true)
     world:setCallbacks(beginContact, endContact)
 
-    engine = Engine()
-    engine:addListener("KeyPressed", MainKeySystem())
-    engine:addListener("KeyPressed", PlayerControlSystem())
-    engine:addListener("BeginContact", CollisionSelectSystem())
-    engine:addListener("MousePressed", MainMousePressedSystem())
-    engine:addListener("ExplosionEvent", ExplosionEventSystem())
+    self.engine = Engine()
+    self.engine:addListener("KeyPressed", MainKeySystem())
+    self.engine:addListener("KeyPressed", PlayerControlSystem())
+    self.engine:addListener("BeginContact", CollisionSelectSystem())
+    self.engine:addListener("MousePressed", MainMousePressedSystem())
+    self.engine:addListener("ExplosionEvent", ExplosionEventSystem())
 
-    engine:addSystem(DrawableDrawSystem(), "draw")
-    engine:addSystem(PolygonDrawSystem(), "draw")
-    engine:addSystem(ParticleDrawSystem(), "draw")
-    engine:addSystem(LifebarSystem(), "draw")
+    self.engine:addSystem(DrawableDrawSystem(), "draw")
+    self.engine:addSystem(PolygonDrawSystem(), "draw")
+    self.engine:addSystem(ParticleDrawSystem(), "draw")
+    self.engine:addSystem(LifebarSystem(), "draw")
     
-    engine:addSystem(MaxSpeedSystem(), "logic", 1)
-    engine:addSystem(SideChangeSystem(), "logic", 2)
-    engine:addSystem(PhysicsPositionSyncSystem(), "logic", 3)
-    engine:addSystem(ParticleDeleteSystem(), "logic", 4)
-    engine:addSystem(PlayerMoveSystem(), "logic", 5)
-    engine:addSystem(EnemyTrackingSystem(), "logic", 6)
-    engine:addSystem(SpeedLimitSystem(), "logic", 7)
-    engine:addSystem(BleedingDetectSystem(), "logic", 8)
-    self.wobbleSystem = engine:addSystem(WobbleSystem(), "logic", 9)
-    self.dashingSystem = engine:addSystem(DashingSystem(), "logic", 10)
-    engine:addSystem(CutieDeleteSystem(), "logic", 11)
-    engine:addSystem(BodyDestroySystem(), "logic", 12)
-    engine:addSystem(EnemySpawnSystem(), "logic", 13)
-    engine:addSystem(ExplosionSystem(), "logic", 14)
-    engine:addSystem(GrenadeRotationSystem(), "logic", 15)
+    self.engine:addSystem(MaxSpeedSystem(), "logic", 1)
+    self.engine:addSystem(SideChangeSystem(), "logic", 2)
+    self.engine:addSystem(PhysicsPositionSyncSystem(), "logic", 3)
+    self.engine:addSystem(ParticleDeleteSystem(), "logic", 4)
+    self.engine:addSystem(PlayerMoveSystem(), "logic", 5)
+    self.engine:addSystem(EnemyTrackingSystem(), "logic", 6)
+    self.engine:addSystem(SpeedLimitSystem(), "logic", 7)
+    self.engine:addSystem(BleedingDetectSystem(), "logic", 8)
+    self.wobbleSystem = self.engine:addSystem(WobbleSystem(), "logic", 9)
+    self.dashingSystem = self.engine:addSystem(DashingSystem(), "logic", 10)
+    self.engine:addSystem(CutieDeleteSystem(), "logic", 11)
+    self.engine:addSystem(BodyDestroySystem(), "logic", 12)
+    self.engine:addSystem(EnemySpawnSystem(), "logic", 13)
+    self.engine:addSystem(ExplosionSystem(), "logic", 14)
+    self.engine:addSystem(GrenadeRotationSystem(), "logic", 15)
 
     -- Background und Umgebungselemente
     self.bg = Entity()
     self.bg:addComponent(DrawableComponent(resources.images.level1, 0, 1, 1, 0, 0))
     self.bg:addComponent(PositionComponent(0, 0))
     self.bg:addComponent(ZIndex(1))
-    engine:addEntity(self.bg) --]]
+    self.engine:addEntity(self.bg) --]]
 
     -- Player erstellung
     playercutie = CutieModel(333, 520, resources.images.cutie1, 100)
     playercutie:addComponent(IsPlayer())
-    engine:addEntity(playercutie)
+    self.engine:addEntity(playercutie)
 
     self.wall =  Entity()
     self.wall:addComponent(DrawablePolygonComponent(world, 500, 580, 1050, 10, "static", self.wall))
-    engine:addEntity(self.wall)
+    self.engine:addEntity(self.wall)
 
     self.wall =  Entity()
     self.wall:addComponent(DrawablePolygonComponent(world, 500, -50, 1050, 0, "static", self.wall))
-    engine:addEntity(self.wall)
+    self.engine:addEntity(self.wall)
 
     for i = 0, 4, 1 do 
         local y = 100 + 100 * i
         local xbreite = 200 + 100 * i 
         self.wall = Entity()
         self.wall:addComponent(DrawablePolygonComponent(world, 500, y, xbreite, 10, "static", self.wall))
-        engine:addEntity(self.wall)
+        self.engine:addEntity(self.wall)
     end
 
     for i = 0, 1, 1 do
         local x = 20 + i * 960
         self.wall = Entity()
         self.wall:addComponent(DrawablePolygonComponent(world, x, 200, 10, 200, "static", self.wall))
-        engine:addEntity(self.wall)
+        self.engine:addEntity(self.wall)
     end
 
     -- Slowmospeed
@@ -206,7 +206,7 @@ function MainState:update(dt)
     end
 
     -- Update Functions
-    engine:update(dt)
+    self.engine:update(dt)
     world:update(dt)
 end
 
@@ -218,7 +218,7 @@ function MainState:draw()
     -- Zeichnen der Grafiken
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
 
-    engine:draw()
+    self.engine:draw()
 
     -- Zeichnen der Schriftzüge
     love.graphics.setColor(255, 255, 255, 255)
@@ -228,22 +228,22 @@ end
 
 function MainState:restart()
     world:destroy()
-    for index, value in pairs(engine.entities) do
-        engine:removeEntity(value)
+    for index, value in pairs(self.engine.entities) do
+        self.engine:removeEntity(value)
     end
     self:__init()
 end
 
 function MainState:keypressed(key, u)
-    engine:fireEvent(KeyPressed(key, u))
+    self.engine:fireEvent(KeyPressed(key, u))
 end
 
 
 function MainState:mousepressed(x, y, button)
-    engine:fireEvent(MousePressed(x, y, button))
+    self.engine:fireEvent(MousePressed(x, y, button))
 end
 
 --Collision function
 function beginContact(a, b, coll)
-    engine:fireEvent(BeginContact(a, b, coll))
+    stack:current().engine:fireEvent(BeginContact(a, b, coll))
 end

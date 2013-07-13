@@ -1,8 +1,7 @@
 WobbleSystem = class("WobbleSystem", System)
 
 function WobbleSystem:__init()
-    
-    engine:addListener("BeginContact", self)
+    stack:current().engine:addListener("BeginContact", self)
 end
 
 function WobbleSystem:update() 

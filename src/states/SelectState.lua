@@ -38,18 +38,18 @@ end
 
 function SelectState:load()
 
-    engine = Engine()
+    self.engine = Engine()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
-    engine:addListener("KeyPressed", boxnavigation)
-    engine:addListener("MousePressed", boxclick)
+    self.engine:addListener("KeyPressed", boxnavigation)
+    self.engine:addListener("MousePressed", boxclick)
 
-    engine:addSystem(BoxHoverSystem(), "logic", 1)
-    engine:addSystem(MenuWobblySystem(), "logic", 2)
-    engine:addSystem(BoxDrawSystem(), "draw")
-    engine:addSystem(DrawableDrawSystem(), "draw")
-    engine:addSystem(boxclick)
-    engine:addSystem(boxnavigation)
+    self.engine:addSystem(BoxHoverSystem(), "logic", 1)
+    self.engine:addSystem(MenuWobblySystem(), "logic", 2)
+    self.engine:addSystem(BoxDrawSystem(), "draw")
+    self.engine:addSystem(DrawableDrawSystem(), "draw")
+    self.engine:addSystem(boxclick)
+    self.engine:addSystem(boxnavigation)
 
     self.menunumber = 4
     self.menuboxes = {}
@@ -63,7 +63,7 @@ function SelectState:load()
         else
             box = BoxModel(100, 40, x, y, "menu", gameplay.selectMenu[i][2], self.font, gameplay.selectMenu[i][1], false)
         end
-        engine:addEntity(box)
+        self.engine:addEntity(box)
     end
     sortMenu(self.menuboxes)
     love.graphics.setFont(self.font)
@@ -71,12 +71,12 @@ end
 
 
 function SelectState:update(dt)
-    engine:update(dt)
+    self.engine:update(dt)
 end
 
 
 function SelectState:draw()
-    engine:draw()
+    self.engine:draw()
     love.graphics.setColor(255, 255, 255)
     love.graphics.draw(resources.images.cutie3, love.graphics.getWidth()/2, 400, 0, 1, self.yscale, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
     love.graphics.print("Select a level or start SHOPPING", love.graphics.getWidth()/2 - resources.fonts.sixty:getWidth("Select a Level or start SHOPPING")/2, 50, 0, 1, 1, 0, 0)
@@ -84,9 +84,9 @@ end
 
 
 function SelectState:keypressed(key, u)
-    engine:fireEvent(KeyPressed(key, u))
+    self.engine:fireEvent(KeyPressed(key, u))
 end
 
 function SelectState:mousepressed(x, y, button)
-    engine:fireEvent(MousePressed(x, y, button))
+    self.engine:fireEvent(MousePressed(x, y, button))
 end

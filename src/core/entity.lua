@@ -6,14 +6,14 @@ end
 
 function Entity:addComponent(component)
     self.components[component.__name] = component
-    engine:refreshEntity(self)
+    stack:current().engine:refreshEntity(self)
 end
 
 function Entity:removeComponent(name)
     if self.components[name] then
         self.components[name] = nil
     end
-    engine:refreshEntity(self)
+    stack:current().engine:refreshEntity(self)
 end
 
 function Entity:getComponent(name)

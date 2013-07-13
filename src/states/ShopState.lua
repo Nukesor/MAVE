@@ -7,6 +7,7 @@ require("core/event")
 --Events
 require("core/events/mousePressed")
 require("core/events/keyPressed")
+require("core/events/boolEvent")
 
 -- BoxComponents
 require("components/userinterface/stringComponent")

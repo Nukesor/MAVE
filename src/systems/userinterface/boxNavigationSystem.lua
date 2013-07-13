@@ -17,7 +17,7 @@ function BoxNavigationSystem:fireEvent(event)
     elseif key == "down" or key == "s" then
     	self:changeSelected(4)
     elseif key == "return" then
-		self:getSelectedBox():getComponent("FunctionComponent").func()
+		getSelectedBox():getComponent("FunctionComponent").func()
     end
 end
 
@@ -25,18 +25,9 @@ function BoxNavigationSystem:getRequiredComponents()
 	return {"BoxComponent"}
 end
 
--- Holt sich die momentan selektierte Box
-function BoxNavigationSystem:getSelectedBox()
-	for index, value in pairs(self.targets) do
-		if value:getComponent("BoxComponent").selected == true then 
-			return value
-		end
-	end
-end
-
 -- Setzt die verlinkte Entity auf selected und die momentan selektierte auf false. Aufbau der Table {links, rechts, oben, unten}
 function BoxNavigationSystem:changeSelected(link) 
-	local box = self:getSelectedBox()
+	local box = getSelectedBox()
     if box:getComponent("BoxComponent").linked[link] then
    	    box:getComponent("BoxComponent").selected = false
         box:getComponent("BoxComponent").linked[link]:getComponent("BoxComponent").selected = true

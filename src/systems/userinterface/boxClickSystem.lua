@@ -19,12 +19,3 @@ end
 function BoxClickSystem:getRequiredComponents()
 	return {"BoxComponent"}
 end
-
--- Holt sich die momentan selektierte Box
-function BoxClickSystem:getSelectedBox()
-	for index, value in pairs(self.targets) do
-		if value:getComponent("BoxComponent").selected == true then
-			return value
-		end
-	end
-end

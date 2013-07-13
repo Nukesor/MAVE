@@ -24,3 +24,11 @@ function sortMenu(table)
         end
     end
 end
+
+function getSelectedBox()
+    for index, value in pairs(stack:current().engine:getEntitylist("BoxComponent")) do
+        if value:getComponent("BoxComponent").selected == true then 
+            return value
+        end
+    end
+end

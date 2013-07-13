@@ -36,8 +36,7 @@ function Gameplay:__init()
 		end}
 		,
 		{"Hammer", true, 100, resources.images.grenade, 0.07, 0.07, 
-		function()
-
+    	function()
 		end}
 	}
 

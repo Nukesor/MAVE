@@ -26,20 +26,14 @@ TODO
 
 Shop/Menus:
 - Shop System bauen 
-    - Table fuer Waffen erstellen, Funktion schreiben, die sich den Status aus der Tabelle holt.
-    - ItemComponent fuer Playercutie erstellen und mit Tabelle verlinken
 - Boxmodel erstellen. 2 Boxmodels. Einmal fuer menu und einemal fuer item. Fertiges Layout fuer den Shop entwerfen.
-- Images dynamisch auf Menu runterscalen. Funktion dafuer raussuchen. 
 - Umstellen des SelectStates auf EntitySystem
 
 Ingame:
 
 - Schadenssystem ausfeilen
-- Dynamische Drawuebergangfunktion fuer verschiedene Imagegroeszen.
 - Mine einbauen. Proximity -- Polygon shapes!!!
 
 Engine/ Core:
-- Fullscreen support
-- Addlistener Aufruf in der init des jeweiligen Systems
 
 ## Bugs

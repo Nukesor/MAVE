@@ -25,11 +25,7 @@ TODO
 ### Code
 
 Shop/Menus:
-- Shop System bauen 
 - Gold darstellen, potentiell stats. Wie machen wir das jetzt mit den Daten. Packen wir die Daten in ne Table und werten die dann aus oder nehmen wir einfach nen einfachen String und schauen dann mal, ob sich das damit gut stylen laesst. 
-- Boxmodel erstellen. 2 Boxmodels. Einmal fuer menu und einemal fuer item. Fertiges Layout fuer den Shop entwerfen.
-- Umstellen des SelectStates auf EntitySystem
-- Promtstate, der beim pop in der Function ein Event im lower State feuert und dadurch allgemein ein JA oder NEIN zurueckgibt
 
 Ingame:
 
@@ -39,3 +35,4 @@ Ingame:
 Engine/ Core:
 
 ## Bugs
+

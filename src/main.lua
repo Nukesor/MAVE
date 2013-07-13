@@ -12,6 +12,7 @@ require("states/CreditsState")
 require("states/PauseState")
 require("states/SelectState")
 require("states/ShopState")
+require("states/PromptState")
 
 
 function love.load()
@@ -35,6 +36,7 @@ function love.load()
     resources:addFont("twentyfive", "data/font/SwankyandMooMoo.ttf", 25)
     resources:addFont("thirty", "data/font/SwankyandMooMoo.ttf", 30)
     resources:addFont("forty", "data/font/SwankyandMooMoo.ttf", 40)
+    resources:addFont("fifty", "data/font/SwankyandMooMoo.ttf", 50)
     resources:addFont("sixty", "data/font/SwankyandMooMoo.ttf", 60)
     
     resources:load()
@@ -50,6 +52,7 @@ function love.load()
     stack = StackHelper()
     shop = ShopState()
     gameplay = Gameplay()
+    prompt = PromptState()
 
     stack:push(menu)
 end

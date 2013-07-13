@@ -24,6 +24,8 @@ require("systems/userinterface/boxHoverSystem")
 require("systems/userinterface/boxNavigationSystem")
 require("systems/userinterface/menuWobblySystem")
 
+require("models/itemBoxModel")
+
 
 ShopState = class("ShopState", State)
 
@@ -52,48 +54,16 @@ function ShopState:load()
     -- Dynamische Erstellung der Item boxes
     for i = 1, self.boxnumber, 1 do
 
-        local boxwidth = 150
-        local boxheight = 75
         local box
-
         -- Berrechnung der Position und Zeilenumbruch nach i == self.width Boxes
         y = 50 + (math.floor((i-1)/self.width)*100)
         x = 25 + 200 * ((i-1)-math.floor((i-1)/self.width)*5)
-        if i == self.boxnumber then
-            box = Entity()
-            box:addComponent(BoxComponent(boxwidth, boxheight, {self.boxes[i-1], nil}, "item"))
-            box:addComponent(FunctionComponent(function ()
-                                                       stack:popload()
-                                                end
-                                                    ))
-            self.boxes[1]:getComponent("BoxComponent").linked[1] = box 
-            box:getComponent("BoxComponent").linked[2] = self.boxes[1] 
-            self.boxes[i-1]:getComponent("BoxComponent").linked[2] = box
-            table.insert(self.boxes, box)
 
-        elseif i == 1 then 
-            box = Entity()
-            box:addComponent(BoxComponent(boxwidth, boxheight, {nil, nil}, "item"))
-            box:addComponent(FunctionComponent(function ()
-                                                       stack:popload()
-                                                end
-                                                    ))
-            table.insert(self.boxes, box)
+        box = ItemBoxModel(150, 75, x, y, "item", false)
 
-        else
-            box = Entity()
-            box:addComponent(BoxComponent(boxwidth, boxheight, {self.boxes[i-1],nil}, "item"))
-            box:addComponent(FunctionComponent(function ()
-                                                    stack:popload()
-                                                end
-                                                    ))
-            self.boxes[i-1]:getComponent("BoxComponent").linked[2] = box
-            table.insert(self.boxes, box)
-        end
-        box:addComponent(PositionComponent(x, y))
         self.engine:addEntity(box)
     end
-
+    sortMenu(self.boxes)
 
     -- Erstellung der MenuBoxes
     self.menunumber = 3
@@ -108,10 +78,9 @@ function ShopState:load()
         else
             box = BoxModel(100, 40, x, y, "menu", gameplay.shopMenu[i][2], self.font, gameplay.shopMenu[i][1], false)
         end        
-        sortMenu(self.menuboxes)
-
         self.engine:addEntity(box)
     end
+    sortMenu(self.menuboxes)
 
     -- Verlinkung der MenuBoxes mit normalen Boxes
     for i, box in ipairs(self.menuboxes) do

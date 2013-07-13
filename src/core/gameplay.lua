@@ -6,7 +6,7 @@ function Gameplay:__init()
 	self.level = 1
 	self.kills = 0
 
-	self.gold = 0
+	self.gold = 100
 	self.items = {
 		--String, gekauft, Kosten, image, scalingx, scalingy, function 
 		{"Gewehr", true, 100, resources.images.grenade, 0.07, 0.07,
@@ -22,7 +22,7 @@ function Gameplay:__init()
 
 		end}
 		,
-		{"Granate", true, 100, resources.images.grenade, 0.07, 0.07, 
+		{"Granate", false, 100, resources.images.grenade, 0.07, 0.07, 
 		function()
         -- Generates a new Grenademodel
         local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y), love.mouse.getPosition())
@@ -30,12 +30,12 @@ function Gameplay:__init()
         stack:current().engine:addEntity(grenade)
 		end}
 		,
-		{"Mine", true, 100, resources.images.grenade, 0.07, 0.07,
+		{"Mine", false, 100, resources.images.grenade, 0.07, 0.07,
 		function()
 
 		end}
 		,
-		{"Hammer", true, 100, resources.images.grenade, 0.07, 0.07, 
+		{"Hammer", false, 100, resources.images.grenade, 0.07, 0.07, 
     	function()
 		end}
 	}
@@ -65,6 +65,14 @@ function Gameplay:__init()
                 stack:popload() end, "Main Menu"},
     {function () stack:pop() end, "Return"},
     {function () love.event.quit() end, "Exit"}
+    }
+    self.promptMenu = {
+    {function () stack:pop()
+                stack:current().engine:fireEvent(BoolEvent(true))
+                end, "Yes"},
+    {function () stack:pop()
+                stack:current().engine:fireEvent(BoolEvent(false))
+                end, "No"}
     }
 end
 

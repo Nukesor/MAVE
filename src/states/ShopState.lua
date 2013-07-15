@@ -10,7 +10,7 @@ require("core/events/keyPressed")
 require("core/events/boolEvent")
 
 -- BoxComponents
-require("components/userinterface/stringComponent")
+require("components/userinterface/uiStringComponent")
 require("components/userinterface/boxComponent")
 require("components/physic/positionComponent")
 require("components/userinterface/functionComponent")
@@ -23,6 +23,7 @@ require("systems/userinterface/boxDrawSystem")
 require("systems/userinterface/boxHoverSystem")
 require("systems/userinterface/boxNavigationSystem")
 require("systems/userinterface/menuWobblySystem")
+require("systems/userinterface/buyEventSystem")
 
 require("models/itemBoxModel")
 
@@ -38,14 +39,18 @@ function ShopState:load()
     self.engine = Engine()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
+    local buyeventsystem = BuyEventSystem()
     self.engine:addListener("KeyPressed", boxnavigation)
     self.engine:addListener("MousePressed", boxclick)
+    self.engine:addListener("BoolEvent", buyeventsystem)
+    print(self.engine.eventListeners["BoolEvent"]["BuyEventSystem"].__name)
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
     self.engine:addSystem(BoxDrawSystem(), "draw")
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
+    self.engine:addSystem(buyeventsystem)
 
     self.boxnumber = 10
     self.boxes = {}
@@ -54,13 +59,11 @@ function ShopState:load()
     -- Dynamische Erstellung der Item boxes
     for i = 1, self.boxnumber, 1 do
 
-        local box
         -- Berrechnung der Position und Zeilenumbruch nach i == self.width Boxes
         y = 50 + (math.floor((i-1)/self.width)*100)
         x = 25 + 200 * ((i-1)-math.floor((i-1)/self.width)*5)
 
-        box = ItemBoxModel(150, 75, x, y, "item", false)
-
+        local box = ItemBoxModel(150, 75, x, y, "item", false)
         self.engine:addEntity(box)
     end
     sortMenu(self.boxes)
@@ -126,3 +129,6 @@ end
 function ShopState:mousepressed(x, y, button)
     self.engine:fireEvent(MousePressed(x, y, button))
 end
+
+-- ShopState 46
+-- buyEventSystem 4, 8, 19,20

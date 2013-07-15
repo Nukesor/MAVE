@@ -14,8 +14,8 @@ function BoxDrawSystem:draw()
 		if value:getComponent("MenuWobblyComponent") then
 			scale = value:getComponent("MenuWobblyComponent").scale
 		end
-		if value:getComponent("StringComponent") then
-			boxstring = value:getComponent("StringComponent")
+		if value:getComponent("UIStringComponent") then
+			boxstring = value:getComponent("UIStringComponent")
 		end
 
 		-- Drawfunktion for Boxes

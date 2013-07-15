@@ -1,3 +1,5 @@
+require("core/events/boolEvent")
+
 PromptState = class("PromptState", State)
 
 function PromptState:__init()
@@ -26,7 +28,7 @@ function PromptState:load()
         y = 500
         x = love.graphics.getWidth()/3 * (i) - 50
         local box
-        if i == 2 then
+        if i == 1 then
             box = BoxModel(100, 40, x, y, "menu", gameplay.promptMenu[i][2], self.font, gameplay.promptMenu[i][1], true)
         else
             box = BoxModel(100, 40, x, y, "menu", gameplay.promptMenu[i][2], self.font, gameplay.promptMenu[i][1], false)

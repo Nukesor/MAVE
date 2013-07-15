@@ -9,7 +9,7 @@ function Gameplay:__init()
 	self.gold = 100
 	self.items = {
 		--String, gekauft, Kosten, image, scalingx, scalingy, function 
-		{"Gewehr", true, 100, resources.images.grenade, 0.07, 0.07,
+		{"Gewehr", false, 100, resources.images.grenade, 0.07, 0.07,
 		function()
         -- Erstellt ein neues Shotmodel
         local shot = ShotModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y), love.mouse.getPosition())
@@ -75,23 +75,3 @@ function Gameplay:__init()
                 end, "No"}
     }
 end
-
-
-
---[[ Was muss die Itemlist alles beinhalten 
-
-Potentiell eine eigene Klasse erstellen?? Externe Datenbank zu op? Upgrade Table, oder feste Werte? Tendiere zu  festen Werten. ist meiner meinung nach wesentlich angenehmer. 
-
-Die jeweilige Erstellungsfunktion
-Das jeweilige Bild mit passendem Scaling
-Daten, ob das item bereits gekauft wurde, oder ob es noch zum verkauf aussteht. 
-Kosten
-Menuimage
-Identifier String
-
-Itemdaten:
-	Anzahl
-	Schaden
-	Maximale Kapazitaet?s
-
---]]

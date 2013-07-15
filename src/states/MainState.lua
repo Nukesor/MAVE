@@ -15,6 +15,7 @@ require("core/events/explosionEvent")
 require("systems/draw/drawableDrawSystem")
 require("systems/draw/polygonDrawSystem")
 require("systems/draw/lifebarSystem")
+require("systems/draw/stringDrawSystem")
 
 -- Particle Systems
 require("systems/particle/particleDrawSystem")
@@ -55,6 +56,7 @@ require("systems/event/explosionEventSystem")
 require("components/graphic/drawableComponent")
 require("components/graphic/drawablePolygonComponent")
 require("components/graphic/zIndex")
+require("components/graphic/stringComponent")
 
 -- Particle Component
 require("components/particle/particleComponent")
@@ -115,6 +117,7 @@ function MainState:load()
     self.engine:addSystem(PolygonDrawSystem(), "draw")
     self.engine:addSystem(ParticleDrawSystem(), "draw")
     self.engine:addSystem(LifebarSystem(), "draw")
+    self.engine:addSystem(StringDrawSystem(), "draw")
     
     self.engine:addSystem(MaxSpeedSystem(), "logic", 1)
     self.engine:addSystem(SideChangeSystem(), "logic", 2)
@@ -167,6 +170,10 @@ function MainState:load()
         self.engine:addEntity(self.wall)
     end
 
+    local string = Entity()
+    string:addComponent(PositionComponent(20, 20))
+    string:addComponent(StringComponent({"Your Cutie´s life: %s", playercutie:getComponent("LifeComponent").life}, resources.fonts.thirty))
+
     -- Slowmospeed
     self.worldspeed = 1;
 
@@ -211,19 +218,11 @@ function MainState:update(dt)
 end
 
 function MainState:draw()
-    -- Deklaration der lokalen Variablen
-    local x, y = playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y
-    local playercutiexv, playercutieyv = playercutie:getComponent("PhysicsComponent").body:getLinearVelocity()
 
     -- Zeichnen der Grafiken
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
 
     self.engine:draw()
-
-    -- Zeichnen der Schriftzüge
-    love.graphics.setColor(255, 255, 255, 255)
-    love.graphics.print(string.format("%.2f ",x) ..  "    " .. "X-Vel: " .. string.format("%.2f ",playercutiexv) .. ", Y-Vel: " .. string.format("%.2f ",playercutieyv), 20, 20,0,1,1)
-    love.graphics.print("Your Cutie´s life: " .. playercutie:getComponent("LifeComponent").life, 20, 40, 0, 1, 1)
 end
 
 function MainState:restart()

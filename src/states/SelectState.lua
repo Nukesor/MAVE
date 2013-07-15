@@ -9,7 +9,7 @@ require("core/events/mousePressed")
 require("core/events/keyPressed")
 
 -- BoxComponents
-require("components/userinterface/stringComponent")
+require("components/userinterface/uiStringComponent")
 require("components/userinterface/boxComponent")
 require("components/physic/positionComponent")
 require("components/userinterface/functionComponent")

@@ -70,13 +70,9 @@ function Gameplay:__init()
     }
     self.promptMenu = {
     {function () stack:pop()
-                local bool = BoolEvent(true)
-                print(bool.boolean)
-                print(bool.__name)
-                stack:current().engine:fireEvent(bool)
                 print(stack:current().__name)
                 print(stack:current().engine.eventListeners["BoolEvent"]["BuyEventSystem"].__name)
-                print(stack:current().engine.eventListeners["BoolEvent"]["BuyEventSystem"]:fireEvent())
+                stack:current().engine:fireEvent(BoolEvent(true))
                 end, "Yes"},
     {function () stack:pop()
                 stack:current().engine:fireEvent(BoolEvent(false))

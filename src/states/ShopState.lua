@@ -43,7 +43,6 @@ function ShopState:load()
     self.engine:addListener("KeyPressed", boxnavigation)
     self.engine:addListener("MousePressed", boxclick)
     self.engine:addListener("BoolEvent", buyeventsystem)
-    print(self.engine.eventListeners["BoolEvent"]["BuyEventSystem"].__name)
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
@@ -129,6 +128,3 @@ end
 function ShopState:mousepressed(x, y, button)
     self.engine:fireEvent(MousePressed(x, y, button))
 end
-
--- ShopState 46
--- buyEventSystem 4, 8, 19,20

@@ -38,7 +38,7 @@ function PauseState:load()
         end
         self.engine:addEntity(box)
     end
-    sortMenu(self.menuboxes)
+    sortMenuVertical(self.menuboxes)
     love.graphics.setFont(self.font)
 end
 

@@ -1,4 +1,4 @@
-require("core/events/boolEvent")
+require("core/events/buyBoolEvent")
 
 PromptState = class("PromptState", State)
 

@@ -2,12 +2,11 @@ require("core/resources")
 require("core/state")
 require("core/entity")
 require("core/engine")
-require("core/event")
 
 --Events
 require("core/events/mousePressed")
 require("core/events/keyPressed")
-require("core/events/boolEvent")
+require("core/events/buyBoolEvent")
 
 -- BoxComponents
 require("components/userinterface/uiStringComponent")
@@ -42,7 +41,7 @@ function ShopState:load()
     local buyeventsystem = BuyEventSystem()
     self.engine:addListener("KeyPressed", boxnavigation)
     self.engine:addListener("MousePressed", boxclick)
-    self.engine:addListener("BoolEvent", buyeventsystem)
+    self.engine:addListener("BuyBoolEvent", buyeventsystem)
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)

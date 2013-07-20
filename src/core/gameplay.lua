@@ -1,4 +1,4 @@
-require("core/events/boolEvent")
+require("core/events/buyBoolEvent")
 
 Gameplay = class("Gameplay")
 
@@ -70,12 +70,10 @@ function Gameplay:__init()
     }
     self.promptMenu = {
     {function () stack:pop()
-                print(stack:current().__name)
-                print(stack:current().engine.eventListeners["BoolEvent"]["BuyEventSystem"].__name)
-                stack:current().engine:fireEvent(BoolEvent(true))
+                stack:current().engine:fireEvent(BuyBoolEvent(true))
                 end, "Yes"},
     {function () stack:pop()
-                stack:current().engine:fireEvent(BoolEvent(false))
+                stack:current().engine:fireEvent(BuyBoolEvent(false))
                 end, "No"}
     }
 end

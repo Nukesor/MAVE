@@ -112,8 +112,8 @@ function Engine:removeListener(eventName, listener)
 end
 
 function Engine:fireEvent(event)
-    if self.eventListeners[event.name] then
-        for k,v in pairs(self.eventListeners[event.name]) do
+    if self.eventListeners[event.__name] then
+        for k,v in pairs(self.eventListeners[event.__name]) do
             v:fireEvent(event)
         end
     end

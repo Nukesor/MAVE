@@ -31,6 +31,12 @@ ShopState = class("ShopState", State)
 
 function ShopState:__init()
     self.font = resources.fonts.forty
+    self.menu = {
+    {function () stack:popload() end, "Back"},
+    {function () stack:popload() end, "Back"},
+    {function () stack:pop() 
+                 stack:push(main) end, "Play"}
+    }
 end
 
 function ShopState:load()
@@ -75,9 +81,9 @@ function ShopState:load()
         x = love.graphics.getWidth()/4 * (i) - 50
         local box
         if i == 2 then
-            box = BoxModel(100, 40, x, y, "menu", gameplay.shopMenu[i][2], self.font, gameplay.shopMenu[i][1], true)
+            box = BoxModel(100, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
         else
-            box = BoxModel(100, 40, x, y, "menu", gameplay.shopMenu[i][2], self.font, gameplay.shopMenu[i][1], false)
+            box = BoxModel(100, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
         end        
         self.engine:addEntity(box)
     end

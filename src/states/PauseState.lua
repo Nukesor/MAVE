@@ -2,6 +2,12 @@ PauseState = class("PauseState", State)
 
 function PauseState:__init()
     self.font = resources.fonts.thirty
+    self.menu = {
+    {function () stack:pop()
+                stack:popload() end, "Main Menu"},
+    {function () stack:pop() end, "Return"},
+    {function () love.event.quit() end, "Exit"}
+    }
 end
 
 function PauseState:load()
@@ -13,8 +19,8 @@ function PauseState:load()
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
-    self.engine:addSystem(BoxDrawSystem(), "draw")
     self.engine:addSystem(DrawableDrawSystem(), "draw")
+    self.engine:addSystem(BoxDrawSystem(), "draw")
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
 
@@ -26,13 +32,20 @@ function PauseState:load()
         x = 120
         local box
         if i == 1 then
-            box = BoxModel(100, 40, x, y, "menu", gameplay.pauseMenu[i][2], self.font, gameplay.pauseMenu[i][1], true)
+            box = BoxModel(100, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
         else
-            box = BoxModel(100, 40, x, y, "menu", gameplay.pauseMenu[i][2], self.font, gameplay.pauseMenu[i][1], false)
+            box = BoxModel(100, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
         end
         self.engine:addEntity(box)
     end
-    sortMenu(self.menuboxes)
+    sortMenuVertical(self.menuboxes)
+        
+    local background = Entity()
+    background:addComponent(DrawableComponent(self.screenshot))
+    background:addComponent(PositionComponent(0, 0))
+    background:addComponent(ZIndex(1))
+    self.engine:addEntity(background)
+
     love.graphics.setFont(self.font)
 end
 

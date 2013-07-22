@@ -29,6 +29,12 @@ SelectState = class("SelectState", State)
 
 function SelectState:__init()
     self.font = resources.fonts.forty
+    self.menu = {
+    {function () stack:push(main) end , "Level1"},
+    {function () stack:push(main) end , "Level2"},
+    {function () stack:push(shop) end , "Shop"},
+    {function () stack:popload() end, "Main Menu"}
+    }
 end
 
 function SelectState:load()
@@ -58,9 +64,9 @@ function SelectState:load()
         x = love.graphics.getWidth()/5 * (i) - 50
         local box
         if i == 2 then
-            box = BoxModel(100, 40, x, y, "menu", gameplay.selectMenu[i][2], self.font, gameplay.selectMenu[i][1], true)
+            box = BoxModel(100, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
         else
-            box = BoxModel(100, 40, x, y, "menu", gameplay.selectMenu[i][2], self.font, gameplay.selectMenu[i][1], false)
+            box = BoxModel(100, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
         end
         self.engine:addEntity(box)
     end

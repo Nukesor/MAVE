@@ -25,6 +25,21 @@ function sortMenu(table)
     end
 end
 
+function sortMenuVertical(table)
+    for index, box in pairs(table) do
+        if index == 1 then
+            box:getComponent("BoxComponent").linked[3] = table[#table]
+            box:getComponent("BoxComponent").linked[4] = table[index+1]
+        elseif index == #table then
+            box:getComponent("BoxComponent").linked[3] = table[index-1]
+            box:getComponent("BoxComponent").linked[4] = table[1]
+        else
+            box:getComponent("BoxComponent").linked[3] = table[index-1]
+            box:getComponent("BoxComponent").linked[4] = table[index+1]
+        end
+    end
+end
+
 function getSelectedBox()
     for index, value in pairs(stack:current().engine:getEntitylist("BoxComponent")) do
         if value:getComponent("BoxComponent").selected == true then 

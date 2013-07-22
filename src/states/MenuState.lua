@@ -27,6 +27,11 @@ MenuState = class("MenuState", State)
 
 function MenuState:__init()
     self.font = resources.fonts.forty
+    self.menu = {
+    {function () stack:push(credits) end, "Credits"},
+    {function () stack:push(selectstate) end, "Play"},
+    {function () love.event.quit() end, "Exit"}
+    }
 end
 
 function MenuState:load()
@@ -52,9 +57,9 @@ function MenuState:load()
         x = love.graphics.getWidth()/4 * (i) - 50
         local box
         if i == 2 then
-            box = BoxModel(100, 40, x, y, "menu", gameplay.mainMenu[i][2], self.font, gameplay.mainMenu[i][1], true)
+            box = BoxModel(100, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
         else
-            box = BoxModel(100, 40, x, y, "menu", gameplay.mainMenu[i][2], self.font, gameplay.mainMenu[i][1], false)
+            box = BoxModel(100, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
         end
         self.engine:addEntity(box)
     end

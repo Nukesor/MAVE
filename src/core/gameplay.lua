@@ -41,39 +41,4 @@ function Gameplay:__init()
     	function()
 		end}
 	}
-
-    self.selectMenu = {
-    {function () stack:push(main) end , "Level1"},
-    {function () stack:push(main) end , "Level2"},
-    {function () stack:push(shop) end , "Shop"},
-    {function () stack:popload() end, "Main Menu"}
-    }
-
-    self.mainMenu = {
-    {function () stack:push(credits) end, "Credits"},
-    {function () stack:push(selectstate) end, "Play"},
-    {function () love.event.quit() end, "Exit"}
-    }
-
-    self.shopMenu = {
-    {function () stack:popload() end, "Back"},
-    {function () stack:popload() end, "Back"},
-    {function () stack:pop() 
-                 stack:push(main) end, "Play"}
-    }
-
-    self.pauseMenu = {
-    {function () stack:pop()
-                stack:popload() end, "Main Menu"},
-    {function () stack:pop() end, "Return"},
-    {function () love.event.quit() end, "Exit"}
-    }
-    self.promptMenu = {
-    {function () stack:pop()
-                stack:current().engine:fireEvent(BuyBoolEvent(true))
-                end, "Yes"},
-    {function () stack:pop()
-                stack:current().engine:fireEvent(BuyBoolEvent(false))
-                end, "No"}
-    }
 end

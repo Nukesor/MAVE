@@ -1,10 +1,7 @@
-Heio!
+# the Most Adorable Violence Ever
 
-Hier ist mein erstes selbst gecodetes Spiel. Ist vermutlich derbe vermurkst und an vielen Stellen 
-verbesserungswürdig, aber immerhin funktioniert es :D. Wer mitmachen will, soll sich melden. Ist 
-eine gute Möglichkeit ein wenig mit der Physik von Love rumzuprobieren und mit sich mit der OOP von Lua anzufreunden. 
+MAVE is a game of fun and, especially, violence. In a world full of very cute cuties, you are the villain. Your despicable goal is to kill them all - and the more you kill, the cuter it gets.
 
-Grundidee: Paul, Sven, Hans, Toenjes, Rafael, Arne 
-,Sounds: Toenjes 
-,Grafik: Rafael 
-,Coding: Arne 
+MAVE is written in [Löve](https://www.love2d.org/), a game library for lua.
+
+To get it running on your system, Install löve, clone the repo and execute `make` in the new directory.

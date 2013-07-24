@@ -8,7 +8,7 @@ function CutieModel:__init(x, y, image, life)
     fixture:setUserData(self)
     
     self:addComponent(PhysicsComponent(body, fixture, shape))
-    self:addComponent(PositionComponent(xs, ys))
+    self:addComponent(PositionComponent(x, y))
     self:addComponent(DrawableComponent(image, 0, 0.1, 0.1, 140, 140))
     self:addComponent(LevelComponent(0))
     self:addComponent(LifeComponent(life))

@@ -93,13 +93,13 @@ require("models/cutieModel")
 require("models/grenadeModel")
 
 
-MainState = class("MainState", State)
+LevelState = class("LevelState", State)
 
-function MainState:__init()
+function LevelState:__init()
 
 end
 
-function MainState:load()
+function LevelState:load()
     love.graphics.setFont(resources.fonts.twenty)
     love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81*64, true)
@@ -183,7 +183,7 @@ function MainState:load()
     self.shaketimer = 0
 end
 
-function MainState:update(dt)
+function LevelState:update(dt)
     -- Slowmotion
     dt = dt*self.worldspeed
     if love.keyboard.isDown(" ") and self.worldspeed > 0.2 then
@@ -216,7 +216,7 @@ function MainState:update(dt)
     world:update(dt)
 end
 
-function MainState:draw()
+function LevelState:draw()
 
     -- Zeichnen der Grafiken
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
@@ -224,7 +224,7 @@ function MainState:draw()
     self.engine:draw()
 end
 
-function MainState:restart()
+function LevelState:restart()
     world:destroy()
     for index, value in pairs(self.engine.entities) do
         self.engine:removeEntity(value)
@@ -232,12 +232,12 @@ function MainState:restart()
     self:__init()
 end
 
-function MainState:keypressed(key, u)
+function LevelState:keypressed(key, u)
     self.engine:fireEvent(KeyPressed(key, u))
 end
 
 
-function MainState:mousepressed(x, y, button)
+function LevelState:mousepressed(x, y, button)
     self.engine:fireEvent(MousePressed(x, y, button))
 end
 

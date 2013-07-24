@@ -1,8 +1,8 @@
 CutieModel = class("CutieModel", Entity)
 
-function CutieModel:__init(xs, ys, image, life)
+function CutieModel:__init(x, y, image, life)
 
-    local body = love.physics.newBody(world, xs, ys, "dynamic")
+    local body = love.physics.newBody(world, x, y, "dynamic")
     local shape = love.physics.newCircleShape(9)
     local fixture = love.physics.newFixture(body, shape, 1) 
     fixture:setUserData(self)

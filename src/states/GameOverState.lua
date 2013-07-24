@@ -1,5 +1,7 @@
 GameOverState = class("GameOverState", State)
 
+-- TOTAL BULLSHIT, not used at the moment. To be reimplemented.
+
 function GameOverState:__init()
     self.menulist = {"Main Menu", "Restart" , "Exit"}
 end

@@ -13,10 +13,10 @@ function Gameplay:__init()
 		--String, gekauft, Kosten, image, scalingx, scalingy, function 
 		{"Gewehr", false, 100, resources.images.grenade, 0.07, 0.07,
 		function()
-        -- Erstellt ein neues Shotmodel
-        local shot = ShotModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y), love.mouse.getPosition())
-        shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
-        stack:current().engine:addEntity(shot) 
+            -- Erstellt ein neues Shotmodel
+            local shot = ShotModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y), love.mouse.getPosition())
+            shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
+            stack:current().engine:addEntity(shot) 
 		end}
 		,
 		{"Granatwerfer", false, 300, resources.images, grenade, 0,07, 0,07, 
@@ -26,15 +26,14 @@ function Gameplay:__init()
 		,
 		{"Granate", false, 100, resources.images.grenade, 0.07, 0.07, 
 		function()
-        -- Generates a new Grenademodel
-        local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y), love.mouse.getPosition())
-        grenade:getComponent("PhysicsComponent").fixture:setUserData(grenade)
-        stack:current().engine:addEntity(grenade)
+            -- Generates a new Grenademodel
+            local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y), love.mouse.getPosition())
+            grenade:getComponent("PhysicsComponent").fixture:setUserData(grenade)
+            stack:current().engine:addEntity(grenade)
 		end}
 		,
 		{"Mine", false, 100, resources.images.grenade, 0.07, 0.07,
 		function()
-
 		end}
 		,
 		{"Hammer", false, 100, resources.images.grenade, 0.07, 0.07, 

@@ -5,7 +5,7 @@ require("core/gameplay")
 require("core/util")
 
 require("core/state")
-require("states/MainState")
+require("states/levelState")
 require("states/MenuState")
 require("states/GameOverState")
 require("states/CreditsState")
@@ -44,7 +44,7 @@ function love.load()
     love.graphics.setMode(1000, 600, false, true, 0) -- Fensteroberfläche
 
     credits = CreditsState()
-    main = MainState()
+    main = LevelState()
     menu = MenuState()
     gameover = GameOverState()
     pause = PauseState()

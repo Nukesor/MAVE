@@ -6,7 +6,8 @@ function EnemyTrackingSystem:update(dt)
         local enemy=entity:getComponent("IsEnemy")
         local playercutiex, playercutiey = playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y
         local xpos, ypos = entity:getComponent("PositionComponent").x, entity:getComponent("PositionComponent").y
-        local speed = main.worldspeed
+        local speed = stack:current().worldspeed or 1
+
         -- Ki
         if ypos <= 579 then
             height = 500

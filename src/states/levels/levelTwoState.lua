@@ -1,0 +1,1 @@
+LevelTwoState = class("LevelTwoState", LevelState)

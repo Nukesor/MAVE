@@ -134,13 +134,6 @@ function LevelState:load()
     self.engine:addSystem(ExplosionSystem(), "logic", 14)
     self.engine:addSystem(GrenadeRotationSystem(), "logic", 15)
 
-    -- Background und Umgebungselemente
-    self.bg = Entity()
-    self.bg:addComponent(DrawableComponent(resources.images.level1, 0, 1, 1, 0, 0))
-    self.bg:addComponent(PositionComponent(0, 0))
-    self.bg:addComponent(ZIndex(1))
-    self.engine:addEntity(self.bg) --]]
-
     -- Player erstellung
     playercutie = CutieModel(333, 520, resources.images.cutie1, 100)
     playercutie:addComponent(IsPlayer())

@@ -134,39 +134,16 @@ function LevelState:load()
     self.engine:addSystem(ExplosionSystem(), "logic", 14)
     self.engine:addSystem(GrenadeRotationSystem(), "logic", 15)
 
+    -- Player creation
+    playercutie = CutieModel(0, 0, resources.images.cutie1, 100)
+    playercutie:addComponent(IsPlayer())
+    self.engine:addEntity(playercutie)
+
     -- Background und Umgebungselemente
     self.bg = Entity()
     self.bg:addComponent(PositionComponent(0, 0))
     self.bg:addComponent(ZIndex(1))
     self.engine:addEntity(self.bg) 
-
-    -- Player erstellung
-    playercutie = CutieModel(333, 520, resources.images.cutie1, 100)
-    playercutie:addComponent(IsPlayer())
-    self.engine:addEntity(playercutie)
-
-    self.wall =  Entity()
-    self.wall:addComponent(DrawablePolygonComponent(world, 500, 580, 1050, 10, "static", self.wall))
-    self.engine:addEntity(self.wall)
-
-    self.wall =  Entity()
-    self.wall:addComponent(DrawablePolygonComponent(world, 500, -50, 1050, 0, "static", self.wall))
-    self.engine:addEntity(self.wall)
-
-    for i = 0, 4, 1 do 
-        local y = 100 + 100 * i
-        local xbreite = 200 + 100 * i 
-        self.wall = Entity()
-        self.wall:addComponent(DrawablePolygonComponent(world, 500, y, xbreite, 10, "static", self.wall))
-        self.engine:addEntity(self.wall)
-    end
-
-    for i = 0, 1, 1 do
-        local x = 20 + i * 960
-        self.wall = Entity()
-        self.wall:addComponent(DrawablePolygonComponent(world, x, 200, 10, 200, "static", self.wall))
-        self.engine:addEntity(self.wall)
-    end
 
     local string = Entity()
     string:addComponent(PositionComponent(20, 20))

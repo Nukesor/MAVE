@@ -30,8 +30,8 @@ SelectState = class("SelectState", State)
 function SelectState:__init()
     self.font = resources.fonts.forty
     self.menu = {
-    {function () stack:push(main) end , "Level1"},
-    {function () stack:push(main) end , "Level2"},
+    {function () stack:push(levelOne) end , "Level1"},
+    {function () stack:push(levelTwo) end , "Level2"},
     {function () stack:push(shop) end , "Shop"},
     {function () stack:popload() end, "Main Menu"}
     }
@@ -42,7 +42,6 @@ function SelectState:load()
 end
 
 function SelectState:load()
-
     self.engine = Engine()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()

@@ -15,7 +15,6 @@ function CutieModel:__init(x, y, image, life)
     self:addComponent(ZIndex(2))
     self:addComponent(CutieComponent(0, 0, 1))
     self:addComponent(WobblyComponent(0.1))
-    self:addComponent(ItemComponent(nil))
     body:setMass(0.0192)
 
 end

@@ -11,14 +11,15 @@ function MainKeySystem:fireEvent(event)
     end
     if tonumber(event.key) then
         if gameplay.items[tonumber(event.key)] then
-            print(gameplay.items[tonumber(event.key)].name)
+            if playercutie:getComponent("ItemComponent") and playercutie:getComponent("ItemComponent").drawableEntity then
+                    stack:current().engine:removeEntity(playercutie:getComponent("ItemComponent").drawableEntity)
+                end
             if gameplay.items[tonumber(event.key)].owned == true then
                 playercutie:addComponent(gameplay.items[tonumber(event.key)])
-                for k,v in pairs(playercutie:getComponent("ItemComponent")) do
-                    print(k,v)
-                end
+                playercutie:getComponent("ItemComponent").drawableEntity = Entity()
+                stack:current().engine:addEntity(playercutie:getComponent("ItemComponent").drawableEntity)
             else
-                playercutie:getComponent("ItemComponent").item = nil
+                playercutie:removeComponent("ItemComponent")
             end
         end
     end

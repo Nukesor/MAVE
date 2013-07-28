@@ -15,6 +15,7 @@ require("systems/draw/drawableDrawSystem")
 require("systems/draw/polygonDrawSystem")
 require("systems/draw/lifebarSystem")
 require("systems/draw/stringDrawSystem")
+require("systems/draw/itemDrawSystem")
 
 -- Particle Systems
 require("systems/particle/particleDrawSystem")
@@ -36,7 +37,6 @@ require("systems/weapon/explosionSystem")
 require("systems/cutie/wobbleSystem")
 require("systems/cutie/cutieDeleteSystem")
 require("systems/cutie/bleedingDetectSystem")
-require("systems/cutie/weaponCarrySystem")
         --Enemy
 require("systems/enemy/enemySpawnSystem")
 require("systems/enemy/enemyTrackingSystem")
@@ -118,6 +118,7 @@ function LevelState:load()
     self.engine:addSystem(ParticleDrawSystem(), "draw")
     self.engine:addSystem(LifebarSystem(), "draw")
     self.engine:addSystem(StringDrawSystem(), "draw")
+    self.engine:addSystem(ItemDrawSystem(), "draw")
     
     self.engine:addSystem(MaxSpeedSystem(), "logic", 1)
     self.engine:addSystem(SideChangeSystem(), "logic", 2)
@@ -134,7 +135,6 @@ function LevelState:load()
     self.engine:addSystem(EnemySpawnSystem(), "logic", 13)
     self.engine:addSystem(ExplosionSystem(), "logic", 14)
     self.engine:addSystem(GrenadeRotationSystem(), "logic", 15)
-    self.engine:addSystem(WeaponCarrySystem(), "logic", 15)
 
     -- Player creation
     playercutie = CutieModel(0, 0, resources.images.cutie1, 100)

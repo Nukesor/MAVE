@@ -9,5 +9,4 @@ function ItemComponent:__init(name, owned, price, image, sx, sy, use, drawableEn
     self.sx = sx
     self.sy = sy
     self.use = use
-    self.drawableEntity = drawableEntity
 end

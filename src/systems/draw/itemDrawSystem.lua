@@ -10,9 +10,14 @@ function ItemDrawSystem:draw()
         local entityY = entity:getComponent("PositionComponent").y
         local x = mouseX - entityX
         local y = mouseY - entityY
+
+        local sy = item.sy
+        if x < 0 then
+            sy = -sy
+        end
         
         love.graphics.setColor(255,255,255)
-        love.graphics.draw(item.image, entityX, entityY, math.atan2(x,y), item.sx, item.sy, 0, 0)
+        love.graphics.draw(item.image, entityX, entityY, math.atan2(x,-y)-(math.pi/2), item.sx, sy, 0, 0)
     end
 end
 

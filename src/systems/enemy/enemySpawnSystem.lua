@@ -11,7 +11,7 @@ function EnemySpawnSystem:update(dt)
     self.spawntimer = self.spawntimer + dt
 
     if self.spawntimer > 3 then 
-        self.fire = true
+        self.fire = false
     end
 
     if self.fire == true then

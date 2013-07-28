@@ -12,8 +12,8 @@ function MainMousePressedSystem:fireEvent(event)
         playercutie:addComponent(DashingComponent({x=xBefore, y=yBefore}, {x=targetX, y=targetY}))
     end
     if event.button == "l" then
-    	if playercutie:getComponent("ItemComponent").item then
-    		playercutie:getComponent("ItemComponent").item[7]()
+    	if playercutie:getComponent("ItemComponent") then
+    		playercutie:getComponent("ItemComponent").use()
     	end
     end
 end

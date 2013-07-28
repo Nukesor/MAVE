@@ -11,8 +11,12 @@ function MainKeySystem:fireEvent(event)
     end
     if tonumber(event.key) then
         if gameplay.items[tonumber(event.key)] then
-            if gameplay.items[tonumber(event.key)][2] == true then
-                playercutie:getComponent("ItemComponent").item = gameplay.items[tonumber(event.key)]
+            print(gameplay.items[tonumber(event.key)].name)
+            if gameplay.items[tonumber(event.key)].owned == true then
+                playercutie:addComponent(gameplay.items[tonumber(event.key)])
+                for k,v in pairs(playercutie:getComponent("ItemComponent")) do
+                    print(k,v)
+                end
             else
                 playercutie:getComponent("ItemComponent").item = nil
             end

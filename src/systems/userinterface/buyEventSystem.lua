@@ -13,8 +13,8 @@ function BuyEventSystem:fireEvent(event)
 
 		--Gold abziehen
 		if gameplay.items[index] then
-			gameplay.gold = gameplay.gold - gameplay.items[index][3]
-			gameplay.items[index][2] = true
+			gameplay.gold = gameplay.gold - gameplay.items[index].price
+			gameplay.items[index].owned = true
 		end
 	end
 end

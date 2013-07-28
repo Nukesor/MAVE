@@ -1,6 +1,6 @@
 ExplosionSystem = class("ExplosionSystem", System)
 
---ExplosionEventSystem Rename
+-- Lets explodable things with a timer explode.
 function ExplosionSystem:update(dt)
 	for index, value in pairs(self.targets) do
 		value.components.TimerComponent.time = value.components.TimerComponent.time - dt

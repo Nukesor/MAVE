@@ -1,4 +1,5 @@
 require("core/events/buyBoolEvent")
+require("components/cutie/itemComponent")
 
 Gameplay = class("Gameplay")
 
@@ -11,33 +12,33 @@ function Gameplay:__init()
 	self.gold = 100
 	self.items = {
 		--String, gekauft, Kosten, image, scalingx, scalingy, function 
-		{"Gewehr", false, 100, resources.images.grenade, 0.07, 0.07,
-		function()
+		ItemComponent("Gewehr", true, 100, resources.images.grenade, 0.07, 0.07,
+        function()
             -- Erstellt ein neues Shotmodel
             local shot = ShotModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y), love.mouse.getPosition())
             shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
             stack:current().engine:addEntity(shot) 
-		end}
+        end)
 		,
-		{"Granatwerfer", false, 300, resources.images, grenade, 0,07, 0,07, 
+		ItemComponent("Granatwerfer", false, 300, resources.images, grenade, 0,07, 0,07, 
 		function()
 
-		end}
+		end)
 		,
-		{"Granate", false, 100, resources.images.grenade, 0.07, 0.07, 
+		ItemComponent("Granate", false, 100, resources.images.grenade, 0.07, 0.07, 
 		function()
             -- Generates a new Grenademodel
             local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y), love.mouse.getPosition())
             grenade:getComponent("PhysicsComponent").fixture:setUserData(grenade)
             stack:current().engine:addEntity(grenade)
-		end}
+		end)
 		,
-		{"Mine", false, 100, resources.images.grenade, 0.07, 0.07,
+		ItemComponent("Mine", false, 100, resources.images.grenade, 0.07, 0.07,
 		function()
-		end}
+		end)
 		,
-		{"Hammer", false, 100, resources.images.grenade, 0.07, 0.07, 
+		ItemComponent("Hammer", false, 100, resources.images.grenade, 0.07, 0.07, 
     	function()
-		end}
+		end)
 	}
 end

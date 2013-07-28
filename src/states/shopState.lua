@@ -113,9 +113,6 @@ function ShopState:load()
     love.graphics.setFont(self.font)
 end
 
-
-
-
 function ShopState:update(dt)
     self.engine:update(dt)
 end

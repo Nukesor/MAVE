@@ -35,7 +35,7 @@ function ShopState:__init()
     {function () stack:popload() end, "Back"},
     {function () stack:popload() end, "Back"},
     {function () stack:pop() 
-                 stack:push(main) end, "Play"}
+                 stack:push(levelOne) end, "Play"}
     }
 end
 

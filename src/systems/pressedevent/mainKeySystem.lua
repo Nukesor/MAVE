@@ -8,6 +8,8 @@ function MainKeySystem:fireEvent(event)
         stack:push(pause)
     elseif event.key == "b" then
         main.shaketimer = 0.5
+    elseif event.key == "o" then
+        playercutie:getComponent("LifeComponent").life = 0
     end
     if tonumber(event.key) then
         if gameplay.items[tonumber(event.key)] then

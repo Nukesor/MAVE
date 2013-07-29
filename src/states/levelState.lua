@@ -184,8 +184,9 @@ function LevelState:update(dt)
     -- Spiel-Ende und Pushen des jeweiligen Gamestates
     if playercutie:getComponent("LifeComponent").life <= 0 then
         local canvas = love.graphics.newScreenshot()
-        screenshot = love.graphics.newImage(canvas)
+        local screenshot = love.graphics.newImage(canvas)
         self.shaketimer = 0
+        gameover.screenshot = screenshot
         stack:push(gameover)
     end
 

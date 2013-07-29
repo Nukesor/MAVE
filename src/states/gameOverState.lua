@@ -1,79 +1,101 @@
+require("core/resources")
+require("core/state")
+require("core/component")
+require("core/entity")
+require("core/engine")
+
+--Events
+require("core/events/mousePressed")
+require("core/events/keyPressed")
+
+-- BoxComponents
+require("components/userinterface/uiStringComponent")
+require("components/userinterface/boxComponent")
+require("components/physic/positionComponent")
+require("components/userinterface/functionComponent")
+require("components/userinterface/imageComponent")
+require("components/userinterface/menuWobblyComponent")
+
+-- Systems
+require("systems/userinterface/boxClickSystem")
+require("systems/userinterface/boxDrawSystem")
+require("systems/userinterface/boxHoverSystem")
+require("systems/userinterface/boxNavigationSystem")
+require("systems/userinterface/menuWobblySystem")
+
+
 GameOverState = class("GameOverState", State)
 
--- TOTAL BULLSHIT, not used at the moment. To be reimplemented.
-
 function GameOverState:__init()
-    self.menulist = {"Main Menu", "Restart" , "Exit"}
+    self.font = resources.fonts.forty
+    self.menu = {
+    {function () stack:popload() end, "Retry"},
+    {function () stack:pop() 
+                 stack:popload() end, "Level Select"},
+    {function () stack:pop()
+                 stack:pop()
+                 stack:push(shop) end, "Shop"}
+    }
 end
 
 function GameOverState:load()
-    self.flag = true
-    self.index = 2
-    self.shades = 250
-    self.runner = 0
+
+    self.engine = Engine()
+    local boxnavigation = BoxNavigationSystem()
+    local boxclick = BoxClickSystem()
+    self.engine:addListener("KeyPressed", boxnavigation)
+    self.engine:addListener("MousePressed", boxclick)
+
+    self.engine:addSystem(BoxHoverSystem(), "logic", 1)
+    self.engine:addSystem(MenuWobblySystem(), "logic", 2)
+    self.engine:addSystem(DrawableDrawSystem(), "draw")
+    self.engine:addSystem(BoxDrawSystem(), "draw")
+    self.engine:addSystem(boxclick)
+    self.engine:addSystem(boxnavigation)
+
+    self.menunumber = 3
+    self.menuboxes = {}
+
+    for i = 1, self.menunumber, 1 do
+        y = 500
+        x = love.graphics.getWidth()/4 * i - 50
+        local box
+        if i == 2 then
+            box = BoxModel(100, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
+        else
+            box = BoxModel(100, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
+        end
+        self.engine:addEntity(box)
+    end
+    sortMenu(self.menuboxes)
+
+    local background = Entity()
+    background:addComponent(DrawableComponent(self.screenshot))
+    background:addComponent(PositionComponent(0, 0))
+    background:addComponent(ZIndex(1))
+    self.engine:addEntity(background)
+
+    love.graphics.setFont(self.font)
 end
+
 
 function GameOverState:update(dt)
-    if self.flag == true and self.shades > 100 then
-        self.shades = self.shades - dt * 280
-    elseif self.flag == false then
-        self.shades = self.shades + dt * 380
-        if self.shades > 255 then
-            self.shades = 255
-        end
-    end
-    if self.flag == true and self.runner < 1 then
-        self.runner = self.runner + dt*3
-        if self.runner > 1 then
-            self.runner = 1
-        end
-    elseif self.flag == false then
-        self.runner = self.runner - dt*5
-    end
-    if self.runner < 0 then 
-        if self.index == 1 then
-            stack:pop()
-            stack:pop()
-            main:restart()
-        elseif self.index == 2 then
-            main:restart()
-            stack:pop()
-        elseif self.index == 3 then
-            love.event.quit()
-        end
-    end
+    self.engine:update(dt)
 end
+
 
 function GameOverState:draw()
-    love.graphics.setColor(255, 255, 255, self.shades)
-    love.graphics.draw(screenshot, 0, 0)
-
-    love.graphics.setColor(255, 255, 255, 255*self.runner)
-    love.graphics.setFont(resources.fonts.sixty)
-    love.graphics.print("GAME OVER", 370, 200)
-    for i, v in pairs(self.menulist) do
-        local scroll = i * 200 + 50
-        if i == self.index then
-            love.graphics.setFont(resources.fonts.forty)
-            love.graphics.print(v, scroll, 400)
-        else
-            love.graphics.setFont(resources.fonts.thirty)
-            love.graphics.print(v, scroll, 400)
-        end
-    end
-    love.graphics.setFont(resources.fonts.thirty)
+    self.engine:draw()
+    love.graphics.setColor(255, 255, 255)
+    love.graphics.print("You just died!", love.graphics.getWidth()/2-self.font:getWidth("You just died!")/2, 300)
+    love.graphics.print("Well, that sucks...", love.graphics.getWidth()/2-self.font:getWidth("Well that sucks...")/2, 200)
 end
 
-function GameOverState:keypressed(key, unicode)
-    if key == "left" or key == "a" then
-        self.index = self.index -1
-        if self.index < 1 then self.index = 3 end
-    end
-    if key == "right" or key == "d" then
-        self.index = self.index + 1
-        if self.index > 3 then self.index = 1 end
-    end
-    if key == "return" then
-        self.flag = false       
-    end
+
+function GameOverState:keypressed(key, u)
+    self.engine:fireEvent(KeyPressed(key, u))
+end
+
+function GameOverState:mousepressed(x, y, button)
+    self.engine:fireEvent(MousePressed(x, y, button))
 end

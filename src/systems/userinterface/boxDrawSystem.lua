@@ -34,7 +34,6 @@ function BoxDrawSystem:draw()
 
 		-- Drawfunktion for Menuboxes
 		elseif box.typ == "menu" then
-			print(position.x, position.y)
 			love.graphics.setColor(255, 255, 255, 255)
 			love.graphics.setFont(boxstring.font)
 			if box.selected == true then

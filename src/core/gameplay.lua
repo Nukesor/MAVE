@@ -12,29 +12,32 @@ function Gameplay:__init()
 	self.gold = 100
 	self.items = {
 		--String, gekauft, Kosten, image, scalingx, scalingy, function 
-		ItemComponent("Gewehr", true, 100, resources.images.gun, 0.1, 0.1,
+		ItemComponent("Gewehr", true, 10, resources.images.gun, 0.1, 0.1,
         function()
             -- Erstellt ein neues Shotmodel
-            local shot = ShotModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y), love.mouse.getPosition())
+            local shot = ShotModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, love.mouse.getPosition())
             shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
             stack:current().engine:addEntity(shot) 
         end)
 		,
-		ItemComponent("Granatwerfer", false, 300, resources.images.gun, grenade, 0,07, 0,07, 
+		ItemComponent("Granatwerfer", false, 10, resources.images.gun, grenade, 0,07, 0,07, 
 		function()
 
 		end)
 		,
-		ItemComponent("Granate", false, 100, resources.images.grenade, 0.07, 0.07, 
+		ItemComponent("Granate", true, 10, resources.images.grenade, 0.07, 0.07, 
 		function()
             -- Generates a new Grenademodel
-            local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, (playercutie:getComponent("PositionComponent").y), love.mouse.getPosition())
+            local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, love.mouse.getPosition())
             grenade:getComponent("PhysicsComponent").fixture:setUserData(grenade)
             stack:current().engine:addEntity(grenade)
 		end)
 		,
-		ItemComponent("Mine", false, 100, resources.images.grenade, 0.07, 0.07,
+		ItemComponent("Mine", true, 10, resources.images.grenade, 0.07, 0.07,
 		function()
+			local mine = MineModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y)
+			mine:getComponent("PhysicsComponent").fixture:setUserData(mine)
+			stack:current().engine:addEntity(mine)
 		end)
 		,
 		ItemComponent("Hammer", false, 100, resources.images.grenade, 0.07, 0.07, 

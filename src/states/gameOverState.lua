@@ -58,20 +58,22 @@ function GameOverState:load()
 
     for i = 1, self.menunumber, 1 do
         y = 500
-        x = love.graphics.getWidth()/4 * i - 50
+        x = love.graphics.getWidth()/4 * i
         local box
         if i == 2 then
             box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
         else
             box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
         end
-        print(i)
-        print(box)
-        print(self.menu[i][2])
-        print(self.menu[i][1])
         self.engine:addEntity(box)
     end
     sortMenu(self.menuboxes)
+    self.engine:addEntity(self.menuboxes[1])
+    for index, entity in pairs(self.engine.entities) do
+        if entity == self.menuboxes[1] then
+            print("roflcopter its here")
+        end
+    end
 
     local background = Entity()
     background:addComponent(DrawableComponent(self.screenshot))

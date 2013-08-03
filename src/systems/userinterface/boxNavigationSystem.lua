@@ -1,8 +1,6 @@
 BoxNavigationSystem = class("BoxNavigationSystem", System)
 
 function BoxNavigationSystem:init()
-	
-	self.selectedBox = nil
 end
 
 function BoxNavigationSystem:fireEvent(event)

@@ -31,6 +31,7 @@ require("systems/physic/bodyDestroySystem")
 --Weapon Systems
 require("systems/weapon/grenadeRotationSystem")
 require("systems/weapon/explosionSystem")
+require("systems/weapon/mineProximitySystem")
 
 --CutieManipulation Upgrade Systems
         --Cutie
@@ -81,6 +82,7 @@ require("components/identifier/isShot")
 require("components/identifier/isPlayer")
 require("components/identifier/isEnemy")
 require("components/identifier/isGrenade")
+require("components/identifier/isMine")
 
 -- Other Components
 require("components/explosionComponent")
@@ -92,6 +94,7 @@ require("components/damageComponent")
 require("models/shotmodel")
 require("models/cutieModel")
 require("models/grenadeModel")
+require("models/mineModel")
 
 
 LevelState = class("LevelState", State)
@@ -134,7 +137,8 @@ function LevelState:load()
     self.engine:addSystem(BodyDestroySystem(), "logic", 12)
     self.engine:addSystem(EnemySpawnSystem(), "logic", 13)
     self.engine:addSystem(ExplosionSystem(), "logic", 14)
-    self.engine:addSystem(GrenadeRotationSystem(), "logic", 15)
+    self.engine:addSystem(MineProximitySystem(), "logic", 15)
+    self.engine:addSystem(GrenadeRotationSystem(), "logic", 16 )
 
     -- Player creation
     playercutie = CutieModel(0, 0, resources.images.cutie1, 100)

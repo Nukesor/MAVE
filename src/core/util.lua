@@ -10,6 +10,14 @@ function distanceBetween(pos1, pos2)
     return math.sqrt(relativeX*relativeX + relativeY*relativeY)
 end
 
+function distanceBetweenEntities(entitie1, entitie2)
+    position1 = entitie1:getComponent("PositionComponent")
+    position2 = entitie2:getComponent("PositionComponent")
+    relativeX = position1.x - position2.x
+    relativeY = position1.y - position2.y
+    return math.sqrt(relativeX*relativeX + relativeY*relativeY)
+end
+
 function sortMenu(table)
     for index, box in pairs(table) do
         if index == 1 then

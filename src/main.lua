@@ -31,7 +31,7 @@ function love.load()
     resources:addImage("level2", 'data/gfx/arena.png')
     resources:addImage("level1", 'data/gfx/level1.png')
     resources:addImage("shot", 'data/gfx/shot.png')
-    resources:addImage("grenade", 'data/gfx/grenade.png')
+    resources:addImage("grenade", 'data/gfx/weapons/grenade.png')
     resources:addImage("gun", "data/gfx/weapons/lmg.png")
 
     resources:addSound("bounce1", 'data/sfx/bounce_low_level.ogg')

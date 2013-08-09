@@ -4,7 +4,7 @@ MineModel = class("MineModel", Entity)
 function MineModel:__init(x,y)
 
     local body = love.physics.newBody(world, x, y, "dynamic")
-    local shape = love.physics.newRectangleShape(8, 4) 
+    local shape = love.physics.newRectangleShape(10, 10) 
     local fixture = love.physics.newFixture(body, shape, 0)  
         fixture:setRestitution(0.5)  
         body:setMass(1)

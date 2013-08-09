@@ -20,11 +20,6 @@ function Gameplay:__init()
             stack:current().engine:addEntity(shot) 
         end)
 		,
-		ItemComponent("Granatwerfer", false, 10, resources.images.gun, grenade, 0,07, 0,07, 
-		function()
-
-		end)
-		,
 		ItemComponent("Granate", true, 10, resources.images.grenade, 0.07, 0.07, 
 		function()
             -- Generates a new Grenademodel

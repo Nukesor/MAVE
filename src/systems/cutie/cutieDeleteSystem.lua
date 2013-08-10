@@ -5,7 +5,7 @@ function CutieDeleteSystem:update()
         if entity:getComponent("LifeComponent").life <= 0 then
             gameplay.gold = gameplay.gold + entity:getComponent("GoldComponent").gold
             gameplay.kills = gameplay.kills + 1
-            DestroyBody(entity)
+            removeEntityWithPhysics(entity)
         end
     end
 end

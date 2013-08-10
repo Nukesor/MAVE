@@ -15,7 +15,7 @@ end
 
 
 function System:removeEntity(entity)
-    self.targets[entity.id] = nil
+	self.targets[entity.id] = nil
 end
 
 function System:addEntity(entity)

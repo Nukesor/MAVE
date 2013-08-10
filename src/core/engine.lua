@@ -34,7 +34,7 @@ function Engine:removeEntity(entity)
                 end
             end
         end
-        table.remove(entities, entity.id)
+        self.entities[entity.id] = nil
     end
 
     -- Löschen der jeweiligen Entity aus der ComponentList

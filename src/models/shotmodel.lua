@@ -26,5 +26,4 @@ function ShotModel:__init(x, y, xt, yt)
 
     body:setGravityScale(0.1)
     body:setLinearVelocity((1000*cos), (1000*sin))
-    print(body:getLinearVelocity())
 end

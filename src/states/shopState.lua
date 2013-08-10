@@ -119,6 +119,8 @@ end
 
 function ShopState:draw()
     self.engine:draw()
+    love.graphics.setFont(resources.fonts.twenty)
+    love.graphics.print(gameplay.gold .. " Gold", 26, 10)
 end
 
 

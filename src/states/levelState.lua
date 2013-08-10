@@ -82,13 +82,13 @@ require("components/identifier/isShot")
 require("components/identifier/isPlayer")
 require("components/identifier/isEnemy")
 require("components/identifier/isGrenade")
-require("components/identifier/isMine")
 
--- Other Components
-require("components/explosionComponent")
-require("components/timeComponent")
-require("components/timerComponent")
-require("components/damageComponent")
+-- Item Components
+require("components/items/explosionComponent")
+require("components/items/timeComponent")
+require("components/items/timerComponent")
+require("components/items/damageComponent")
+require("components/items/proximityExplodeComponent")
 
 -- Models
 require("models/shotmodel")

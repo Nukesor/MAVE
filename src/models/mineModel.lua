@@ -11,7 +11,7 @@ function MineModel:__init(x,y)
     self:addComponent(PhysicsComponent(body, fixture, shape ))
 	self:addComponent(PositionComponent(x,y))
     self:addComponent(DrawableComponent(resources.images.grenade, 0, 0.08, 0.08, 100, 130))
-    self:addComponent(IsMine())
     self:addComponent(ExplosionComponent(40, 120))
+    self:addComponent(ProximityExplodeComponent(20))
     self:addComponent(ZIndex(99))
 end

@@ -33,7 +33,6 @@ function ShopState:__init()
     self.font = resources.fonts.forty
     self.menu = {
     {function () stack:popload() end, "Back"},
-    {function () stack:popload() end, "Back"},
     {function () stack:pop() 
                  stack:push(levelOne) end, "Play"}
     }
@@ -73,12 +72,12 @@ function ShopState:load()
     sortMenu(self.boxes)
 
     -- Erstellung der MenuBoxes
-    self.menunumber = 3
+    self.menunumber = 2
     self.menuboxes = {}
 
     for i = 1, self.menunumber, 1 do
-        y = 500
-        x = love.graphics.getWidth()/4 * (i) - 50
+        y = 420
+        x = (love.graphics.getWidth()*i/(self.menunumber+1))-self.font:getWidth(self.menu[i][2])/2
         local box
         if i == 2 then
             box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)

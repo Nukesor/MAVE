@@ -7,7 +7,7 @@ function MenuWobblySystem:update(dt)
 		if component.pi >= math.pi*2 then
 			component.pi = 0
 		end
-		component.scale = math.sin(component.pi)*0.15+1
+		component.scale = math.sin(component.pi)*0.1+1
 	end
 end
 

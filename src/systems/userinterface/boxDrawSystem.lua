@@ -38,7 +38,7 @@ function BoxDrawSystem:draw()
 			love.graphics.setFont(boxstring.font)
 			if box.selected == true then
 				if scale ~= nil then
-					love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, scale + 0.5, scale + 0.5, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
+					love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, scale * 1.5, scale * 1.5, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
 				else
 					love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, scale, scale, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
 				end

@@ -31,5 +31,5 @@ function CreditsState:draw()
 end
 
 function CreditsState:keypressed(key, u)
-    stack:push(menu)
+    stack:pop()
 end

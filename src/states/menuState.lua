@@ -52,9 +52,10 @@ function MenuState:load()
     self.menunumber = 3
     self.menuboxes = {}
 
+    -- Add Buttons
     for i = 1, self.menunumber, 1 do
-        y = 500
-        x = love.graphics.getWidth()/4 * (i) - 50
+        y = 420
+        x = (love.graphics.getWidth()*i/4)-(self.font:getWidth(self.menu[i][2])/2)
         local box
         if i == 2 then
             box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
@@ -63,8 +64,8 @@ function MenuState:load()
         end
         self.engine:addEntity(box)
     end
-    sortMenu(self.menuboxes)
 
+    sortMenu(self.menuboxes)
     love.graphics.setFont(self.font)
 end
 
@@ -78,6 +79,11 @@ function MenuState:draw()
     love.graphics.setColor(255, 255, 255)
     love.graphics.draw(resources.images.cutie2, love.graphics.getWidth()/2, 400, 0, 1, 1, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
     self.engine:draw()
+
+    -- Draw title
+    love.graphics.setFont(resources.fonts.sixty)
+    love.graphics.print("MAVE", 
+        (love.graphics.getWidth()-resources.fonts.sixty:getWidth("MAVE"))/2, 50, 0, 1, 1, 0, 0)
 end
 
 

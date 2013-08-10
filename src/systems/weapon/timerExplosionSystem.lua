@@ -1,7 +1,7 @@
-ExplosionSystem = class("ExplosionSystem", System)
+TimerExplosionSystem = class("TimerExplosionSystem", System)
 
 -- Lets explodable things with a timer explode.
-function ExplosionSystem:update(dt)
+function TimerExplosionSystem:update(dt)
 	for index, value in pairs(self.targets) do
 		value.components.TimerComponent.time = value.components.TimerComponent.time - dt
 		if value.components.TimerComponent.time < 0 then
@@ -10,6 +10,6 @@ function ExplosionSystem:update(dt)
 	end
 end
 
-function ExplosionSystem:getRequiredComponents()
+function TimerExplosionSystem:getRequiredComponents()
 	return {"TimerComponent", "ExplosionComponent"}
 end

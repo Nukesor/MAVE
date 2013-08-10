@@ -16,7 +16,6 @@ function CollisionDamage:action(entities)
     local difference = distanceBetween({e1XSpeed, e1YSpeed}, {e2XSpeed, e2YSpeed})
 
     -- Check if there will be no damage dealt
-    -- ALL HAIL MATH.ABS
     if (difference < 700) then
         return
     end

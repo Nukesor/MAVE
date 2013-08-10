@@ -1,7 +1,7 @@
 CreditsState = class("CreditsState", State)
 
 function CreditsState:__init()
-    self.bg = resources.images.arena
+    self.bg = resources.images.level2
     self.names = {
                     {"Code:", "Arne Beer", "Rafael Epplée"}, 
                     {"Graphics:", "Rafael Epplée"}, 

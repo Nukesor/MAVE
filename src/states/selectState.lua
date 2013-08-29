@@ -82,7 +82,6 @@ end
 function SelectState:draw()
     self.engine:draw()
     love.graphics.setColor(255, 255, 255)
-    love.graphics.draw(resources.images.cutie3, love.graphics.getWidth()/2, 400, 0, 1, self.yscale, 
         resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
     love.graphics.setFont(resources.fonts.sixty)
     love.graphics.print("Select a level or start SHOPPING", 

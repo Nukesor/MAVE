@@ -10,4 +10,5 @@ function ShotCutieCollision:action(entities)
     local entity2 = entities.entity2
     entity1:getComponent("LifeComponent").life = entity1:getComponent("LifeComponent").life - entity2:getComponent("DamageComponent").damage
     entity2:addComponent(DestroyComponent())
+    stack:current().engine:refreshEntity(entity2, {"DestroyComponent"}, {})
 end

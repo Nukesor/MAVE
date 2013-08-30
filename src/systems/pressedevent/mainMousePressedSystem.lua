@@ -10,6 +10,7 @@ function MainMousePressedSystem:fireEvent(event)
 
         -- Adds a DashingComponent to the PlayerCutie
         playercutie:addComponent(DashingComponent({x=xBefore, y=yBefore}, {x=targetX, y=targetY}))
+        stack:current().engine:refreshEntity(entity, {"DashingComponent"}, {})
     end
     if event.button == "l" then
     	if playercutie:getComponent("ItemComponent") then

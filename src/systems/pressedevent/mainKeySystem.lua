@@ -15,8 +15,10 @@ function MainKeySystem:fireEvent(event)
         if gameplay.items[tonumber(event.key)] then
             if gameplay.items[tonumber(event.key)].owned == true then
                 playercutie:addComponent(gameplay.items[tonumber(event.key)])
+                stack:current().engine:refreshEntity(playercutie, {"ItemComponent"}, {})
             else
                 playercutie:removeComponent("ItemComponent")
+                stack:current().engine:refreshEntity(entity, {}, {"ItemComponent"})
             end
         end
     end

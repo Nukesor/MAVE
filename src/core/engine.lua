@@ -200,7 +200,7 @@ function Engine:getEntitylist(component)
             for index2, entity in pairs(table) do
                 for index3, comp in pairs(entity.components) do
                     if comp.__name == component then
-                        table.insert(self[component], rofl)
+                        table.insert(self[component], entity)
                         break
                     end
                 end

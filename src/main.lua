@@ -27,9 +27,12 @@ function love.load()
     resources:addImage("cutie3", 'data/gfx/cutie-3.png')
     resources:addImage("cutie4", 'data/gfx/cutie-4.png')
     resources:addImage("cutie5", 'data/gfx/cutie-5.png')
+
     resources:addImage("blood1", 'data/gfx/blood1.png')
     resources:addImage("level2", 'data/gfx/arena.png')
     resources:addImage("level1", 'data/gfx/level1.png')
+    resources:addImage("selectstate", 'data/gfx/psd/menu/concept.png')
+
     resources:addImage("shot", 'data/gfx/shot.png')
     resources:addImage("grenade", 'data/gfx/weapons/grenade.png')
     resources:addImage("gun", "data/gfx/weapons/lmg.png")

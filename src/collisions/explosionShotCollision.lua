@@ -9,6 +9,6 @@ function ExplosionShotCollision:action(entities)
     local shot = entities.entity2
     local expl = entities.entity1
 
-    expl:getComponent("TimerComponent").time = 0
-    DestroyBody(shot)
+	stack:current().engine:fireEvent(ExplosionEvent(expl))
+	removeEntityWithPhysics(shot)
 end

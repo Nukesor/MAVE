@@ -77,6 +77,7 @@ end
 
 function MenuState:draw()
     love.graphics.setColor(255, 255, 255)
+    love.graphics.draw(resources.images.cutie2, love.graphics.getWidth()/2, 400, 0, 1, 1, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
     self.engine:draw()
 
     -- Draw title

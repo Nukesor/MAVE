@@ -1,4 +1,4 @@
-function DestroyBody(entity)
+function removeEntityWithPhysics(entity)
     local physics = entity:getComponent("PhysicsComponent")
     physics.body:destroy()
     stack:current().engine:removeEntity(entity)

@@ -20,10 +20,33 @@ function Engine:addEntity(entity)
     end
     table.insert(self.entities[entity.id], entity)
 
-    -- Adding Entity to specific Entitylist if already existing
     for index, component in pairs(entity.components) do
+    -- Adding Entity to specific Entitylist if already existing
         if self[component.__name] then
             table.insert(self[component.__name], entity)
+        end
+    -- Adding Entity to System if all requirements are granted
+        if self.requirements[component.__name] then
+            for index2, system in pairs(self.requirements[component.__name]) do
+                local check = true
+                for index3, requirement in pairs(system:getRequiredComponents()) do
+                    if check == true then
+                        for index4, component in pairs(entity.components) do
+                            if component.__name == requirement then
+                                check = true
+                                break
+                            else
+                                check = false
+                            end
+                        end
+                    else
+                        break 
+                    end
+                end
+                if check == true then
+                    system:addEntity(entity)
+                end
+            end
         end
     end
 end 
@@ -177,7 +200,7 @@ function Engine:getEntitylist(component)
             for index2, entity in pairs(table) do
                 for index3, comp in pairs(entity.components) do
                     if comp.__name == component then
-                        table.insert(self[component], entity)
+                        table.insert(self[component], rofl)
                         break
                     end
                 end

@@ -10,7 +10,7 @@ function ExplosionEventSystem:fireEvent(event)
         end
     end
     if entity.components.PhysicsComponent then
-        DestroyBody(entity)
+        removeEntityWithPhysics(entity)
     else
     stack:current().engine:removeEntity(entity)
     end

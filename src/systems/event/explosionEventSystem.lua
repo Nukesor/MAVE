@@ -12,7 +12,7 @@ function ExplosionEventSystem:fireEvent(event)
     if entity.components.PhysicsComponent then
         removeEntityWithPhysics(entity)
     else
-    stack:current().engine:removeEntity(entity)
+        stack:current().engine:removeEntity(entity)
     end
     explo = Entity()
     local radius = entity:getComponent("ExplosionComponent").radius
@@ -20,6 +20,7 @@ function ExplosionEventSystem:fireEvent(event)
                                             220, 100, 0, 80, 220, 0, 0, 140, 
                                             exp.x, exp.y, 0.6, 0.5, 0.6, 0, 360, 
                                             0, 360, (radius*-7.5), (radius*-7.5)))
+    explo:addComponent(TimeComponent(0.6, 0.6))
     explo.components.ParticleComponent.hit:setColors(255, 255, 255, 255,
                                                     255, 255, 0, 255,
                                                     200, 0, 0, 255,

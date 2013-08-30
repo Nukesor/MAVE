@@ -218,9 +218,9 @@ end
 function Engine:getEntitylist(component)
     if self[component] then
         return self[component]
---[[
     else
         self[component] = {}
+--[[
         for index, table in pairs(self.entities) do
             for index2, entity in pairs(table) do
                 for index3, comp in pairs(entity.components) do
@@ -231,7 +231,7 @@ function Engine:getEntitylist(component)
                 end
             end
         end
-        return self[component]
 --]]
+        return self[component]
     end
 end

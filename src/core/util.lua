@@ -1,6 +1,8 @@
 function removeEntityWithPhysics(entity)
     local physics = entity:getComponent("PhysicsComponent")
-    physics.body:destroy()
+    if physics.body.destroy then
+        physics.body:destroy()
+    end
     stack:current().engine:removeEntity(entity)
 end
 

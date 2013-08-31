@@ -79,17 +79,10 @@ function Engine:removeEntity(entity)
     end
 
     -- Deleting the Entity from the specific entity lists
-    print(entity)
     for index, component in pairs(entity.components) do
         for index2, ent in pairs(self[component.__name]) do
             if entity == ent then 
-                print(#self[component.__name])
-                print(entity)
-                print(ent)
                 table.remove(self[component.__name], index2)
-                print(component.__name)
-                print(index2)
-                print("done")
             end
         end
     end

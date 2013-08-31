@@ -21,8 +21,11 @@ function Engine:addEntity(entity)
     table.insert(self.entities[entity.id], entity)
 
     for index, component in pairs(entity.components) do
-        -- Adding Entity to specific Entitylist if already existing
+        -- Adding Entity to specific Entitylist
         if self[component.__name] then
+            table.insert(self[component.__name], entity)
+        else
+            self[component.__name] = {}
             table.insert(self[component.__name], entity)
         end
         -- Adding Entity to System if all requirements are granted
@@ -32,13 +35,6 @@ function Engine:addEntity(entity)
                 for index3, requirement in pairs(system:getRequiredComponents()) do
                     if check == true then
                         for index4, component in pairs(entity.components) do
-                            -- adding Entity to componentlist.
-                            if self[component.__name] then
-                                table.insert(self[component.__name], entity)
-                            else
-                                self[component.__name] = {}
-                                table.insert(self[component.__name], entity)
-                            end
                             if component.__name == requirement then
                                 check = true
                                 break
@@ -83,12 +79,17 @@ function Engine:removeEntity(entity)
     end
 
     -- Deleting the Entity from the specific entity lists
+    print(entity)
     for index, component in pairs(entity.components) do
-        if self[component.__name] then
-            for index2, ent in pairs(self[component.__name]) do
-                if entity == ent then 
-                    table.remove(self[component.__name], index2)
-                end
+        for index2, ent in pairs(self[component.__name]) do
+            if entity == ent then 
+                print(#self[component.__name])
+                print(entity)
+                print(ent)
+                table.remove(self[component.__name], index2)
+                print(component.__name)
+                print(index2)
+                print("done")
             end
         end
     end

@@ -1,4 +1,5 @@
-# the Most Adorable Violence Ever
+![MAVE](https://raw.github.com/raffomania/MAVE/master/data/gfx/menu/logo.png)
+# The Most Adorable Violence Ever
 
 MAVE is a game of fun and cuteness. Prove yourself in a world full of small furballs called cuties. Battle against a range of different enemies, get new weapons, new skills and new levels. And the further you are, the cuter it gets!
 

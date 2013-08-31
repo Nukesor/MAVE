@@ -15,15 +15,9 @@ end
 
 
 function System:addEntity(entity)
-	table.insert(self.targets, entity)
+	self.targets[entity.id] = entity
 end
 
 function System:removeEntity(entity)
-	local index
-	for i, value in pairs(self.targets) do
-		if value ==  entity then
-			index = i
-		end
-	end
-	table.remove(self.targets, index)
+	self.targets[entity.id] = nil
 end

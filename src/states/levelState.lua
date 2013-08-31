@@ -140,20 +140,11 @@ function LevelState:load()
     self.engine:addSystem(MineProximitySystem(), "logic", 15)
     self.engine:addSystem(GrenadeRotationSystem(), "logic", 16 )
 
-    -- Player creation
-    playercutie = CutieModel(0, 0, resources.images.cutie1, 100)
-    playercutie:addComponent(IsPlayer())
-    self.engine:addEntity(playercutie)
-
     -- Background und Umgebungselemente
     self.bg = Entity()
     self.bg:addComponent(PositionComponent(0, 0))
     self.bg:addComponent(ZIndex(1))
     self.engine:addEntity(self.bg) 
-
-    local string = Entity()
-    string:addComponent(PositionComponent(20, 20))
-    string:addComponent(StringComponent({"Your Cutie´s life: %s", playercutie:getComponent("LifeComponent").life}, resources.fonts.thirty))
 
     -- Slowmospeed
     self.worldspeed = 1;

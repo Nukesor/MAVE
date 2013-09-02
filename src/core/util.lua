@@ -1,8 +1,6 @@
 function removeEntityWithPhysics(entity)
     local physics = entity:getComponent("PhysicsComponent")
-    if physics.body.destroy then
-        physics.body:destroy()
-    end
+    physics.body:destroy()
     stack:current().engine:removeEntity(entity)
 end
 
@@ -56,4 +54,41 @@ function getSelectedBox()
             return value
         end
     end
+end
+
+function deepcopy(orig)
+    local copy
+    if type(orig) == 'table' then
+        copy = {}
+        for orig_key, orig_value in next, orig, nil do
+            copy[deepcopy(orig_key)] = deepcopy(orig_value)
+        end
+        setmetatable(copy, deepcopy(getmetatable(orig)))
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
+end
+
+function copy(orig)
+    local copy
+    if type(orig) == 'table' then
+        copy = {}
+        for orig_key, orig_value in pairs(orig) do
+            copy[orig_key] = orig_value
+        end
+    else
+        copy = orig
+    end
+    return copy
+end
+
+function resetIndice(thing)
+    local newTable = {}
+    if type(thing) == 'table' then
+        for index, value in pairs(thing) do
+            table.insert(newTable, value)
+        end
+    end
+    return newTable
 end

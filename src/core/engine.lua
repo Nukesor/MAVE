@@ -63,16 +63,14 @@ function Engine:removeEntity(entity)
         table.insert(self.stack, entitiy.id)
     end
     -- Removing the Entity from all Systems and engine
-    if self.entities[entity.id] then
-        for i, component in pairs(entity.components) do
-            if self.requirements[component.__name] then
-                for i2, system in pairs(self.requirements[component.__name]) do
-                    system:removeEntity(entity)
-                end
+    for i, component in pairs(entity.components) do
+        if self.requirements[component.__name] then
+            for i2, system in pairs(self.requirements[component.__name]) do
+                system:removeEntity(entity)
             end
         end
-        table.remove(self.entities, entity.id)
     end
+    self.entities[entity.id] = nil
     -- Deleting the Entity from the specific entity lists
     for index, component in pairs(entity.components) do
         if self[component.__name] then

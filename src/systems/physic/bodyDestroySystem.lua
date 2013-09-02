@@ -2,7 +2,7 @@ BodyDestroySystem = class("BodyDestroySystem", System)
 
 function BodyDestroySystem:update()
 	for index, entity in pairs(self.targets) do
-			removeEntityWithPhysics(entity)
+		removeEntityWithPhysics(entity)
 	end
 end
 

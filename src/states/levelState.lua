@@ -26,7 +26,6 @@ require("systems/physic/speedLimitSystem")
 require("systems/physic/maxSpeedSystem")
 require("systems/physic/sideChangeSystem")
 require("systems/physic/physicsPositionSyncSystem")
-require("systems/physic/bodyDestroySystem")
 
 --Weapon Systems
 require("systems/weapon/grenadeRotationSystem")
@@ -65,7 +64,6 @@ require("components/particle/particleComponent")
 -- PhysicsCompoents
 require("components/physic/physicsComponent")
 require("components/physic/positionComponent")
-require("components/physic/destroyComponent")
 
 -- Cutie Components
 require("components/cutie/levelComponent")
@@ -134,7 +132,6 @@ function LevelState:load()
     self.wobbleSystem = self.engine:addSystem(WobbleSystem(), "logic", 9)
     self.dashingSystem = self.engine:addSystem(DashingSystem(), "logic", 10)
     self.engine:addSystem(CutieDeleteSystem(), "logic", 11)
-    self.engine:addSystem(BodyDestroySystem(), "logic", 12)
     self.engine:addSystem(EnemySpawnSystem(), "logic", 13)
     self.engine:addSystem(TimerExplosionSystem(), "logic", 14)
     self.engine:addSystem(MineProximitySystem(), "logic", 15)

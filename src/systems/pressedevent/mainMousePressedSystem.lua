@@ -13,6 +13,7 @@ function MainMousePressedSystem:fireEvent(event)
         stack:current().engine:componentAdded(entity, {"DashingComponent"})
     end
     if event.button == "l" then
+        -- Calls the funktion of the equiped item.
     	if playercutie:getComponent("ItemComponent") then
     		playercutie:getComponent("ItemComponent").use()
     	end

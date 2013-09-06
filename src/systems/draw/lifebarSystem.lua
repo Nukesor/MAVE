@@ -5,6 +5,7 @@ function LifebarSystem:draw()
 		local position = value:getComponent("PositionComponent")
 		local life = value:getComponent("LifeComponent")
 		local hp = life.life
+		-- Draws a healthbar above Entity. If life is below 0 its made 0 again. Otherwise huge healthbars will be displayed.
 		if hp < 0 then 
 			hp = 0
 		end

@@ -2,6 +2,7 @@ BleedingDetectSystem = class("BleedingDetectSystem", System)
 
 function BleedingDetectSystem:update(dt)
     for index, entity in pairs(self.targets) do
+        -- Checks if life is below 1/4 of full health and adds a particleComponent for bleeding animation.
         if (entity:getComponent("LifeComponent").life/entity:getComponent("LifeComponent").maxlife) <= 0.25 then
             if not entity:getComponent("ParticleComponent") then
                 entity:addComponent(ParticleComponent(resources.images.blood1, 50, 30, 20, 10, 0.3, 0.2, 

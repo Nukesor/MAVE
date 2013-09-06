@@ -11,6 +11,7 @@ function MainKeySystem:fireEvent(event)
     elseif event.key == "o" then
         playercutie:getComponent("LifeComponent").life = 0
     end
+    -- If any numberkey is pressed, the linked Item will be selected.
     if tonumber(event.key) then
         if gameplay.items[tonumber(event.key)] then
             if gameplay.items[tonumber(event.key)].owned == true then

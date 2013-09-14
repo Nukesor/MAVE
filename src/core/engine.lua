@@ -22,7 +22,8 @@ function Engine:addEntity(entity)
         self.entities[entity.id] = entity
         table.remove(self.stack, #self.stack)
     end
-
+    print("entity added")
+    print(entity.id)
     for index, component in pairs(entity.components) do
         -- Adding Entity to specific Entitylist
         if self[component.__name] then
@@ -58,24 +59,26 @@ function Engine:addEntity(entity)
 end 
 
 function Engine:removeEntity(entity)
-    -- Stashing the id of the removed Entity in self.stack
-    if not entity.id == #self.entities then
-        table.insert(self.stack, entitiy.id)
-    end
-    -- Removing the Entity from all Systems and engine
-    for i, component in pairs(entity.components) do
-        if self.requirements[component.__name] then
-            for i2, system in pairs(self.requirements[component.__name]) do
-                system:removeEntity(entity)
+    print("Entity removed")
+    print(entity.id)
+    if self.entities[entity.id] == entity then
+        -- Stashing the id of the removed Entity in self.stack
+        table.insert(self.stack, entity.id)
+        -- Removing the Entity from all Systems and engine
+        for i, component in pairs(entity.components) do
+            if self.requirements[component.__name] then
+                for i2, system in pairs(self.requirements[component.__name]) do
+                    system:removeEntity(entity)
+                end
             end
         end
-    end
-    self.entities[entity.id] = nil
-    -- Deleting the Entity from the specific entity lists
-    for index, component in pairs(entity.components) do
-        if self[component.__name] then
-            self[component.__name][entity.id] = nil
+        -- Deleting the Entity from the specific entity lists
+        for index, component in pairs(entity.components) do
+            if self[component.__name] then
+                self[component.__name][entity.id] = nil
+            end
         end
+        self.entities[entity.id] = nil
     end
 end
 

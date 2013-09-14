@@ -25,6 +25,7 @@ require("systems/particle/particleUpdateSystem")
 require("systems/physic/speedLimitSystem")
 require("systems/physic/sideChangeSystem")
 require("systems/physic/physicsPositionSyncSystem")
+require("systems/physic/bodyDestroySystem")
 
 --Weapon Systems
 require("systems/weapon/grenadeRotationSystem")
@@ -64,6 +65,7 @@ require("components/particle/particleComponent")
 -- PhysicsCompoents
 require("components/physic/physicsComponent")
 require("components/physic/positionComponent")
+require("components/physic/destroyComponent")
 
 -- Cutie Components
 require("components/cutie/levelComponent")
@@ -136,6 +138,7 @@ function LevelState:load()
     self.engine:addSystem(MineProximitySystem(), "logic", 13)
     self.engine:addSystem(GrenadeRotationSystem(), "logic", 14 )
     self.engine:addSystem(PlayerDeathCheckSystem(), "logic", 15)
+    self.engine:addSystem(BodyDestroySystem(), "logic", 16)
 
     -- Background und Umgebungselemente
     self.bg = Entity()

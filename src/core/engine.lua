@@ -22,8 +22,6 @@ function Engine:addEntity(entity)
         self.entities[entity.id] = entity
         table.remove(self.stack, #self.stack)
     end
-    print("entity added")
-    print(entity.id)
     for index, component in pairs(entity.components) do
         -- Adding Entity to specific Entitylist
         if self[component.__name] then
@@ -59,8 +57,6 @@ function Engine:addEntity(entity)
 end 
 
 function Engine:removeEntity(entity)
-    print("Entity removed")
-    print(entity.id)
     if self.entities[entity.id] == entity then
         -- Stashing the id of the removed Entity in self.stack
         table.insert(self.stack, entity.id)

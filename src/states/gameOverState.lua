@@ -68,12 +68,6 @@ function GameOverState:load()
         self.engine:addEntity(box)
     end
     sortMenu(self.menuboxes)
-    self.engine:addEntity(self.menuboxes[1])
-    for index, entity in pairs(self.engine.entities) do
-        if entity == self.menuboxes[1] then
-            print("roflcopter its here")
-        end
-    end
 
     local background = Entity()
     background:addComponent(DrawableComponent(self.screenshot))

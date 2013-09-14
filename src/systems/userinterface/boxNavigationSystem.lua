@@ -6,6 +6,7 @@ end
 function BoxNavigationSystem:fireEvent(event)
 	local key = event.key
 	local u = event.u
+    -- Navigation with keys through linked Boxes
     if key == "left" or key == "a" then
     	self:changeSelected(1)
     elseif key == "right" or key == "d" then
@@ -23,7 +24,6 @@ function BoxNavigationSystem:getRequiredComponents()
 	return {"BoxComponent"}
 end
 
--- Setzt die verlinkte Entity auf selected und die momentan selektierte auf false. Aufbau der Table {links, rechts, oben, unten}
 function BoxNavigationSystem:changeSelected(link) 
 	local box = getSelectedBox()
     if box:getComponent("BoxComponent").linked[link] then

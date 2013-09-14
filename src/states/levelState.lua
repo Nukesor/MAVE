@@ -19,14 +19,12 @@ require("systems/draw/itemDrawSystem")
 
 -- Particle Systems
 require("systems/particle/particleDrawSystem")
-require("systems/particle/particleDeleteSystem")
+require("systems/particle/particleUpdateSystem")
 
 -- Physics Systems
 require("systems/physic/speedLimitSystem")
-require("systems/physic/maxSpeedSystem")
 require("systems/physic/sideChangeSystem")
 require("systems/physic/physicsPositionSyncSystem")
-require("systems/physic/bodyDestroySystem")
 
 --Weapon Systems
 require("systems/weapon/grenadeRotationSystem")
@@ -44,6 +42,7 @@ require("systems/enemy/enemyTrackingSystem")
         --Player
 require("systems/player/playerMoveSystem")
 require("systems/player/dashingSystem")
+require("systems/player/playerDeathCheckSystem")
 
 -- Pressed Event Systems
 require("systems/pressedevent/mainKeySystem")
@@ -65,7 +64,6 @@ require("components/particle/particleComponent")
 -- PhysicsCompoents
 require("components/physic/physicsComponent")
 require("components/physic/positionComponent")
-require("components/physic/destroyComponent")
 
 -- Cutie Components
 require("components/cutie/levelComponent")
@@ -123,37 +121,27 @@ function LevelState:load()
     self.engine:addSystem(StringDrawSystem(), "draw")
     self.engine:addSystem(ItemDrawSystem(), "draw")
     
-    self.engine:addSystem(MaxSpeedSystem(), "logic", 1)
-    self.engine:addSystem(SideChangeSystem(), "logic", 2)
-    self.engine:addSystem(PhysicsPositionSyncSystem(), "logic", 3)
-    self.engine:addSystem(ParticleDeleteSystem(), "logic", 4)
-    self.engine:addSystem(PlayerMoveSystem(), "logic", 5)
-    self.engine:addSystem(EnemyTrackingSystem(), "logic", 6)
-    self.engine:addSystem(SpeedLimitSystem(), "logic", 7)
-    self.engine:addSystem(BleedingDetectSystem(), "logic", 8)
-    self.wobbleSystem = self.engine:addSystem(WobbleSystem(), "logic", 9)
-    self.dashingSystem = self.engine:addSystem(DashingSystem(), "logic", 10)
-    self.engine:addSystem(CutieDeleteSystem(), "logic", 11)
-    self.engine:addSystem(BodyDestroySystem(), "logic", 12)
-    self.engine:addSystem(EnemySpawnSystem(), "logic", 13)
-    self.engine:addSystem(TimerExplosionSystem(), "logic", 14)
-    self.engine:addSystem(MineProximitySystem(), "logic", 15)
-    self.engine:addSystem(GrenadeRotationSystem(), "logic", 16 )
-
-    -- Player creation
-    playercutie = CutieModel(0, 0, resources.images.cutie1, 100)
-    playercutie:addComponent(IsPlayer())
-    self.engine:addEntity(playercutie)
+    self.engine:addSystem(SideChangeSystem(), "logic", 1)
+    self.engine:addSystem(PhysicsPositionSyncSystem(), "logic", 2)
+    self.engine:addSystem(ParticleUpdateSystem(), "logic", 3)
+    self.engine:addSystem(PlayerMoveSystem(), "logic", 4)
+    self.engine:addSystem(EnemyTrackingSystem(), "logic", 5)
+    self.engine:addSystem(SpeedLimitSystem(), "logic", 6)
+    self.engine:addSystem(BleedingDetectSystem(), "logic", 7)
+    self.wobbleSystem = self.engine:addSystem(WobbleSystem(), "logic", 8)
+    self.dashingSystem = self.engine:addSystem(DashingSystem(), "logic", 9)
+    self.engine:addSystem(CutieDeleteSystem(), "logic", 10)
+    self.engine:addSystem(EnemySpawnSystem(), "logic", 11)
+    self.engine:addSystem(TimerExplosionSystem(), "logic", 12)
+    self.engine:addSystem(MineProximitySystem(), "logic", 13)
+    self.engine:addSystem(GrenadeRotationSystem(), "logic", 14 )
+    self.engine:addSystem(PlayerDeathCheckSystem(), "logic", 15)
 
     -- Background und Umgebungselemente
     self.bg = Entity()
     self.bg:addComponent(PositionComponent(0, 0))
     self.bg:addComponent(ZIndex(1))
     self.engine:addEntity(self.bg) 
-
-    local string = Entity()
-    string:addComponent(PositionComponent(20, 20))
-    string:addComponent(StringComponent({"Your Cutie´s life: %s", playercutie:getComponent("LifeComponent").life}, resources.fonts.thirty))
 
     -- Slowmospeed
     self.worldspeed = 1;
@@ -185,22 +173,12 @@ function LevelState:update(dt)
         self.shaketimer = self.shaketimer - dt
     end
 
-    -- Spiel-Ende und Pushen des jeweiligen Gamestates
-    if playercutie:getComponent("LifeComponent").life <= 0 then
-        local canvas = love.graphics.newScreenshot()
-        local screenshot = love.graphics.newImage(canvas)
-        self.shaketimer = 0
-        gameover.screenshot = screenshot
-        stack:push(gameover)
-    end
-
     -- Update Functions
     self.engine:update(dt)
     world:update(dt)
 end
 
 function LevelState:draw()
-
     -- Zeichnen der Grafiken
     if self.shaketimer > 0 then love.graphics.translate(self.shakeX, self.shakeY) end
 

@@ -2,6 +2,7 @@
 PhysicsPositionSyncSystem = class("PhysicsPositionSyncSystem", System)
 
 function PhysicsPositionSyncSystem:update(dt)
+	-- Syncs the PositionComponent with the PhysicsComponent. PhysicsComponent is the primary component.
     for k, entity in pairs(self.targets) do
         entity:getComponent("PositionComponent").x = entity:getComponent("PhysicsComponent").body:getX()
         entity:getComponent("PositionComponent").y = entity:getComponent("PhysicsComponent").body:getY()

@@ -5,7 +5,7 @@ function MineGroundCollision:__init()
 	self.component2 = "DrawablePolygonComponent"
 end
 
-function MineGroundCollision::action(entities)
+function MineGroundCollision:action(entities)
     local mine = entities.entity1
 
     mine:getComponent("PhysicsComponent").body:setLinearVelocity(0, 0)

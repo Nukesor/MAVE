@@ -9,15 +9,18 @@ function DrawableDrawSystem:__init()
             return vec4(1.0-effectiveColor.rgb, effectiveColor.a);
         }
     ]])
+    self.sortedTargets = {}
 end
 
 function DrawableDrawSystem:draw()
     love.graphics.setColor(255, 255, 255)
-    for index, entity in ipairs(self.targets) do
+    for index, entity in ipairs(self.sortedTargets) do
         local drawable = entity:getComponent("DrawableComponent")
         local pos = entity:getComponent("PositionComponent")
-        -- Enable for teh lulz
+        -- Enable to get inverted Colors
         --love.graphics.setPixelEffect(self.invert)
+
+        -- Draws the Picture. If Entity is near to the beginng or the end of the screen, the Entity is drawed on both sides for sideChangeSystem animation.
         if pos.x < 50 then 
             love.graphics.draw(drawable.image, pos.x+1000, pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
         elseif pos.x > 950 then
@@ -33,16 +36,15 @@ function DrawableDrawSystem:getRequiredComponents()
 end
 
 function DrawableDrawSystem:addEntity(entity)
-    table.insert(self.targets, entity)
-    table.sort(self.targets, function(a, b) return a:getComponent("ZIndex").index < b:getComponent("ZIndex").index end)
+    -- Entitys are sorted by ZIndex, therefore we had to overwrite System:addEntity
+    self.targets[entity.id] = entity
+    self.sortedTargets = resetIndice(self.targets)
+    table.sort(self.sortedTargets, function(a, b) return a:getComponent("ZIndex").index < b:getComponent("ZIndex").index end)
 end
 
 function DrawableDrawSystem:removeEntity(entity)
-    for index, value in pairs(self.targets) do
-        if value == entity then
-            table.remove(self.targets, index)
-            table.sort(self.targets, function(a, b) return a:getComponent("ZIndex").index < b:getComponent("ZIndex").index end)
-            break
-        end
-    end
+    -- Entitys are sorted by ZIndex, therefore we had to overwrite System:addEntity
+    self.targets[entity.id] = nil
+    self.sortedTargets = resetIndice(self.targets)
+    table.sort(self.sortedTargets, function(a, b) return a:getComponent("ZIndex").index < b:getComponent("ZIndex").index end)
 end

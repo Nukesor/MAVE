@@ -3,12 +3,13 @@ require("collisions/collisionDamage")
 require("collisions/shotCutieCollision")
 require("collisions/shotWallCollision")
 require("collisions/explosionShotCollision")
+require("collisions/mineGroundCollision")
 
 CollisionSelectSystem = class("CollisionDetectSystem", System)
 
 function CollisionSelectSystem:__init()
     self.conditions = {}
-
+    -- All available Collisions will be registered over here.
     local bounce = BounceCollision()
     self:addCollisionAction(bounce.component1, bounce.component2, bounce)
     local damage = CollisionDamage()
@@ -19,6 +20,8 @@ function CollisionSelectSystem:__init()
     self:addCollisionAction(shotwall.component1, shotwall.component2, shotwall)
     local shotexplosive = ExplosionShotCollision()
     self:addCollisionAction(shotexplosive.component1, shotexplosive.component2, shotexplosive)
+    local mineground = MineGroundCollision()
+    self:addCollisionAction(mineground.component1, mineground.component2, mineground)
 end
 
 function CollisionSelectSystem:addCollisionAction(component1, component2, object)
@@ -27,6 +30,7 @@ function CollisionSelectSystem:addCollisionAction(component1, component2, object
 end
 
 function CollisionSelectSystem:fireEvent(event)
+    -- If an Event is fired, the entities are given to the specific collisions. Entities are passed in Reihenfolge^^.
     local e1 = event.a:getUserData()
     local e2 = event.b:getUserData()
 

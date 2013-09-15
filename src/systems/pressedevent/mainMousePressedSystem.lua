@@ -14,8 +14,8 @@ function MainMousePressedSystem:fireEvent(event)
     end
     if event.button == "l" then
         -- Calls the funktion of the equiped item.
-    	if playercutie:getComponent("ItemComponent") then
-    		playercutie:getComponent("ItemComponent").use()
-    	end
+        if playercutie:getComponent("ItemComponent") then
+            playercutie:getComponent("ItemComponent").use()
+        end
     end
 end

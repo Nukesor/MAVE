@@ -68,11 +68,11 @@ end
 
 
 function love.update(dt)
-	stack:update(dt)
+    stack:update(dt)
 end
 
 function love.draw()
-	stack:draw()
+    stack:draw()
 end 
 
 function love.keypressed(key, u)

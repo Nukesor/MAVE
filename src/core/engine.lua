@@ -83,7 +83,7 @@ function Engine:addSystem(system, type, index)
     if type == "draw" then
         table.insert(self.drawSystems, system)
     elseif type == "logic" then
-        self.logicSystems[index] = system
+        table.insert(self.logicSystems, system)
     end
     table.insert(self.allSystems, system)
 

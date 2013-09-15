@@ -2,7 +2,7 @@ default: build run
 
 clean:
 	@[[ ! -e MAVE.love ]] || rm MAVE.love
-	@[[ ! -e pkg ]] || rm -r pkg		
+	@[[ ! -e pkg ]] || rm -r pkg        
 
 build: clean
 	@zip -r -0 MAVE.love data/*

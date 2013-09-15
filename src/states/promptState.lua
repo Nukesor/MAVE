@@ -3,7 +3,7 @@ require("core/events/buyBoolEvent")
 PromptState = class("PromptState", State)
 
 function PromptState:__init()
-	self.font = resources.fonts.fifty
+    self.font = resources.fonts.fifty
     self.menu = {
     {function () stack:pop()
                 stack:current().engine:fireEvent(BuyBoolEvent(true))

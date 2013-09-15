@@ -22,6 +22,9 @@ require("systems/userinterface/boxHoverSystem")
 require("systems/userinterface/boxNavigationSystem")
 require("systems/userinterface/menuWobblySystem")
 
+require("systems/draw/stringDrawSystem")
+require("components/graphic/stringComponent")
+
 
 MenuState = class("MenuState", State)
 
@@ -49,6 +52,8 @@ function MenuState:load()
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
 
+    self.engine:addSystem(StringDrawSystem(), "draw")
+
     self.menunumber = 3
     self.menuboxes = {}
 
@@ -65,6 +70,12 @@ function MenuState:load()
         self.engine:addEntity(box)
     end
 
+    self.timer = 0
+    str = Entity()
+    str:addComponent(StringComponent(resources.fonts.twenty, "ExtremeRofl, show that stuff:    %i", {stack:current().timer}))
+    str:addComponent(PositionComponent(100, 100))
+    self.engine:addEntity(str)
+
     sortMenu(self.menuboxes)
     love.graphics.setFont(self.font)
 end
@@ -72,6 +83,7 @@ end
 
 function MenuState:update(dt)
     self.engine:update(dt)
+    self.timer = self.timer + 1
 end
 
 

@@ -9,7 +9,7 @@ function ExplosionShotCollision:action(entities)
     local shot = entities.entity2
     local expl = entities.entity1
 
-	stack:current().engine:fireEvent(ExplosionEvent(expl))
-	shot:addComponent(DestroyComponent())
+    stack:current().engine:fireEvent(ExplosionEvent(expl))
+    shot:addComponent(DestroyComponent())
     stack:current().engine:componentAdded(shot, {"DestroyComponent"})
 end

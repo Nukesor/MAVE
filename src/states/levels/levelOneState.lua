@@ -8,31 +8,31 @@ function LevelOneState:load()
 
     -- Wall creation
     local wall =  Entity()
-    wall:addComponent(DrawablePolygonComponent(world, 500, 580, 1050, 10, "static", wall))
+    wall:addComponent(DrawablePolygonComponent(world, love.graphics.getWidth()/2, love.graphics.getHeight()* (29/30), love.graphics.getWidth()+50, love.graphics.getHeight()/60, "static", wall))
     self.engine:addEntity(wall)
 
     wall =  Entity()
-    wall:addComponent(DrawablePolygonComponent(world, 500, -50, 1050, 0, "static", wall))
+    wall:addComponent(DrawablePolygonComponent(world, love.graphics.getWidth()/2, -50, love.graphics.getWidth()+50, love.graphics.getHeight()/60, "static", wall))
     self.engine:addEntity(wall)
 
     for i = 0, 4, 1 do 
-        local y = 100 + 100 * i
-        local xbreite = 200 + 100 * i 
+        local y = love.graphics.getHeight()/6 * (i+1)
+        local xbreite = love.graphics.getWidth()/10 * (i+2) 
         wall = Entity()
-        wall:addComponent(DrawablePolygonComponent(world, 500, y, xbreite, 10, "static", wall))
+        wall:addComponent(DrawablePolygonComponent(world, love.graphics.getWidth()/2, y, xbreite, 10, "static", wall))
         self.engine:addEntity(wall)
     end
 
     for i = 0, 1, 1 do
-        local x = 20 + i * 960
+        local x = love.graphics.getWidth()/25 + i * love.graphics.getWidth() * (24/25)
         wall = Entity()
-        wall:addComponent(DrawablePolygonComponent(world, x, 200, 10, 200, "static", wall))
+        wall:addComponent(DrawablePolygonComponent(world, x, love.graphics.getHeight()/3, 10, love.graphics.getHeight()/3, "static", wall))
         self.engine:addEntity(wall)
     end
 
     -- Background
     self.bg = Entity()
-    self.bg:addComponent(DrawableComponent(resources.images.level1, 0, 1, 1, 0, 0))
+    self.bg:addComponent(DrawableComponent(resources.images.background, 0, relationX(), relationY(), 0, 0))
     self.bg:addComponent(PositionComponent(0, 0))
     self.bg:addComponent(ZIndex(0))
     self.engine:addEntity(self.bg)

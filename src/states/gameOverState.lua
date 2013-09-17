@@ -57,8 +57,8 @@ function GameOverState:load()
     self.menuboxes = {}
 
     for i = 1, self.menunumber, 1 do
-        y = 500
-        x = love.graphics.getWidth()/4 * i
+        y = love.graphics:getHeight() * (5/6)
+        x = love.graphics.getWidth()/4 * i -(self.font:getWidth(self.menu[i][2])/2)
         local box
         if i == 2 then
             box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)

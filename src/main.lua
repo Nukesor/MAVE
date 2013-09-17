@@ -21,7 +21,6 @@ require("states/settingState")
 
 
 function love.load()
-    stack = StackHelper()
     resources = Resources()
     resources:addImage("cutie1", 'data/gfx/cutie-0.png')
     resources:addImage("cutie0", 'data/gfx/cutie-1.png')
@@ -33,7 +32,7 @@ function love.load()
     resources:addImage("blood1", 'data/gfx/blood1.png')
     resources:addImage("level2", 'data/gfx/arena.png')
     resources:addImage("level1", 'data/gfx/level1.png')
-    resources:addImage("selectstate", 'data/gfx/psd/menu/concept.png')
+    resources:addImage("background", 'data/gfx/debug.png')
 
     resources:addImage("shot", 'data/gfx/shot.png')
     resources:addImage("grenade", 'data/gfx/weapons/grenade.png')
@@ -50,6 +49,8 @@ function love.load()
     resources:addFont("sixty", "data/font/SwankyandMooMoo.ttf", 60)
     
     resources:load()
+    stack = StackHelper()
+    gameplay = Gameplay()
     
     menu = MenuState()
     credits = CreditsState()
@@ -59,7 +60,6 @@ function love.load()
     prompt = PromptState()
     pause = PauseState()
     gameover = GameOverState()
-    gameplay = Gameplay()
 
     levelOne = LevelOneState()
     levelTwo = LevelTwoState()

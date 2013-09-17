@@ -59,7 +59,7 @@ function SelectState:load()
     self.menuboxes = {}
 
     for i = 1, self.menunumber, 1 do
-        y = 500
+        y = love.graphics.getHeight() * (5/6)
         x = (love.graphics.getWidth()*i/(self.menunumber+1))-(self.font:getWidth(self.menu[i][2])/2)
         local box
         if i == 2 then
@@ -73,8 +73,8 @@ function SelectState:load()
     love.graphics.setFont(self.font)
 
     self.bg = Entity()
-    self.bg:addComponent(DrawableComponent(resources.images.selectstate, 0, 2, 2, 0, 0))
-    self.bg:addComponent(PositionComponent(50, 0))
+    self.bg:addComponent(DrawableComponent(resources.images.background, 0, relationx(), relationy(), 0, 0))
+    self.bg:addComponent(PositionComponent(0, 0))
     self.bg:addComponent(ZIndex(0))
     self.engine:addEntity(self.bg)
 end
@@ -88,7 +88,7 @@ end
 function SelectState:draw()
     self.engine:draw()
     love.graphics.setColor(255, 255, 255)
-    love.graphics.draw(resources.images.cutie3, love.graphics.getWidth()/2-80, 500, 0, 1, self.yscale,
+    love.graphics.draw(resources.images.cutie3, love.graphics.getWidth()/2, love.graphics.getHeight() * (3/6), 0, 1, self.yscale,
         resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
     love.graphics.setFont(resources.fonts.sixty)
 --    love.graphics.print("Select a level or start SHOPPING", 

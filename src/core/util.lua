@@ -104,3 +104,13 @@ function equals(a, b)
     end
     return equal
 end
+
+function relationx()
+    local x = gameplay.settings.resolution[1]/1920
+    return x
+end
+
+function relationy()
+    local y = gameplay.settings.resolution[2]/1080
+    return y
+end

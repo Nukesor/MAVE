@@ -30,31 +30,31 @@ function SettingState:__init()
     self.menu = {
     {function (val) 
         local index
-        for k, v in pairs(self.resolutions) do
-            if equals(v, self.settings.resolution) then
+        for k, v in pairs(gameplay.resolutions) do
+            if equals(v, gameplay.settings.resolution) then
                 index = k
                 break
             end
         end
         if val == "add" then
-            if self.resolutions[index+1] then
-                self.settings.resolution = self.resolutions[index+1]
-            love.graphics.setMode(self.settings.resolution[1], self.settings.resolution[2], self.settings.fullscreen, true, 0)
+            if gameplay.resolutions[index+1] then
+                gameplay.settings.resolution = gameplay.resolutions[index+1]
+            love.graphics.setMode(gameplay.settings.resolution[1], gameplay.settings.resolution[2], gameplay.settings.fullscreen, true, 0)
             end
         else
-            if self.resolutions[index-1] then
-                self.settings.resolution = self.resolutions[index-1]
-                love.graphics.setMode(self.settings.resolution[1], self.settings.resolution[2], self.settings.fullscreen, true, 0)
+            if gameplay.resolutions[index-1] then
+                gameplay.settings.resolution = gameplay.resolutions[index-1]
+                love.graphics.setMode(gameplay.settings.resolution[1], gameplay.settings.resolution[2], gameplay.settings.fullscreen, true, 0)
             end
         end 
        end , "Resolution"},
     {function (val) 
-        if self.settings.fullscreen == true then
-            self.settings.fullscreen = false
+        if gameplay.settings.fullscreen == true then
+            gameplay.settings.fullscreen = false
         else
-            self.settings.fullscreen = true
+            gameplay.settings.fullscreen = true
         end
-        love.graphics.setMode(self.settings.resolution[1], self.settings.resolution[2], self.settings.fullscreen, true, 0)
+        love.graphics.setMode(gameplay.settings.resolution[1], gameplay.settings.resolution[2], gameplay.settings.fullscreen, true, 0)
     end , "Fullscreen"},
     {function (val) 
         if val == "add" then
@@ -78,14 +78,6 @@ function SettingState:__init()
         end 
        end , "Mousespeed"},
     {function () stack:popload() end, "Return"}
-    }
-    self.resolutions = {{1366, 768}, {1600, 900}, {1920, 1080}}
-    self.settings = {
-    resolution = {1366, 768},
-    fullscreen = false,
-    audio = 100,
-    music = 100,
-    mousespeed = 1,
     }
 end
 
@@ -111,7 +103,7 @@ function SettingState:load()
     -- Add Buttons
     for k, v in pairs(self.menu) do
         y = ((love.graphics.getHeight()/(#self.menu+1))*k) - 0.5 * (love.graphics.getHeight()/(#self.menu+1))
-        x = 100
+        x = love.graphics.getWidth() * (1/10)
         local box
         if k == #self.menu then
             box = BoxModel(self.font:getWidth(self.menu[k][2]), 40, x, y, "menu", self.menu[k][2], self.font, self.menu[k][1], true)

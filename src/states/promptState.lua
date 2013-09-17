@@ -33,7 +33,7 @@ function PromptState:load()
     self.menuboxes = {}
 
     for i = 1, self.menunumber, 1 do
-        y = 500
+        y = love.graphics.getHeight() * (5/6)
         x = love.graphics.getWidth()/3 * (i) - 50
         local box
         if i == 1 then
@@ -57,7 +57,7 @@ end
 function PromptState:draw()
     love.graphics.setColor(255, 255, 255)
     love.graphics.setFont(self.font)
-    love.graphics.print("ARE YOU SURE?", love.graphics.getWidth()/2, 300, 0, 1, 1, self.font:getWidth("ARE YOU SURE?")/2, self.font:getHeight("ARE YOU SURE?")/2)
+    love.graphics.print("ARE YOU SURE?", love.graphics.getWidth()/2, love.graphics.getHeight() * (1/2), 0, 1, 1, self.font:getWidth("ARE YOU SURE?")/2, self.font:getHeight("ARE YOU SURE?")/2)
     self.engine:draw()
 end
 

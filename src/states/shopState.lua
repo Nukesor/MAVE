@@ -63,8 +63,8 @@ function ShopState:load()
     for i = 1, self.boxnumber, 1 do
 
         -- Berrechnung der Position und Zeilenumbruch nach i == self.width Boxes
-        y = 50 + (math.floor((i-1)/self.width)*100)
-        x = 25 + 200 * ((i-1)-math.floor((i-1)/self.width)*5)
+        y = love.graphics.getHeight() * (1/20) + (math.floor((i-1)/self.width) * love.graphics.getHeight() * (1/10)) + math.floor((i-1)/self.width) * love.graphics.getHeight() * (1/30)
+        x = love.graphics.getWidth() * (1/24) + love.graphics.getWidth() * (1/5) * ((i-1)-math.floor((i-1)/self.width)*5)
 
         local box = ItemBoxModel(150, 75, x, y, "item", false)
         self.engine:addEntity(box)
@@ -76,7 +76,7 @@ function ShopState:load()
     self.menuboxes = {}
 
     for i = 1, self.menunumber, 1 do
-        y = 420
+        y = love.graphics.getHeight() * (3/4)
         x = (love.graphics.getWidth()*i/(self.menunumber+1))-self.font:getWidth(self.menu[i][2])/2
         local box
         if i == 2 then

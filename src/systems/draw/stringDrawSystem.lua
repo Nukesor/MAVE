@@ -2,9 +2,14 @@ StringDrawSystem = class("StringDrawSystem", System)
 
 function StringDrawSystem:draw()
     for index, entity in pairs(self.targets) do
-        love.graphics.setFont(entity:getComponent("StringComponent").font)
+        local str = entity:getComponent("StringComponent")
         local position = entity:getComponent("PositionComponent")
-        love.graphics.print(string.format(entity:getComponent("StringComponent").string, unpack(entity:getComponent("StringComponent").values)), position.x, position.y)
+        local val = {}
+        for k, v in pairs(str.values) do
+        	table.insert(val, v[1][v[2]])
+        end
+		love.graphics.setFont(str.font)
+        love.graphics.print(string.format(str.string, unpack(val)), position.x, position.y)
     end
 end
 

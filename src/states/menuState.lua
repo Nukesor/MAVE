@@ -72,7 +72,7 @@ function MenuState:load()
 
     self.timer = 0
     str = Entity()
-    str:addComponent(StringComponent(resources.fonts.twenty, "ExtremeRofl, show that stuff:    %i", {stack:current().timer}))
+    str:addComponent(StringComponent(resources.fonts.twenty, "ExtremeRofl, show that stuff:    %i", {{stack:current(), "timer"}}))
     str:addComponent(PositionComponent(100, 100))
     self.engine:addEntity(str)
 

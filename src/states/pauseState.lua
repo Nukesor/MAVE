@@ -28,8 +28,8 @@ function PauseState:load()
     self.menuboxes = {}
 
     for i = 1, self.menunumber, 1 do
-        y = (i-1) * 120 + 100
-        x = 120
+        y = i * (love.graphics.getHeight()/8)
+        x = love.graphics:getWidth()/12
         local box
         if i == 1 then
             box = BoxModel(100, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)

@@ -77,7 +77,7 @@ function SettingState:__init()
 
         end 
        end , "Mousespeed"},
-    {function () stack:pop() end, "Return"}
+    {function () stack:popload() end, "Return"}
     }
     self.resolutions = {{1366, 768}, {1600, 900}, {1920, 1080}}
     self.settings = {

@@ -53,7 +53,7 @@ function MenuState:load()
 
     -- Add Buttons
     for i = 1, self.menunumber, 1 do
-        y = 420
+        y = love.graphics.getHeight()*(7/10)
         x = (love.graphics.getWidth()*i/4)-(self.font:getWidth(self.menu[i][2])/2)
         local box
         if i == 2 then
@@ -79,7 +79,7 @@ end
 
 function MenuState:draw()
     love.graphics.setColor(255, 255, 255)
-    love.graphics.draw(resources.images.cutie2, love.graphics.getWidth()/2, 400, 0, 1, 1, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
+    love.graphics.draw(resources.images.cutie2, love.graphics.getWidth()/2, love.graphics.getHeight()*(2/3), 0, 1, 1, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
     self.engine:draw()
 
     -- Draw title

@@ -48,8 +48,6 @@ function MenuState:load()
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
 
-    self.engine:addSystem(StringDrawSystem(), "draw")
-
     self.menunumber = 3
     self.menuboxes = {}
 
@@ -65,6 +63,9 @@ function MenuState:load()
         end
         self.engine:addEntity(box)
     end
+    local box
+    box = BoxModel(self.font:getWidth("Settings"), 40, 100, 100, "menu", "Settings", self.font, function () stack:push(setting) end, false)
+    self.engine:addEntity(box)
 
     sortMenu(self.menuboxes)
     love.graphics.setFont(self.font)

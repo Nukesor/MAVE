@@ -17,6 +17,7 @@ require("states/pauseState")
 require("states/selectState")
 require("states/shopState")
 require("states/promptState")
+require("states/settingState")
 
 
 function love.load()
@@ -62,6 +63,7 @@ function love.load()
     shop = ShopState()
     gameplay = Gameplay()
     prompt = PromptState()
+    setting = SettingState()
 
     stack:push(menu)
 end

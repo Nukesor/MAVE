@@ -22,6 +22,7 @@ function DashingSystem:update(dt)
         entity:getComponent("DashingComponent").time = entity:getComponent("DashingComponent").time + dt
         if entity:getComponent("DashingComponent").time >= 0.15 then
             entity:removeComponent("DashingComponent")
+            stack:current().engine:componentRemoved(entity, {"DashingComponent"})
         end
     end
 end

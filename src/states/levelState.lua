@@ -141,9 +141,9 @@ function LevelState:load()
     self.engine:addSystem(TimerExplosionSystem(), "logic")
     self.engine:addSystem(MineProximitySystem(), "logic")
     self.engine:addSystem(GrenadeRotationSystem(), "logic")
-    self.engine:addSystem(PlayerDeathCheckSystem(), "logic")
     self.engine:addSystem(BodyDestroySystem(), "logic")
     self.engine:addSystem(TimerSystem(), "logic")
+    self.engine:addSystem(PlayerDeathCheckSystem(), "logic")
 
     -- Slowmospeed
     self.worldspeed = 1;

@@ -94,7 +94,7 @@ function SettingState:load()
     self.engine = Engine()
     local settingnavigation = SettingNavigationSystem()
     local boxclick = BoxClickSystem()
-    self.engine:addListener("KeyPressed",  settingnavigation)
+    self.engine:addListener("KeyPressed", settingnavigation)
     self.engine:addListener("MousePressed", boxclick)
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
@@ -103,7 +103,6 @@ function SettingState:load()
     self.engine:addSystem(DrawableDrawSystem(), "draw")
     self.engine:addSystem(boxclick)
     self.engine:addSystem(settingnavigation)
-
     self.engine:addSystem(StringDrawSystem(), "draw")
 
     self.menunumber = 3
@@ -111,7 +110,7 @@ function SettingState:load()
 
     -- Add Buttons
     for k, v in pairs(self.menu) do
-        y = (love.graphics.getHeight()*k/#self.menu)-(self.font:getWidth(self.menu[k][2])/2)
+        y = ((love.graphics.getHeight()/(#self.menu+1))*k) - 0.5 * (love.graphics.getHeight()/(#self.menu+1))
         x = 100
         local box
         if k == #self.menu then

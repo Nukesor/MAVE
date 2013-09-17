@@ -122,7 +122,7 @@ function Engine:componentRemoved(entity, removed)
     if removed then
         for i, component in pairs(removed) do
             -- Removing Entity from Entitylists
-             self[compontent][entity.id] = nil
+            self[component][entity.id] = nil
             -- Removing Entity from old systems
             if self.requirements[component] then
                 for i2, system in pairs(self.requirements[component]) do 

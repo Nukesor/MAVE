@@ -7,7 +7,7 @@ function MainKeySystem:fireEvent(event)
         pause.screenshot = love.graphics.newImage(canvas)
         stack:push(pause)
     elseif event.key == "b" then
-        main.shaketimer = 0.5
+        stack:current().shaketimer = 0.5
     elseif event.key == "o" then
         playercutie:getComponent("LifeComponent").life = 0
     end

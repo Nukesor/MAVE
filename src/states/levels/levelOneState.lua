@@ -3,11 +3,8 @@ LevelOneState = class("LevelOneState", LevelState)
 function LevelOneState:load()
     self.__super.load(self)
 
-    -- Playercreation
-    playercutie = CutieModel(0, 0, resources.images.cutie1, 100)
-    playercutie:addComponent(IsPlayer())
+    -- Playercutie Position
     playercutie:getComponent("PhysicsComponent").body:setPosition(333, 520)
-    self.engine:addEntity(playercutie)
 
     -- Wall creation
     local wall =  Entity()

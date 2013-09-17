@@ -8,6 +8,7 @@ function StringDrawSystem:draw()
         for k, v in pairs(str.values) do
         	table.insert(val, v[1][v[2]])
         end
+        love.graphics.setColor(unpack(str.color))
 		love.graphics.setFont(str.font)
         love.graphics.print(string.format(str.string, unpack(val)), position.x, position.y)
     end

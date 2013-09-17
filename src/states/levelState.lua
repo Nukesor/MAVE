@@ -145,12 +145,6 @@ function LevelState:load()
     self.engine:addSystem(BodyDestroySystem(), "logic")
     self.engine:addSystem(TimerSystem(), "logic")
 
-    -- Background und Umgebungselemente
-    self.bg = Entity()
-    self.bg:addComponent(PositionComponent(0, 0))
-    self.bg:addComponent(ZIndex(1))
-    self.engine:addEntity(self.bg) 
-
     -- Slowmospeed
     self.worldspeed = 1;
 
@@ -159,6 +153,27 @@ function LevelState:load()
     self.shakeX = 0
     self.shakeY = 0
     self.shaketimer = 0
+
+    -- Playercreation
+    playercutie = CutieModel(0, 0, resources.images.cutie1, 100)
+    playercutie:addComponent(IsPlayer())
+    self.engine:addEntity(playercutie)
+
+    local str = Entity()
+    str:addComponent(StringComponent(resources.fonts.twenty, {255, 0, 0, 255}, "Player's life:  %i", {{playercutie:getComponent("LifeComponent"), "life"}}))
+    str:addComponent(PositionComponent(10, 10))
+    self.engine:addEntity(str)
+
+    str = Entity()
+    str:addComponent(StringComponent(resources.fonts.twenty, {255, 0, 0, 255}, "Gold:  %i", {{gameplay, "gold"}}))
+    str:addComponent(PositionComponent(900, 20))
+    self.engine:addEntity(str)
+
+    str = Entity()
+    str:addComponent(StringComponent(resources.fonts.twenty, {255, 0, 0, 255}, "Kills:  %i", {{gameplay, "kills"}}))
+    str:addComponent(PositionComponent(900, 5))
+    self.engine:addEntity(str)
+
 end
 
 function LevelState:update(dt)

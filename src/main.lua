@@ -21,6 +21,7 @@ require("states/settingState")
 
 
 function love.load()
+    stack = StackHelper()
     resources = Resources()
     resources:addImage("cutie1", 'data/gfx/cutie-0.png')
     resources:addImage("cutie0", 'data/gfx/cutie-1.png')
@@ -50,20 +51,18 @@ function love.load()
     
     resources:load()
     
-    love.graphics.setMode(1000, 600, false, true, 0) -- Fensteroberfläche
-
+    menu = MenuState()
     credits = CreditsState()
+    setting = SettingState()
+    selectstate = SelectState()
+    shop = ShopState()
+    prompt = PromptState()
+    pause = PauseState()
+    gameover = GameOverState()
+    gameplay = Gameplay()
+
     levelOne = LevelOneState()
     levelTwo = LevelTwoState()
-    menu = MenuState()
-    gameover = GameOverState()
-    pause = PauseState()
-    selectstate = SelectState()
-    stack = StackHelper()
-    shop = ShopState()
-    gameplay = Gameplay()
-    prompt = PromptState()
-    setting = SettingState()
 
     stack:push(menu)
 end

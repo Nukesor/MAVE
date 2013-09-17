@@ -29,43 +29,64 @@ function SettingState:__init()
     self.font = resources.fonts.forty
     self.menu = {
     {function (val) 
-    	if val == "add" then
-
-    	else
-
-    	end 
-   	end , "Resolution"},
+        local index
+        for k, v in pairs(self.resolutions) do
+            if equals(v, self.settings.resolution) then
+                index = k
+                break
+            end
+        end
+        if val == "add" then
+            if self.resolutions[index+1] then
+                self.settings.resolution = self.resolutions[index+1]
+            love.graphics.setMode(self.settings.resolution[1], self.settings.resolution[2], self.settings.fullscreen, true, 0)
+            end
+        else
+            if self.resolutions[index-1] then
+                self.settings.resolution = self.resolutions[index-1]
+                love.graphics.setMode(self.settings.resolution[1], self.settings.resolution[2], self.settings.fullscreen, true, 0)
+            end
+        end 
+       end , "Resolution"},
+    {function (val) 
+        if self.settings.fullscreen == true then
+            self.settings.fullscreen = false
+        else
+            self.settings.fullscreen = true
+        end
+        love.graphics.setMode(self.settings.resolution[1], self.settings.resolution[2], self.settings.fullscreen, true, 0)
+    end , "Fullscreen"},
     {function (val) 
         if val == "add" then
 
         else
 
         end 
-    end , "Fullscreen"},
+       end , "Sound"},
     {function (val) 
-    	if val == "add" then
+        if val == "add" then
 
-    	else
+        else
 
-    	end 
-   	end , "Sound"},
+        end 
+       end , "Music"},
     {function (val) 
-    	if val == "add" then
+        if val == "add" then
 
-    	else
+        else
 
-    	end 
-   	end , "Music"},
-    {function (val) 
-    	if val == "add" then
-
-    	else
-
-    	end 
-   	end , "Mousespeed"},
+        end 
+       end , "Mousespeed"},
     {function () stack:pop() end, "Return"}
     }
-    self.resolutions = {{1378, 768}, {1600, 900}, {1920, 1080}}
+    self.resolutions = {{1366, 768}, {1600, 900}, {1920, 1080}}
+    self.settings = {
+    resolution = {1366, 768},
+    fullscreen = false,
+    audio = 100,
+    music = 100,
+    mousespeed = 1,
+    }
 end
 
 function SettingState:load()

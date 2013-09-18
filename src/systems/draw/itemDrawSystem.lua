@@ -18,7 +18,7 @@ function ItemDrawSystem:draw()
             end
             
             love.graphics.setColor(255,255,255)
-            love.graphics.draw(item.image, entityX, entityY, math.atan2(x,-y)-(math.pi/2), item.sx, sy, 0, 0)
+            love.graphics.draw(item.image, entityX, entityY, math.atan2(x,-y)-(math.pi/2), item.sx * relation(), sy * relation(), 0, 0)
         end
     end
 end

@@ -6,7 +6,7 @@ function PlayerControlSystem:fireEvent(event)
         playercutie:getComponent("PhysicsComponent").body:applyLinearImpulse(0, 1)
     elseif event.key == "w" or event.key == "up" then
         if playercutie:getComponent("IsPlayer").jumpcount > 0 then
-            playercutie:getComponent("PhysicsComponent").body:applyLinearImpulse(0, -14)
+            playercutie:getComponent("PhysicsComponent").body:applyLinearImpulse(0, -5)
             playercutie:getComponent("IsPlayer").jumpcount = playercutie:getComponent("IsPlayer").jumpcount - 1
         end
     end

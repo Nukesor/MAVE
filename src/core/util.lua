@@ -106,6 +106,6 @@ function equals(a, b)
 end
 
 function relation()
-    local x = gameplay.settings.resolution[1]/1920
+    local x = set.settings.resolution[1]/1920
     return x
 end

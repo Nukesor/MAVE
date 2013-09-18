@@ -3,6 +3,7 @@ require("core/resources")
 require("core/stackhelper")
 require("core/gameplay")
 require("core/util")
+require("core/settings")
 
 require("core/state")
 
@@ -37,6 +38,7 @@ function love.load()
     resources:addImage("shot", 'data/gfx/shot.png')
     resources:addImage("grenade", 'data/gfx/weapons/grenade.png')
     resources:addImage("gun", "data/gfx/weapons/lmg.png")
+    resources:addImage("mine", "data/gfx/weapons/mine.png")
 
     resources:addSound("bounce1", 'data/sfx/bounce_low_level.ogg')
 
@@ -49,6 +51,7 @@ function love.load()
     resources:addFont("sixty", "data/font/SwankyandMooMoo.ttf", 60)
     
     resources:load()
+    set = Settings()
     stack = StackHelper()
     gameplay = Gameplay()
     

@@ -30,33 +30,33 @@ function SettingState:__init()
     self.menu = {
     {function (val) 
         local index
-        for k, v in pairs(gameplay.resolutions) do
-            if equals(v, gameplay.settings.resolution) then
+        for k, v in pairs(set.resolutions) do
+            if equals(v, set.settings.resolution) then
                 index = k
                 break
             end
         end
         if val == "add" then
-            if gameplay.resolutions[index+1] then
-                gameplay.settings.resolution = gameplay.resolutions[index+1]
-            love.graphics.setMode(gameplay.settings.resolution[1], gameplay.settings.resolution[2], gameplay.settings.fullscreen, true, 0)
+            if set.resolutions[index+1] then
+                set.settings.resolution = set.resolutions[index+1]
+            love.graphics.setMode(set.settings.resolution[1], set.settings.resolution[2], set.settings.fullscreen, true, 0)
             self:load()
             end
         else
-            if gameplay.resolutions[index-1] then
-                gameplay.settings.resolution = gameplay.resolutions[index-1]
-                love.graphics.setMode(gameplay.settings.resolution[1], gameplay.settings.resolution[2], gameplay.settings.fullscreen, true, 0)
+            if set.resolutions[index-1] then
+                set.settings.resolution = set.resolutions[index-1]
+                love.graphics.setMode(set.settings.resolution[1], set.settings.resolution[2], set.settings.fullscreen, true, 0)
                 self:load()
             end
         end 
        end , "Resolution"},
     {function (val) 
-        if gameplay.settings.fullscreen == true then
-            gameplay.settings.fullscreen = false
+        if set.settings.fullscreen == true then
+            set.settings.fullscreen = false
         else
-            gameplay.settings.fullscreen = true
+            set.settings.fullscreen = true
         end
-        love.graphics.setMode(gameplay.settings.resolution[1], gameplay.settings.resolution[2], gameplay.settings.fullscreen, true, 0)
+        love.graphics.setMode(set.settings.resolution[1], set.settings.resolution[2], set.settings.fullscreen, true, 0)
     end , "Fullscreen"},
     {function (val) 
         if val == "add" then

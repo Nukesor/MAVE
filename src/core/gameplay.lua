@@ -12,7 +12,7 @@ function Gameplay:__init()
     self.gold = 100
     self.items = {
         --String, gekauft, Kosten, image, scalingx, scalingy, function 
-        ItemComponent("Gewehr", true, 10, resources.images.gun, 0.1, 0.1,
+        ItemComponent("Gewehr", true, 10, resources.images.gun, 0.15 * relation(), 0.15 * relation(),
         function()
             -- Erstellt ein neues Shotmodel
             local shot = ShotModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, love.mouse.getPosition())
@@ -20,7 +20,7 @@ function Gameplay:__init()
             stack:current().engine:addEntity(shot) 
         end)
         ,
-        ItemComponent("Granate", true, 10, resources.images.grenade, 0.07, 0.07, 
+        ItemComponent("Granate", true, 10, resources.images.grenade, 0.12 * relation(), 0.12 * relation(), 
         function()
             -- Generates a new Grenademodel
             local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, love.mouse.getPosition())
@@ -28,23 +28,15 @@ function Gameplay:__init()
             stack:current().engine:addEntity(grenade)
         end)
         ,
-        ItemComponent("Mine", true, 10, resources.images.grenade, 0.07, 0.07,
+        ItemComponent("Mine", true, 10, resources.images.mine, 0.2 * relation(), 0.2 * relation(),
         function()
             local mine = MineModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y)
             mine:getComponent("PhysicsComponent").fixture:setUserData(mine)
             stack:current().engine:addEntity(mine)
         end)
         ,
-        ItemComponent("Hammer", false, 100, resources.images.grenade, 0.07, 0.07, 
+        ItemComponent("Hammer", false, 100, resources.images.grenade, 0.14, 0.14, 
         function()
         end)
-    }
-    self.resolutions = {{1024, 576}, {1280, 720}, {1366, 768}, {1600, 900}, {1920, 1080}}
-    self.settings = {
-    resolution = {1920, 1080},
-    fullscreen = false,
-    audio = 100,
-    music = 100,
-    mousespeed = 1,
     }
 end

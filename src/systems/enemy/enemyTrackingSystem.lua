@@ -9,24 +9,25 @@ function EnemyTrackingSystem:update(dt)
         local speed = stack:current().worldspeed or 1
 
         -- Ki
-        if ypos <= 579 then
-            height = 500
-            if ypos <= 495 then
-                height = 400
-                if ypos <= 395 then
-                    height = 300
-                    if ypos <= 295 then
-                        height = 200
-                        if ypos <= 195 then
-                            height = 100
-                            if ypos <= 95 then
-                                height = 0
+        if ypos <= love.graphics.getHeight() * (6/6) - love.graphics.getHeight()/60   then
+            height = love.graphics.getHeight() * (5/6)
+            if ypos <= love.graphics.getHeight() * (5/6) - love.graphics.getHeight()/60 then
+                height = love.graphics.getHeight() * (4/6)
+                if ypos <= love.graphics.getHeight() * (4/6) - love.graphics.getHeight()/60  then
+                    height = love.graphics.getHeight() * (3/6)
+                    if ypos <= love.graphics.getHeight() * (3/6) - love.graphics.getHeight()/60  then
+                        height = love.graphics.getHeight() * (2/6)
+                        if ypos <= love.graphics.getHeight() * (2/6) - love.graphics.getHeight()/60  then
+                            height = love.graphics.getHeight() * (1/6)
+                            if ypos <= love.graphics.getHeight() * (1/6) - love.graphics.getHeight()/60  then
+                                height = love.graphics.getHeight() * (0/6)
                             end
                         end
                     end
                 end
             end
         end
+
 
 
         if playercutiey < height then
@@ -39,7 +40,7 @@ function EnemyTrackingSystem:update(dt)
                 end
             end
 
-            if  xpos <= (200 + (5-height/100)*50) or xpos >= (800 - (5-height/100)*50) then
+            if xpos <= (200 + (5-height/100)*50) or xpos >= (800 - (5-height/100)*50) then
                 enemy.check = 0
                 entity:getComponent("PhysicsComponent").body:applyLinearImpulse(0, -6)
                 if ypos > 300 then

@@ -11,7 +11,7 @@ function DashingSystem:update(dt)
 
         targetX = targetX - playerX
         targetY = targetY - playerY
-        local length = math.sqrt(targetX*targetX+targetY*targetY)/1500
+        local length = math.sqrt(targetX*targetX+targetY*targetY)/(love.graphics.getWidth()*1.5)
         targetX = targetX/length
         targetY = targetY/length
 

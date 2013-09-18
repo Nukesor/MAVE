@@ -40,11 +40,13 @@ function SettingState:__init()
             if gameplay.resolutions[index+1] then
                 gameplay.settings.resolution = gameplay.resolutions[index+1]
             love.graphics.setMode(gameplay.settings.resolution[1], gameplay.settings.resolution[2], gameplay.settings.fullscreen, true, 0)
+            self:load()
             end
         else
             if gameplay.resolutions[index-1] then
                 gameplay.settings.resolution = gameplay.resolutions[index-1]
                 love.graphics.setMode(gameplay.settings.resolution[1], gameplay.settings.resolution[2], gameplay.settings.fullscreen, true, 0)
+                self:load()
             end
         end 
        end , "Resolution"},
@@ -105,7 +107,7 @@ function SettingState:load()
         y = ((love.graphics.getHeight()/(#self.menu+1))*k) - 0.5 * (love.graphics.getHeight()/(#self.menu+1))
         x = love.graphics.getWidth() * (1/10)
         local box
-        if k == #self.menu then
+        if k == 1 then
             box = BoxModel(self.font:getWidth(self.menu[k][2]), 40, x, y, "menu", self.menu[k][2], self.font, self.menu[k][1], true)
         else
             box = BoxModel(self.font:getWidth(self.menu[k][2]), 40, x, y, "menu", self.menu[k][2], self.font, self.menu[k][1], false)

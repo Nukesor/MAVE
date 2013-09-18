@@ -21,10 +21,10 @@ function DrawableDrawSystem:draw()
         --love.graphics.setPixelEffect(self.invert)
 
         -- Draws the Picture. If Entity is near to the beginng or the end of the screen, the Entity is drawed on both sides for sideChangeSystem animation.
-        if pos.x < 50 then 
-            love.graphics.draw(drawable.image, pos.x+1000, pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
-        elseif pos.x > 950 then
-            love.graphics.draw(drawable.image, pos.x-1000, pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
+        if pos.x < love.graphics.getWidth()/20 then 
+            love.graphics.draw(drawable.image, pos.x+love.graphics.getWidth(), pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
+        elseif pos.x > love.graphics.getWidth() * (19/20) then
+            love.graphics.draw(drawable.image, pos.x-love.graphics.getWidth(), pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
         end
         love.graphics.draw(drawable.image, pos.x, pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
         love.graphics.setPixelEffect()

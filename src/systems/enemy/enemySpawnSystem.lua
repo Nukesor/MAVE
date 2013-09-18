@@ -8,10 +8,10 @@ end
 
 function EnemySpawnSystem:update(dt)
 
-    self.spawntimer = self.spawntimer + dt
+    self.spawntimer = self.spawntimer
     -- Everytime the timer is full an enemy is spawned at the screenside with a random height. 
     if self.spawntimer > 3 then
-        local height = math.random(300, 500)
+        local height = math.random(love.graphics.getHeight * (3/6), love.graphics.getHeight * (5/6))
         local cutie
         cutie = CutieModel(0, height, resources.images.cutie2, 15)
         cutie:addComponent(IsEnemy())

@@ -5,19 +5,21 @@ function SpeedLimitSystem:update()
         local body = entity:getComponent("PhysicsComponent").body
         local xacc, yacc = body:getLinearVelocity()
         -- Sets the Speedlimit for Cuties
-        if yacc > 800 then
-            body:setLinearVelocity(xacc, 800)
-            yacc = 800
-        elseif yacc < -300 then
-            body:setLinearVelocity(xacc, -300)
-            yacc = -300
+        local height = love.graphics.getHeight()
+        local width = love.graphics.getWidth()
+        if yacc > height * (4/3) then
+            body:setLinearVelocity(xacc, height * (4/3))
+            yacc = height * (4/3)
+        elseif yacc < -height/2 then
+            body:setLinearVelocity(xacc, -height/2)
+            xacc = -height/2
         end
-        if xacc > 500 then
-            body:setLinearVelocity(500, yacc)
-            xacc = 500
-        elseif xacc < -500 then
-            body:setLinearVelocity(-500, yacc)
-            xacc = 500
+        if xacc > width/2 then
+            body:setLinearVelocity(width/2, yacc)
+            xacc = width/2
+        elseif xacc < -width/2 then
+            body:setLinearVelocity(-width/2, yacc)
+            xacc = width/2
         end
     end
 end

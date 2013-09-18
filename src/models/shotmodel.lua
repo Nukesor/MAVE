@@ -9,7 +9,7 @@ function ShotModel:__init(x, y, xt, yt)
     local sin = gkat/hypo
     local cos = akat/hypo
 
-    local body = love.physics.newBody(world, x+(60*cos), y+(60*sin), "dynamic")
+    local body = love.physics.newBody(world, x+(80 * cos * relation()), y+(80 * sin * relation()), "dynamic")
     local shape = love.physics.newRectangleShape(50 * relation(), 8 * relation()) 
     local fixture = love.physics.newFixture(body, shape, 0)  
         fixture:setRestitution(1)  

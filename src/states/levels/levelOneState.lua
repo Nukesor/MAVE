@@ -24,7 +24,7 @@ function LevelOneState:load()
     end
 
     for i = 0, 1, 1 do
-        local x = love.graphics.getWidth()/25 + i * love.graphics.getWidth() * (24/25)
+        local x = love.graphics.getWidth()/25 + i * love.graphics.getWidth() * (23/25)
         wall = Entity()
         wall:addComponent(DrawablePolygonComponent(world, x, love.graphics.getHeight()/3, 10, love.graphics.getHeight()/3, "static", wall))
         self.engine:addEntity(wall)

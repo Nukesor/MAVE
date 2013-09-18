@@ -166,12 +166,12 @@ function LevelState:load()
 
     str = Entity()
     str:addComponent(StringComponent(resources.fonts.twenty, {255, 0, 0, 255}, "Gold:  %i", {{gameplay, "gold"}}))
-    str:addComponent(PositionComponent(900, 20))
+    str:addComponent(PositionComponent(love.graphics.getWidth()-100, 20))
     self.engine:addEntity(str)
 
     str = Entity()
     str:addComponent(StringComponent(resources.fonts.twenty, {255, 0, 0, 255}, "Kills:  %i", {{gameplay, "kills"}}))
-    str:addComponent(PositionComponent(900, 5))
+    str:addComponent(PositionComponent(love.graphics.getWidth()-100, 5))
     self.engine:addEntity(str)
 
 end

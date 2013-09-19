@@ -27,9 +27,10 @@ MenuState = class("MenuState", State)
 function MenuState:__init()
     self.font = resources.fonts.forty
     self.menu = {
-    {function () stack:push(credits) end, "Credits"},
-    {function () stack:push(selectstate) end, "Play"},
+    {function () loadGame() stack:push(selectstate) end, "Continue"},
+    {function () gameplay:__init() stack:push(selectstate) end, "New Game"},
     {function () stack:push(setting) end, "Settings"},
+    {function () stack:push(credits) end, "Credits"},
     {function () love.event.quit() end, "Exit"}
     }
 end
@@ -49,7 +50,7 @@ function MenuState:load()
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
 
-    self.menunumber = 4
+    self.menunumber = #self.menu
     self.menuboxes = {}
 
     -- Add Buttons

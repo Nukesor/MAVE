@@ -4,12 +4,13 @@ require("components/cutie/itemComponent")
 Gameplay = class("Gameplay")
 
 function Gameplay:__init()
-    self.time = 0
-    self.highscore = 0
-    self.level = 1
-    self.kills = 0
-
-    self.gold = 100
+    self.stats = {
+                    time = 0,
+                    highscore = 0,
+                    level = 1,
+                    kills = 0,
+                    gold = 100
+                    }
     self.items = {
         --String, gekauft, Kosten, image, scalingx, scalingy, function 
         ItemComponent("Gewehr", true, 10, resources.images.gun, 0.15 * relation(), 0.15 * relation(),

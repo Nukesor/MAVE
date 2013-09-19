@@ -3,9 +3,9 @@ PauseState = class("PauseState", State)
 function PauseState:__init()
     self.font = resources.fonts.thirty
     self.menu = {
-    {function () stack:pop()
-                stack:popload() end, "Main Menu"},
     {function () stack:pop() end, "Return"},
+    {function () saveGame() end, "Save"},
+    {function () stack:pop() stack:popload() end, "Level Select"},
     {function () love.event.quit() end, "Exit"}
     }
 end
@@ -27,7 +27,7 @@ function PauseState:load()
     self.menunumber = 3
     self.menuboxes = {}
 
-    for i = 1, self.menunumber, 1 do
+    for i = 1, #self.menu, 1 do
         y = i * (love.graphics.getHeight()/8)
         x = love.graphics:getWidth()/12
         local box

@@ -51,15 +51,12 @@ function love.load()
     resources:addFont("sixty", "data/font/SwankyandMooMoo.ttf", 60)
     
     resources:load()
+
     set = Settings()
-    if love.filesystem.exists("save.lua") then
-        chunk = love.filesystem.load("save.lua")
-        chunk()
-        set.settings = asdf
-    end
-    stack = StackHelper()
+    loadSettings()
     gameplay = Gameplay()
     
+    stack = StackHelper()
     menu = MenuState()
     credits = CreditsState()
     setting = SettingState()

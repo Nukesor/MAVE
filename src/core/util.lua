@@ -118,6 +118,37 @@ function saveSettings()
     success = love.filesystem.write("save.lua", table.show(set.settings, "asdf"))
 end
 
+function loadSettings()
+    if love.filesystem.exists("save.lua") then
+        chunk = love.filesystem.load("save.lua")
+        chunk()
+        set.settings = asdf
+        return true
+    else
+        return false
+    end
+end
+
+
+function saveGame()
+    if love.filesystem.exists("stats.lua") then
+        love.filesystem.remove("stats.lua")
+    end
+    love.filesystem.newFile("stats.lua")
+    success = love.filesystem.write("stats.lua", table.show(gameplay.stats, "fdsa"))
+end
+
+function loadGame()
+    if love.filesystem.exists("stats.lua") then
+        chunk = love.filesystem.load("stats.lua")
+        chunk()
+        gameplay.stats = fdsa
+        return true
+    else
+        return false
+    end
+end
+
 function table.show(t, name, indent)
    local cart     -- a container
    local autoref  -- for self references

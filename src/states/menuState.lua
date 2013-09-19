@@ -29,6 +29,7 @@ function MenuState:__init()
     self.menu = {
     {function () stack:push(credits) end, "Credits"},
     {function () stack:push(selectstate) end, "Play"},
+    {function () stack:push(setting) end, "Settings"},
     {function () love.event.quit() end, "Exit"}
     }
 end
@@ -48,13 +49,13 @@ function MenuState:load()
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
 
-    self.menunumber = 3
+    self.menunumber = 4
     self.menuboxes = {}
 
     -- Add Buttons
-    for i = 1, self.menunumber, 1 do
+    for i = 1, #self.menu, 1 do
         y = love.graphics.getHeight()*(7/10)
-        x = (love.graphics.getWidth()*i/4)-(self.font:getWidth(self.menu[i][2])/2)
+        x = (love.graphics.getWidth()*i/(#self.menu + 1))-(self.font:getWidth(self.menu[i][2])/2)
         local box
         if i == 2 then
             box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
@@ -63,9 +64,6 @@ function MenuState:load()
         end
         self.engine:addEntity(box)
     end
-    local box
-    box = BoxModel(self.font:getWidth("Settings"), 40, 100, 100, "menu", "Settings", self.font, function () stack:push(setting) end, false)
-    self.engine:addEntity(box)
 
     sortMenu(self.menuboxes)
     love.graphics.setFont(self.font)

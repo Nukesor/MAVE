@@ -52,6 +52,11 @@ function love.load()
     
     resources:load()
     set = Settings()
+    if love.filesystem.exists("save.lua") then
+        chunk = love.filesystem.load("save.lua")
+        chunk()
+        set.settings = asdf
+    end
     stack = StackHelper()
     gameplay = Gameplay()
     

@@ -39,14 +39,16 @@ function SettingState:__init()
         if val == "add" then
             if set.resolutions[index+1] then
                 set.settings.resolution = set.resolutions[index+1]
-            love.graphics.setMode(set.settings.resolution[1], set.settings.resolution[2], set.settings.fullscreen, true, 0)
-            self:load()
+                love.graphics.setMode(set.settings.resolution[1], set.settings.resolution[2], set.settings.fullscreen, true, 0)
+                self:load()
+                saveSettings()
             end
         else
             if set.resolutions[index-1] then
                 set.settings.resolution = set.resolutions[index-1]
                 love.graphics.setMode(set.settings.resolution[1], set.settings.resolution[2], set.settings.fullscreen, true, 0)
                 self:load()
+                saveSettings()
             end
         end 
        end , "Resolution"},
@@ -57,6 +59,7 @@ function SettingState:__init()
             set.settings.fullscreen = true
         end
         love.graphics.setMode(set.settings.resolution[1], set.settings.resolution[2], set.settings.fullscreen, true, 0)
+        saveSettings()
     end , "Fullscreen"},
     {function (val) 
         if val == "add" then

@@ -13,7 +13,6 @@ function System:getEntities()
     return self.targets
 end
 
-
 function System:addEntity(entity)
     self.targets[entity.id] = entity
 end

@@ -24,12 +24,9 @@ function Engine:addEntity(entity)
     end
     for index, component in pairs(entity.components) do
         -- Adding Entity to specific Entitylist
-        if self[component.__name] then
-            self[component.__name][entity.id] = entity
-        else
-            self[component.__name] = {}
-            self[component.__name][entity.id] = entity
-        end
+        if not self[component.__name] then self[component.__name] = {} end
+        self[component.__name][entity.id] = entity
+
         -- Adding Entity to System if all requirements are granted
         if self.requirements[component.__name] then
             for index2, system in pairs(self.requirements[component.__name]) do

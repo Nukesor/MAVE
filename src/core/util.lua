@@ -122,18 +122,18 @@ function relation()
 end
 
 function saveSettings()
-    if love.filesystem.exists("save.lua") then
-        love.filesystem.remove("save.lua")
+    if love.filesystem.exists("settings.lua") then
+        love.filesystem.remove("settings.lua")
     end
-    love.filesystem.newFile("save.lua")
-    success = love.filesystem.write("save.lua", table.show(set.settings, "asdf"))
+    love.filesystem.newFile("settings.lua")
+    success = love.filesystem.write("settings.lua", table.show(set.settings, "settings"))
 end
 
 function loadSettings()
-    if love.filesystem.exists("save.lua") then
-        chunk = love.filesystem.load("save.lua")
+    if love.filesystem.exists("settings.lua") then
+        chunk = love.filesystem.load("settings.lua")
         chunk()
-        set.settings = asdf
+        set.settings = settings
         return true
     else
         return false
@@ -146,14 +146,14 @@ function saveGame()
         love.filesystem.remove("stats.lua")
     end
     love.filesystem.newFile("stats.lua")
-    success = love.filesystem.write("stats.lua", table.show(gameplay.stats, "fdsa"))
+    success = love.filesystem.write("stats.lua", table.show(gameplay.stats, "stats"))
 end
 
 function loadGame()
     if love.filesystem.exists("stats.lua") then
         chunk = love.filesystem.load("stats.lua")
         chunk()
-        gameplay.stats = fdsa
+        gameplay.stats = stats
         return true
     else
         return false

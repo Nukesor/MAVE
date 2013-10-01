@@ -8,19 +8,19 @@ require("core/events/mousePressed")
 require("core/events/keyPressed")
 
 -- BoxComponents
-require("components/userinterface/uiStringComponent")
-require("components/userinterface/boxComponent")
+require("components/ui/uiStringComponent")
+require("components/ui/boxComponent")
 require("components/physic/positionComponent")
-require("components/userinterface/functionComponent")
-require("components/userinterface/imageComponent")
-require("components/userinterface/menuWobblyComponent")
+require("components/ui/functionComponent")
+require("components/ui/imageComponent")
+require("components/ui/menuWobblyComponent")
 
 -- Systems
-require("systems/userinterface/boxClickSystem")
-require("systems/userinterface/boxDrawSystem")
-require("systems/userinterface/boxHoverSystem")
-require("systems/userinterface/boxNavigationSystem")
-require("systems/userinterface/menuWobblySystem")
+require("systems/ui/boxClickSystem")
+require("systems/ui/boxDrawSystem")
+require("systems/ui/boxHoverSystem")
+require("systems/ui/boxNavigationSystem")
+require("systems/ui/menuWobblySystem")
 
 MenuState = class("MenuState", State)
 
@@ -45,28 +45,40 @@ function MenuState:load()
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
-    self.engine:addSystem(BoxDrawSystem(), "draw")
     self.engine:addSystem(DrawableDrawSystem(), "draw")
+    self.engine:addSystem(BoxDrawSystem(), "draw")
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
+
+    local bg = Entity()
+    bg:addComponent(DrawableComponent(resources.images.background, 0, 1, 1, 0, 0))
+    bg:addComponent(ZIndex(0))
+    bg:addComponent(PositionComponent(0, 0))
+    self.engine:addEntity(bg)
+
+    local logo = Entity()
+    logo:addComponent(DrawableComponent(resources.images.logo, 0, 1, 1, 0, 0))
+    logo:addComponent(ZIndex(1))
+    logo:addComponent(PositionComponent(100, 100))
+    self.engine:addEntity(logo)
 
     self.menunumber = #self.menu
     self.menuboxes = {}
 
     -- Add Buttons
     for i = 1, #self.menu, 1 do
-        y = love.graphics.getHeight()*(7/10)
-        x = (love.graphics.getWidth()*i/(#self.menu + 1))-(self.font:getWidth(self.menu[i][2])/2)
+        y = i * (love.graphics.getHeight()/8)
+        x = love.graphics:getWidth()/12
         local box
         if i == 2 then
-            box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
+            box = BoxModel(150, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
         else
-            box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
+            box = BoxModel(150, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
         end
         self.engine:addEntity(box)
     end
 
-    sortMenu(self.menuboxes)
+    sortMenuVertical(self.menuboxes)
     love.graphics.setFont(self.font)
 end
 
@@ -78,13 +90,10 @@ end
 
 function MenuState:draw()
     love.graphics.setColor(255, 255, 255)
-    love.graphics.draw(resources.images.cutie2, love.graphics.getWidth()/2, love.graphics.getHeight()*(2/3), 0, 1, 1, resources.images.cutie2:getWidth()/2, resources.images.cutie2:getHeight())
     self.engine:draw()
 
     -- Draw title
     love.graphics.setFont(resources.fonts.sixty)
-    love.graphics.print("MAVE", 
-        (love.graphics.getWidth()-resources.fonts.sixty:getWidth("MAVE"))/2, 50, 0, 1, 1, 0, 0)
 end
 
 

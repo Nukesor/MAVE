@@ -9,20 +9,20 @@ require("core/events/keyPressed")
 require("core/events/buyBoolEvent")
 
 -- BoxComponents
-require("components/userinterface/uiStringComponent")
-require("components/userinterface/boxComponent")
+require("components/ui/uiStringComponent")
+require("components/ui/boxComponent")
 require("components/physic/positionComponent")
-require("components/userinterface/functionComponent")
-require("components/userinterface/imageComponent")
-require("components/userinterface/menuWobblyComponent")
+require("components/ui/functionComponent")
+require("components/ui/imageComponent")
+require("components/ui/menuWobblyComponent")
 
 -- Systems
-require("systems/userinterface/boxClickSystem")
-require("systems/userinterface/boxDrawSystem")
-require("systems/userinterface/boxHoverSystem")
-require("systems/userinterface/boxNavigationSystem")
-require("systems/userinterface/menuWobblySystem")
-require("systems/userinterface/buyEventSystem")
+require("systems/ui/boxClickSystem")
+require("systems/ui/boxDrawSystem")
+require("systems/ui/boxHoverSystem")
+require("systems/ui/boxNavigationSystem")
+require("systems/ui/menuWobblySystem")
+require("systems/ui/buyEventSystem")
 
 require("models/itemBoxModel")
 

@@ -8,7 +8,7 @@ function MineModel:__init(x,y)
     else
         direction = 30 * relation()
     end
-    local body = love.physics.newBody(world, x+direction, y+(20 * relation()), "dynamic")
+    local body = love.physics.newBody(world, x+direction, y+(20 * relation()), "static")
     local shape = love.physics.newRectangleShape(10* relation(), 8* relation()) 
     local fixture = love.physics.newFixture(body, shape, 0)  
         fixture:setRestitution(0.5)  

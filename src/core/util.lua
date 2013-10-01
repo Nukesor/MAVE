@@ -16,7 +16,18 @@ end
 function distanceBetweenEntities(entity1, entity2)
     position1 = entity1:getComponent("PositionComponent")
     position2 = entity2:getComponent("PositionComponent")
-    return distanceBetween({position1.x, position1.y}, {position2.x, position2.y})
+end
+
+function insideRadius(entity1, entity2, radius)
+    position1 = entity1:getComponent("PositionComponent")
+    position2 = entity2:getComponent("PositionComponent")
+    if distanceBetween({position1.x, position1.y}, {position2.x, position2.y}) <= radius
+    or distanceBetween({position1.x - love.graphics.getWidth(), position1.y}, {position2.x, position2.y}) <= radius
+    or distanceBetween({position1.x + love.graphics.getWidth(), position1.y}, {position2.x, position2.y}) <= radius then
+        return true
+    else
+        return false
+    end
 end
 
 function sortMenu(table)

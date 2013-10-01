@@ -121,10 +121,10 @@ function LevelState:load()
 
     self.engine:addSystem(DrawableDrawSystem(), "draw")
     self.engine:addSystem(PolygonDrawSystem(), "draw")
-    self.engine:addSystem(ParticleDrawSystem(), "draw")
     self.engine:addSystem(LifebarSystem(), "draw")
     self.engine:addSystem(StringDrawSystem(), "draw")
     self.engine:addSystem(ItemDrawSystem(), "draw")
+    self.engine:addSystem(ParticleDrawSystem(), "draw")
     self.engine:addSystem(GoldUpDisplaySystem(), "draw")
     
     self.engine:addSystem(SideChangeSystem(), "logic")

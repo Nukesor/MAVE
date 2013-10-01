@@ -8,25 +8,25 @@ function LevelOneState:load()
 
     -- Wall creation
     local wall =  Entity()
-    wall:addComponent(DrawablePolygonComponent(world, love.graphics.getWidth()/2, love.graphics.getHeight()* (29/30), love.graphics.getWidth()+50, love.graphics.getHeight()/60, "static", wall))
+    wall:addComponent(DrawablePolygonComponent(world, 960, 1080* (29/30), 1970, 1080/60, "static", wall))
     self.engine:addEntity(wall)
 
     wall =  Entity()
-    wall:addComponent(DrawablePolygonComponent(world, love.graphics.getWidth()/2, -50, love.graphics.getWidth()+50, love.graphics.getHeight()/60, "static", wall))
+    wall:addComponent(DrawablePolygonComponent(world, 960, -50, 1970, 1080/60, "static", wall))
     self.engine:addEntity(wall)
 
     for i = 0, 4, 1 do 
-        local y = love.graphics.getHeight()/6 * (i+1)
-        local xbreite = love.graphics.getWidth()/10 * (i+2) 
+        local y = 1080/6 * (i+1)
+        local xbreite = 1920/10 * (i+2) 
         wall = Entity()
-        wall:addComponent(DrawablePolygonComponent(world, love.graphics.getWidth()/2, y, xbreite, 10, "static", wall))
+        wall:addComponent(DrawablePolygonComponent(world, 960, y, xbreite, 10, "static", wall))
         self.engine:addEntity(wall)
     end
 
     for i = 0, 1, 1 do
-        local x = love.graphics.getWidth()/25 + i * love.graphics.getWidth() * (23/25)
+        local x = 1920/25 + i * 1920 * (23/25)
         wall = Entity()
-        wall:addComponent(DrawablePolygonComponent(world, x, love.graphics.getHeight()/3, 10, love.graphics.getHeight()/3, "static", wall))
+        wall:addComponent(DrawablePolygonComponent(world, x, 1080/3, 10, 1080/3, "static", wall))
         self.engine:addEntity(wall)
     end
 

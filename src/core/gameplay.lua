@@ -13,7 +13,7 @@ function Gameplay:__init()
                     }
     self.items = {
         --String, gekauft, Kosten, image, scalingx, scalingy, function 
-        ItemComponent("Gewehr", true, 10, resources.images.gun, 0.15 * relation(), 0.15 * relation(),
+        ItemComponent("Gewehr", true, 10, resources.images.gun, 0.15, 0.15,
         function()
             -- Erstellt ein neues Shotmodel
             local shot = ShotModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, love.mouse.getPosition())
@@ -21,7 +21,7 @@ function Gameplay:__init()
             stack:current().engine:addEntity(shot) 
         end)
         ,
-        ItemComponent("Granate", true, 10, resources.images.grenade, 0.12 * relation(), 0.12 * relation(), 
+        ItemComponent("Granate", true, 10, resources.images.grenade, 0.12, 0.12, 
         function()
             -- Generates a new Grenademodel
             local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, love.mouse.getPosition())
@@ -29,7 +29,7 @@ function Gameplay:__init()
             stack:current().engine:addEntity(grenade)
         end)
         ,
-        ItemComponent("Mine", true, 10, resources.images.mine, 0.2 * relation(), 0.2 * relation(),
+        ItemComponent("Mine", true, 10, resources.images.mine, 0.2, 0.2,
         function()
             local mine = MineModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y)
             mine:getComponent("PhysicsComponent").fixture:setUserData(mine)

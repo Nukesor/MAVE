@@ -19,7 +19,7 @@ function GrenadeModel:__init(x, y, xt, yt)
     self:addComponent(PositionComponent())
     self:addComponent(DrawableComponent(resources.images.grenade, 0, 0.12, 0.12, 100, 130))
     self:addComponent(IsGrenade())
-    self:addComponent(ExplosionComponent(80 * relation(), 240 * relation()))
+    self:addComponent(ExplosionComponent(80, 240))
     self:addComponent(TimerComponent(1.5))
     self:addComponent(ZIndex(99))
 

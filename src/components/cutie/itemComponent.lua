@@ -6,7 +6,7 @@ function ItemComponent:__init(name, owned, price, image, sx, sy, use, drawableEn
     self.owned = owned
     self.price = price
     self.image = image
-    self.sx = sx
-    self.sy = sy
+    self.sx = sx * relation()
+    self.sy = sy * relation()
     self.use = use
 end

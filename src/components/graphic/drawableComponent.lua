@@ -5,6 +5,6 @@ function DrawableComponent:__init(image, r, sx, sy, ox, oy)
     self.r = r
     if sx then self.sx = sx * relation() end
     if sy then self.sy = sy * relation() end
-    self.ox = ox
-    self.oy = oy
+    self.ox = ox * relation()
+    self.oy = oy * relation()
 end

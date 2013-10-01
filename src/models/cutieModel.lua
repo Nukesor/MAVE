@@ -9,7 +9,7 @@ function CutieModel:__init(x, y, image, life)
     
     self:addComponent(PhysicsComponent(body, fixture, shape))
     self:addComponent(PositionComponent(x, y))
-    self:addComponent(DrawableComponent(image, 0, 0.2*relation(), 0.2*relation(), 140, 140))
+    self:addComponent(DrawableComponent(image, 0, 0.2, 0.2, 140, 140))
     self:addComponent(LevelComponent(0))
     self:addComponent(LifeComponent(life))
     self:addComponent(ZIndex(2))

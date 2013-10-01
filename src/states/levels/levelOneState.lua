@@ -33,7 +33,7 @@ function LevelOneState:load()
     --[[
     -- Background picture
     self.bg = Entity()
-    self.bg:addComponent(DrawableComponent(resources.images.background, 0, relation(), relation(), 0, 0))
+    self.bg:addComponent(DrawableComponent(resources.images.background, 0, 1, 1, 0, 0))
     self.bg:addComponent(PositionComponent(0, 0))
     self.bg:addComponent(ZIndex(0))
     self.engine:addEntity(self.bg)

@@ -9,7 +9,7 @@ function WobbleSystem:update()
         local drawable = entity:getComponent("DrawableComponent")
         local wobbly = entity:getComponent("WobblyComponent")
         if drawable.sy < wobbly.default then
-            drawable.sy = drawable.sy + (wobbly.default / 70)
+            drawable.sy = (drawable.sy + (wobbly.default / 70))*relation()
         end
     end
 end

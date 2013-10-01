@@ -2,7 +2,6 @@ Engine = class("Engine")
 
 function Engine:__init() 
     self.entities = {}
-    self.entityIndex = 0
     self.requirements = {}
 
     self.allSystems = {}

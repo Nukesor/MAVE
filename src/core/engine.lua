@@ -75,7 +75,7 @@ function Engine:removeEntity(entity)
     end
 end
 
-function Engine:addSystem(system, type, index)
+function Engine:addSystem(system, type)
     -- Adding System to draw or logic table
     if type == "draw" then
         table.insert(self.drawSystems, system)

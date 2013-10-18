@@ -1,4 +1,4 @@
-require("core/events/buyBoolEvent")
+require("events/buyBoolEvent")
 require("components/cutie/itemComponent")
 
 Gameplay = class("Gameplay")

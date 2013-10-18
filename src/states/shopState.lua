@@ -1,12 +1,12 @@
-require("core/resources")
-require("core/state")
+require("lib/resources")
+require("lib/state")
 require("core/entity")
 require("core/engine")
 
 --Events
-require("core/events/mousePressed")
-require("core/events/keyPressed")
-require("core/events/buyBoolEvent")
+require("events/mousePressed")
+require("events/keyPressed")
+require("events/buyBoolEvent")
 
 -- BoxComponents
 require("components/ui/uiStringComponent")

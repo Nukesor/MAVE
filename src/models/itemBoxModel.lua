@@ -10,7 +10,7 @@ function ItemBoxModel:__init(w, h, x, y, type, selected)
                                                     index = i 
                                                 end
                                             end
-                                            if (gameplay.gold - gameplay.items[index].price) >= 0 then
+                                            if (gameplay.stats.gold - gameplay.items[index].price) >= 0 and gameplay.items[index].owned == false then
                                                 stack:push(prompt)
                                             end
                                         end    ))

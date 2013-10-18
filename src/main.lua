@@ -1,11 +1,10 @@
-require("core/class")
-require("core/resources")
-require("core/stackhelper")
-require("core/gameplay")
-require("core/util")
-require("core/settings")
-
-require("core/state")
+require("lib/class")
+require("lib/resources")
+require("lib/stackhelper")
+require("lib/gameplay")
+require("lib/util")
+require("lib/settings")
+require("lib/state")
 
 require("states/levelState")
 require("states/levels/levelOneState")

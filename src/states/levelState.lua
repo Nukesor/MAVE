@@ -1,14 +1,14 @@
-require("core/resources")
-require("core/state")
+require("lib/resources")
+require("lib/state")
 require("core/entity")
 require("core/engine")
 require("core/system")
 
 --Events
-require("core/events/mousePressed")
-require("core/events/keyPressed")
-require("core/events/beginContact")
-require("core/events/explosionEvent")
+require("events/mousePressed")
+require("events/keyPressed")
+require("events/beginContact")
+require("events/explosionEvent")
 
 -- Draw Systems
 require("systems/draw/drawableDrawSystem")
@@ -52,7 +52,7 @@ require("systems/pressedevent/mainKeySystem")
 require("systems/pressedevent/playerControlSystem")
 require("systems/pressedevent/mainMousePressedSystem")
 -- Event Systems
-require("systems/event/collisionSelectSystem")
+require("core/collisionSelectSystem")
 require("systems/event/explosionEventSystem")
 
 --GraphicComponents

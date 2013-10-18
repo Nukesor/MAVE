@@ -55,18 +55,18 @@ function ShopState:load()
     self.engine:addSystem(boxnavigation)
     self.engine:addSystem(buyeventsystem)
 
-    self.boxnumber = 10
+    self.boxnumber = 12
     self.boxes = {}
-    self.width = 5
+    self.width = 4
 
     -- Dynamische Erstellung der Item boxes
     for i = 1, self.boxnumber, 1 do
 
         -- Berrechnung der Position und Zeilenumbruch nach i == self.width Boxes
         y = love.graphics.getHeight() * (1/20) + (math.floor((i-1)/self.width) * love.graphics.getHeight() * (1/10)) + math.floor((i-1)/self.width) * love.graphics.getHeight() * (1/30)
-        x = love.graphics.getWidth() * (1/24) + love.graphics.getWidth() * (1/5) * ((i-1)-math.floor((i-1)/self.width)*5)
+        x = love.graphics.getWidth() * (1/24) + love.graphics.getWidth() * (1/5) * ((i-1)-math.floor((i-1)/self.width)*self.width)
 
-        local box = ItemBoxModel(150, 75, x, y, "item", false)
+        local box = ItemBoxModel(love.graphics.getWidth()*(3/25), love.graphics.getHeight()*(1/9), x, y, "item", false)
         self.engine:addEntity(box)
     end
     sortMenu(self.boxes)

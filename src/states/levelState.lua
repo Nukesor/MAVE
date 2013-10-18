@@ -115,9 +115,10 @@ function LevelState:load()
 
     self.engine = Engine()
     self.eventmanager = EventManager()
+    self.collisionmanager = CollisionManager()
     self.eventmanager:addListener("KeyPressed", MainKeySystem())
     self.eventmanager:addListener("KeyPressed", PlayerControlSystem())
-    self.eventmanager:addListener("BeginContact", CollisionManager())
+    self.eventmanager:addListener("BeginContact", self.collisionmanager)
     self.eventmanager:addListener("MousePressed", MainMousePressedSystem())
     self.eventmanager:addListener("ExplosionEvent", ExplosionEventSystem())
 
@@ -147,6 +148,22 @@ function LevelState:load()
     self.engine:addSystem(TimerSystem(), "logic")
     self.engine:addSystem(PlayerDeathCheckSystem(), "logic")
 
+
+    -- Adding Collisions to CollisionManager
+
+    local bounce = BounceCollision()
+    self.collisionmanager:addCollisionAction(bounce.component1, bounce.component2, bounce)
+    local damage = CollisionDamage()
+    self.collisionmanager:addCollisionAction(damage.component1, damage.component2, damage)
+    local shotcutie = ShotCutieCollision()
+    self.collisionmanager:addCollisionAction(shotcutie.component1, shotcutie.component2, shotcutie)
+    local shotwall = ShotWallCollision()
+    self.collisionmanager:addCollisionAction(shotwall.component1, shotwall.component2, shotwall)
+    local shotexplosive = ExplosionShotCollision()
+    self.collisionmanager:addCollisionAction(shotexplosive.component1, shotexplosive.component2, shotexplosive)
+    local mineground = MineGroundCollision()
+    self.collisionmanager:addCollisionAction(mineground.component1, mineground.component2, mineground)
+    
     -- Slowmospeed
     self.worldspeed = 1;
 

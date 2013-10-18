@@ -3,6 +3,7 @@ require("lib/state")
 require("core/entity")
 require("core/engine")
 require("core/system")
+require("core/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -52,7 +53,7 @@ require("systems/pressedevent/mainKeySystem")
 require("systems/pressedevent/playerControlSystem")
 require("systems/pressedevent/mainMousePressedSystem")
 -- Event Systems
-require("core/collisionSelectSystem")
+require("core/collisionManager")
 require("systems/event/explosionEventSystem")
 
 --GraphicComponents
@@ -113,11 +114,12 @@ function LevelState:load()
     world:setCallbacks(beginContact, endContact)
 
     self.engine = Engine()
-    self.engine:addListener("KeyPressed", MainKeySystem())
-    self.engine:addListener("KeyPressed", PlayerControlSystem())
-    self.engine:addListener("BeginContact", CollisionSelectSystem())
-    self.engine:addListener("MousePressed", MainMousePressedSystem())
-    self.engine:addListener("ExplosionEvent", ExplosionEventSystem())
+    self.eventmanager = EventManager()
+    self.eventmanager:addListener("KeyPressed", MainKeySystem())
+    self.eventmanager:addListener("KeyPressed", PlayerControlSystem())
+    self.eventmanager:addListener("BeginContact", CollisionManager())
+    self.eventmanager:addListener("MousePressed", MainMousePressedSystem())
+    self.eventmanager:addListener("ExplosionEvent", ExplosionEventSystem())
 
     self.engine:addSystem(DrawableDrawSystem(), "draw")
     self.engine:addSystem(PolygonDrawSystem(), "draw")
@@ -217,15 +219,15 @@ function LevelState:restart()
 end
 
 function LevelState:keypressed(key, u)
-    self.engine:fireEvent(KeyPressed(key, u))
+    self.eventmanager:fireEvent(KeyPressed(key, u))
 end
 
 
 function LevelState:mousepressed(x, y, button)
-    self.engine:fireEvent(MousePressed(x, y, button))
+    self.eventmanager:fireEvent(MousePressed(x, y, button))
 end
 
 --Collision function
 function beginContact(a, b, coll)
-    stack:current().engine:fireEvent(BeginContact(a, b, coll))
+    stack:current().eventmanager:fireEvent(BeginContact(a, b, coll))
 end

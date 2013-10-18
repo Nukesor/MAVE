@@ -2,6 +2,7 @@ require("lib/resources")
 require("lib/state")
 require("core/entity")
 require("core/engine")
+require("core/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -89,10 +90,11 @@ end
 function SettingState:load()
 
     self.engine = Engine()
+    self.eventmanager = EventManager()
     local settingnavigation = SettingNavigationSystem()
     local boxclick = BoxClickSystem()
-    self.engine:addListener("KeyPressed", settingnavigation)
-    self.engine:addListener("MousePressed", boxclick)
+    self.eventmanager:addListener("KeyPressed", settingnavigation)
+    self.eventmanager:addListener("MousePressed", boxclick)
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
@@ -134,9 +136,9 @@ end
 
 
 function SettingState:keypressed(key, u)
-    self.engine:fireEvent(KeyPressed(key, u))
+    self.eventmanager:fireEvent(KeyPressed(key, u))
 end
 
 function SettingState:mousepressed(x, y, button)
-    self.engine:fireEvent(MousePressed(x, y, button))
+    self.eventmanager:fireEvent(MousePressed(x, y, button))
 end

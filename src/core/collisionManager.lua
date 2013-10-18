@@ -5,9 +5,9 @@ require("collisions/shotWallCollision")
 require("collisions/explosionShotCollision")
 require("collisions/mineGroundCollision")
 
-CollisionSelectSystem = class("CollisionDetectSystem", System)
+CollisionManager = class("CollisionDetectSystem", System)
 
-function CollisionSelectSystem:__init()
+function CollisionManager:__init()
     self.conditions = {}
     -- All available Collisions will be registered over here.
     local bounce = BounceCollision()
@@ -24,12 +24,12 @@ function CollisionSelectSystem:__init()
     self:addCollisionAction(mineground.component1, mineground.component2, mineground)
 end
 
-function CollisionSelectSystem:addCollisionAction(component1, component2, object)
+function CollisionManager:addCollisionAction(component1, component2, object)
     if not self.conditions[component1] then self.conditions[component1] = {} end
     self.conditions[component1][component2] = object
 end
 
-function CollisionSelectSystem:fireEvent(event)
+function CollisionManager:fireEvent(event)
     -- If an Event is fired, the entities are given to the specific collisions. Entities are passed in Reihenfolge^^.
     local e1 = event.a:getUserData()
     local e2 = event.b:getUserData()

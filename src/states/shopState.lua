@@ -2,6 +2,7 @@ require("lib/resources")
 require("lib/state")
 require("core/entity")
 require("core/engine")
+require("core/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -41,12 +42,13 @@ end
 function ShopState:load()
 
     self.engine = Engine()
+    self.eventmanager = EventManager()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
     local buyeventsystem = BuyEventSystem()
-    self.engine:addListener("KeyPressed", boxnavigation)
-    self.engine:addListener("MousePressed", boxclick)
-    self.engine:addListener("BuyBoolEvent", buyeventsystem)
+    self.eventmanager:addListener("KeyPressed", boxnavigation)
+    self.eventmanager:addListener("MousePressed", boxclick)
+    self.eventmanager:addListener("BuyBoolEvent", buyeventsystem)
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
@@ -125,9 +127,9 @@ end
 
 
 function ShopState:keypressed(key, u)
-    self.engine:fireEvent(KeyPressed(key, u))
+    self.eventmanager:fireEvent(KeyPressed(key, u))
 end
 
 function ShopState:mousepressed(x, y, button)
-    self.engine:fireEvent(MousePressed(x, y, button))
+    self.eventmanager:fireEvent(MousePressed(x, y, button))
 end

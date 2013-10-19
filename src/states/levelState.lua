@@ -1,9 +1,10 @@
 require("lib/resources")
 require("lib/state")
-require("core/entity")
-require("core/engine")
-require("core/system")
-require("core/eventManager")
+require("lovetoys/core/entity")
+require("lovetoys/core/engine")
+require("lovetoys/core/system")
+require("lovetoys/core/eventManager")
+require("lovetoys/core/collisionManager")
 
 --Events
 require("events/mousePressed")
@@ -53,7 +54,6 @@ require("systems/pressedevent/mainKeySystem")
 require("systems/pressedevent/playerControlSystem")
 require("systems/pressedevent/mainMousePressedSystem")
 -- Event Systems
-require("core/collisionManager")
 require("systems/event/explosionEventSystem")
 
 --GraphicComponents
@@ -99,6 +99,16 @@ require("models/shotmodel")
 require("models/cutieModel")
 require("models/grenadeModel")
 require("models/mineModel")
+
+
+-- Collisions
+
+require("collisions/bounceCollision")
+require("collisions/collisionDamage")
+require("collisions/shotCutieCollision")
+require("collisions/shotWallCollision")
+require("collisions/explosionShotCollision")
+require("collisions/mineGroundCollision")
 
 
 LevelState = class("LevelState", State)

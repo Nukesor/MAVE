@@ -1,9 +1,9 @@
 require("lib/resources")
 require("lib/state")
-require("core/component")
-require("core/entity")
-require("core/engine")
-require("core/eventManager")
+require("lovetoys/core/component")
+require("lovetoys/core/entity")
+require("lovetoys/core/engine")
+require("lovetoys/core/eventManager")
 
 --Events
 require("events/mousePressed")

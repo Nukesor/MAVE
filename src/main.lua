@@ -1,4 +1,4 @@
-require("lib/class")
+require("lovetoys/core/class")
 require("lib/resources")
 require("lib/stackhelper")
 require("lib/gameplay")

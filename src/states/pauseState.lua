@@ -11,11 +11,13 @@ function PauseState:__init()
 end
 
 function PauseState:load()
+
     self.engine = Engine()
+    self.eventmanager = EventManager()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
-    self.engine:addListener("KeyPressed", boxnavigation)
-    self.engine:addListener("MousePressed", boxclick)
+    self.eventmanager:addListener("KeyPressed", boxnavigation)
+    self.eventmanager:addListener("MousePressed", boxclick)
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
@@ -58,9 +60,9 @@ function PauseState:draw()
 end
 
 function PauseState:keypressed(key, unicode)
-    self.engine:fireEvent(KeyPressed(key,unicode))
+    self.eventmanager:fireEvent(KeyPressed(key,unicode))
 end
 
 function PauseState:mousepressed(x, y, button)
-    self.engine:fireEvent(MousePressed(x, y, button))
+    self.eventmanager:fireEvent(MousePressed(x, y, button))
 end

@@ -134,12 +134,16 @@ function loadSettings()
         chunk = love.filesystem.load("settings.lua")
         chunk()
         set.settings = settings
+        refreshSettings()
         return true
     else
         return false
     end
 end
 
+function refreshSettings()
+    love.graphics.setMode(set.settings.resolution[1], set.settings.resolution[2], set.settings.fullscreen, true, 0)
+end
 
 function saveGame()
     if love.filesystem.exists("stats.lua") then

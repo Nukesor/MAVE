@@ -1,4 +1,4 @@
-require("core/events/buyBoolEvent")
+require("events/buyBoolEvent")
 
 PromptState = class("PromptState", State)
 
@@ -6,10 +6,10 @@ function PromptState:__init()
     self.font = resources.fonts.fifty
     self.menu = {
     {function () stack:pop()
-                stack:current().engine:fireEvent(BuyBoolEvent(true))
+                stack:current().eventmanager:fireEvent(BuyBoolEvent(true))
                 end, "Yes"},
     {function () stack:pop()
-                stack:current().engine:fireEvent(BuyBoolEvent(false))
+                stack:current().eventmanager:fireEvent(BuyBoolEvent(false))
                 end, "No"}
     }
 end
@@ -17,10 +17,11 @@ end
 function PromptState:load()
 
     self.engine = Engine()
+    self.eventmanager = EventManager()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
-    self.engine:addListener("KeyPressed", boxnavigation)
-    self.engine:addListener("MousePressed", boxclick)
+    self.eventmanager:addListener("KeyPressed", boxnavigation)
+    self.eventmanager:addListener("MousePressed", boxclick)
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
@@ -63,9 +64,9 @@ end
 
 
 function PromptState:keypressed(key, u)
-    self.engine:fireEvent(KeyPressed(key, u))
+    self.eventmanager:fireEvent(KeyPressed(key, u))
 end
 
 function PromptState:mousepressed(x, y, button)
-    self.engine:fireEvent(MousePressed(x, y, button))
+    self.eventmanager:fireEvent(MousePressed(x, y, button))
 end

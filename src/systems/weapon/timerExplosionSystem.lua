@@ -4,7 +4,7 @@ TimerExplosionSystem = class("TimerExplosionSystem", System)
 function TimerExplosionSystem:update(dt)
     for index, value in pairs(self.targets) do
         if value.components.TimerComponent.time < 0 then
-            stack:current().engine:fireEvent(ExplosionEvent(value))
+            stack:current().eventmanager:fireEvent(ExplosionEvent(value))
         end
     end
 end

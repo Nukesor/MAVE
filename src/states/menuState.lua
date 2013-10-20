@@ -1,11 +1,12 @@
-require("core/resources")
-require("core/state")
-require("core/entity")
-require("core/engine")
+require("lib/resources")
+require("lib/state")
+require("lovetoys/core/entity")
+require("lovetoys/core/engine")
+require("lovetoys/core/eventManager")
 
 --Events
-require("core/events/mousePressed")
-require("core/events/keyPressed")
+require("events/mousePressed")
+require("events/keyPressed")
 
 -- BoxComponents
 require("components/ui/uiStringComponent")
@@ -38,10 +39,11 @@ end
 function MenuState:load()
 
     self.engine = Engine()
+    self.eventmanager = EventManager()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
-    self.engine:addListener("KeyPressed", boxnavigation)
-    self.engine:addListener("MousePressed", boxclick)
+    self.eventmanager:addListener("KeyPressed", boxnavigation)
+    self.eventmanager:addListener("MousePressed", boxclick)
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
@@ -98,9 +100,9 @@ end
 
 
 function MenuState:keypressed(key, u)
-    self.engine:fireEvent(KeyPressed(key, u))
+    self.eventmanager:fireEvent(KeyPressed(key, u))
 end
 
 function MenuState:mousepressed(x, y, button)
-    self.engine:fireEvent(MousePressed(x, y, button))
+    self.eventmanager:fireEvent(MousePressed(x, y, button))
 end

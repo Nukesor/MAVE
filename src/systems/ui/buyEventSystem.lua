@@ -13,7 +13,7 @@ function BuyEventSystem:fireEvent(event)
 
         --Gold decrease
         if gameplay.items[index] then
-            gameplay.gold = gameplay.gold - gameplay.items[index].price
+            gameplay.stats.gold = gameplay.stats.gold - gameplay.items[index].price
             gameplay.items[index].owned = true
         end
     end

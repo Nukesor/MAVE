@@ -1,12 +1,13 @@
-require("core/resources")
-require("core/state")
-require("core/entity")
-require("core/engine")
+require("lib/resources")
+require("lib/state")
+require("lovetoys/core/entity")
+require("lovetoys/core/engine")
+require("lovetoys/core/eventManager")
 
 --Events
-require("core/events/mousePressed")
-require("core/events/keyPressed")
-require("core/events/buyBoolEvent")
+require("events/mousePressed")
+require("events/keyPressed")
+require("events/buyBoolEvent")
 
 -- BoxComponents
 require("components/ui/uiStringComponent")
@@ -41,12 +42,13 @@ end
 function ShopState:load()
 
     self.engine = Engine()
+    self.eventmanager = EventManager()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
     local buyeventsystem = BuyEventSystem()
-    self.engine:addListener("KeyPressed", boxnavigation)
-    self.engine:addListener("MousePressed", boxclick)
-    self.engine:addListener("BuyBoolEvent", buyeventsystem)
+    self.eventmanager:addListener("KeyPressed", boxnavigation)
+    self.eventmanager:addListener("MousePressed", boxclick)
+    self.eventmanager:addListener("BuyBoolEvent", buyeventsystem)
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
@@ -55,18 +57,18 @@ function ShopState:load()
     self.engine:addSystem(boxnavigation)
     self.engine:addSystem(buyeventsystem)
 
-    self.boxnumber = 10
+    self.boxnumber = 12
     self.boxes = {}
-    self.width = 5
+    self.width = 4
 
     -- Dynamische Erstellung der Item boxes
     for i = 1, self.boxnumber, 1 do
 
         -- Berrechnung der Position und Zeilenumbruch nach i == self.width Boxes
         y = love.graphics.getHeight() * (1/20) + (math.floor((i-1)/self.width) * love.graphics.getHeight() * (1/10)) + math.floor((i-1)/self.width) * love.graphics.getHeight() * (1/30)
-        x = love.graphics.getWidth() * (1/24) + love.graphics.getWidth() * (1/5) * ((i-1)-math.floor((i-1)/self.width)*5)
+        x = love.graphics.getWidth() * (1/24) + love.graphics.getWidth() * (1/5) * ((i-1)-math.floor((i-1)/self.width)*self.width)
 
-        local box = ItemBoxModel(150, 75, x, y, "item", false)
+        local box = ItemBoxModel(love.graphics.getWidth()*(3/25), love.graphics.getHeight()*(1/9), x, y, "item", false)
         self.engine:addEntity(box)
     end
     sortMenu(self.boxes)
@@ -125,9 +127,9 @@ end
 
 
 function ShopState:keypressed(key, u)
-    self.engine:fireEvent(KeyPressed(key, u))
+    self.eventmanager:fireEvent(KeyPressed(key, u))
 end
 
 function ShopState:mousepressed(x, y, button)
-    self.engine:fireEvent(MousePressed(x, y, button))
+    self.eventmanager:fireEvent(MousePressed(x, y, button))
 end

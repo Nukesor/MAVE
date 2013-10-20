@@ -1,14 +1,16 @@
-require("core/resources")
-require("core/state")
-require("core/entity")
-require("core/engine")
-require("core/system")
+require("lib/resources")
+require("lib/state")
+require("lovetoys/core/entity")
+require("lovetoys/core/engine")
+require("lovetoys/core/system")
+require("lovetoys/core/eventManager")
+require("lovetoys/core/collisionManager")
 
 --Events
-require("core/events/mousePressed")
-require("core/events/keyPressed")
-require("core/events/beginContact")
-require("core/events/explosionEvent")
+require("events/mousePressed")
+require("events/keyPressed")
+require("events/beginContact")
+require("events/explosionEvent")
 
 -- Draw Systems
 require("systems/draw/drawableDrawSystem")
@@ -52,7 +54,6 @@ require("systems/pressedevent/mainKeySystem")
 require("systems/pressedevent/playerControlSystem")
 require("systems/pressedevent/mainMousePressedSystem")
 -- Event Systems
-require("systems/event/collisionSelectSystem")
 require("systems/event/explosionEventSystem")
 
 --GraphicComponents
@@ -100,6 +101,16 @@ require("models/grenadeModel")
 require("models/mineModel")
 
 
+-- Collisions
+
+require("collisions/bounceCollision")
+require("collisions/collisionDamage")
+require("collisions/shotCutieCollision")
+require("collisions/shotWallCollision")
+require("collisions/explosionShotCollision")
+require("collisions/mineGroundCollision")
+
+
 LevelState = class("LevelState", State)
 
 function LevelState:__init()
@@ -113,11 +124,13 @@ function LevelState:load()
     world:setCallbacks(beginContact, endContact)
 
     self.engine = Engine()
-    self.engine:addListener("KeyPressed", MainKeySystem())
-    self.engine:addListener("KeyPressed", PlayerControlSystem())
-    self.engine:addListener("BeginContact", CollisionSelectSystem())
-    self.engine:addListener("MousePressed", MainMousePressedSystem())
-    self.engine:addListener("ExplosionEvent", ExplosionEventSystem())
+    self.eventmanager = EventManager()
+    self.collisionmanager = CollisionManager()
+    self.eventmanager:addListener("KeyPressed", MainKeySystem())
+    self.eventmanager:addListener("KeyPressed", PlayerControlSystem())
+    self.eventmanager:addListener("BeginContact", self.collisionmanager)
+    self.eventmanager:addListener("MousePressed", MainMousePressedSystem())
+    self.eventmanager:addListener("ExplosionEvent", ExplosionEventSystem())
 
     self.engine:addSystem(DrawableDrawSystem(), "draw")
     self.engine:addSystem(PolygonDrawSystem(), "draw")
@@ -145,6 +158,22 @@ function LevelState:load()
     self.engine:addSystem(TimerSystem(), "logic")
     self.engine:addSystem(PlayerDeathCheckSystem(), "logic")
 
+
+    -- Adding Collisions to CollisionManager
+
+    local bounce = BounceCollision()
+    self.collisionmanager:addCollisionAction(bounce.component1, bounce.component2, bounce)
+    local damage = CollisionDamage()
+    self.collisionmanager:addCollisionAction(damage.component1, damage.component2, damage)
+    local shotcutie = ShotCutieCollision()
+    self.collisionmanager:addCollisionAction(shotcutie.component1, shotcutie.component2, shotcutie)
+    local shotwall = ShotWallCollision()
+    self.collisionmanager:addCollisionAction(shotwall.component1, shotwall.component2, shotwall)
+    local shotexplosive = ExplosionShotCollision()
+    self.collisionmanager:addCollisionAction(shotexplosive.component1, shotexplosive.component2, shotexplosive)
+    local mineground = MineGroundCollision()
+    self.collisionmanager:addCollisionAction(mineground.component1, mineground.component2, mineground)
+    
     -- Slowmospeed
     self.worldspeed = 1;
 
@@ -217,15 +246,15 @@ function LevelState:restart()
 end
 
 function LevelState:keypressed(key, u)
-    self.engine:fireEvent(KeyPressed(key, u))
+    self.eventmanager:fireEvent(KeyPressed(key, u))
 end
 
 
 function LevelState:mousepressed(x, y, button)
-    self.engine:fireEvent(MousePressed(x, y, button))
+    self.eventmanager:fireEvent(MousePressed(x, y, button))
 end
 
 --Collision function
 function beginContact(a, b, coll)
-    stack:current().engine:fireEvent(BeginContact(a, b, coll))
+    stack:current().eventmanager:fireEvent(BeginContact(a, b, coll))
 end

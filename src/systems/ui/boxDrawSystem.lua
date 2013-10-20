@@ -26,11 +26,11 @@ function BoxDrawSystem:draw()
                     index = i
                 end
             end
-            love.graphics.setColor(255, 255, 255)
-            love.graphics.setColor(200, 50, 0, 255)
-            love.graphics.rectangle("line", position.x, position.y, box.width, box.height)
-            love.graphics.setColor(100, 100, 100, 100)
-            love.graphics.rectangle("fill", position.x+2, position.y+2, box.width-4, box.height-4)
+            if box.image then
+                love.graphics.setColor(255, 255, 255, 255)
+                love.graphics.draw(box.image, position.x+box.width/2, position.y+box.height/2, 0, box.scale, 
+                    box.scale, box.image:getWidth()/2, box.image:getHeight()/2)
+            end
             if box.selected == true then
                 love.graphics.setColor(255, 255, 255, 50)
                 love.graphics.rectangle("fill", position.x, position.y, box.width, box.height)
@@ -42,12 +42,15 @@ function BoxDrawSystem:draw()
             love.graphics.setFont(boxstring.font)
             if box.selected == true then
                 if scale ~= nil then
-                    love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, scale * 1.5, scale * 1.5, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
+                    love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, 
+                        scale * 1.5, scale * 1.5, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
                 else
-                    love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, scale, scale, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
+                    love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, 
+                        scale, scale, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
                 end
             else
-                love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, scale, scale, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
+                love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, 
+                    scale, scale, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
             end
         end
     end

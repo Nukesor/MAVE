@@ -1,7 +1,7 @@
 ItemBoxModel = class("ItemBoxModel", Entity)
 
-function ItemBoxModel:__init(w, h, x, y, type, selected)
-    self:addComponent(BoxComponent(w, h, {}, type))
+function ItemBoxModel:__init(w, h, x, y, type, selected, image, xscale, yscale)
+    self:addComponent(BoxComponent(w, h, {}, type, image, xscale, yscale))
     self:addComponent(FunctionComponent(function ()
                                             local box = getSelectedBox()
                                             local index

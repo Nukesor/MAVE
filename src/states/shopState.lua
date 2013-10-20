@@ -68,7 +68,33 @@ function ShopState:load()
         y = love.graphics.getHeight() * (1/20) + (math.floor((i-1)/self.width) * love.graphics.getHeight() * (1/10)) + math.floor((i-1)/self.width) * love.graphics.getHeight() * (1/30)
         x = love.graphics.getWidth() * (1/24) + love.graphics.getWidth() * (1/5) * ((i-1)-math.floor((i-1)/self.width)*self.width)
 
-        local box = ItemBoxModel(love.graphics.getWidth()*(3/25), love.graphics.getHeight()*(1/9), x, y, "item", false)
+        local bwidth = love.graphics.getWidth()*(3/25)
+        local bheight = love.graphics.getHeight()*(1/9)
+        local box
+        if gameplay.items[i] then
+            local xscale
+            local yscale
+            if bheight / gameplay.items[i].image:getHeight() < 1 then
+                yscale = bheight / gameplay.items[i].image:getHeight()
+            else
+                yscale = 1
+            end
+            if bwidth / gameplay.items[i].image:getWidth() < 1 then
+                xscale = bwidth / gameplay.items[i].image:getWidth()
+            else
+                xscale = 1
+            end
+            if xscale < yscale then
+                yscale = xscale
+            else
+                xscale = yscale
+            end
+            print(yscale)
+            print(xscale)
+            box = ItemBoxModel(bwidth, bheight, x, y, "item", false, gameplay.items[i].image, xscale)
+        else
+            box = ItemBoxModel(bwidth, bheight, x, y, "item", false)
+        end
         self.engine:addEntity(box)
     end
     sortMenu(self.boxes)

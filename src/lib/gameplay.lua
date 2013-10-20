@@ -35,9 +35,5 @@ function Gameplay:__init()
             mine:getComponent("PhysicsComponent").fixture:setUserData(mine)
             stack:current().engine:addEntity(mine)
         end)
-        ,
-        ItemComponent("Hammer", false, 100, resources.images.grenade, 0.14, 0.14, 
-        function()
-        end)
     }
 end

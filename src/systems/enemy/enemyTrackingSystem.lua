@@ -28,8 +28,6 @@ function EnemyTrackingSystem:update(dt)
             end
         end
 
-
-
         if playercutiey < height then
             if enemy.check == 0 then
                 enemy.check = 1

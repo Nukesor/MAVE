@@ -122,7 +122,7 @@ end
 function ShopState:draw()
     self.engine:draw()
     love.graphics.setFont(resources.fonts.twenty)
-    love.graphics.print(gameplay.stats["gold"] .. " Gold", 26, 10)
+    love.graphics.print(gameplay.stats["blood"] .. " Blood", 26, 10)
 end
 
 

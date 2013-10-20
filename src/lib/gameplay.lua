@@ -9,7 +9,7 @@ function Gameplay:__init()
                     highscore = 0,
                     level = 1,
                     kills = 0,
-                    gold = 100
+                    blood = 100
                     }
     self.items = {
         --String, gekauft, Kosten, image, scalingx, scalingy, function 

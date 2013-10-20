@@ -15,7 +15,7 @@ function EnemySpawnSystem:update(dt)
         local cutie
         cutie = CutieModel(0, height, resources.images.cutie2, 15)
         cutie:addComponent(IsEnemy())
-        cutie:addComponent(GoldComponent(10))
+        cutie:addComponent(BloodComponent(10))
         stack:current().engine:addEntity(cutie)
         self.spawntimer = 0 
     end

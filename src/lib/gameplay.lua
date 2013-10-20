@@ -1,5 +1,6 @@
 require("events/buyBoolEvent")
 require("components/cutie/itemComponent")
+require("models/waves")
 
 Gameplay = class("Gameplay")
 
@@ -35,5 +36,9 @@ function Gameplay:__init()
             mine:getComponent("PhysicsComponent").fixture:setUserData(mine)
             stack:current().engine:addEntity(mine)
         end)
+    }
+
+    self.waves = {
+        Wave1()
     }
 end

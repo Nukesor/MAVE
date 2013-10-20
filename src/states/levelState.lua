@@ -18,7 +18,7 @@ require("systems/draw/polygonDrawSystem")
 require("systems/draw/lifebarSystem")
 require("systems/draw/stringDrawSystem")
 require("systems/draw/itemDrawSystem")
-require("systems/draw/goldUpDisplaySystem")
+require("systems/draw/bloodUpDisplaySystem")
 
 -- Particle Systems
 require("systems/particle/particleDrawSystem")
@@ -61,7 +61,7 @@ require("components/graphic/drawableComponent")
 require("components/graphic/drawablePolygonComponent")
 require("components/graphic/zIndex")
 require("components/graphic/stringComponent")
-require("components/graphic/goldUpComponent")
+require("components/graphic/bloodUpComponent")
 
 -- Particle Component
 require("components/particle/particleComponent")
@@ -79,7 +79,7 @@ require("components/cutie/wobblyComponent")
 require("components/cutie/dashingComponent")
 require("components/cutie/enemyComponent")
 require("components/cutie/itemComponent")
-require("components/cutie/goldComponent")
+require("components/cutie/bloodComponent")
 
 --IdentifierComponents
 require("components/identifier/isShot")
@@ -138,7 +138,7 @@ function LevelState:load()
     self.engine:addSystem(StringDrawSystem(), "draw")
     self.engine:addSystem(ItemDrawSystem(), "draw")
     self.engine:addSystem(ParticleDrawSystem(), "draw")
-    self.engine:addSystem(GoldUpDisplaySystem(), "draw")
+    self.engine:addSystem(BloodUpDisplaySystem(), "draw")
     
     self.engine:addSystem(SideChangeSystem(), "logic")
     self.engine:addSystem(PhysicsPositionSyncSystem(), "logic")
@@ -194,7 +194,7 @@ function LevelState:load()
     self.engine:addEntity(str)
 
     str = Entity()
-    str:addComponent(StringComponent(resources.fonts.twenty, {255, 0, 0, 255}, "Gold:  %i", {{gameplay.stats, "gold"}}))
+    str:addComponent(StringComponent(resources.fonts.twenty, {255, 0, 0, 255}, "Blood:  %i", {{gameplay.stats, "blood"}}))
     str:addComponent(PositionComponent(love.graphics.getWidth()-100, 20))
     self.engine:addEntity(str)
 

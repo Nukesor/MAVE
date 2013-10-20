@@ -120,7 +120,7 @@ end
 function LevelState:load()
     love.graphics.setFont(resources.fonts.twenty)
     love.physics.setMeter(64)
-    world = love.physics.newWorld(0, 9.81*64, true)
+    world = love.physics.newWorld(0, 9.81*80, true)
     world:setCallbacks(beginContact, endContact)
 
     self.engine = Engine()
@@ -144,10 +144,10 @@ function LevelState:load()
     self.engine:addSystem(PhysicsPositionSyncSystem(), "logic")
     self.engine:addSystem(ParticleUpdateSystem(), "logic")
     self.engine:addSystem(PlayerMoveSystem(), "logic")
-    --self.engine:addSystem(EnemyTrackingSystem(), "logic")
+    self.engine:addSystem(EnemyTrackingSystem(), "logic")
     self.engine:addSystem(SpeedLimitSystem(), "logic")
     self.engine:addSystem(BleedingDetectSystem(), "logic")
-    --self.wobbleSystem = self.engine:addSystem(WobbleSystem(), "logic")
+    self.wobbleSystem = self.engine:addSystem(WobbleSystem(), "logic")
     self.dashingSystem = self.engine:addSystem(DashingSystem(), "logic")
     self.engine:addSystem(CutieDeleteSystem(), "logic")
     self.engine:addSystem(EnemySpawnSystem(), "logic")
@@ -182,6 +182,12 @@ function LevelState:load()
     self.shakeX = 0
     self.shakeY = 0
     self.shaketimer = 0
+
+    local bg = Entity()
+    bg:addComponent(DrawableComponent(resources.images.arena, 0, 1, 1, 0, 0))
+    bg:addComponent(ZIndex(1))
+    bg:addComponent(PositionComponent(0, 0))
+    self.engine:addEntity(bg)
 
     -- Playercreation
     playercutie = CutieModel(0, 0, resources.images.cutie1, 100)

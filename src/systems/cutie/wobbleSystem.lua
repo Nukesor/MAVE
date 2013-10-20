@@ -9,7 +9,7 @@ function WobbleSystem:update()
         local drawable = entity:getComponent("DrawableComponent")
         local wobbly = entity:getComponent("WobblyComponent")
         if drawable.sy < wobbly.default then
-            drawable.sy = (drawable.sy + (wobbly.default / 70))*relation()
+            drawable.sy = (drawable.sy + (wobbly.default/70)*relation())
         end
     end
 end
@@ -29,8 +29,6 @@ function WobbleSystem:fireEvent(event)
     elseif physicsB then
         self:setNewSy(entityB)
     end
-        
-
 end
 
 function WobbleSystem:getRequiredComponents()
@@ -38,7 +36,7 @@ function WobbleSystem:getRequiredComponents()
 end
 
 function WobbleSystem:setNewSy(entity, speed)
-    if not speed and entity:getComponent("PhysicsComponent") then
+    if not speed then
         speed = distanceBetween({0, 0}, {entity:getComponent("PhysicsComponent").body:getLinearVelocity()})
     end
     
@@ -46,8 +44,6 @@ function WobbleSystem:setNewSy(entity, speed)
         local drawable = entity:getComponent("DrawableComponent")
         local wobbly = entity:getComponent("WobblyComponent")
         local maxSpeed = 1000
-        drawable.sy = wobbly.default - (wobbly.default / 4) * (speed / maxSpeed)
-        if speed > 1000 then
-        end
+        drawable.sy = wobbly.default - ((wobbly.default/3) * (speed / maxSpeed))
     end
 end

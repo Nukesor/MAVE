@@ -183,6 +183,12 @@ function LevelState:load()
     self.shakeY = 0
     self.shaketimer = 0
 
+    local bg = Entity()
+    bg:addComponent(DrawableComponent(resources.images.arena, 0, 1, 1, 0, 0))
+    bg:addComponent(ZIndex(1))
+    bg:addComponent(PositionComponent(0, 0))
+    self.engine:addEntity(bg)
+
     -- Playercreation
     playercutie = CutieModel(0, 0, resources.images.cutie1, 100)
     playercutie:addComponent(IsPlayer())

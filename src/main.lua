@@ -30,8 +30,7 @@ function love.load()
     resources:addImage("cutie5", 'data/gfx/cutie-5.png')
 
     resources:addImage("blood1", 'data/gfx/blood1.png')
-    resources:addImage("level2", 'data/gfx/arena.png')
-    resources:addImage("level1", 'data/gfx/level1.png')
+    resources:addImage("arena", 'data/gfx/arena.png')
     resources:addImage("background", 'data/gfx/menu/background.png')
     resources:addImage("logo", "data/gfx/menu/logo.png")
 

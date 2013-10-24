@@ -89,8 +89,6 @@ function ShopState:load()
             else
                 xscale = yscale
             end
-            print(yscale)
-            print(xscale)
             box = ItemBoxModel(bwidth, bheight, x, y, "item", false, gameplay.items[i].image, xscale)
         else
             box = ItemBoxModel(bwidth, bheight, x, y, "item", false)

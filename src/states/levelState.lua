@@ -36,6 +36,8 @@ require("systems/weapon/grenadeRotationSystem")
 require("systems/weapon/timerExplosionSystem")
 require("systems/weapon/timerShotDeletionSystem")
 require("systems/weapon/mineProximitySystem")
+require("systems/weapon/shootSystem")
+require("systems/weapon/weaponTimerSystem")
 
 --CutieManipulation Upgrade Systems
         --Cutie
@@ -157,6 +159,8 @@ function LevelState:load()
     self.engine:addSystem(GrenadeRotationSystem(), "logic")
     self.engine:addSystem(BodyDestroySystem(), "logic")
     self.engine:addSystem(TimerSystem(), "logic")
+    self.engine:addSystem(WeaponTimerSystem(), "logic")
+    self.engine:addSystem(ShootSystem(), "logic")
     self.engine:addSystem(TimerShotDeletionSystem(), "logic")
     self.engine:addSystem(PlayerDeathCheckSystem(), "logic")
 

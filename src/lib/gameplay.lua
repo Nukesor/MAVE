@@ -25,7 +25,7 @@ function Gameplay:__init()
             end
         end)
         ,
-        ItemComponent("Granate", false, 10, resources.images.grenade, 0.12, 0.12, 0,5,
+        ItemComponent("Granate", true, 10, resources.images.grenade, 0.12, 0.12, 0.5,
         function()
             -- Generates a new Grenademodel
             if playercutie:getComponent("ItemComponent").counttimer < 0 then

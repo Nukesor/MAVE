@@ -11,10 +11,11 @@ function BuyEventSystem:fireEvent(event)
             end
         end
 
-        --Blood decrease
+        --Blood decrease and Item marked as owned
         if gameplay.items[index] then
             gameplay.stats.blood = gameplay.stats.blood - gameplay.items[index].price
             gameplay.items[index].owned = true
+            saveGame()
         end
     end
 end

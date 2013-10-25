@@ -45,7 +45,7 @@ function Gameplay:__init()
                 playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
             end
         end),
-        ItemComponent("Machinegun", true, 10, resources.images.gun, 0.15, 0.15, 0.08,
+        ItemComponent("Machinegun", true, 10, resources.images.gun, 0.15, 0.15, 0.0001,
         function()
             -- Erstellen eines neuen Shotmodels
             if playercutie:getComponent("ItemComponent").counttimer < 0 then

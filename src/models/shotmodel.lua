@@ -20,7 +20,7 @@ function ShotModel:__init(x, y, xt, yt)
     self:addComponent(IsShot())
     self:addComponent(ZIndex(99))
     self:addComponent(DamageComponent(20))
-    self:addComponent(TimerComponent(2))
+    self:addComponent(TimerComponent(1.5))
 
     body:setGravityScale(0.1)
     body:setAngle(math.atan2(akat, -gkat)-math.pi/2)

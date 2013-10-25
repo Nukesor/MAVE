@@ -19,7 +19,7 @@ function MainKeySystem:fireEvent(event)
                 stack:current().engine:componentAdded(playercutie, {"ItemComponent"})
             elseif playercutie:getComponent("ItemComponent") then
                 playercutie:removeComponent("ItemComponent")
-                stack:current().engine:componentRemoved(entity, {"ItemComponent"})
+                stack:current().engine:componentRemoved(playercutie, {"ItemComponent"})
             end
         end
     end

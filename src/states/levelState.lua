@@ -89,6 +89,8 @@ require("components/identifier/isShot")
 require("components/identifier/isPlayer")
 require("components/identifier/isEnemy")
 require("components/identifier/isGrenade")
+require("components/identifier/isRocket")
+
 
 -- Item Components
 require("components/items/explosionComponent")
@@ -102,6 +104,7 @@ require("models/shotmodel")
 require("models/cutieModel")
 require("models/grenadeModel")
 require("models/mineModel")
+require("models/rocketModel")
 
 
 -- Collisions
@@ -112,6 +115,7 @@ require("collisions/shotCutieCollision")
 require("collisions/shotWallCollision")
 require("collisions/explosionShotCollision")
 require("collisions/mineGroundCollision")
+require("collisions/rocketCollision")
 
 
 LevelState = class("LevelState", State)
@@ -179,7 +183,10 @@ function LevelState:load()
     self.collisionmanager:addCollisionAction(shotexplosive.component1, shotexplosive.component2, shotexplosive)
     local mineground = MineGroundCollision()
     self.collisionmanager:addCollisionAction(mineground.component1, mineground.component2, mineground)
+    local rocketcollision = RocketCollision()
+    self.collisionmanager:addCollisionAction(rocketcollision.component1, rocketcollision.component2, rocketcollision)
     
+
     -- Slowmospeed
     self.worldspeed = 1;
 

@@ -6,9 +6,9 @@ function ShotCutieCollision:__init()
 end
 
 function ShotCutieCollision:action(entities)
-    local entity1 = entities.entity1   
-    local entity2 = entities.entity2
-    entity1:getComponent("LifeComponent").life = entity1:getComponent("LifeComponent").life - entity2:getComponent("DamageComponent").damage
-    entity2:addComponent(DestroyComponent())
-    stack:current().engine:componentAdded(entity2, {"DestroyComponent"})
+    local cutie = entities.entity1  
+    local shot = entities.entity2
+    cutie:getComponent("LifeComponent").life = cutie:getComponent("LifeComponent").life - shot:getComponent("DamageComponent").damage
+    shot:addComponent(DestroyComponent())
+    stack:current().engine:componentAdded(shot, {"DestroyComponent"})
 end

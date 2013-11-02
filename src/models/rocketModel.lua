@@ -1,6 +1,6 @@
-ShotModel = class("ShotModel", Entity)
+RocketModel = class("RocketModel", Entity)
 
-function ShotModel:__init(x, y, xt, yt)
+function RocketModel:__init(x, y, xt, yt)
     local akat, gkat
     akat = xt - x
     gkat = yt - y
@@ -20,10 +20,11 @@ function ShotModel:__init(x, y, xt, yt)
     self:addComponent(PhysicsComponent(body, fixture, shape ))
     self:addComponent(PositionComponent(x,y))
     self:addComponent(DrawableComponent(resources.images.shot, math.atan2(akat, -gkat)-math.pi/2, 1, 1, 20, 4))
-    self:addComponent(IsShot())
     self:addComponent(ZIndex(99))
     self:addComponent(DamageComponent(20))
     self:addComponent(TimerComponent(1.5))
+    self:addComponent(IsRocket())
+    self:addComponent(ExplosionComponent(80, 150))
 
     body:setGravityScale(0.1)
     body:setAngle(math.atan2(akat, -gkat)-math.pi/2)

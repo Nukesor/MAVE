@@ -45,13 +45,23 @@ function Gameplay:__init()
                 playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
             end
         end),
-        ItemComponent("Machinegun", true, 10, resources.images.gun, 0.15, 0.15, 0.0001,
+        ItemComponent("Machinegun", true, 10, resources.images.gun, 0.15, 0.15, 0.05,
         function()
             -- Erstellen eines neuen Shotmodels
             if playercutie:getComponent("ItemComponent").counttimer < 0 then
                 local shot = ShotModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, love.mouse.getPosition())
                 shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
                 stack:current().engine:addEntity(shot)
+                playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
+            end
+        end),
+        ItemComponent("Rocketlauncher", true, 10, resources.images.gun, 0.15, 0.15, 0.8,
+        function()
+            -- Erstellen eines neuen Rocketmodels
+            if playercutie:getComponent("ItemComponent").counttimer < 0 then
+                local rocket = RocketModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, love.mouse.getPosition())
+                rocket:getComponent("PhysicsComponent").fixture:setUserData(rocket)
+                stack:current().engine:addEntity(rocket)
                 playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
             end
         end)

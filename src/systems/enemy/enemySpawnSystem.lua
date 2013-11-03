@@ -3,7 +3,6 @@ EnemySpawnSystem = class("EnemySpawnSystem", System)
 function EnemySpawnSystem:__init()
     self.waitUntilSpawn = 5
     self.waveIndex = 1
-    self.wave = gameplay.waves[self.waveIndex]:getWave()
 end
 
 function EnemySpawnSystem:update(dt)
@@ -16,9 +15,7 @@ function EnemySpawnSystem:update(dt)
             self.waveIndex = self.waveIndex + 1
         end
 
-        self.wave = gameplay.waves[self.waveIndex]:getWave()
-
-        for index, enemy in pairs(self.wave) do
+        for index, enemy in pairs(gameplay.waves[self.waveIndex]:getWave()) do
             stack:current().engine:addEntity(enemy)
         end
 

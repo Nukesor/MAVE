@@ -11,7 +11,7 @@ function Wave1:getWave()
     local wave = {}
     for i=1, 10, 1 do
         local pos = self:getRandomSpawnPosition()
-        local enemy = CutieModel(pos.x, pos.y, resources.images.cutie1, 20)
+        local enemy = CutieModel(pos.x, pos.y, resources.images.cutie2, 20)
         enemy:addComponent(BloodComponent(1))
         enemy:addComponent(IsEnemy())
         table.insert(wave, enemy)

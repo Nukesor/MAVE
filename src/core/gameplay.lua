@@ -10,7 +10,8 @@ function Gameplay:__init()
                     highscore = 0,
                     level = 1,
                     kills = 0,
-                    blood = 100
+                    blood = 100,
+                    owned = {}
                     }
     self.items = {
         --String, gekauft, Kosten, image, scalingx, scalingy, function 
@@ -25,7 +26,7 @@ function Gameplay:__init()
             end
         end)
         ,
-        ItemComponent("Granate", true, 10, resources.images.grenade, 0.12, 0.12, 0.5,
+        ItemComponent("Granate", false, 10, resources.images.grenade, 0.12, 0.12, 0.5,
         function()
             -- Generates a new Grenademodel
             if playercutie:getComponent("ItemComponent").counttimer < 0 then
@@ -36,7 +37,7 @@ function Gameplay:__init()
             end
         end)
         ,
-        ItemComponent("Mine", true, 10, resources.images.mine, 0.2, 0.2, 1,
+        ItemComponent("Mine", false, 10, resources.images.mine, 0.2, 0.2, 1,
         function()
             if playercutie:getComponent("ItemComponent").counttimer < 0 then
                 local mine = MineModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y)
@@ -45,7 +46,7 @@ function Gameplay:__init()
                 playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
             end
         end),
-        ItemComponent("Machinegun", true, 10, resources.images.gun, 0.15, 0.15, 0.05,
+        ItemComponent("Machinegun", false, 10, resources.images.gun, 0.15, 0.15, 0.05,
         function()
             -- Erstellen eines neuen Shotmodels
             if playercutie:getComponent("ItemComponent").counttimer < 0 then
@@ -55,7 +56,7 @@ function Gameplay:__init()
                 playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
             end
         end),
-        ItemComponent("Rocketlauncher", true, 10, resources.images.gun, 0.15, 0.15, 0.8,
+        ItemComponent("Rocketlauncher", false, 10, resources.images.gun, 0.15, 0.15, 0.8,
         function()
             -- Erstellen eines neuen Rocketmodels
             if playercutie:getComponent("ItemComponent").counttimer < 0 then
@@ -66,7 +67,10 @@ function Gameplay:__init()
             end
         end)
     }
-
+    for i, v in pairs(self.items) do
+        self.stats.owned[i] = v.owned
+    end
+    
     self.waves = {
         Wave1()
     }

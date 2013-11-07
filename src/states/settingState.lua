@@ -83,7 +83,9 @@ function SettingState:__init()
 
         end 
        end , "Mousespeed"},
-    {function ()  end , "Reset Game"},
+    {function ()  stack:push(PromptState(function()
+                                  gameplay:__init()  
+                                  saveGame() end )) end, "Reset Game"},
     {function () stack:popload() end, "Return"}
     }
 end

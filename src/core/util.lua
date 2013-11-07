@@ -158,6 +158,9 @@ function loadGame()
         chunk = love.filesystem.load("stats.lua")
         chunk()
         gameplay.stats = stats
+        for i, v in pairs(gameplay.items) do
+            v.owned = gameplay.stats.owned[i]
+        end
         return true
     else
         return false

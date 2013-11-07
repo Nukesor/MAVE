@@ -1,22 +1,15 @@
 ItemBoxModel = class("ItemBoxModel", Entity)
 
-function ItemBoxModel:__init(w, h, x, y, type, selected, image, xscale, yscale)
-    self:addComponent(BoxComponent(w, h, {}, type, image, xscale, yscale))
+function ItemBoxModel:__init(id, w, h, x, y, selected, image, xscale, yscale)
+    self:addComponent(BoxComponent(w, h, {}, image, xscale, yscale))
     self:addComponent(FunctionComponent(function ()
-                                            local box = getSelectedBox()
-                                            local index
-                                            for i, v in pairs(stack:current().boxes) do
-                                                if v == box then
-                                                    index = i 
-                                                end
-                                            end
-                                            if (gameplay.stats.blood - gameplay.items[index].price) >= 0 and gameplay.items[index].owned == false then
+                                            if (gameplay.stats.blood - gameplay.items[id].price) >= 0 and gameplay.items[id].owned == false then
                                                 stack:push(PromptState(
                                                     function () 
                                                         --Blood decrease and Item marked as owned
-                                                        if gameplay.items[index] then
-                                                            gameplay.stats.blood = gameplay.stats.blood - gameplay.items[index].price
-                                                            gameplay.items[index].owned = true
+                                                        if gameplay.items[id] then
+                                                            gameplay.stats.blood = gameplay.stats.blood - gameplay.items[id].price
+                                                            gameplay.items[id].owned = true
                                                             saveGame()
                                                         end
                                                     end))

@@ -1,4 +1,4 @@
-require("lib/lovetoys/lovetoys/class")
+require("lib/lua-lovetoys/lovetoys/class")
 require("core/resources")
 require("core/stackhelper")
 require("core/gameplay")
@@ -33,6 +33,7 @@ function love.load()
     resources:addImage("arena", 'data/gfx/arena.png')
     resources:addImage("background", 'data/gfx/menu/background.png')
     resources:addImage("logo", "data/gfx/menu/logo.png")
+    resources:addImage("sold", "data/gfx/menu/sold.png")
 
     resources:addImage("shot", 'data/gfx/shot.png')
     resources:addImage("grenade", 'data/gfx/weapons/grenade.png')

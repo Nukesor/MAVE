@@ -1,9 +1,9 @@
 require("core/resources")
 require("core/state")
-require("lib/lovetoys/lovetoys/component")
-require("lib/lovetoys/lovetoys/entity")
-require("lib/lovetoys/lovetoys/engine")
-require("lib/lovetoys/lovetoys/eventManager")
+require("lib/lua-lovetoys/lovetoys/component")
+require("lib/lua-lovetoys/lovetoys/entity")
+require("lib/lua-lovetoys/lovetoys/engine")
+require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -19,7 +19,7 @@ require("components/ui/menuWobblyComponent")
 
 -- Systems
 require("systems/ui/boxClickSystem")
-require("systems/ui/boxDrawSystem")
+require("systems/ui/menuBoxDrawSystem")
 require("systems/ui/boxHoverSystem")
 require("systems/ui/boxNavigationSystem")
 require("systems/ui/menuWobblySystem")
@@ -51,7 +51,7 @@ function GameOverState:load()
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
     self.engine:addSystem(DrawableDrawSystem(), "draw")
-    self.engine:addSystem(BoxDrawSystem(), "draw")
+    self.engine:addSystem(MenuBoxDrawSystem(), "draw")
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
 
@@ -63,9 +63,9 @@ function GameOverState:load()
         x = love.graphics.getWidth()/4 * i -(self.font:getWidth(self.menu[i][2])/2)
         local box
         if i == 2 then
-            box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
+            box = menuBox(self.font:getWidth(self.menu[i][2]), 40, x, y, self.menu[i][2], self.font, self.menu[i][1], true)
         else
-            box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
+            box = menuBox(self.font:getWidth(self.menu[i][2]), 40, x, y, self.menu[i][2], self.font, self.menu[i][1], false)
         end
         self.engine:addEntity(box)
     end

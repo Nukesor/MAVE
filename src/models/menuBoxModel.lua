@@ -1,7 +1,7 @@
-BoxModel = class("BoxModel",  Entity)
+menuBox = class("menuBox",  Entity)
 
-function BoxModel:__init(width, height, x, y, type, string, font, func, selected)
-    self:addComponent(BoxComponent(width, height, {}, type))
+function menuBox:__init(width, height, x, y, string, font, func, selected)
+    self:addComponent(BoxComponent(width, height, {}))
     self:addComponent(UIStringComponent(string, font))
     self:addComponent(FunctionComponent(func))
     self:addComponent(MenuWobblyComponent())

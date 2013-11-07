@@ -24,7 +24,7 @@ function PromptState:load()
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
-    self.engine:addSystem(BoxDrawSystem(), "draw")
+    self.engine:addSystem(MenuBoxDrawSystem(), "draw")
     self.engine:addSystem(DrawableDrawSystem(), "draw")
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
@@ -37,9 +37,9 @@ function PromptState:load()
         x = love.graphics.getWidth()/3 * (i) - 50
         local box
         if i == 1 then
-            box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
+            box = menuBox(self.font:getWidth(self.menu[i][2]), 40, x, y, self.menu[i][2], self.font, self.menu[i][1], true)
         else
-            box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
+            box = menuBox(self.font:getWidth(self.menu[i][2]), 40, x, y, self.menu[i][2], self.font, self.menu[i][1], false)
         end
         self.engine:addEntity(box)
     end

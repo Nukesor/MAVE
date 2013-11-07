@@ -1,8 +1,8 @@
 require("core/resources")
 require("core/state")
-require("lib/lovetoys/lovetoys/entity")
-require("lib/lovetoys/lovetoys/engine")
-require("lib/lovetoys/lovetoys/eventManager")
+require("lib/lua-lovetoys/lovetoys/entity")
+require("lib/lua-lovetoys/lovetoys/engine")
+require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -19,11 +19,11 @@ require("components/ui/menuWobblyComponent")
 
 -- Systems
 require("systems/ui/boxClickSystem")
-require("systems/ui/boxDrawSystem")
+require("systems/ui/menuBoxDrawSystem")
 require("systems/ui/boxHoverSystem")
 require("systems/ui/boxNavigationSystem")
 require("systems/ui/menuWobblySystem")
-require("systems/ui/buyEventSystem")
+require("systems/ui/itemBoxDrawSystem")
 
 require("models/itemBoxModel")
 
@@ -44,19 +44,17 @@ function ShopState:load()
     self.eventmanager = EventManager()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
-    local buyeventsystem = BuyEventSystem()
     self.eventmanager:addListener("KeyPressed", boxnavigation)
     self.eventmanager:addListener("MousePressed", boxclick)
-    self.eventmanager:addListener("BuyBoolEvent", buyeventsystem)
 
-    self.engine:addSystem(BoxHoverSystem(), "logic", 1)
-    self.engine:addSystem(MenuWobblySystem(), "logic", 2)
-    self.engine:addSystem(BoxDrawSystem(), "draw")
+    self.engine:addSystem(BoxHoverSystem(), "logic")
+    self.engine:addSystem(MenuWobblySystem(), "logic")
+    self.engine:addSystem(MenuBoxDrawSystem(), "draw")
+    self.engine:addSystem(ItemBoxDrawSystem(), "draw")
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
-    self.engine:addSystem(buyeventsystem)
 
-    self.boxnumber = 12
+    self.boxnumber = 5
     self.boxes = {}
     self.width = 4
 
@@ -88,9 +86,11 @@ function ShopState:load()
             else
                 xscale = yscale
             end
-            box = ItemBoxModel(bwidth, bheight, x, y, "item", false, gameplay.items[i].image, xscale)
+            box = ItemBoxModel(i, bwidth, bheight, x, y, false, gameplay.items[i].image, xscale)
+            box:addComponent(gameplay.items[i])
         else
-            box = ItemBoxModel(bwidth, bheight, x, y, "item", false)
+            box = ItemBoxModel(i, bwidth, bheight, x, y, false)
+            box:addComponent(gameplay.items[i])
         end
         self.engine:addEntity(box)
     end
@@ -105,9 +105,9 @@ function ShopState:load()
         x = (love.graphics.getWidth()*i/(self.menunumber+1))-self.font:getWidth(self.menu[i][2])/2
         local box
         if i == 2 then
-            box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
+            box = menuBox(self.font:getWidth(self.menu[i][2]), 40, x, y, self.menu[i][2], self.font, self.menu[i][1], true)
         else
-            box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
+            box = menuBox(self.font:getWidth(self.menu[i][2]), 40, x, y, self.menu[i][2], self.font, self.menu[i][1], false)
         end        
         self.engine:addEntity(box)
     end

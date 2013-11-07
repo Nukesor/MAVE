@@ -1,10 +1,10 @@
 require("core/resources")
 require("core/state")
-require("lib/lovetoys/lovetoys/entity")
-require("lib/lovetoys/lovetoys/engine")
-require("lib/lovetoys/lovetoys/system")
-require("lib/lovetoys/lovetoys/eventManager")
-require("lib/lovetoys/lovetoys/collisionManager")
+require("lib/lua-lovetoys/lovetoys/entity")
+require("lib/lua-lovetoys/lovetoys/engine")
+require("lib/lua-lovetoys/lovetoys/system")
+require("lib/lua-lovetoys/lovetoys/eventManager")
+require("lib/lua-lovetoys/lovetoys/collisionManager")
 
 --Events
 require("events/mousePressed")

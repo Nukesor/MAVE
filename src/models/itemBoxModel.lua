@@ -11,7 +11,15 @@ function ItemBoxModel:__init(w, h, x, y, type, selected, image, xscale, yscale)
                                                 end
                                             end
                                             if (gameplay.stats.blood - gameplay.items[index].price) >= 0 and gameplay.items[index].owned == false then
-                                                stack:push(prompt)
+                                                stack:push(PromptState(
+                                                    function () 
+                                                        --Blood decrease and Item marked as owned
+                                                        if gameplay.items[index] then
+                                                            gameplay.stats.blood = gameplay.stats.blood - gameplay.items[index].price
+                                                            gameplay.items[index].owned = true
+                                                            saveGame()
+                                                        end
+                                                    end))
                                             end
                                         end    ))
     self:getComponent("BoxComponent").selected = selected

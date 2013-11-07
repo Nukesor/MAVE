@@ -1,10 +1,10 @@
-require("lib/resources")
-require("lib/state")
-require("lovetoys/core/entity")
-require("lovetoys/core/engine")
-require("lovetoys/core/system")
-require("lovetoys/core/eventManager")
-require("lovetoys/core/collisionManager")
+require("core/resources")
+require("core/state")
+require("lib/lovetoys/lovetoys/entity")
+require("lib/lovetoys/lovetoys/engine")
+require("lib/lovetoys/lovetoys/system")
+require("lib/lovetoys/lovetoys/eventManager")
+require("lib/lovetoys/lovetoys/collisionManager")
 
 --Events
 require("events/mousePressed")

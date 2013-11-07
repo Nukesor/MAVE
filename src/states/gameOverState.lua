@@ -1,9 +1,9 @@
-require("lib/resources")
-require("lib/state")
-require("lovetoys/core/component")
-require("lovetoys/core/entity")
-require("lovetoys/core/engine")
-require("lovetoys/core/eventManager")
+require("core/resources")
+require("core/state")
+require("lib/lovetoys/lovetoys/component")
+require("lib/lovetoys/lovetoys/entity")
+require("lib/lovetoys/lovetoys/engine")
+require("lib/lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -30,12 +30,12 @@ GameOverState = class("GameOverState", State)
 function GameOverState:__init()
     self.font = resources.fonts.forty
     self.menu = {
-    {function () stack:popload() end, "Retry"},
-    {function () stack:pop() 
-                 stack:popload() end, "Level Select"},
-    {function () stack:pop()
-                 stack:pop()
-                 stack:push(shop) end, "Shop"}
+    {function () saveGame()
+                 stack:popload() end, "Retry"},
+    {function () saveGame()
+                 stack:popload() end, "Shop"},
+    {function () saveGame()
+                 love.event.quit() end, "Exit"}
     }
 end
 

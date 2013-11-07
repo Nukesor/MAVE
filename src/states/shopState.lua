@@ -1,8 +1,8 @@
-require("lib/resources")
-require("lib/state")
-require("lovetoys/core/entity")
-require("lovetoys/core/engine")
-require("lovetoys/core/eventManager")
+require("core/resources")
+require("core/state")
+require("lib/lovetoys/lovetoys/entity")
+require("lib/lovetoys/lovetoys/engine")
+require("lib/lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -33,9 +33,8 @@ ShopState = class("ShopState", State)
 function ShopState:__init()
     self.font = resources.fonts.forty
     self.menu = {
-    {function () stack:popload() end, "Back"},
-    {function () stack:pop() 
-                 stack:push(levelOne) end, "Play"}
+    {function () stack:popload() end, "Main Menu"},
+    {function () stack:push(levelOne) end, "Start Game"}
     }
 end
 

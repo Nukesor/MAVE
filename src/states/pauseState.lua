@@ -3,10 +3,13 @@ PauseState = class("PauseState", State)
 function PauseState:__init()
     self.font = resources.fonts.thirty
     self.menu = {
-    {function () stack:pop() saveGame() end, "Return"},
-    {function () saveGame() end, "Save"},
-    {function () stack:pop() stack:popload()  saveGame() end, "Level Select"},
-    {function () love.event.quit() saveGame() end, "Exit"}
+    {function () saveGame() 
+                 stack:pop() end, "Resume"},
+    {function () saveGame()
+                 stack:popload()
+                 stack:popload() end, "Shop"},
+    {function () saveGame()
+                 love.event.quit() end, "Exit"}
     }
 end
 

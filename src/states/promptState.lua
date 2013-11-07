@@ -2,15 +2,14 @@ require("events/buyBoolEvent")
 
 PromptState = class("PromptState", State)
 
-function PromptState:__init()
+function PromptState:__init(func)
+    self.func = func
     self.font = resources.fonts.fifty
     self.menu = {
     {function () stack:pop()
-                stack:current().eventmanager:fireEvent(BuyBoolEvent(true))
-                end, "Yes"},
+                func() end, "Yes"},
     {function () stack:pop()
-                stack:current().eventmanager:fireEvent(BuyBoolEvent(false))
-                end, "No"}
+                func() end, "No"}
     }
 end
 

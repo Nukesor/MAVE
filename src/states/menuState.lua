@@ -1,8 +1,8 @@
-require("lib/resources")
-require("lib/state")
-require("lovetoys/core/entity")
-require("lovetoys/core/engine")
-require("lovetoys/core/eventManager")
+require("core/resources")
+require("core/state")
+require("lib/lovetoys/lovetoys/entity")
+require("lib/lovetoys/lovetoys/engine")
+require("lib/lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -28,11 +28,10 @@ MenuState = class("MenuState", State)
 function MenuState:__init()
     self.font = resources.fonts.forty
     self.menu = {
-    {function () loadGame() stack:push(selectstate) end, "Continue"},
-    {function () gameplay:__init() stack:push(selectstate) end, "New Game"},
+    {function () loadGame() stack:push(shop) end , "Play"},
     {function () stack:push(setting) end, "Settings"},
     {function () stack:push(credits) end, "Credits"},
-    {function () love.event.quit() end, "Exit"}
+    {function () saveGame() love.event.quit() end, "Exit"}
     }
 end
 
@@ -72,7 +71,7 @@ function MenuState:load()
         y = i * (love.graphics.getHeight()/8)
         x = love.graphics:getWidth()/12
         local box
-        if i == 2 then
+        if i == 1 then
             box = BoxModel(150, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
         else
             box = BoxModel(150, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)

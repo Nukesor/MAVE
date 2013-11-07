@@ -1,8 +1,11 @@
-require("lib/resources")
-require("lib/state")
-require("lovetoys/core/entity")
-require("lovetoys/core/engine")
-require("lovetoys/core/eventManager")
+-- This State will be used, if we decide to implement new levels.
+
+
+require("core/resources")
+require("core/state")
+require("lib/lovetoys/lovetoys/entity")
+require("lib/lovetoys/lovetoys/engine")
+require("lib/lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")

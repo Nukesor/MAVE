@@ -1,8 +1,8 @@
-require("lib/resources")
-require("lib/state")
-require("lovetoys/core/entity")
-require("lovetoys/core/engine")
-require("lovetoys/core/eventManager")
+require("core/resources")
+require("core/state")
+require("lib/lovetoys/lovetoys/entity")
+require("lib/lovetoys/lovetoys/engine")
+require("lib/lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -83,6 +83,7 @@ function SettingState:__init()
 
         end 
        end , "Mousespeed"},
+    {function ()  end , "Reset Game"},
     {function () stack:popload() end, "Return"}
     }
 end

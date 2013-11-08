@@ -15,7 +15,7 @@ function Gameplay:__init()
                     }
     self.items = {
         --String, gekauft, Kosten, image, scalingx, scalingy, function 
-        ItemComponent("Gewehr", false, 10, resources.images.gun, 0.15, 0.15, 1,
+        ItemComponent("Gewehr", false, 10, resources.images.gun, 0.15, 0.15, 0.25,
         function()
             -- Erstellt ein neues Shotmodel
             if playercutie:getComponent("ItemComponent").counttimer < 0 then

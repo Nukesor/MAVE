@@ -8,8 +8,7 @@ function PromptState:__init(func)
     self.menu = {
     {function () stack:pop()
                 func() end, "Yes"},
-    {function () stack:pop()
-                func() end, "No"}
+    {function () stack:pop() end, "No"}
     }
 end
 

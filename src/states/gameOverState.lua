@@ -27,16 +27,18 @@ require("systems/ui/menuWobblySystem")
 
 GameOverState = class("GameOverState", State)
 
-function GameOverState:__init()
+function GameOverState:__init(screenshot)
     self.font = resources.fonts.forty
     self.menu = {
     {function () saveGame()
                  stack:popload() end, "Retry"},
     {function () saveGame()
+                 stack:pop()
                  stack:popload() end, "Shop"},
     {function () saveGame()
                  love.event.quit() end, "Exit"}
     }
+    self.screenshot = screenshot
 end
 
 function GameOverState:load()

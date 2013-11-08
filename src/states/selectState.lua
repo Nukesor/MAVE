@@ -34,9 +34,9 @@ SelectState = class("SelectState", State)
 function SelectState:__init()
     self.font = resources.fonts.forty
     self.menu = {
-    {function () stack:push(levelOne) end , "Level1"},
-    {function () stack:push(levelOne) end , "Level2"},
-    {function () stack:push(shop) end , "Shop"},
+    {function () stack:push(LevelOneState()) end , "Level1"},
+    {function () stack:push(LevelOneState()) end , "Level2"},
+    {function () stack:push(ShopState()) end , "Shop"},
     {function () stack:popload() end, "Main Menu"}
     }
 end

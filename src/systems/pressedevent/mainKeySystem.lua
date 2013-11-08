@@ -4,8 +4,8 @@ function MainKeySystem:fireEvent(event)
     -- Playercutie Jump
     if event.key == "p" or event.key == "escape" then
         local canvas = love.graphics.newScreenshot()
-        pause.screenshot = love.graphics.newImage(canvas)
-        stack:push(pause)
+        local screenshot = love.graphics.newImage(canvas)
+        stack:push(PauseState(screenshot))
     elseif event.key == "b" then
         stack:current().shaketimer = 0.5
     elseif event.key == "o" then

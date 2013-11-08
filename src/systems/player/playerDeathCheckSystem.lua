@@ -7,8 +7,7 @@ function PlayerDeathCheckSystem:update()
             local canvas = love.graphics.newScreenshot()
             local screenshot = love.graphics.newImage(canvas)
             self.shaketimer = 0
-            gameover.screenshot = screenshot
-            stack:push(gameover)
+            stack:push(GameOverState(screenshot))
         end
     end
 end

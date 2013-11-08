@@ -28,10 +28,12 @@ MenuState = class("MenuState", State)
 function MenuState:__init()
     self.font = resources.fonts.forty
     self.menu = {
-    {function () loadGame() stack:push(shop) end , "Play"},
-    {function () stack:push(setting) end, "Settings"},
-    {function () stack:push(credits) end, "Credits"},
-    {function () saveGame() love.event.quit() end, "Exit"}
+    {function () loadGame() 
+                 stack:push(ShopState()) end , "Play"},
+    {function () stack:push(SettingState()) end, "Settings"},
+    {function () stack:push(CreditsState()) end, "Credits"},
+    {function () saveGame()
+                 love.event.quit() end, "Exit"}
     }
 end
 

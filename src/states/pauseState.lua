@@ -1,6 +1,6 @@
 PauseState = class("PauseState", State)
 
-function PauseState:__init()
+function PauseState:__init(screenshot)
     self.font = resources.fonts.thirty
     self.menu = {
     {function () saveGame() 
@@ -11,6 +11,7 @@ function PauseState:__init()
     {function () saveGame()
                  love.event.quit() end, "Exit"}
     }
+    self.screenshot = screenshot
 end
 
 function PauseState:load()

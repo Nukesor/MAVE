@@ -57,19 +57,8 @@ function love.load()
     gameplay = Gameplay()
     
     stack = StackHelper()
-    menu = MenuState()
-    credits = CreditsState()
-    setting = SettingState()
-    selectstate = SelectState()
-    shop = ShopState()
-    prompt = PromptState()
-    pause = PauseState()
-    gameover = GameOverState()
-
-    levelOne = LevelOneState()
-    levelTwo = LevelTwoState()
-
-    stack:push(menu)
+    
+    stack:push(MenuState())
 end
 
 

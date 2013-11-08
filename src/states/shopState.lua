@@ -34,7 +34,7 @@ function ShopState:__init()
     self.font = resources.fonts.forty
     self.menu = {
     {function () stack:popload() end, "Main Menu"},
-    {function () stack:push(levelOne) end, "Start Game"}
+    {function () stack:push(LevelOneState()) end, "Start Game"}
     }
 end
 

@@ -24,6 +24,7 @@ require("systems/ui/boxHoverSystem")
 require("systems/ui/boxNavigationSystem")
 require("systems/ui/menuWobblySystem")
 require("systems/ui/itemBoxDrawSystem")
+require("systems/draw/stringDrawSystem")
 
 require("models/itemBoxModel")
 
@@ -51,12 +52,19 @@ function ShopState:load()
     self.engine:addSystem(MenuWobblySystem(), "logic")
     self.engine:addSystem(MenuBoxDrawSystem(), "draw")
     self.engine:addSystem(ItemBoxDrawSystem(), "draw")
+    self.engine:addSystem(StringDrawSystem(), "draw")
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
 
     self.boxnumber = 5
     self.boxes = {}
     self.width = 4
+
+
+    local str = Entity()
+    str:addComponent(StringComponent(resources.fonts.twenty, {255, 0, 0, 255}, "Blood:  %i", {{gameplay.stats, "blood"}}))
+    str:addComponent(PositionComponent(10, 10))
+    self.engine:addEntity(str)
 
     -- Dynamische Erstellung der Item boxes
     for i = 1, self.boxnumber, 1 do
@@ -144,8 +152,6 @@ end
 
 function ShopState:draw()
     self.engine:draw()
-    love.graphics.setFont(resources.fonts.twenty)
-    love.graphics.print(gameplay.stats["blood"] .. " Blood", 26, 10)
 end
 
 

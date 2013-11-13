@@ -12,7 +12,11 @@ function ItemBoxDrawSystem:draw()
 
         -- Drawfunktion for Item-Boxes
         if box.image then
-            love.graphics.setColor(255, 255, 255, 255)
+            if (gameplay.stats.blood - value:getComponent("ItemComponent").price ) < 0 and value:getComponent("ItemComponent").owned == false then
+                love.graphics.setColor(100, 100, 100, 255)
+            else
+                love.graphics.setColor(255, 255, 255, 255)
+            end
             love.graphics.draw(box.image, position.x+box.width/2, position.y+box.height/2, 0, box.scale, 
                 box.scale, box.image:getWidth()/2, box.image:getHeight()/2)
         end

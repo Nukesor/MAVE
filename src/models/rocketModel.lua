@@ -19,15 +19,15 @@ function RocketModel:__init(x, y, xt, yt)
         
     self:addComponent(PhysicsComponent(body, fixture, shape ))
     self:addComponent(PositionComponent(x,y))
-    self:addComponent(DrawableComponent(resources.images.shot, math.atan2(akat, -gkat)-math.pi/2, 1, 1, 20, 4))
+    self:addComponent(DrawableComponent(resources.images.rocket, math.atan2(akat, -gkat)-math.pi/2, 0.07, 0.07, 68*relation(), 120*relation()))
     self:addComponent(ZIndex(99))
     self:addComponent(DamageComponent(20))
     self:addComponent(TimerComponent(1.5))
     self:addComponent(IsRocket())
     self:addComponent(ExplosionComponent(80, 150))
-    self:addComponent(ParticleComponent(resources.images.blood1, 100, 200, 0, 0, 0.3, 0.2, 
+    self:addComponent(ParticleComponent(resources.images.blood1, 200, 400, 10, 10, 0.5, 0.5, 
                                                 155, 155, 155, 255, 155, 155, 155, 0, 
-                                                self:getComponent("PositionComponent").x, self:getComponent("PositionComponent").y, -1, 0.5, 0.5, 0, 360, 
+                                                self:getComponent("PositionComponent").x, self:getComponent("PositionComponent").y, -1, 0.2, 0.3, 0, 360, 
                                                 0, 0, 50, 100))
     self:getComponent("ParticleComponent").hit:start()
 

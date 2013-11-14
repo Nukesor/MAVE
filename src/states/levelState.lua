@@ -199,7 +199,7 @@ function LevelState:load()
     self.shaketimer = 0
 
     local bg = Entity()
-    bg:addComponent(DrawableComponent(resources.images.arena, 0, 1, 1, 0, 0))
+    bg:addComponent(DrawableComponent(resources.images.level2, 0, 1, 1, 0, 0))
     bg:addComponent(ZIndex(1))
     bg:addComponent(PositionComponent(0, 0))
     self.engine:addEntity(bg)

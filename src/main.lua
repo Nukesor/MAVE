@@ -29,7 +29,8 @@ function love.load()
     resources:addImage("cutie4", 'data/gfx/cuties/cutie-4.png')
     resources:addImage("cutie5", 'data/gfx/cuties/cutie-5.png')
 
-    resources:addImage("blood1", 'data/gfx/blood1.png')
+    resources:addImage("blood1", 'data/gfx/particle/blood1.png')
+
     resources:addImage("level2", 'data/gfx/level/level2.png')
     resources:addImage("background", 'data/gfx/menu/background.png')
     resources:addImage("logo", "data/gfx/menu/logo.png")
@@ -41,8 +42,6 @@ function love.load()
     resources:addImage("mine", "data/gfx/weapons/mine.png")
     resources:addImage("rocket", "data/gfx/weapons/rocket.png")
     resources:addImage("rocketlauncher", "data/gfx/weapons/rocketlauncher.png")
-
-    resources:addSound("bounce1", 'data/sfx/bounce_low_level.ogg')
 
     resources:addFont("seventeen", "data/font/SwankyandMooMoo.ttf", 17)
     resources:addFont("twenty", "data/font/SwankyandMooMoo.ttf", 20)

@@ -15,7 +15,7 @@ function Gameplay:__init()
                     }
     self.items = {
         --String, gekauft, Kosten, image, scalingx, scalingy, function 
-        ItemComponent(1, "Gewehr", false, 15, resources.images.gun, 0.2, 0.2, 0.25,
+        ItemComponent(1, "Gewehr", false, 15, resources.images.gun, 0.18, 0.18, 0.25,
         function()
             -- Erstellt ein neues Shotmodel
             if playercutie:getComponent("ItemComponent").counttimer < 0 then
@@ -26,7 +26,7 @@ function Gameplay:__init()
             end
         end)
         ,
-        ItemComponent(2, "Granate", false, 50, resources.images.grenade, 0.16, 0.16, 0.5,
+        ItemComponent(2, "Granate", false, 50, resources.images.grenade, 0.14, 0.14, 0.5,
         function()
             -- Generates a new Grenademodel
             if playercutie:getComponent("ItemComponent").counttimer < 0 then
@@ -37,7 +37,7 @@ function Gameplay:__init()
             end
         end)
         ,
-        ItemComponent(3, "Mine", false, 80, resources.images.mine, 0.2, 0.2, 1,
+        ItemComponent(3, "Mine", false, 80, resources.images.mine, 0.4, 0.4, 1,
         function()
             if playercutie:getComponent("ItemComponent").counttimer < 0 then
                 local mine = MineModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y)
@@ -46,7 +46,7 @@ function Gameplay:__init()
                 playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
             end
         end),
-        ItemComponent(4, "Machinegun", false, 200, resources.images.gun, 0.2, 0.2, 0.05,
+        ItemComponent(4, "Machinegun", false, 200, resources.images.gun, 0.18, 0.18, 0.05,
         function()
             -- Erstellen eines neuen Shotmodels
             if playercutie:getComponent("ItemComponent").counttimer < 0 then

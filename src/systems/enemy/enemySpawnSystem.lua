@@ -1,23 +1,25 @@
 EnemySpawnSystem = class("EnemySpawnSystem", System)
 
 function EnemySpawnSystem:__init()
-    
-    self.spawntimer = 0
-    self.fire = false
+    self.waitUntilSpawn = 5
+    self.waveIndex = 1
 end
 
 function EnemySpawnSystem:update(dt)
+    if next(stack:current().engine:getEntitylist("IsEnemy")) == nil then
+        self.waitUntilSpawn = self.waitUntilSpawn - dt
+    end
 
-    self.spawntimer = self.spawntimer + dt
-    -- Everytime the timer is full an enemy is spawned at the screenside with a random height. 
-    if self.spawntimer > 3 then
-        local height = math.random(love.graphics.getHeight() * (3/6), love.graphics.getHeight() * (5/6))
-        local cutie
-        cutie = CutieModel(0, height, resources.images.cutie2, 15)
-        cutie:addComponent(IsEnemy())
-        cutie:addComponent(GoldComponent(10))
-        stack:current().engine:addEntity(cutie)
-        self.spawntimer = 0 
+    if self.waitUntilSpawn <= 0 then
+        if gameplay.waves[self.waveIndex+1] then
+            self.waveIndex = self.waveIndex + 1
+        end
+
+        for index, enemy in pairs(gameplay.waves[self.waveIndex]:getWave()) do
+            stack:current().engine:addEntity(enemy)
+        end
+
+        self.waitUntilSpawn = 5
     end
 end
 

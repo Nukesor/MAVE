@@ -1,10 +1,10 @@
-require("lovetoys/core/class")
-require("lib/resources")
-require("lib/stackhelper")
-require("lib/gameplay")
-require("lib/util")
-require("lib/settings")
-require("lib/state")
+require("lib/lua-lovetoys/lovetoys/class")
+require("core/resources")
+require("core/stackhelper")
+require("core/gameplay")
+require("core/util")
+require("core/settings")
+require("core/state")
 
 require("states/levelState")
 require("states/levels/levelOneState")
@@ -22,25 +22,26 @@ require("states/settingState")
 
 function love.load()
     resources = Resources()
-    resources:addImage("cutie1", 'data/gfx/cutie-0.png')
-    resources:addImage("cutie0", 'data/gfx/cutie-1.png')
-    resources:addImage("cutie2", 'data/gfx/cutie-2.png')
-    resources:addImage("cutie3", 'data/gfx/cutie-3.png')
-    resources:addImage("cutie4", 'data/gfx/cutie-4.png')
-    resources:addImage("cutie5", 'data/gfx/cutie-5.png')
+    resources:addImage("cutie1", 'data/gfx/cuties/cutie-0.png')
+    resources:addImage("cutie0", 'data/gfx/cuties/cutie-1.png')
+    resources:addImage("cutie2", 'data/gfx/cuties/cutie-2.png')
+    resources:addImage("cutie3", 'data/gfx/cuties/cutie-3.png')
+    resources:addImage("cutie4", 'data/gfx/cuties/cutie-4.png')
+    resources:addImage("cutie5", 'data/gfx/cuties/cutie-5.png')
 
-    resources:addImage("blood1", 'data/gfx/blood1.png')
-    resources:addImage("level2", 'data/gfx/arena.png')
-    resources:addImage("level1", 'data/gfx/level1.png')
+    resources:addImage("blood1", 'data/gfx/particles/blood1.png')
+
+    resources:addImage("level2", 'data/gfx/level/level2.png')
     resources:addImage("background", 'data/gfx/menu/background.png')
     resources:addImage("logo", "data/gfx/menu/logo.png")
+    resources:addImage("sold", "data/gfx/menu/sold.png")
 
-    resources:addImage("shot", 'data/gfx/shot.png')
+    resources:addImage("shot", 'data/gfx/weapons/shot.png')
     resources:addImage("grenade", 'data/gfx/weapons/grenade.png')
     resources:addImage("gun", "data/gfx/weapons/lmg.png")
     resources:addImage("mine", "data/gfx/weapons/mine.png")
-
-    resources:addSound("bounce1", 'data/sfx/bounce_low_level.ogg')
+    resources:addImage("rocket", "data/gfx/weapons/rocket.png")
+    resources:addImage("rocketlauncher", "data/gfx/weapons/rocketlauncher.png")
 
     resources:addFont("seventeen", "data/font/SwankyandMooMoo.ttf", 17)
     resources:addFont("twenty", "data/font/SwankyandMooMoo.ttf", 20)
@@ -57,19 +58,8 @@ function love.load()
     gameplay = Gameplay()
     
     stack = StackHelper()
-    menu = MenuState()
-    credits = CreditsState()
-    setting = SettingState()
-    selectstate = SelectState()
-    shop = ShopState()
-    prompt = PromptState()
-    pause = PauseState()
-    gameover = GameOverState()
-
-    levelOne = LevelOneState()
-    levelTwo = LevelTwoState()
-
-    stack:push(menu)
+    
+    stack:push(MenuState())
 end
 
 

@@ -1,8 +1,11 @@
-require("lib/resources")
-require("lib/state")
-require("lovetoys/core/entity")
-require("lovetoys/core/engine")
-require("lovetoys/core/eventManager")
+-- This State will be used, if we decide to implement new levels.
+
+
+require("core/resources")
+require("core/state")
+require("lib/lua-lovetoys/lovetoys/entity")
+require("lib/lua-lovetoys/lovetoys/engine")
+require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -18,22 +21,22 @@ require("components/ui/menuWobblyComponent")
 
 -- Systems
 require("systems/ui/boxClickSystem")
-require("systems/ui/boxDrawSystem")
+require("systems/ui/menuBoxDrawSystem")
 require("systems/ui/boxHoverSystem")
 require("systems/ui/boxNavigationSystem")
 require("systems/ui/menuWobblySystem")
 
 --Models
-require("models/boxModel")
+require("models/menuBoxModel")
 
 SelectState = class("SelectState", State)
 
 function SelectState:__init()
     self.font = resources.fonts.forty
     self.menu = {
-    {function () stack:push(levelOne) end , "Level1"},
-    {function () stack:push(levelOne) end , "Level2"},
-    {function () stack:push(shop) end , "Shop"},
+    {function () stack:push(LevelOneState()) end , "Level1"},
+    {function () stack:push(LevelOneState()) end , "Level2"},
+    {function () stack:push(ShopState()) end , "Shop"},
     {function () stack:popload() end, "Main Menu"}
     }
 end
@@ -54,7 +57,7 @@ function SelectState:load()
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
     self.engine:addSystem(DrawableDrawSystem(), "draw")
-    self.engine:addSystem(BoxDrawSystem(), "draw")
+    self.engine:addSystem(MenuBoxDrawSystem(), "draw")
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
 
@@ -66,9 +69,9 @@ function SelectState:load()
         x = (love.graphics.getWidth()*i/(self.menunumber+1))-(self.font:getWidth(self.menu[i][2])/2)
         local box
         if i == 2 then
-            box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
+            box = menuBox(self.font:getWidth(self.menu[i][2]), 40, x, y, self.menu[i][2], self.font, self.menu[i][1], true)
         else
-            box = BoxModel(self.font:getWidth(self.menu[i][2]), 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
+            box = menuBox(self.font:getWidth(self.menu[i][2]), 40, x, y, self.menu[i][2], self.font, self.menu[i][1], false)
         end
         self.engine:addEntity(box)
     end

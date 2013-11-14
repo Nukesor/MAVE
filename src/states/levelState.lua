@@ -1,10 +1,10 @@
-require("lib/resources")
-require("lib/state")
-require("lovetoys/core/entity")
-require("lovetoys/core/engine")
-require("lovetoys/core/system")
-require("lovetoys/core/eventManager")
-require("lovetoys/core/collisionManager")
+require("core/resources")
+require("core/state")
+require("lib/lua-lovetoys/lovetoys/entity")
+require("lib/lua-lovetoys/lovetoys/engine")
+require("lib/lua-lovetoys/lovetoys/system")
+require("lib/lua-lovetoys/lovetoys/eventManager")
+require("lib/lua-lovetoys/lovetoys/collisionManager")
 
 --Events
 require("events/mousePressed")
@@ -18,11 +18,12 @@ require("systems/draw/polygonDrawSystem")
 require("systems/draw/lifebarSystem")
 require("systems/draw/stringDrawSystem")
 require("systems/draw/itemDrawSystem")
-require("systems/draw/goldUpDisplaySystem")
+require("systems/draw/bloodUpDisplaySystem")
 
 -- Particle Systems
 require("systems/particle/particleDrawSystem")
 require("systems/particle/particleUpdateSystem")
+require("systems/particle/particlePositionSyncSystem")
 
 -- Physics Systems
 require("systems/physic/speedLimitSystem")
@@ -34,7 +35,10 @@ require("systems/physic/timerSystem")
 --Weapon Systems
 require("systems/weapon/grenadeRotationSystem")
 require("systems/weapon/timerExplosionSystem")
+require("systems/weapon/timerShotDeletionSystem")
 require("systems/weapon/mineProximitySystem")
+require("systems/weapon/shootSystem")
+require("systems/weapon/weaponTimerSystem")
 
 --CutieManipulation Upgrade Systems
         --Cutie
@@ -61,7 +65,7 @@ require("components/graphic/drawableComponent")
 require("components/graphic/drawablePolygonComponent")
 require("components/graphic/zIndex")
 require("components/graphic/stringComponent")
-require("components/graphic/goldUpComponent")
+require("components/graphic/bloodUpComponent")
 
 -- Particle Component
 require("components/particle/particleComponent")
@@ -79,13 +83,15 @@ require("components/cutie/wobblyComponent")
 require("components/cutie/dashingComponent")
 require("components/cutie/enemyComponent")
 require("components/cutie/itemComponent")
-require("components/cutie/goldComponent")
+require("components/cutie/bloodComponent")
 
 --IdentifierComponents
 require("components/identifier/isShot")
 require("components/identifier/isPlayer")
 require("components/identifier/isEnemy")
 require("components/identifier/isGrenade")
+require("components/identifier/isRocket")
+
 
 -- Item Components
 require("components/items/explosionComponent")
@@ -99,6 +105,7 @@ require("models/shotmodel")
 require("models/cutieModel")
 require("models/grenadeModel")
 require("models/mineModel")
+require("models/rocketModel")
 
 
 -- Collisions
@@ -109,6 +116,7 @@ require("collisions/shotCutieCollision")
 require("collisions/shotWallCollision")
 require("collisions/explosionShotCollision")
 require("collisions/mineGroundCollision")
+require("collisions/rocketCollision")
 
 
 LevelState = class("LevelState", State)
@@ -120,7 +128,7 @@ end
 function LevelState:load()
     love.graphics.setFont(resources.fonts.twenty)
     love.physics.setMeter(64)
-    world = love.physics.newWorld(0, 9.81*64, true)
+    world = love.physics.newWorld(0, 9.81*80, true)
     world:setCallbacks(beginContact, endContact)
 
     self.engine = Engine()
@@ -138,16 +146,17 @@ function LevelState:load()
     self.engine:addSystem(StringDrawSystem(), "draw")
     self.engine:addSystem(ItemDrawSystem(), "draw")
     self.engine:addSystem(ParticleDrawSystem(), "draw")
-    self.engine:addSystem(GoldUpDisplaySystem(), "draw")
+    self.engine:addSystem(BloodUpDisplaySystem(), "draw")
     
     self.engine:addSystem(SideChangeSystem(), "logic")
     self.engine:addSystem(PhysicsPositionSyncSystem(), "logic")
     self.engine:addSystem(ParticleUpdateSystem(), "logic")
+    self.engine:addSystem(ParticlePositionSyncSystem(), "logic")
     self.engine:addSystem(PlayerMoveSystem(), "logic")
-    --self.engine:addSystem(EnemyTrackingSystem(), "logic")
+    self.engine:addSystem(EnemyTrackingSystem(), "logic")
     self.engine:addSystem(SpeedLimitSystem(), "logic")
     self.engine:addSystem(BleedingDetectSystem(), "logic")
-    --self.wobbleSystem = self.engine:addSystem(WobbleSystem(), "logic")
+    self.wobbleSystem = self.engine:addSystem(WobbleSystem(), "logic")
     self.dashingSystem = self.engine:addSystem(DashingSystem(), "logic")
     self.engine:addSystem(CutieDeleteSystem(), "logic")
     self.engine:addSystem(EnemySpawnSystem(), "logic")
@@ -156,6 +165,9 @@ function LevelState:load()
     self.engine:addSystem(GrenadeRotationSystem(), "logic")
     self.engine:addSystem(BodyDestroySystem(), "logic")
     self.engine:addSystem(TimerSystem(), "logic")
+    self.engine:addSystem(WeaponTimerSystem(), "logic")
+    self.engine:addSystem(ShootSystem(), "logic")
+    self.engine:addSystem(TimerShotDeletionSystem(), "logic")
     self.engine:addSystem(PlayerDeathCheckSystem(), "logic")
 
 
@@ -173,7 +185,10 @@ function LevelState:load()
     self.collisionmanager:addCollisionAction(shotexplosive.component1, shotexplosive.component2, shotexplosive)
     local mineground = MineGroundCollision()
     self.collisionmanager:addCollisionAction(mineground.component1, mineground.component2, mineground)
+    local rocketcollision = RocketCollision()
+    self.collisionmanager:addCollisionAction(rocketcollision.component1, rocketcollision.component2, rocketcollision)
     
+
     -- Slowmospeed
     self.worldspeed = 1;
 
@@ -182,6 +197,12 @@ function LevelState:load()
     self.shakeX = 0
     self.shakeY = 0
     self.shaketimer = 0
+
+    local bg = Entity()
+    bg:addComponent(DrawableComponent(resources.images.level2, 0, 1, 1, 0, 0))
+    bg:addComponent(ZIndex(1))
+    bg:addComponent(PositionComponent(0, 0))
+    self.engine:addEntity(bg)
 
     -- Playercreation
     playercutie = CutieModel(0, 0, resources.images.cutie1, 100)
@@ -194,7 +215,7 @@ function LevelState:load()
     self.engine:addEntity(str)
 
     str = Entity()
-    str:addComponent(StringComponent(resources.fonts.twenty, {255, 0, 0, 255}, "Gold:  %i", {{gameplay.stats, "gold"}}))
+    str:addComponent(StringComponent(resources.fonts.twenty, {255, 0, 0, 255}, "Blood:  %i", {{gameplay.stats, "blood"}}))
     str:addComponent(PositionComponent(love.graphics.getWidth()-100, 20))
     self.engine:addEntity(str)
 

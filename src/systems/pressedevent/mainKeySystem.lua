@@ -4,8 +4,8 @@ function MainKeySystem:fireEvent(event)
     -- Playercutie Jump
     if event.key == "p" or event.key == "escape" then
         local canvas = love.graphics.newScreenshot()
-        pause.screenshot = love.graphics.newImage(canvas)
-        stack:push(pause)
+        local screenshot = love.graphics.newImage(canvas)
+        stack:push(PauseState(screenshot))
     elseif event.key == "b" then
         stack:current().shaketimer = 0.5
     elseif event.key == "o" then
@@ -17,9 +17,9 @@ function MainKeySystem:fireEvent(event)
             if gameplay.items[tonumber(event.key)].owned == true then
                 playercutie:addComponent(gameplay.items[tonumber(event.key)])
                 stack:current().engine:componentAdded(playercutie, {"ItemComponent"})
-            else
+            elseif playercutie:getComponent("ItemComponent") then
                 playercutie:removeComponent("ItemComponent")
-                stack:current().engine:componentRemoved(entity, {"ItemComponent"})
+                stack:current().engine:componentRemoved(playercutie, {"ItemComponent"})
             end
         end
     end

@@ -5,7 +5,12 @@ MAVE is a game of fun and cuteness. Prove yourself in a world full of small furb
 
 MAVE is written in [Löve](https://www.love2d.org/), a game library for lua.
 
-To get it running on your system, Install löve, clone the repo and execute `make` in the new directory.
+## Installation:
+
+* Install Löve2D
+* Clone the repository
+* Run `git submodule update --init --update`
+* Execute `make` in the new directory.
 
 This Software is published under GPL General Public License Version 3.
 For further information check the license.txt or read read the online version under [GPL](http://www.gnu.org/licenses/gpl.txt)

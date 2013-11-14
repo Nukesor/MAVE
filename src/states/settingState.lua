@@ -1,8 +1,8 @@
-require("lib/resources")
-require("lib/state")
-require("lovetoys/core/entity")
-require("lovetoys/core/engine")
-require("lovetoys/core/eventManager")
+require("core/resources")
+require("core/state")
+require("lib/lua-lovetoys/lovetoys/entity")
+require("lib/lua-lovetoys/lovetoys/engine")
+require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -18,7 +18,7 @@ require("components/ui/menuWobblyComponent")
 
 -- Systems
 require("systems/ui/boxClickSystem")
-require("systems/ui/boxDrawSystem")
+require("systems/ui/menuBoxDrawSystem")
 require("systems/ui/boxHoverSystem")
 require("systems/ui/settingNavigationSystem")
 require("systems/ui/menuWobblySystem")
@@ -83,6 +83,9 @@ function SettingState:__init()
 
         end 
        end , "Mousespeed"},
+    {function ()  stack:push(PromptState(function()
+                                  gameplay:__init()  
+                                  saveGame() end )) end, "Reset Game"},
     {function () stack:popload() end, "Return"}
     }
 end
@@ -98,7 +101,7 @@ function SettingState:load()
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
-    self.engine:addSystem(BoxDrawSystem(), "draw")
+    self.engine:addSystem(MenuBoxDrawSystem(), "draw")
     self.engine:addSystem(DrawableDrawSystem(), "draw")
     self.engine:addSystem(boxclick)
     self.engine:addSystem(settingnavigation)
@@ -113,9 +116,9 @@ function SettingState:load()
         x = love.graphics.getWidth() * (1/10)
         local box
         if k == 1 then
-            box = BoxModel(self.font:getWidth(self.menu[k][2]), 40, x, y, "menu", self.menu[k][2], self.font, self.menu[k][1], true)
+            box = menuBox(self.font:getWidth(self.menu[k][2]), 40, x, y, self.menu[k][2], self.font, self.menu[k][1], true)
         else
-            box = BoxModel(self.font:getWidth(self.menu[k][2]), 40, x, y, "menu", self.menu[k][2], self.font, self.menu[k][1], false)
+            box = menuBox(self.font:getWidth(self.menu[k][2]), 40, x, y, self.menu[k][2], self.font, self.menu[k][1], false)
         end
         self.engine:addEntity(box)
     end

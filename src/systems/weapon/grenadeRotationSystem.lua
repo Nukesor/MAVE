@@ -1,6 +1,5 @@
 GrenadeRotationSystem = class("GrenadeRotationSystem", System)
 
-
 -- Rotates the grenade depending on dt
 
 function GrenadeRotationSystem:update(dt)

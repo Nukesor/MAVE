@@ -1,8 +1,8 @@
-require("lib/resources")
-require("lib/state")
-require("lovetoys/core/entity")
-require("lovetoys/core/engine")
-require("lovetoys/core/eventManager")
+require("core/resources")
+require("core/state")
+require("lib/lua-lovetoys/lovetoys/entity")
+require("lib/lua-lovetoys/lovetoys/engine")
+require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -18,7 +18,7 @@ require("components/ui/menuWobblyComponent")
 
 -- Systems
 require("systems/ui/boxClickSystem")
-require("systems/ui/boxDrawSystem")
+require("systems/ui/menuBoxDrawSystem")
 require("systems/ui/boxHoverSystem")
 require("systems/ui/boxNavigationSystem")
 require("systems/ui/menuWobblySystem")
@@ -28,11 +28,12 @@ MenuState = class("MenuState", State)
 function MenuState:__init()
     self.font = resources.fonts.forty
     self.menu = {
-    {function () loadGame() stack:push(selectstate) end, "Continue"},
-    {function () gameplay:__init() stack:push(selectstate) end, "New Game"},
-    {function () stack:push(setting) end, "Settings"},
-    {function () stack:push(credits) end, "Credits"},
-    {function () love.event.quit() end, "Exit"}
+    {function () loadGame() 
+                 stack:push(ShopState()) end , "Play"},
+    {function () stack:push(SettingState()) end, "Settings"},
+    {function () stack:push(CreditsState()) end, "Credits"},
+    {function () saveGame()
+                 love.event.quit() end, "Exit"}
     }
 end
 
@@ -48,7 +49,7 @@ function MenuState:load()
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(MenuWobblySystem(), "logic", 2)
     self.engine:addSystem(DrawableDrawSystem(), "draw")
-    self.engine:addSystem(BoxDrawSystem(), "draw")
+    self.engine:addSystem(MenuBoxDrawSystem(), "draw")
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
 
@@ -72,10 +73,10 @@ function MenuState:load()
         y = i * (love.graphics.getHeight()/8)
         x = love.graphics:getWidth()/12
         local box
-        if i == 2 then
-            box = BoxModel(150, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], true)
+        if i == 1 then
+            box = menuBox(150, 40, x, y, self.menu[i][2], self.font, self.menu[i][1], true)
         else
-            box = BoxModel(150, 40, x, y, "menu", self.menu[i][2], self.font, self.menu[i][1], false)
+            box = menuBox(150, 40, x, y, self.menu[i][2], self.font, self.menu[i][1], false)
         end
         self.engine:addEntity(box)
     end

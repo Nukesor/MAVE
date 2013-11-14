@@ -2,16 +2,16 @@ CutieDeleteSystem = class("CutieDeleteSystem", System)
 
 function CutieDeleteSystem:update()
     for index, entity in pairs(self.targets) do
-        -- If EnemyCuties health falls below 0 it gets deleted. Gold is added to gameplay.gold
+        -- If EnemyCuties health falls below 0 it gets deleted. Blood is added to gameplay.blood
         if entity:getComponent("LifeComponent").life <= 0 then
-            gameplay.stats["gold"] = gameplay.stats["gold"] + entity:getComponent("GoldComponent").gold
+            gameplay.stats["blood"] = gameplay.stats["blood"] + entity:getComponent("BloodComponent").blood
             gameplay.stats["kills"] = gameplay.stats["kills"] + 1
 
-            local goldup = Entity()
-            goldup:addComponent(GoldUpComponent(entity:getComponent("GoldComponent").gold))
-            goldup:addComponent(PositionComponent(entity:getComponent("PositionComponent").x, entity:getComponent("PositionComponent").y))
-            goldup:addComponent(TimerComponent(0.5))
-            stack:current().engine:addEntity(goldup)
+            local bloodup = Entity()
+            bloodup:addComponent(BloodUpComponent(entity:getComponent("BloodComponent").blood))
+            bloodup:addComponent(PositionComponent(entity:getComponent("PositionComponent").x, entity:getComponent("PositionComponent").y))
+            bloodup:addComponent(TimerComponent(1.5))
+            stack:current().engine:addEntity(bloodup)
 
             entity:addComponent(DestroyComponent())
             stack:current().engine:componentAdded(entity, {"DestroyComponent"})

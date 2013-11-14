@@ -17,8 +17,6 @@ function DrawableDrawSystem:draw()
     for index, entity in ipairs(self.sortedTargets) do
         local drawable = entity:getComponent("DrawableComponent")
         local pos = entity:getComponent("PositionComponent")
-        -- Enable to get inverted Colors
-        --love.graphics.setPixelEffect(self.invert)
 
         -- Draws the Picture. If Entity is near to the beginng or the end of the screen, the Entity is drawed on both sides for sideChangeSystem animation.
         if pos.x < love.graphics.getWidth()/20 then 

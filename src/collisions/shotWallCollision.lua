@@ -6,9 +6,9 @@ function ShotWallCollision:__init()
 end
 
 function ShotWallCollision:action(entities)
-    local entity1 = entities.entity1   
-    local entity2 = entities.entity2
-    entity2:addComponent(DestroyComponent())
-    stack:current().engine:componentAdded(entity2, {"DestroyComponent"})
+    local wall = entities.entity1   
+    local shot = entities.entity2
+    shot:addComponent(DestroyComponent())
+    stack:current().engine:componentAdded(shot, {"DestroyComponent"})
 end
 

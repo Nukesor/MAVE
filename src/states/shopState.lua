@@ -102,14 +102,14 @@ function ShopState:load()
         end
         self.engine:addEntity(box)
     end
-    sortMenu(self.boxes)
+    sortItemMenu(self.boxes, self.width)
 
     -- Erstellung der MenuBoxes
     self.menunumber = 2
     self.menuboxes = {}
 
     for i = 1, self.menunumber, 1 do
-        y = love.graphics.getHeight() * (3/4)
+        y = love.graphics.getHeight() * (7/8)
         x = (love.graphics.getWidth()*i/(self.menunumber+1))-self.font:getWidth(self.menu[i][2])/2
         local box
         if i == 2 then
@@ -123,7 +123,7 @@ function ShopState:load()
 
     -- Verlinkung der MenuBoxes mit normalen Boxes
     for i, box in ipairs(self.menuboxes) do
-        box:getComponent("BoxComponent").linked[3] = self.boxes[8]
+        box:getComponent("BoxComponent").linked[3] = self.boxes[self.boxnumber]
         box:getComponent("BoxComponent").linked[4] = self.boxes[3]
     end
 
@@ -141,8 +141,6 @@ function ShopState:load()
             box:getComponent("BoxComponent").linked[4] = self.menuboxes[2]
         end
     end
-
-    love.graphics.setFont(self.font)
 end
 
 function ShopState:update(dt)

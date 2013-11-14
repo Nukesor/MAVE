@@ -25,6 +25,11 @@ function RocketModel:__init(x, y, xt, yt)
     self:addComponent(TimerComponent(1.5))
     self:addComponent(IsRocket())
     self:addComponent(ExplosionComponent(80, 150))
+    self:addComponent(ParticleComponent(resources.images.blood1, 100, 200, 0, 0, 0.3, 0.2, 
+                                                155, 155, 155, 255, 155, 155, 155, 0, 
+                                                self:getComponent("PositionComponent").x, self:getComponent("PositionComponent").y, -1, 0.5, 0.5, 0, 360, 
+                                                0, 0, 50, 100))
+    self:getComponent("ParticleComponent").hit:start()
 
     body:setGravityScale(0.1)
     body:setAngle(math.atan2(akat, -gkat)-math.pi/2)

@@ -56,7 +56,7 @@ function Gameplay:__init()
                 playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
             end
         end),
-        ItemComponent(5, "Rocketlauncher", false, 300, resources.images.gun, 0.15, 0.15, 0.8,
+        ItemComponent(5, "Rocketlauncher", true, 300, resources.images.gun, 0.15, 0.15, 0.8,
         function()
             -- Erstellen eines neuen Rocketmodels
             if playercutie:getComponent("ItemComponent").counttimer < 0 then

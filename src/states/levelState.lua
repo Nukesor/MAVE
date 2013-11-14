@@ -23,6 +23,7 @@ require("systems/draw/bloodUpDisplaySystem")
 -- Particle Systems
 require("systems/particle/particleDrawSystem")
 require("systems/particle/particleUpdateSystem")
+require("systems/particle/particlePositionSyncSystem")
 
 -- Physics Systems
 require("systems/physic/speedLimitSystem")
@@ -150,6 +151,7 @@ function LevelState:load()
     self.engine:addSystem(SideChangeSystem(), "logic")
     self.engine:addSystem(PhysicsPositionSyncSystem(), "logic")
     self.engine:addSystem(ParticleUpdateSystem(), "logic")
+    self.engine:addSystem(ParticlePositionSyncSystem(), "logic")
     self.engine:addSystem(PlayerMoveSystem(), "logic")
     self.engine:addSystem(EnemyTrackingSystem(), "logic")
     self.engine:addSystem(SpeedLimitSystem(), "logic")

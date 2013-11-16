@@ -22,6 +22,13 @@ require("states/settingState")
 
 function love.load()
     resources = Resources()
+
+    -- Different Stuff for Menus
+    resources:addImage("logo", "data/gfx/menu/logo.png")
+    resources:addImage("sold", "data/gfx/menu/sold.png")
+
+
+    -- Cutie Graphics
     resources:addImage("cutie1", 'data/gfx/cuties/cutie-0.png')
     resources:addImage("cutie0", 'data/gfx/cuties/cutie-1.png')
     resources:addImage("cutie2", 'data/gfx/cuties/cutie-2.png')
@@ -29,13 +36,19 @@ function love.load()
     resources:addImage("cutie4", 'data/gfx/cuties/cutie-4.png')
     resources:addImage("cutie5", 'data/gfx/cuties/cutie-5.png')
 
+
+    -- Particles
     resources:addImage("blood1", 'data/gfx/particles/blood1.png')
+    resources:addImage("blood2", 'data/gfx/particles/blood2.png')
+    resources:addImage("blood3", 'data/gfx/particles/blood3.png')
 
-    resources:addImage("level2", 'data/gfx/level/level2.png')
+    -- Levelelements
     resources:addImage("background", 'data/gfx/menu/background.png')
-    resources:addImage("logo", "data/gfx/menu/logo.png")
-    resources:addImage("sold", "data/gfx/menu/sold.png")
+    resources:addImage("level2", 'data/gfx/level/level2.png')
+    resources:addImage("platform1", 'data/gfx/level/platform1.png')
 
+
+    -- Weapongraphics
     resources:addImage("shot", 'data/gfx/weapons/shot.png')
     resources:addImage("grenade", 'data/gfx/weapons/grenade.png')
     resources:addImage("gun", "data/gfx/weapons/lmg.png")
@@ -43,6 +56,8 @@ function love.load()
     resources:addImage("rocket", "data/gfx/weapons/rocket.png")
     resources:addImage("rocketlauncher", "data/gfx/weapons/rocketlauncher.png")
 
+
+    -- Fonts
     resources:addFont("seventeen", "data/font/SwankyandMooMoo.ttf", 17)
     resources:addFont("twenty", "data/font/SwankyandMooMoo.ttf", 20)
     resources:addFont("twentyfive", "data/font/SwankyandMooMoo.ttf", 25)

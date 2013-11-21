@@ -6,7 +6,8 @@ function CutieModel:__init(x, y, image, life)
     local shape = love.physics.newCircleShape(20 * relation())
     local fixture = love.physics.newFixture(body, shape, 1) 
     fixture:setUserData(self)
-    
+    fixture:setFilterData(3, 9, 2)
+
     self:addComponent(PhysicsComponent(body, fixture, shape))
     self:addComponent(PositionComponent(x, y))
     self:addComponent(DrawableComponent(image, 0, 0.2, 0.2, 140, 140))

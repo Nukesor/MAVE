@@ -14,8 +14,7 @@ function ShotModel:__init(x, y, xt, yt)
     local fixture = love.physics.newFixture(body, shape, 0)  
         fixture:setRestitution(1)  
         body:setMass(0)
-
-
+    fixture:setFilterData(5, 3, -1)
         
     self:addComponent(PhysicsComponent(body, fixture, shape ))
     self:addComponent(PositionComponent(x,y))

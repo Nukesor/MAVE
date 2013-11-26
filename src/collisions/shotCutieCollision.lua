@@ -12,5 +12,4 @@ function ShotCutieCollision:action(entities)
         cutie:getComponent("LifeComponent").life = cutie:getComponent("LifeComponent").life - shot:getComponent("DamageComponent").damage
     end
     shot:addComponent(DestroyComponent())
-    stack:current().engine:componentAdded(shot, {"DestroyComponent"})
 end

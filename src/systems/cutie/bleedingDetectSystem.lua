@@ -10,7 +10,6 @@ function BleedingDetectSystem:update(dt)
                                                 entity:getComponent("PositionComponent").x, entity:getComponent("PositionComponent").y, -1, 0.4, 0.5, 0, 360, 
                                                 0, 0, 50, 100))
                 entity:getComponent("ParticleComponent").hit:start()
-                stack:current().engine:componentAdded(entity, {"ParticleComponent"})
             end
         end
     end

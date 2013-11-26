@@ -12,7 +12,6 @@ function ExplosionEventSystem:fireEvent(event)
     -- Removes the exploding Entity
     if entity.components.PhysicsComponent then
         entity:addComponent(DestroyComponent())
-        stack:current().engine:componentAdded(entity, {"DestroyComponent"})
     else
         stack:current().engine:removeEntity(entity)
     end

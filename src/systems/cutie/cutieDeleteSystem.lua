@@ -14,7 +14,6 @@ function CutieDeleteSystem:update()
             stack:current().engine:addEntity(bloodup)
 
             entity:addComponent(DestroyComponent())
-            stack:current().engine:componentAdded(entity, {"DestroyComponent"})
         end
     end
 end

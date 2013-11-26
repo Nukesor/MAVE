@@ -11,5 +11,4 @@ function ExplosionShotCollision:action(entities)
 
     stack:current().eventmanager:fireEvent(ExplosionEvent(expl))
     shot:addComponent(DestroyComponent())
-    stack:current().engine:componentAdded(shot, {"DestroyComponent"})
 end

@@ -4,13 +4,11 @@ function MainMousePressedSystem:fireEvent(event)
     if event.button == "r" then
         if playercutie:getComponent("DashingComponent") then
             playercutie:removeComponent("DashingComponent")
-            stack:current().engine:componentRemoved(playercutie, {"DashingComponent"})
         end
         local targetX, targetY = event.x, event.y 
         local xBefore, yBefore = playercutie:getComponent("PhysicsComponent").body:getPosition()
 
         -- Adds a DashingComponent to the PlayerCutie
         playercutie:addComponent(DashingComponent({x=xBefore, y=yBefore}, {x=targetX, y=targetY}))
-        stack:current().engine:componentAdded(playercutie, {"DashingComponent"})
     end
 end

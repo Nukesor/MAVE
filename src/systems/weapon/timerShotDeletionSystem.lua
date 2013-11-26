@@ -5,7 +5,6 @@ function TimerShotDeletionSystem:update(dt)
         entity:getComponent("TimerComponent").time = entity:getComponent("TimerComponent").time - dt
         if entity:getComponent("TimerComponent").time < 0 then
             entity:addComponent(DestroyComponent())
-            stack:current().engine:componentAdded(entity, {"DestroyComponent"})
         end
     end
 end

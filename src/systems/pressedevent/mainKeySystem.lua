@@ -14,7 +14,7 @@ function MainKeySystem:fireEvent(event)
     if event.key == "[" then
         stack:current().engine:removeSystem("DrawableDrawSystem", "draw")
     elseif event.key == "]" then
-        stack:current().engine:addSystem(DrawableDrawSystem(), "draw")
+        stack:current().engine:addSystem(DrawableDrawSystem(), "draw", 1)
     end
 
     -- If any numberkey is pressed, the linked Item will be selected.

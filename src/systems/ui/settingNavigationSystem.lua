@@ -1,6 +1,6 @@
 SettingNavigationSystem = class("SettingNavigationSystem", System)
 
-function SettingNavigationSystem:fireEvent(event)
+function SettingNavigationSystem.fireEvent(self, event)
     local key = event.key
     local u = event.u
     -- Navigation with keys through linked Boxes

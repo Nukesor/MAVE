@@ -1,6 +1,6 @@
 PlayerControlSystem = class("PlayerControlSystem", System)
 
-function PlayerControlSystem:fireEvent(event)
+function PlayerControlSystem.fireEvent(self, event)
     -- Playercutie Jump
     if event.key == "s" or event.key == "down" then
         playercutie:getComponent("PhysicsComponent").body:applyLinearImpulse(0, 1)

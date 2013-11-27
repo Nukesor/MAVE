@@ -1,4 +1,4 @@
-require("lib/lua-lovetoys/lovetoys/class")
+require("lib/lua-lovetoys/lovetoys/engine")
 require("core/resources")
 require("core/stackhelper")
 require("core/gameplay")

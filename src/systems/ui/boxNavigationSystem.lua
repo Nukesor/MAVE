@@ -1,9 +1,6 @@
 BoxNavigationSystem = class("BoxNavigationSystem", System)
 
-function BoxNavigationSystem:init()
-end
-
-function BoxNavigationSystem:fireEvent(event)
+function BoxNavigationSystem.fireEvent(self, event)
     local key = event.key
     local u = event.u
     -- Navigation with keys through linked Boxes

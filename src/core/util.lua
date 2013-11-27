@@ -4,6 +4,16 @@ function removeEntityWithPhysics(entity)
     stack:current().engine:removeEntity(entity)
 end
 
+-- Returns the key of an element inside that table
+function table.getKey(table, element)
+    for index, value in pairs(table) do
+        if value == element then
+            return index
+        end
+    end
+    return false
+end
+
 -- Returns the distance between the two Positions.
 -- A position is  specified as a table with two values: {x, y}.
 function distanceBetween(pos1, pos2)

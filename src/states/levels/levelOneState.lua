@@ -2,7 +2,7 @@ LevelOneState = class("LevelOneState", LevelState)
 
 function LevelOneState:load()
     self.__super.load(self)
-
+    local playercutie  = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
     -- Playercutie Position
     playercutie:getComponent("PhysicsComponent").body:setPosition(333, 520)
 

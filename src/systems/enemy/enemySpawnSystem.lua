@@ -6,7 +6,7 @@ function EnemySpawnSystem:__init()
 end
 
 function EnemySpawnSystem:update(dt)
-    if next(stack:current().engine:getEntitylist("IsEnemy")) == nil then
+    if next(stack:current().engine:getEntityList("IsEnemy")) == nil then
         self.waitUntilSpawn = self.waitUntilSpawn - dt
     end
 

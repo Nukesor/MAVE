@@ -14,6 +14,12 @@ function table.getKey(table, element)
     return false
 end
 
+
+function table.firstElement(table)
+    for index, value in pairs(table) do
+        return value
+    end
+end 
 -- Returns the distance between the two Positions.
 -- A position is  specified as a table with two values: {x, y}.
 function distanceBetween(pos1, pos2)
@@ -85,7 +91,7 @@ function sortMenuVertical(table)
 end
 
 function getSelectedBox()
-    for index, value in pairs(stack:current().engine:getEntitylist("BoxComponent")) do
+    for index, value in pairs(stack:current().engine:getEntityList("BoxComponent")) do
         if value:getComponent("BoxComponent").selected == true then 
             return value
         end

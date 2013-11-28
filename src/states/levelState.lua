@@ -211,7 +211,7 @@ function LevelState:load()
     self.engine:addEntity(bg)
 
     -- Playercreation
-    playercutie = CutieModel(0, 0, resources.images.cutie1, 100)
+    local playercutie = CutieModel(0, 0, resources.images.cutie1, 100)
     playercutie:addComponent(IsPlayer())
     playercutie:getComponent("PhysicsComponent").fixture:setFilterData(9, 3, 10)
     self.engine:addEntity(playercutie)

@@ -2,6 +2,7 @@ MainMousePressedSystem = class("MainMousePressedSystem")
 
 function MainMousePressedSystem:fireEvent(event)
     if event.button == "r" then
+        local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
         if playercutie:getComponent("DashingComponent") then
             playercutie:removeComponent("DashingComponent")
         end

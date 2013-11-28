@@ -2,6 +2,7 @@ EnemyTrackingSystem = class("EnemyTrackingSystem", System)
 
 function EnemyTrackingSystem:update(dt)
     for index, entity in pairs(self.targets) do
+        local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
         local height
         local enemy=entity:getComponent("IsEnemy")
         local playercutiex, playercutiey = playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y

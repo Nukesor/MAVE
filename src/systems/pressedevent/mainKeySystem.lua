@@ -9,6 +9,7 @@ function MainKeySystem.fireEvent(self, event)
     elseif event.key == "b" then
         stack:current().shaketimer = 0.5
     elseif event.key == "o" then
+        local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
         playercutie:getComponent("LifeComponent").life = 0
     end
     if event.key == "[" then
@@ -20,6 +21,7 @@ function MainKeySystem.fireEvent(self, event)
     -- If any numberkey is pressed, the linked Item will be selected.
     if tonumber(event.key) then
         if gameplay.items[tonumber(event.key)] then
+            local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
             if gameplay.items[tonumber(event.key)].owned == true then
                 playercutie:addComponent(gameplay.items[tonumber(event.key)])
             elseif playercutie:getComponent("ItemComponent") then

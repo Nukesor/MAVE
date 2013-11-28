@@ -4,7 +4,7 @@ function ExplosionEventSystem.fireEvent(self, event)
     local entity = event.entity
     local exp = entity:getComponent("PositionComponent")
     -- Checks if an enemy is in the explosionradius and adds damage to the Entity.
-    for i, enemy in pairs(stack:current().engine:getEntitylist("IsEnemy")) do 
+    for i, enemy in pairs(stack:current().engine:getEntityList("IsEnemy")) do 
         if insideRadius(entity, enemy, entity:getComponent("ExplosionComponent").radius ) then
             enemy:getComponent("LifeComponent").life = enemy:getComponent("LifeComponent").life - entity:getComponent("ExplosionComponent").damage
         end

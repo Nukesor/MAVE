@@ -1,4 +1,4 @@
-ExplosionEvent = class("ExplosionEvent", Event)
+ExplosionEvent = class("ExplosionEvent")
 
 function ExplosionEvent:__init(entity)
     self.entity = entity

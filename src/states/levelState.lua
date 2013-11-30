@@ -9,7 +9,6 @@ require("lib/lua-lovetoys/lovetoys/collisionManager")
 --Events
 require("events/mousePressed")
 require("events/keyPressed")
-require("events/beginContact")
 require("events/explosionEvent")
 
 -- Draw Systems

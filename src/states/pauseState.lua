@@ -24,7 +24,6 @@ function PauseState:load()
     self.eventmanager:addListener("MousePressed", {boxclick, boxclick.fireEvent})
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
-    self.engine:addSystem(MenuWobblySystem(), "logic", 2)
     self.engine:addSystem(DrawableDrawSystem(), "draw")
     self.engine:addSystem(MenuBoxDrawSystem(), "draw")
     self.engine:addSystem(boxclick)
@@ -38,9 +37,9 @@ function PauseState:load()
         x = love.graphics:getWidth()/12
         local box
         if i == 1 then
-            box = menuBox(100, 40, x, y, self.menu[i][2], self.font, self.menu[i][1], true)
+            box = MenuBoxModel(x, y, self.menu[i][2], self.font, self.menu[i][1], true)
         else
-            box = menuBox(100, 40, x, y, self.menu[i][2], self.font, self.menu[i][1], false)
+            box = MenuBoxModel(x, y, self.menu[i][2], self.font, self.menu[i][1], false)
         end
         self.engine:addEntity(box)
     end

@@ -14,14 +14,12 @@ require("components/ui/boxComponent")
 require("components/physic/positionComponent")
 require("components/ui/functionComponent")
 require("components/ui/imageComponent")
-require("components/ui/menuWobblyComponent")
 
 -- Systems
 require("systems/ui/boxClickSystem")
 require("systems/ui/menuBoxDrawSystem")
 require("systems/ui/boxHoverSystem")
 require("systems/ui/boxNavigationSystem")
-require("systems/ui/menuWobblySystem")
 
 MenuState = class("MenuState", State)
 
@@ -47,7 +45,6 @@ function MenuState:load()
     self.eventmanager:addListener("MousePressed", {boxclick, boxclick.fireEvent})
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
-    self.engine:addSystem(MenuWobblySystem(), "logic", 2)
     
     self.engine:addSystem(MenuBoxDrawSystem(), "draw", 2)
     self.engine:addSystem(DrawableDrawSystem(), "draw", 1)
@@ -75,9 +72,9 @@ function MenuState:load()
         x = love.graphics:getWidth()/12
         local box
         if i == 1 then
-            box = menuBox(150, 40, x, y, self.menu[i][2], self.font, self.menu[i][1], true)
+            box = MenuBoxModel(x, y, self.menu[i][2], self.font, self.menu[i][1], true)
         else
-            box = menuBox(150, 40, x, y, self.menu[i][2], self.font, self.menu[i][1], false)
+            box = MenuBoxModel(x, y, self.menu[i][2], self.font, self.menu[i][1], false)
         end
         self.engine:addEntity(box)
     end

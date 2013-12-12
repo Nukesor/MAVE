@@ -14,14 +14,12 @@ require("components/ui/boxComponent")
 require("components/physic/positionComponent")
 require("components/ui/functionComponent")
 require("components/ui/imageComponent")
-require("components/ui/menuWobblyComponent")
 
 -- Systems
 require("systems/ui/boxClickSystem")
 require("systems/ui/menuBoxDrawSystem")
 require("systems/ui/boxHoverSystem")
 require("systems/ui/settingNavigationSystem")
-require("systems/ui/menuWobblySystem")
 require("systems/draw/stringDrawSystem")
 
 SettingState = class("SettingState", State)
@@ -100,12 +98,17 @@ function SettingState:load()
     self.eventmanager:addListener("MousePressed", {boxclick, boxclick.fireEvent})
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
-    self.engine:addSystem(MenuWobblySystem(), "logic", 2)
-    self.engine:addSystem(MenuBoxDrawSystem(), "draw")
-    self.engine:addSystem(DrawableDrawSystem(), "draw")
+    self.engine:addSystem(MenuBoxDrawSystem(), "draw", 2)
+    self.engine:addSystem(DrawableDrawSystem(), "draw", 1)
     self.engine:addSystem(boxclick)
     self.engine:addSystem(settingnavigation)
-    self.engine:addSystem(StringDrawSystem(), "draw")
+    self.engine:addSystem(StringDrawSystem(), "draw", 3)
+
+    local bg = Entity()
+    bg:addComponent(DrawableComponent(resources.images.background, 0, 1, 1, 0, 0))
+    bg:addComponent(ZIndex(100))
+    bg:addComponent(PositionComponent(0, 0))
+    self.engine:addEntity(bg)
 
     self.menunumber = 3
     self.menuboxes = {}
@@ -116,9 +119,9 @@ function SettingState:load()
         x = love.graphics.getWidth() * (1/10)
         local box
         if k == 1 then
-            box = menuBox(self.font:getWidth(self.menu[k][2]), 40, x, y, self.menu[k][2], self.font, self.menu[k][1], true)
+            box = MenuBoxModel(x, y, self.menu[k][2], self.font, self.menu[k][1], true)
         else
-            box = menuBox(self.font:getWidth(self.menu[k][2]), 40, x, y, self.menu[k][2], self.font, self.menu[k][1], false)
+            box = MenuBoxModel(x, y, self.menu[k][2], self.font, self.menu[k][1], false)
         end
         self.engine:addEntity(box)
     end

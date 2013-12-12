@@ -22,8 +22,8 @@ function PromptState:load()
     self.eventmanager:addListener("MousePressed", {boxclick, boxclick.fireEvent})
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
-    self.engine:addSystem(MenuBoxDrawSystem(), "draw")
-    self.engine:addSystem(DrawableDrawSystem(), "draw")
+    self.engine:addSystem(MenuBoxDrawSystem(), "draw", 2)
+    self.engine:addSystem(DrawableDrawSystem(), "draw", 1)
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
 

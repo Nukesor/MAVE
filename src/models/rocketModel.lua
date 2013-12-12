@@ -24,10 +24,10 @@ function RocketModel:__init(x, y, xt, yt)
     self:addComponent(IsRocket())
     self:addComponent(ExplosionComponent(80, 150))
 
-    self:addComponent(ParticleComponent(resources.images.particle1, 200))
+    self:addComponent(ParticleComponent(resources.images.particle1, 4000))
     local particle = self:getComponent("ParticleComponent").particle
-    particle:setEmissionRate(400)
-    particle:setSpeed(10, 10)
+    particle:setEmissionRate(2000)
+    particle:setSpeed(20, 50)
     particle:setSizes(0.5, 0.5)
     particle:setColors(155, 155, 155, 255, 155, 155, 155, 0)
     particle:setPosition(self:getComponent("PositionComponent").x,self:getComponent("PositionComponent").y)
@@ -36,7 +36,7 @@ function RocketModel:__init(x, y, xt, yt)
     -- particle:setOffset(x, y) Punkt um den der Partikel rotiert
     particle:setRotation(0, 360) -- Der Rotationswert des Partikels bei seiner Erstellung
     particle:setDirection(0)
-    particle:setSpread(0)
+    particle:setSpread(360)
     particle:setRadialAcceleration(50, 100)
     self:getComponent("ParticleComponent").particle:start()
 

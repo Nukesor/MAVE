@@ -2,7 +2,7 @@ ExplosionEventSystem = class("ExplosionEventSystem")
 
 function ExplosionEventSystem.fireEvent(self, event)
     local entity = event.entity
-    local exp = entity:getComponent("PositionComponent")
+    local position = entity:getComponent("PositionComponent")
     -- Checks if an enemy is in the explosionradius and adds damage to the Entity.
     for i, enemy in pairs(stack:current().engine:getEntityList("IsEnemy")) do 
         if insideRadius(entity, enemy, entity:getComponent("ExplosionComponent").radius ) then
@@ -16,17 +16,29 @@ function ExplosionEventSystem.fireEvent(self, event)
         stack:current().engine:removeEntity(entity)
     end
     -- Creates an entity for Explosionparticles
-    explo = Entity()
+    explosion = Entity()
     local radius = entity:getComponent("ExplosionComponent").radius
-    explo:addComponent(ParticleComponent(resources.images.blood1, 400, 400, (radius*3-50), (radius*3), 2.0, 2.3, 
-                                            220, 100, 0, 80, 220, 0, 0, 140, 
-                                            exp.x, exp.y, 0.6, 0.5, 0.6, 0, 360, 
-                                            0, 360, (radius*-7.5), (radius*-7.5)))
-    explo:addComponent(TimeComponent(0.6, 0.6))
-    explo.components.ParticleComponent.hit:setColors(255, 255, 255, 255,
-                                                    255, 255, 0, 255,
-                                                    200, 0, 0, 255,
-                                                    255, 100, 0, 155)
-    stack:current().engine:addEntity(explo)
-    explo.components.ParticleComponent.hit:start()
+    explosion:addComponent(TimeComponent(0.6, 0.6))
+    explosion:addComponent(ParticleComponent(resources.images.particle1, 400))
+
+    local particle = explosion:getComponent("ParticleComponent").particle
+    particle:setEmissionRate(400)
+    particle:setSpeed((radius*3-50), (radius*3))
+    particle:setSizes(2.0, 2.3)
+    particle:setColors(255, 255, 255, 255,
+                        255, 255, 0, 255,
+                        200, 0, 0, 255,
+                        255, 100, 0, 155)
+    particle:setPosition(position.x, position.y)
+    particle:setLifetime(0.6) -- Zeit die der Partikelstrahl anhält
+    particle:setParticleLife(0.5, 0.6) -- setzt Lebenszeit in min-max
+    -- particle:setOffset(x, y) Punkt um den der Partikel rotiert
+    particle:setRotation(0, 360) -- Der Rotationswert des Partikels bei seiner Erstellung
+    particle:setDirection(0)
+    particle:setSpread(360)
+    particle:setRadialAcceleration((radius*-7.5), (radius*-7.5))
+    particle:start()
+
+    stack:current().engine:addEntity(explosion)
+    explosion.components.ParticleComponent.particle:start()
 end

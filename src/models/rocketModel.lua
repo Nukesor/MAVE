@@ -23,11 +23,22 @@ function RocketModel:__init(x, y, xt, yt)
     self:addComponent(TimerComponent(1.5))
     self:addComponent(IsRocket())
     self:addComponent(ExplosionComponent(80, 150))
-    self:addComponent(ParticleComponent(resources.images.blood1, 200, 400, 10, 10, 0.5, 0.5, 
-                                                155, 155, 155, 255, 155, 155, 155, 0, 
-                                                self:getComponent("PositionComponent").x, self:getComponent("PositionComponent").y, -1, 0.2, 0.3, 0, 360, 
-                                                0, 0, 50, 100))
-    self:getComponent("ParticleComponent").hit:start()
+
+    self:addComponent(ParticleComponent(resources.images.particle1, 4000))
+    local particle = self:getComponent("ParticleComponent").particle
+    particle:setEmissionRate(2000)
+    particle:setSpeed(20, 50)
+    particle:setSizes(0.5, 0.5)
+    particle:setColors(155, 155, 155, 255, 155, 155, 155, 0)
+    particle:setPosition(self:getComponent("PositionComponent").x,self:getComponent("PositionComponent").y)
+    particle:setLifetime(-1) -- Zeit die der Partikelstrahl anhält
+    particle:setParticleLife(0.2, 0.3) -- setzt Lebenszeit in min-max
+    -- particle:setOffset(x, y) Punkt um den der Partikel rotiert
+    particle:setRotation(0, 360) -- Der Rotationswert des Partikels bei seiner Erstellung
+    particle:setDirection(0)
+    particle:setSpread(360)
+    particle:setRadialAcceleration(50, 100)
+    self:getComponent("ParticleComponent").particle:start()
 
     body:setGravityScale(0.1)
     body:setAngle(math.atan2(akat, -gkat)-math.pi/2)

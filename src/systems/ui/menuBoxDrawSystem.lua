@@ -24,14 +24,14 @@ function MenuBoxDrawSystem:draw()
         if box.selected == true then
             if scale ~= nil then
                 love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, 
-                    scale * 1.5, scale * 1.5, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
+                    scale * 1.5*relation(), scale * 1.5*relation(), boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
             else
                 love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, 
-                    scale, scale, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
+                    scale*relation(), scale*relation(), boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
             end
         else
             love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, 
-                scale, scale, boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
+                scale*relation(), scale*relation(), boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
         end
     end
 end

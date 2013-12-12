@@ -62,7 +62,7 @@ function ShopState:load()
 
 
     local str = Entity()
-    str:addComponent(StringComponent(resources.fonts.twenty, {255, 0, 0, 255}, "Blood:  %i", {{gameplay.stats, "blood"}}))
+    str:addComponent(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Blood:  %i", {{gameplay.stats, "blood"}}))
     str:addComponent(PositionComponent(10, 10))
     self.engine:addEntity(str)
 

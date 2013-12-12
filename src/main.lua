@@ -41,6 +41,7 @@ function love.load()
     resources:addImage("blood1", 'data/gfx/particles/blood1.png')
     resources:addImage("blood2", 'data/gfx/particles/blood2.png')
     resources:addImage("blood3", 'data/gfx/particles/blood3.png')
+    resources:addImage("particle1", 'data/gfx/particles/particle1.png')
 
     -- Levelelements
     resources:addImage("background", 'data/gfx/menu/background.png')

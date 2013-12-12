@@ -38,14 +38,14 @@ function CollisionDamage:action(entities)
                                             0, 360, 50, 100))
     blood:addComponent(TimeComponent(0.3, 0.5))
     stack:current().engine:addEntity(blood)
-    blood.components.ParticleComponent.hit:start()
+    blood.components.ParticleComponent.particle:start()
 end
 
 function CollisionDamage:dealDamage(entity, entity2)
     local entityCuteness = entity2:getComponent("CutieComponent").cuteness
     local damage = math.random(0, 5 + entityCuteness)
 
-    -- Critical hit?
+    -- Critical particle?
     if math.random(0, 100 + 2*entityCuteness) > 100 then
         damage = damage * 3
         main.shaketimer = 0.25

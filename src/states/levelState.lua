@@ -217,17 +217,17 @@ function LevelState:load()
 
     local str = Entity()
     str:addComponent(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Player's life:  %i", {{playercutie:getComponent("LifeComponent"), "life"}}))
-    str:addComponent(PositionComponent(10, 10))
+    str:addComponent(PositionComponent(love.graphics.getWidth()*0.005, love.graphics.getHeight()*0.01))
     self.engine:addEntity(str)
 
     str = Entity()
     str:addComponent(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Blood:  %i", {{gameplay.stats, "blood"}}))
-    str:addComponent(PositionComponent(love.graphics.getWidth()-100, 20))
+    str:addComponent(PositionComponent(love.graphics.getWidth()*0.9, love.graphics.getHeight()*0.02))
     self.engine:addEntity(str)
 
     str = Entity()
     str:addComponent(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Kills:  %i", {{gameplay.stats, "kills"}}))
-    str:addComponent(PositionComponent(love.graphics.getWidth()-100, 5))
+    str:addComponent(PositionComponent(love.graphics.getWidth()*0.9, love.graphics.getHeight()*0.005))
     self.engine:addEntity(str)
 
 end

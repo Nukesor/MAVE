@@ -19,7 +19,7 @@ function MenuBoxDrawSystem:draw()
             scale = scale*1.5
         end
         love.graphics.print(boxstring.string, position.x, position.y, 0, 
-                scale, scale, 0, 0)
+                scale*relation(), scale*relation(), 0, 0)
     end
 end
 

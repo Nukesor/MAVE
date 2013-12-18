@@ -70,6 +70,10 @@ function getRadian(x, y, xt, yt)
     return math.atan2(akat, -gkat)-math.pi/2
 end
 
+function getAngle(x, y, xt, yt)
+    return getRadian(x, y, xt, yt) * 180/math.pi
+end
+
 function sortMenu(table)
     for index, box in pairs(table) do
         if index == 1 then

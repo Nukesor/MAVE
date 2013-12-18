@@ -9,13 +9,8 @@ function MenuBoxDrawSystem:draw()
     for index, entity in pairs(self.targets) do
         local position = entity:getComponent("PositionComponent")
         local box = entity:getComponent("BoxComponent")
-        local boxstring
+        local boxstring = entity:getComponent("UIStringComponent")
         local scale = 1
-        if entity:getComponent("UIStringComponent") then
-            boxstring = entity:getComponent("UIStringComponent")
-        end
-
-        --print("font: " .. position.y)
 
         -- Drawfunktion for Menuboxes
         love.graphics.setColor(255, 255, 255, 255)

@@ -18,7 +18,7 @@ function MineModel:__init(x,y)
     self:addComponent(PhysicsComponent(body, fixture, shape ))
     self:addComponent(PositionComponent(x, y))
     self:addComponent(DrawableComponent(resources.images.mine, 0, 0.3, 0.3, 0, 0))
-    self:addComponent(ExplosionComponent(100, 250))
+    self:addComponent(ExplosionComponent(100, 250*relation()))
     self:addComponent(ProximityExplodeComponent(60))
     self:addComponent(ZIndex(99))
 end

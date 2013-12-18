@@ -6,8 +6,12 @@ function PauseState:__init(screenshot)
     {function () saveGame() 
                  stack:pop() end, "Resume"},
     {function () saveGame()
-                 stack:popload()
+                 stack:pop()
                  stack:popload() end, "Shop"},
+    {function () saveGame()
+                 stack:pop()
+                 stack:pop()
+                 stack:popload() end, "Main Menu"},
     {function () saveGame()
                  love.event.quit() end, "Exit"}
     }
@@ -30,7 +34,6 @@ function PauseState:load()
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
 
-    self.menunumber = 3
     self.menuboxes = {}
 
     for i = 1, #self.menu, 1 do
@@ -65,6 +68,9 @@ end
 
 function PauseState:keypressed(key, unicode)
     self.eventmanager:fireEvent(KeyPressed(key,unicode))
+    if key == "escape" or key == "p" then
+        stack:pop()
+    end
 end
 
 function PauseState:mousepressed(x, y, button)

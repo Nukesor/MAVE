@@ -22,7 +22,7 @@ function RocketModel:__init(x, y, xt, yt)
     self:addComponent(DamageComponent(20))
     self:addComponent(TimerComponent(1.5))
     self:addComponent(IsRocket())
-    self:addComponent(ExplosionComponent(80, 150))
+    self:addComponent(ExplosionComponent(80, 150*relation()))
 
     self:addComponent(ParticleComponent(resources.images.particle1, 4000))
     local particle = self:getComponent("ParticleComponent").particle

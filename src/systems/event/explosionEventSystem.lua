@@ -24,7 +24,7 @@ function ExplosionEventSystem.fireEvent(self, event)
     local particle = explosion:getComponent("ParticleComponent").particle
     particle:setEmissionRate(400)
     particle:setSpeed((radius*3-50), (radius*3))
-    particle:setSizes(2.0, 2.3)
+    particle:setSizes(2.5*relation(), 2.8*relation())
     particle:setColors(255, 255, 255, 255,
                         255, 255, 0, 255,
                         200, 0, 0, 255,
@@ -36,7 +36,7 @@ function ExplosionEventSystem.fireEvent(self, event)
     particle:setRotation(0, 360) -- Der Rotationswert des Partikels bei seiner Erstellung
     particle:setDirection(0)
     particle:setSpread(360)
-    particle:setRadialAcceleration((radius*-7.5), (radius*-7.5))
+    particle:setRadialAcceleration((radius*-7.5)*relation(), (radius*-7.5)*relation())
     particle:start()
 
     stack:current().engine:addEntity(explosion)

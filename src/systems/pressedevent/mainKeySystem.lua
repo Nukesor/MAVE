@@ -11,6 +11,9 @@ function MainKeySystem.fireEvent(self, event)
     elseif event.key == "o" then
         local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
         playercutie:getComponent("LifeComponent").life = 0
+    elseif event.key == "i" then
+        local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
+        playercutie:getComponent("LifeComponent").life = 15
     end
     if event.key == "[" then
         stack:current().engine:removeSystem("DrawableDrawSystem", "draw")

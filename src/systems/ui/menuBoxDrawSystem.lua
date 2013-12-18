@@ -6,33 +6,25 @@ function MenuBoxDrawSystem:__init()
 end
 
 function MenuBoxDrawSystem:draw()
-    for index, value in pairs(self.targets) do
-        local position = value:getComponent("PositionComponent")
-        local box = value:getComponent("BoxComponent")
+    for index, entity in pairs(self.targets) do
+        local position = entity:getComponent("PositionComponent")
+        local box = entity:getComponent("BoxComponent")
         local boxstring
-        local scale
-        if value:getComponent("MenuWobblyComponent") then
-            scale = value:getComponent("MenuWobblyComponent").scale
+        local scale = 1
+        if entity:getComponent("UIStringComponent") then
+            boxstring = entity:getComponent("UIStringComponent")
         end
-        if value:getComponent("UIStringComponent") then
-            boxstring = value:getComponent("UIStringComponent")
-        end
+
+        --print("font: " .. position.y)
 
         -- Drawfunktion for Menuboxes
         love.graphics.setColor(255, 255, 255, 255)
         love.graphics.setFont(boxstring.font)
         if box.selected == true then
-            if scale ~= nil then
-                love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, 
-                    scale * 1.5*relation(), scale * 1.5*relation(), boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
-            else
-                love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, 
-                    scale*relation(), scale*relation(), boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
-            end
-        else
-            love.graphics.print(boxstring.string, position.x + box.width/2, position.y + box.height/2, 0, 
-                scale*relation(), scale*relation(), boxstring.font:getWidth(boxstring.string)/2, boxstring.font:getHeight(boxstring.string)/2)
+            scale = scale*1.5
         end
+        love.graphics.print(boxstring.string, position.x, position.y, 0, 
+                scale, scale, 0, 0)
     end
 end
 

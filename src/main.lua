@@ -23,9 +23,10 @@ require("states/settingState")
 function love.load()
     resources = Resources()
 
-    -- Different Stuff for Menus
+    -- Menus
     resources:addImage("logo", "data/gfx/menu/logo.png")
     resources:addImage("sold", "data/gfx/menu/sold.png")
+    resources:addImage("button", "data/gfx/menu/button.png")
 
 
     -- Cutie Graphics

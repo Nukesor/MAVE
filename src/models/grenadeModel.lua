@@ -2,13 +2,7 @@ GrenadeModel = class("GrenadeModel", Entity)
 
 function GrenadeModel:__init(x, y, xt, yt)
     
-    local akat, gkat
-        akat = xt - x
-        gkat = yt - y
-
-    local hypo = math.sqrt(math.pow(gkat, 2) + math.pow(akat, 2))
-    local cos = gkat/hypo
-    local sin = akat/hypo
+    local sin, cos = getSinCos(x, y, xt, yt)
 
     local body = love.physics.newBody(world, x+20*sin, y+20*cos, "dynamic")
     local shape = love.physics.newCircleShape(6) 
@@ -23,5 +17,5 @@ function GrenadeModel:__init(x, y, xt, yt)
     self:addComponent(TimerComponent(1.5))
     self:addComponent(ZIndex(99))
 
-    body:setLinearVelocity((300 * sin), (300 * cos))
+    body:setLinearVelocity((300 * cos), (300 * sin))
 end

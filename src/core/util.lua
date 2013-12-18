@@ -52,6 +52,23 @@ function getMid(entity1, entity2)
     return (x1 + x2)/2 , (y1 + y2)/2 
 end
 
+function getSinCos(x, y, xt, yt)
+    local akat, gkat
+    akat = xt - x
+    gkat = yt - y
+
+    local hypo = math.sqrt(math.pow(gkat, 2) + math.pow(akat, 2))
+    local sin = gkat/hypo
+    local cos = akat/hypo
+    return sin, cos
+end
+
+function getRadian(x, y, xt, yt)
+    local akat, gkat
+    akat = xt - x
+    gkat = yt - y
+    return math.atan2(akat, -gkat)-math.pi/2
+end
 
 function sortMenu(table)
     for index, box in pairs(table) do

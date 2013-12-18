@@ -1,13 +1,7 @@
 RocketModel = class("RocketModel", Entity)
 
 function RocketModel:__init(x, y, xt, yt)
-    local akat, gkat
-    akat = xt - x
-    gkat = yt - y
-
-    local hypo = math.sqrt(math.pow(gkat, 2) + math.pow(akat, 2))
-    local sin = gkat/hypo
-    local cos = akat/hypo
+    local sin, cos = getSinCos(x, y, xt, yt)
 
     local body = love.physics.newBody(world, x+(80 * cos * relation()), y+(80 * sin * relation()), "dynamic")
     local shape = love.physics.newRectangleShape(50 * relation(), 8 * relation()) 
@@ -17,7 +11,7 @@ function RocketModel:__init(x, y, xt, yt)
         
     self:addComponent(PhysicsComponent(body, fixture, shape ))
     self:addComponent(PositionComponent(x,y))
-    self:addComponent(DrawableComponent(resources.images.rocket, math.atan2(akat, -gkat)-math.pi/2, 0.07, 0.07, 68*relation(), 120*relation()))
+    self:addComponent(DrawableComponent(resources.images.rocket, getRadian(x, y, xt, yt), 0.07, 0.07, 68*relation(), 120*relation()))
     self:addComponent(ZIndex(99))
     self:addComponent(DamageComponent(20))
     self:addComponent(TimerComponent(1.5))
@@ -40,6 +34,6 @@ function RocketModel:__init(x, y, xt, yt)
     self:getComponent("ParticleComponent").particle:start()
 
     body:setGravityScale(0.1)
-    body:setAngle(math.atan2(akat, -gkat)-math.pi/2)
+    body:setAngle(getRadian(x, y, xt, yt))
     body:setLinearVelocity((2000*cos*relation()), (2000*sin*relation()))
 end

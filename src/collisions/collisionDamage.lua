@@ -32,13 +32,26 @@ function CollisionDamage:action(entities)
 
     -- Blutpartikel
     blood = Entity()
-    blood:addComponent(ParticleComponent(resources.images.blood1, 50, 30, 20, 10, 0.3, 0.2, 
-                                            255, 0, 0, 255, 200, 0, 0, 255, 
-                                            e1:getComponent("PositionComponent").x, e1:getComponent("PositionComponent").y, 0.3, 0.4, 0.5, 0, 360, 
-                                            0, 360, 50, 100))
+    blood:addComponent(ParticleComponent(resources.images.particle1, 50))
+
+    local particle = blood:getComponent("ParticleComponent").particle
+    particle:setEmissionRate(50)
+    particle:setSpeed(40, 20)
+    particle:setSizes(0.3*relation(), 0.4*relation())
+    particle:setColors(255, 0, 0, 255, 200, 0, 0, 255)
+    particle:setPosition(getMid(e1, e2))
+    particle:setLifetime(0.2) -- Zeit die der Partikelstrahl anhält
+    particle:setParticleLife(0.2, 1) -- setzt Lebenszeit in min-max
+    particle:setOffset(0, 0) -- Punkt um den der Partikel rotiert
+    particle:setRotation(0, 360) -- Der Rotationswert des Partikels bei seiner Erstellung
+    particle:setDirection(0)
+    particle:setSpread(360)
+    particle:setRadialAcceleration(50*relation(), 100*relation())
+    particle:setGravity(300, 300)
+    particle:start()
+
     blood:addComponent(TimeComponent(0.3, 0.5))
     stack:current().engine:addEntity(blood)
-    blood.components.ParticleComponent.particle:start()
 end
 
 function CollisionDamage:dealDamage(entity, entity2)

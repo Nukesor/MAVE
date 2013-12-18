@@ -32,7 +32,7 @@ function ExplosionEventSystem.fireEvent(self, event)
     particle:setPosition(position.x, position.y)
     particle:setLifetime(0.6) -- Zeit die der Partikelstrahl anhält
     particle:setParticleLife(0.5, 0.6) -- setzt Lebenszeit in min-max
-    -- particle:setOffset(x, y) Punkt um den der Partikel rotiert
+    -- particle:setOffset(x, y) -- Punkt um den der Partikel rotiert
     particle:setRotation(0, 360) -- Der Rotationswert des Partikels bei seiner Erstellung
     particle:setDirection(0)
     particle:setSpread(360)

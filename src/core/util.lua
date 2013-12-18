@@ -45,6 +45,14 @@ function insideRadius(entity1, entity2, radius)
     end
 end
 
+function getMid(entity1, entity2)
+    local x1, y1 = entity1:getComponent("PositionComponent").x, entity1:getComponent("PositionComponent").y
+    local x2, y2 = entity2:getComponent("PositionComponent").x, entity2:getComponent("PositionComponent").y
+
+    return (x1 + x2)/2 , (y1 + y2)/2 
+end
+
+
 function sortMenu(table)
     for index, box in pairs(table) do
         if index == 1 then

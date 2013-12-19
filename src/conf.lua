@@ -12,16 +12,16 @@ function love.conf(t)
     t.console = false           -- Attach a console (boolean, Windows only)
     t.release = false           -- Enable release mode (boolean)
     if asdf then
-        t.screen.width = asdf.resolution[1]
-        t.screen.height = asdf.resolution[2]
-        t.screen.fullsceen = asdf.fullscreen
+        t.window.width = asdf.resolution[1]
+        t.window.height = asdf.resolution[2]
+        t.window.fullsceen = asdf.fullwindow
     else
-        t.screen.width = 1366       -- The window width (number)
-        t.screen.height = 768       -- The window height (number)
-        t.screen.fullscreen = false -- Enable fullscreen (boolean)
+        t.window.width = 1366       -- The window width (number)
+        t.window.height = 768       -- The window height (number)
+        t.window.fullwindow = false -- Enable fullwindow (boolean)
     end
-    t.screen.vsync = true       -- Enable vertical sync (boolean)
-    t.screen.fsaa = 0           -- The number of FSAA-buffers (number)
+    t.window.vsync = true       -- Enable vertical sync (boolean)
+    t.window.fsaa = 0           -- The number of FSAA-buffers (number)
     t.modules.joystick = true   -- Enable the joystick module (boolean)
     t.modules.audio = true      -- Enable the audio module (boolean)
     t.modules.keyboard = true   -- Enable the keyboard module (boolean)

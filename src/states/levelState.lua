@@ -39,6 +39,10 @@ require("systems/weapon/mineProximitySystem")
 require("systems/weapon/shootSystem")
 require("systems/weapon/weaponTimerSystem")
 
+-- Logic Gameplay Systems
+
+require("systems/gameplay/focusCheckSystem")
+
 --CutieManipulation Upgrade Systems
         --Cutie
 require("systems/cutie/wobbleSystem")
@@ -174,6 +178,7 @@ function LevelState:load()
     self.engine:addSystem(ShootSystem(), "logic", 19)
     self.engine:addSystem(TimerShotDeletionSystem(), "logic", 20)
     self.engine:addSystem(PlayerDeathCheckSystem(), "logic", 21)
+    self.engine:addSystem(FocusCheckSystem(), "logic", 22)
 
 
     -- Adding Collisions to CollisionManager

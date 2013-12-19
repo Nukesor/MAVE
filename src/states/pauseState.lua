@@ -65,7 +65,7 @@ function PauseState:draw()
     self.engine:draw()
 end
 
-function PauseState:keypressed(key, unicode)
+function PauseState:keypressed(key, isrepeatnicode)
     self.eventmanager:fireEvent(KeyPressed(key,unicode))
     if key == "escape" or key == "p" then
         stack:pop()

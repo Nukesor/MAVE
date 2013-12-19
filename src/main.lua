@@ -88,12 +88,12 @@ function love.draw()
     stack:draw()
 end 
 
-function love.keypressed(key, u)
-    stack:current():keypressed(key, u)
+function love.keypressed(key, isrepeat)
+    stack:current():keypressed(key, isrepeat)
 end
 
-function love.keyreleased(key, u)
-    stack:current():keyreleased(key, u)
+function love.keyreleased(key, isrepeat)
+    stack:current():keyreleased(key, isrepeat)
 end
 
 function love.mousepressed(x, y, button)

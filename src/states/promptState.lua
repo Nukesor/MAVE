@@ -60,8 +60,8 @@ function PromptState:draw()
 end
 
 
-function PromptState:keypressed(key, u)
-    self.eventmanager:fireEvent(KeyPressed(key, u))
+function PromptState:keypressed(key, isrepeat)
+    self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
 end
 
 function PromptState:mousepressed(x, y, button)

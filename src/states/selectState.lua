@@ -99,8 +99,8 @@ function SelectState:draw()
 end
 
 
-function SelectState:keypressed(key, u)
-    self.eventmanager:fireEvent(KeyPressed(key, u))
+function SelectState:keypressed(key, isrepeat)
+    self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
 end
 
 function SelectState:mousepressed(x, y, button)

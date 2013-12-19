@@ -25,8 +25,8 @@ function RocketModel:__init(x, y, xt, yt)
     particle:setSizes(0.5*relation(), 0.5*relation())
     particle:setColors(155, 155, 155, 255, 155, 155, 155, 0)
     particle:setPosition(self:getComponent("PositionComponent").x,self:getComponent("PositionComponent").y)
-    particle:setLifetime(-1) -- Zeit die der Partikelstrahl anhält
-    particle:setParticleLife(0.2, 0.3) -- setzt Lebenszeit in min-max
+    particle:setEmitterLifetime(-1) -- Zeit die der Partikelstrahl anhält
+    particle:setParticleLifetime(0.2, 0.3) -- setzt Lebenszeit in min-max
     particle:setRotation(0, 360) -- Der Rotationswert des Partikels bei seiner Erstellung
     particle:setDirection(0)
     particle:setSpread(360)

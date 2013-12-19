@@ -150,8 +150,8 @@ function ShopState:draw()
 end
 
 
-function ShopState:keypressed(key, u)
-    self.eventmanager:fireEvent(KeyPressed(key, u))
+function ShopState:keypressed(key, isrepeat)
+    self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
 end
 
 function ShopState:mousepressed(x, y, button)

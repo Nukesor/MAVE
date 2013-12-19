@@ -98,8 +98,8 @@ function MenuState:draw()
 end
 
 
-function MenuState:keypressed(key, u)
-    self.eventmanager:fireEvent(KeyPressed(key, u))
+function MenuState:keypressed(key, isrepeat)
+    self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
 end
 
 function MenuState:mousepressed(x, y, button)

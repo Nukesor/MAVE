@@ -30,6 +30,6 @@ function CreditsState:draw()
     end
 end
 
-function CreditsState:keypressed(key, u)
+function CreditsState:keypressed(key, isrepeat)
     stack:pop()
 end

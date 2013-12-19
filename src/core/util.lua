@@ -201,7 +201,7 @@ function loadSettings()
 end
 
 function refreshSettings()
-    love.graphics.setMode(set.settings.resolution[1], set.settings.resolution[2], set.settings.fullscreen, true, 0)
+    love.window.setMode(set.settings.resolution[1], set.settings.resolution[2], {fullscreen=set.settings.fullscreen, resizable=false, vsync=true})
 end
 
 function saveGame()

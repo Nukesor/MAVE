@@ -91,8 +91,8 @@ function GameOverState:draw()
 end
 
 
-function GameOverState:keypressed(key, u)
-    self.eventmanager:fireEvent(KeyPressed(key, u))
+function GameOverState:keypressed(key, isrepeat)
+    self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
 end
 
 function GameOverState:mousepressed(x, y, button)

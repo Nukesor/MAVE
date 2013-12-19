@@ -38,14 +38,14 @@ function SettingState:__init()
         if val == "add" then
             if set.resolutions[index+1] then
                 set.settings.resolution = set.resolutions[index+1]
-                love.graphics.setMode(set.settings.resolution[1], set.settings.resolution[2], set.settings.fullscreen, true, 0)
+                refreshSettings()
                 self:load()
                 saveSettings()
             end
         else
             if set.resolutions[index-1] then
                 set.settings.resolution = set.resolutions[index-1]
-                love.graphics.setMode(set.settings.resolution[1], set.settings.resolution[2], set.settings.fullscreen, true, 0)
+                refreshSettings()
                 self:load()
                 saveSettings()
             end
@@ -57,7 +57,7 @@ function SettingState:__init()
         else
             set.settings.fullscreen = true
         end
-        love.graphics.setMode(set.settings.resolution[1], set.settings.resolution[2], set.settings.fullscreen, true, 0)
+        refreshSettings()
         saveSettings()
     end , "Fullscreen"},
     {function (val) 
@@ -141,8 +141,8 @@ function SettingState:draw()
 end
 
 
-function SettingState:keypressed(key, u)
-    self.eventmanager:fireEvent(KeyPressed(key, u))
+function SettingState:keypressed(key, isrepeat)
+    self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
 end
 
 function SettingState:mousepressed(x, y, button)

@@ -272,8 +272,8 @@ function LevelState:restart()
     self:__init()
 end
 
-function LevelState:keypressed(key, u)
-    self.eventmanager:fireEvent(KeyPressed(key, u))
+function LevelState:keypressed(key, isrepeat)
+    self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
 end
 
 

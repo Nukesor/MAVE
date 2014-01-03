@@ -28,13 +28,13 @@ end
 function DrawableDrawSystem:addEntity(entity)
     -- Entitys are sorted by ZIndex, therefore we had to overwrite System:addEntity
     self.targets[entity.id] = entity
-    self.sortedTargets = resetIndice(self.targets)
+    self.sortedTargets = table.resetIndice(self.targets)
     table.sort(self.sortedTargets, function(a, b) return a:getComponent("ZIndex").index < b:getComponent("ZIndex").index end)
 end
 
 function DrawableDrawSystem:removeEntity(entity)
     -- Entitys are sorted by ZIndex, therefore we had to overwrite System:addEntity
     self.targets[entity.id] = nil
-    self.sortedTargets = resetIndice(self.targets)
+    self.sortedTargets = table.resetIndice(self.targets)
     table.sort(self.sortedTargets, function(a, b) return a:getComponent("ZIndex").index < b:getComponent("ZIndex").index end)
 end

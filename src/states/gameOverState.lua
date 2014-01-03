@@ -28,12 +28,12 @@ GameOverState = class("GameOverState", State)
 function GameOverState:__init(screenshot)
     self.font = resources.fonts.forty
     self.menu = {
-    {function () saveGame()
+    {function () Saves:saveGame()
                  stack:popload() end, "Retry"},
-    {function () saveGame()
+    {function () Saves:saveGame()
                  stack:pop()
                  stack:popload() end, "Shop"},
-    {function () saveGame()
+    {function () Saves:saveGame()
                  love.event.quit() end, "Exit"}
     }
     self.screenshot = screenshot

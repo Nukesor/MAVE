@@ -5,9 +5,15 @@ function ParticleUpdateSystem:update(dt)
         -- Updates Particles. If timer is below 0 the entity will be removed
         entity.components.ParticleComponent.particle:update(dt)
         if entity:getComponent("ParticleTimerComponent") then
-            entity.components.ParticleTimerComponent.timer = entity.components.ParticleTimerComponent.timer - dt
-            if entity.components.ParticleTimerComponent.timer < 0 then
-                stack:current().engine:removeEntity(entity)
+            entity.components.ParticleTimerComponent.emitterlife = entity.components.ParticleTimerComponent.emitterlife - dt
+            if entity.components.ParticleTimerComponent.emitterlife <= 0 then
+                entity.components.ParticleTimerComponent.particlelife = entity.components.ParticleTimerComponent.particlelife - dt
+                if entity.components.ParticleComponent.particle:isActive() then
+                    entity.components.ParticleComponent.particle:pause()
+                end
+                if entity.components.ParticleTimerComponent.particlelife < 0 then
+                    stack:current().engine:removeEntity(entity)
+                end
             end
         end
     end

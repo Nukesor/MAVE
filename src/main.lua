@@ -2,6 +2,7 @@ require("lib/lua-lovetoys/lovetoys/engine")
 
 require("helper/saves")
 require("helper/tables")
+require("helper/menu")
 
 require("core/resources")
 require("core/stackhelper")

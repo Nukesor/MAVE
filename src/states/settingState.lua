@@ -126,7 +126,7 @@ function SettingState:load()
         self.engine:addEntity(box)
     end
 
-    sortMenuVertical(self.menuboxes)
+    Menu:sortMenuVertical(self.menuboxes)
     love.graphics.setFont(self.font)
 end
 

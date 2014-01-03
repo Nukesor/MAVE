@@ -68,7 +68,7 @@ function GameOverState:load()
         end
         self.engine:addEntity(box)
     end
-    sortMenu(self.menuboxes)
+    Menu:sortMenu(self.menuboxes)
 
     local background = Entity()
     background:addComponent(DrawableComponent(self.screenshot))

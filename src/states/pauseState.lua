@@ -46,7 +46,7 @@ function PauseState:load()
         end
         self.engine:addEntity(box)
     end
-    sortMenuVertical(self.menuboxes)
+    Menu:sortMenuVertical(self.menuboxes)
         
     local background = Entity()
     background:addComponent(DrawableComponent(self.screenshot))

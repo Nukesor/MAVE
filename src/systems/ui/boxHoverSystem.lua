@@ -14,7 +14,7 @@ function BoxHoverSystem:update(dt)
             -- If mouse hovers over any Box, the Box will be selected.
             if (x >= value:getComponent("PositionComponent").x) and (x <= (value:getComponent("PositionComponent").x + value:getComponent("BoxComponent").width)) then
                 if (y >= value:getComponent("PositionComponent").y) and (y <= (value:getComponent("PositionComponent").y + value:getComponent("BoxComponent").height)) then
-                    getSelectedBox():getComponent("BoxComponent").selected = false
+                    Menu:getSelectedBox():getComponent("BoxComponent").selected = false
                     value:getComponent("BoxComponent").selected = true
                 end
             end

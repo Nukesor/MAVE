@@ -26,11 +26,11 @@ MenuState = class("MenuState", State)
 function MenuState:__init()
     self.font = resources.fonts.forty
     self.menu = {
-    {function () loadGame() 
+    {function () Saves:loadGame() 
                  stack:push(ShopState()) end , "Play"},
     {function () stack:push(SettingState()) end, "Settings"},
     {function () stack:push(CreditsState()) end, "Credits"},
-    {function () saveGame()
+    {function () Saves:saveGame()
                  love.event.quit() end, "Exit"}
     }
 end
@@ -79,7 +79,7 @@ function MenuState:load()
         self.engine:addEntity(box)
     end
 
-    sortMenuVertical(self.menuboxes)
+    Menu:sortMenuVertical(self.menuboxes)
     love.graphics.setFont(self.font)
 end
 

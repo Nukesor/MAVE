@@ -38,16 +38,16 @@ function SettingState:__init()
         if val == "add" then
             if set.resolutions[index+1] then
                 set.settings.resolution = set.resolutions[index+1]
-                refreshSettings()
+                Saves:refreshSettings()
                 self:load()
-                saveSettings()
+                Saves:saveSettings()
             end
         else
             if set.resolutions[index-1] then
                 set.settings.resolution = set.resolutions[index-1]
-                refreshSettings()
+                Saves:refreshSettings()
                 self:load()
-                saveSettings()
+                Saves:saveSettings()
             end
         end 
        end , "Resolution"},
@@ -57,8 +57,8 @@ function SettingState:__init()
         else
             set.settings.fullscreen = true
         end
-        refreshSettings()
-        saveSettings()
+        Saves:refreshSettings()
+        Saves:saveSettings()
     end , "Fullscreen"},
     {function (val) 
         if val == "add" then
@@ -83,7 +83,7 @@ function SettingState:__init()
        end , "Mousespeed"},
     {function ()  stack:push(PromptState(function()
                                   gameplay:__init()  
-                                  saveGame() end )) end, "Reset Game"},
+                                  Saves:saveGame() end )) end, "Reset Game"},
     {function () stack:popload() end, "Return"}
     }
 end
@@ -126,7 +126,7 @@ function SettingState:load()
         self.engine:addEntity(box)
     end
 
-    sortMenuVertical(self.menuboxes)
+    Menu:sortMenuVertical(self.menuboxes)
     love.graphics.setFont(self.font)
 end
 

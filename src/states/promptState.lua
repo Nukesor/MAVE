@@ -41,7 +41,7 @@ function PromptState:load()
         end
         self.engine:addEntity(box)
     end
-    sortMenu(self.menuboxes)
+    Menu:sortMenu(self.menuboxes)
 
     love.graphics.setFont(self.font)
 end

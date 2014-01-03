@@ -11,7 +11,7 @@ function ItemBoxModel:__init(id, w, h, x, y, selected, image, xscale, yscale)
                                                             gameplay.stats.blood = gameplay.stats.blood - gameplay.items[id].price
                                                             gameplay.items[id].owned = true
                                                             gameplay.stats.owned[id] = true
-                                                            saveGame()
+                                                            Saves:saveGame()
                                                         end
                                                     end))
                                             end

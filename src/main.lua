@@ -1,4 +1,10 @@
 require("lib/lua-lovetoys/lovetoys/engine")
+
+require("helper/saves")
+require("helper/tables")
+require("helper/menu")
+require("helper/math")
+
 require("core/resources")
 require("core/stackhelper")
 require("core/gameplay")
@@ -71,7 +77,7 @@ function love.load()
     resources:load()
 
     set = Settings()
-    loadSettings()
+    Saves:loadSettings()
     gameplay = Gameplay()
     
     stack = StackHelper()

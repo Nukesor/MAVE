@@ -13,7 +13,7 @@ function BoxNavigationSystem.fireEvent(self, event)
     elseif key == "down" or key == "s" then
         self:changeSelected(4)
     elseif key == "return" then
-        getSelectedBox():getComponent("FunctionComponent").func()
+        Menu:getSelectedBox():getComponent("FunctionComponent").func()
     end
 end
 
@@ -22,7 +22,7 @@ function BoxNavigationSystem:getRequiredComponents()
 end
 
 function BoxNavigationSystem:changeSelected(link) 
-    local box = getSelectedBox()
+    local box = Menu:getSelectedBox()
     if box:getComponent("BoxComponent").linked[link] then
            box:getComponent("BoxComponent").selected = false
         box:getComponent("BoxComponent").linked[link]:getComponent("BoxComponent").selected = true

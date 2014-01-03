@@ -99,7 +99,7 @@ function ShopState:load()
         end
         self.engine:addEntity(box)
     end
-    sortItemMenu(self.boxes, self.width)
+    Menu:sortItemMenu(self.boxes, self.width)
 
     -- Erstellung der MenuBoxes
     self.menunumber = 2
@@ -116,7 +116,7 @@ function ShopState:load()
         end        
         self.engine:addEntity(box)
     end
-    sortMenu(self.menuboxes)
+    Menu:sortMenu(self.menuboxes)
 
     -- Verlinkung der MenuBoxes mit normalen Boxes
     for i, box in ipairs(self.menuboxes) do

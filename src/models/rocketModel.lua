@@ -21,19 +21,17 @@ function RocketModel:__init(x, y, xt, yt)
     self:addComponent(ParticleComponent(resources.images.particle1, 4000))
     local particle = self:getComponent("ParticleComponent").particle
     particle:setEmissionRate(2000)
-    particle:setSpeed(20*relation(), 30*relation())
+    particle:setSpeed(50*relation(), 350*relation())
     particle:setSizes(0.5*relation(), 0.5*relation())
     particle:setColors(155, 155, 155, 255, 155, 155, 155, 0)
     particle:setPosition(self:getComponent("PositionComponent").x,self:getComponent("PositionComponent").y)
-    particle:setEmitterLifetime(-1) -- Zeit die der Partikelstrahl anhält
-    particle:setParticleLifetime(0.2, 0.3) -- setzt Lebenszeit in min-max
-    particle:setRotation(0, 360) -- Der Rotationswert des Partikels bei seiner Erstellung
-    particle:setDirection(0)
-    particle:setSpread(360)
-    particle:setRadialAcceleration(50*relation(), 100*relation())
+    particle:setEmitterLifetime(-1) -- Emitter will live forever
+    particle:setParticleLifetime(0.4, 0.5)
+    particle:setSpread(0.2)
+    particle:setDirection(math.pi+getRadian(x, y, xt, yt))
     particle:start()
 
-    body:setGravityScale(0.1)
+    body:setGravityScale(0)
     body:setAngle(getRadian(x, y, xt, yt))
-    body:setLinearVelocity((2000*cos*relation()), (2000*sin*relation()))
+    body:setLinearVelocity((1500*cos*relation()), (1500*sin*relation()))
 end

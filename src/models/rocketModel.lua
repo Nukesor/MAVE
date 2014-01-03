@@ -31,7 +31,7 @@ function RocketModel:__init(x, y, xt, yt)
     particle:setDirection(0)
     particle:setSpread(360)
     particle:setRadialAcceleration(50*relation(), 100*relation())
-    self:getComponent("ParticleComponent").particle:start()
+    particle:start()
 
     body:setGravityScale(0.1)
     body:setAngle(getRadian(x, y, xt, yt))

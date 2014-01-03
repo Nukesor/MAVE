@@ -18,7 +18,7 @@ function ExplosionEventSystem.fireEvent(self, event)
     -- Creates an entity for Explosionparticles
     explosion = Entity()
     local radius = entity:getComponent("ExplosionComponent").radius
-    explosion:addComponent(TimeComponent(0.6, 0.6))
+    explosion:addComponent(ParticleTimerComponent(0.6, 0.6))
     explosion:addComponent(ParticleComponent(resources.images.particle1, 400))
 
     local particle = explosion:getComponent("ParticleComponent").particle
@@ -40,5 +40,4 @@ function ExplosionEventSystem.fireEvent(self, event)
     particle:start()
 
     stack:current().engine:addEntity(explosion)
-    explosion.components.ParticleComponent.particle:start()
 end

@@ -72,8 +72,9 @@ require("components/graphic/bloodUpComponent")
 
 -- Particle Component
 require("components/particle/particleComponent")
+require("components/particle/particleTimerComponent")
 
--- PhysicsCompoents
+-- PhysicsComponents
 require("components/physic/physicsComponent")
 require("components/physic/positionComponent")
 require("components/physic/destroyComponent")
@@ -98,7 +99,6 @@ require("components/identifier/isRocket")
 
 -- Item Components
 require("components/items/explosionComponent")
-require("components/items/timeComponent")
 require("components/items/timerComponent")
 require("components/items/damageComponent")
 require("components/items/proximityExplodeComponent")

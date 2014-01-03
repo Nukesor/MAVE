@@ -51,7 +51,7 @@ function CollisionDamage:action(entities)
     particle:setAreaSpread( "normal", 5*relation(), 5*relation() )
     particle:start()
 
-    blood:addComponent(TimeComponent(0.3, 0.5))
+    blood:addComponent(ParticleTimerComponent(0.3, 0.5))
     stack:current().engine:addEntity(blood)
 end
 

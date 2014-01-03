@@ -1,5 +1,5 @@
 ParticleComponent = class("ParticleComponent")
 
-function ParticleComponent:__init(image, maxparticles)
-    self.particle = love.graphics.newParticleSystem(image, maxparticles)
+function ParticleComponent:__init(image, buffer)
+    self.particle = love.graphics.newParticleSystem(image, buffer)
 end

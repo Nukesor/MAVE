@@ -14,6 +14,13 @@ function table.getKey(table, element)
     return false
 end
 
+function table.count(table) 
+    local counter = 0
+    for index, value in pairs(table) do
+        counter = counter + 1
+    end
+    return counter
+end
 
 function table.firstElement(table)
     for index, value in pairs(table) do

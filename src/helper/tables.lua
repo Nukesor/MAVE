@@ -1,6 +1,6 @@
 -- Returns the key of an element inside that table
-function table.getKey(table, element)
-    for index, value in pairs(table) do
+function table.getKey(list, element)
+    for index, value in pairs(list) do
         if value == element then
             return index
         end
@@ -8,19 +8,35 @@ function table.getKey(table, element)
     return false
 end
 
-function table.count(table) 
+function table.count(list) 
     local counter = 0
-    for index, value in pairs(table) do
+    for index, value in pairs(list) do
         counter = counter + 1
     end
     return counter
 end
 
-function table.firstElement(table)
-    for index, value in pairs(table) do
+function table.contains(list, element)
+    for k, v in pairs(list) do
+        if v == element then
+            return true
+        end
+    end
+    return false
+end
+
+function table.firstElement(list)
+    for index, value in pairs(list) do
         return value
     end
 end 
+
+function table.getLowest(list)
+    lowest = table.firstElement(list)
+    for index, value in pairs(list) do
+        if value < lowest then lowest = lowest end
+    end
+end
 
 function table.deepcopy(orig)
     local copy

@@ -1,4 +1,4 @@
-default: build run
+default: run
 
 clean:
 	@[[ ! -e MAVE.love ]] || rm MAVE.love

@@ -31,6 +31,19 @@ function table.firstElement(list)
     end
 end 
 
+function table.removeElement(list, element)
+    local indice = {}
+    for index, value in pairs(list) do
+        if value == element then
+            table.insert(indice, index)
+        end
+    end
+    table.sort(indice, function(a, b) return a > b end)
+    for index, value in pairs(indice) do
+        table.remove(list, value)
+    end
+end
+
 function table.getLowest(list)
     lowest = table.firstElement(list)
     for index, value in pairs(list) do

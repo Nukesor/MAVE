@@ -9,7 +9,7 @@ MAVE is written in [Löve](https://www.love2d.org/), a game library for lua.
 
 * Install Löve2D
 * Clone the repository
-* Run `git submodule update --init --recursive`
+* Run `git submodule update --init`
 * Execute `make` in the new directory.
 
 This Software is published under GPL General Public License Version 3.

@@ -26,6 +26,6 @@ function DashingSystem:update(dt)
     end
 end
 
-function DashingSystem:getRequiredComponents()
+function DashingSystem:requires()
     return {"PhysicsComponent", "DashingComponent"}
 end

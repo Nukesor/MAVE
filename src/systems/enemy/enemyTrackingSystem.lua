@@ -127,6 +127,6 @@ function EnemyTrackingSystem:update(dt)
     end
 end
 
-function EnemyTrackingSystem:getRequiredComponents()
+function EnemyTrackingSystem:requires()
     return{"IsEnemy"}
 end

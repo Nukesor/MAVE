@@ -15,6 +15,6 @@ function BloodUpDisplaySystem:draw()
     end
 end
 
-function BloodUpDisplaySystem:getRequiredComponents()
+function BloodUpDisplaySystem:requires()
     return {"TimerComponent", "BloodUpComponent"}
 end

@@ -6,6 +6,6 @@ function ParticlePositionSyncSystem:update()
     end
 end
 
-function ParticlePositionSyncSystem:getRequiredComponents()
+function ParticlePositionSyncSystem:requires()
     return {"ParticleComponent", "PositionComponent"}
 end

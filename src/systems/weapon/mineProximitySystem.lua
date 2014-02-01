@@ -14,6 +14,6 @@ function MineProximitySystem:update(dt)
     end
 end
 
-function MineProximitySystem:getRequiredComponents()
+function MineProximitySystem:requires()
     return {"ProximityExplodeComponent"}
 end

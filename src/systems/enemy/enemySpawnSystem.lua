@@ -23,6 +23,6 @@ function EnemySpawnSystem:update(dt)
     end
 end
 
-function EnemySpawnSystem:getRequiredComponents()
+function EnemySpawnSystem:requires()
     return {}
 end

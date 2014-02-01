@@ -23,6 +23,6 @@ function GrenadeRotationSystem:update(dt)
     end
 end
 
-function GrenadeRotationSystem:getRequiredComponents()
+function GrenadeRotationSystem:requires()
     return {"IsGrenade"}
 end

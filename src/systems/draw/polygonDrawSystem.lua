@@ -8,6 +8,6 @@ function PolygonDrawSystem:draw()
     end
 end
 
-function PolygonDrawSystem:getRequiredComponents()
+function PolygonDrawSystem:requires()
     return {"DrawablePolygonComponent"}
 end

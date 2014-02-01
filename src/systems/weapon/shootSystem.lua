@@ -12,6 +12,6 @@ function ShootSystem:update(dt)
     end
 end
 
-function ShootSystem:getRequiredComponents()
+function ShootSystem:requires()
     return {"IsPlayer"}
 end

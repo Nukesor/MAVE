@@ -17,6 +17,6 @@ function LifebarSystem:draw()
 end
 
 
-function LifebarSystem:getRequiredComponents()
+function LifebarSystem:requires()
     return {"LifeComponent"}
 end

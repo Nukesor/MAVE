@@ -10,6 +10,6 @@ function TimerShotDeletionSystem:update(dt)
 end
 
 
-function TimerShotDeletionSystem:getRequiredComponents()
+function TimerShotDeletionSystem:requires()
     return {"TimerComponent", "IsShot"}
 end

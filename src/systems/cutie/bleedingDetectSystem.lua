@@ -27,6 +27,6 @@ function BleedingDetectSystem:update(dt)
     end
 end
 
-function BleedingDetectSystem:getRequiredComponents()
+function BleedingDetectSystem:requires()
     return{"CutieComponent", "LifeComponent"}
 end

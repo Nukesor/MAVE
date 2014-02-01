@@ -24,6 +24,6 @@ function SpeedLimitSystem:update()
     end
 end
 
-function SpeedLimitSystem:getRequiredComponents()
+function SpeedLimitSystem:requires()
     return {"CutieComponent"}
 end

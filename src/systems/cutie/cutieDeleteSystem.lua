@@ -18,6 +18,6 @@ function CutieDeleteSystem:update()
     end
 end
 
-function CutieDeleteSystem:getRequiredComponents()
+function CutieDeleteSystem:requires()
     return {"IsEnemy"}
 end

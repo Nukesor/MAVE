@@ -11,6 +11,6 @@ function PlayerMoveSystem:update(dt)
     end
 end
 
-function PlayerMoveSystem:getRequiredComponents()
+function PlayerMoveSystem:requires()
     return {}
 end

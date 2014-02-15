@@ -14,8 +14,8 @@ function Gameplay:__init()
                     owned = {}
                     }
     self.items = {
-        --String, gekauft, Kosten, image, scalingx, scalingy, function 
-        ItemComponent(1, "Gewehr", false, 15, resources.images.gun, 0.18, 0.18, 0.25,
+        --String, gekauft, Kosten, image, scalingx, scalingy, weaponcooldown, function 
+        ItemComponent(1, "Gewehr", false, 15, resources.images.gun, 0.18, 0.18, 1.25,
         function()
             -- Erstellt ein neues Shotmodel
             local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))

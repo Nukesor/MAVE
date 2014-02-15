@@ -105,3 +105,7 @@ end
 function love.mousepressed(x, y, button)
     stack:current():mousepressed(x, y, button)
 end
+
+function love.quit()
+    Saves:saveGame()
+end

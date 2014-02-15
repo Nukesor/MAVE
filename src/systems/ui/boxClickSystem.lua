@@ -16,6 +16,6 @@ function BoxClickSystem:fireEvent(event)
     end
 end
 
-function BoxClickSystem:getRequiredComponents()
+function BoxClickSystem:requires()
     return {"BoxComponent"}
 end

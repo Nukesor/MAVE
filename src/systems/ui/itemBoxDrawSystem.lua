@@ -51,6 +51,6 @@ function ItemBoxDrawSystem:draw()
     end
 end
 
-function ItemBoxDrawSystem:getRequiredComponents()
+function ItemBoxDrawSystem:requires()
     return {"BoxComponent", "ItemComponent"}
 end

@@ -9,6 +9,6 @@ function TimerExplosionSystem:update(dt)
     end
 end
 
-function TimerExplosionSystem:getRequiredComponents()
+function TimerExplosionSystem:requires()
     return {"TimerComponent", "ExplosionComponent"}
 end

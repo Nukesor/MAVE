@@ -22,6 +22,6 @@ function BoxHoverSystem:update(dt)
     end
 end
 
-function BoxHoverSystem:getRequiredComponents()
+function BoxHoverSystem:requires()
     return {"BoxComponent"}
 end

@@ -15,9 +15,9 @@ function BodyDestroySystem:update()
             stack:current().engine:addEntity(particle)
         end
         removeEntityWithPhysics(entity)
-      end
+    end
 end
 
-function BodyDestroySystem:getRequiredComponents()
-      return {"DestroyComponent"}
+function BodyDestroySystem:requires()
+    return {"DestroyComponent"}
 end

@@ -13,6 +13,6 @@ function SideChangeSystem:update()
     end
 end
 
-function SideChangeSystem:getRequiredComponents()
+function SideChangeSystem:requires()
     return {"PhysicsComponent"}
 end

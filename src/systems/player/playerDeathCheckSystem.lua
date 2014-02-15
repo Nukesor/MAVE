@@ -12,6 +12,6 @@ function PlayerDeathCheckSystem:update()
     end
 end
 
-function PlayerDeathCheckSystem:getRequiredComponents()
+function PlayerDeathCheckSystem:requires()
     return {"IsPlayer"}
 end

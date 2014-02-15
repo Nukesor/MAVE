@@ -9,6 +9,6 @@ function PhysicsPositionSyncSystem:update(dt)
     end
 end
 
-function PhysicsPositionSyncSystem:getRequiredComponents()
+function PhysicsPositionSyncSystem:requires()
     return {"PhysicsComponent", "PositionComponent"}
 end

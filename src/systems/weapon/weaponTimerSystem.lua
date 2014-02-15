@@ -7,6 +7,6 @@ function WeaponTimerSystem:update(dt)
 end
 
 
-function WeaponTimerSystem:getRequiredComponents()
+function WeaponTimerSystem:requires()
     return {"ItemComponent"}
 end

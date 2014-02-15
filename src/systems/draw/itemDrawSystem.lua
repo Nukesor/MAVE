@@ -23,6 +23,6 @@ function ItemDrawSystem:draw()
     end
 end
 
-function ItemDrawSystem:getRequiredComponents() 
+function ItemDrawSystem:requires() 
     return {"ItemComponent", "PositionComponent"}
 end

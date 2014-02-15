@@ -23,6 +23,6 @@ function MenuBoxDrawSystem:draw()
     end
 end
 
-function MenuBoxDrawSystem:getRequiredComponents()
+function MenuBoxDrawSystem:requires()
     return {"BoxComponent", "UIStringComponent"}
 end

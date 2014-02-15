@@ -21,7 +21,7 @@ function DrawableDrawSystem:draw()
     end
 end
 
-function DrawableDrawSystem:getRequiredComponents()
+function DrawableDrawSystem:requires()
     return {"DrawableComponent", "PositionComponent", "ZIndex"}
 end
 

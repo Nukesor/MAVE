@@ -6,6 +6,6 @@ function TimerSystem:update(dt)
     end
 end
 
-function TimerSystem:getRequiredComponents()
+function TimerSystem:requires()
     return {"TimerComponent"}
 end

@@ -17,7 +17,7 @@ function SettingNavigationSystem.fireEvent(self, event)
     end
 end
 
-function SettingNavigationSystem:getRequiredComponents()
+function SettingNavigationSystem:requires()
     return {"BoxComponent"}
 end
 

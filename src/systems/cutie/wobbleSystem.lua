@@ -27,7 +27,7 @@ function WobbleSystem.fireEvent(self, event)
     end
 end
 
-function WobbleSystem:getRequiredComponents()
+function WobbleSystem:requires()
     return {"DrawableComponent", "WobblyComponent"}
 end
 

@@ -49,7 +49,7 @@ function Gameplay:__init()
                 playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
             end
         end),
-        ItemComponent(4, "Machinegun", false, 200, resources.images.gun, 0.18, 0.18, 0.05,
+        ItemComponent(4, "Machinegun", false, 200, resources.images.gun, 0.18, 0.18, 0.1,
         function()
             -- Erstellen eines neuen Shotmodels
             local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))

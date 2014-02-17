@@ -67,13 +67,13 @@ function love.load()
 
 
     -- Fonts
-    resources:addFont("seventeen", "data/font/SwankyandMooMoo.ttf", 17)
-    resources:addFont("twenty", "data/font/SwankyandMooMoo.ttf", 20)
-    resources:addFont("twentyfive", "data/font/SwankyandMooMoo.ttf", 25)
-    resources:addFont("thirty", "data/font/SwankyandMooMoo.ttf", 30)
-    resources:addFont("forty", "data/font/SwankyandMooMoo.ttf", 40)
-    resources:addFont("fifty", "data/font/SwankyandMooMoo.ttf", 50)
-    resources:addFont("sixty", "data/font/SwankyandMooMoo.ttf", 60)
+    resources:addFont("seventeen", "data/font/Skranji-Regular.ttf", 17)
+    resources:addFont("twenty", "data/font/Skranji-Regular.ttf", 20)
+    resources:addFont("twentyfive", "data/font/Skranji-Regular.ttf", 25)
+    resources:addFont("thirty", "data/font/Skranji-Regular.ttf", 30)
+    resources:addFont("forty", "data/font/Skranji-Regular.ttf", 40)
+    resources:addFont("fifty", "data/font/Skranji-Regular.ttf", 50)
+    resources:addFont("sixty", "data/font/Skranji-Regular.ttf", 60)
     
     resources:load()
 

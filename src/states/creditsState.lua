@@ -18,7 +18,7 @@ function CreditsState:draw()
     love.graphics.setColor(255, 255, 255)
     love.graphics.draw(self.bg, 0, 0)
 
-    love.graphics.setColor(0, 0, 0)
+    love.graphics.setColor(160, 160, 160)
     local y = 30
     for i = 1, #self.names, 1 do
         y = y + resources.fonts.twenty:getHeight()

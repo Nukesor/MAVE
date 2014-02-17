@@ -37,7 +37,6 @@ function MenuState:__init()
 end
 
 function MenuState:load()
-
     self.engine = Engine()
     self.eventmanager = EventManager()
     local boxnavigation = BoxNavigationSystem()

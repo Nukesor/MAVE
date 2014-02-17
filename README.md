@@ -14,3 +14,5 @@ MAVE is written in [Löve](https://www.love2d.org/), a game library for lua.
 
 This Software is published under GPL General Public License Version 3.
 For further information check the license.txt or read read the online version under [GPL](http://www.gnu.org/licenses/gpl.txt)
+
+This Project uses the "Skranji" Font by [Font Diner](www.fontdiner.com), licensed under the SIL Open Font License. For further details, see `data/font/OFL.txt`.

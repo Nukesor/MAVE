@@ -16,10 +16,12 @@ function BoxClickSystem:mouseReleased(event)
     local y = event.y  
     if event.button == "l" then
         local entity = self:getBoxAtPosition(x, y)
-        if entity:getComponent("DrawableComponent") then
-            entity:getComponent("DrawableComponent").image = resources.images.button
+        if entity then
+            if entity:getComponent("DrawableComponent") then
+                entity:getComponent("DrawableComponent").image = resources.images.button
+            end
+            entity:getComponent("FunctionComponent"):func()
         end
-        entity:getComponent("FunctionComponent"):func()
     end
 end
 

@@ -23,7 +23,7 @@ function CutieDeleteSystem:update()
             particle:setEmissionRate(300)
             particle:setSpeed(40, 20)
             particle:setSizes(0.3*relation(), 0.4*relation())
-            particle:setColors(255, 0, 0, 255, 200, 0, 0, 255)
+            particle:setColors(255, 0, 0, 255, 200, 0, 0, 0)
             particle:setPosition(entity:getComponent("PositionComponent").x, entity:getComponent("PositionComponent").y)
             particle:setEmitterLifetime(0.1) -- Zeit die der Partikelstrahl anhält
             particle:setParticleLifetime(0.5, 0.8) -- setzt Lebenszeit in min-max

@@ -16,7 +16,7 @@ function MenuBoxDrawSystem:draw()
         love.graphics.setColor(255, 255, 255, 255)
         love.graphics.setFont(boxstring.font)
         if box.selected == true then
-            scale = scale*1.5
+            scale = scale*1.1
         end
         love.graphics.print(boxstring.string, position.x, position.y, 0, 
                 scale*relation(), scale*relation(), 0, 0)

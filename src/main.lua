@@ -33,6 +33,7 @@ function love.load()
     resources:addImage("logo", "data/gfx/menu/logo.png")
     resources:addImage("sold", "data/gfx/menu/sold.png")
     resources:addImage("button", "data/gfx/menu/button.png")
+    resources:addImage("button_pressed", "data/gfx/menu/button_pressed.png")
 
 
     -- Cutie Graphics
@@ -98,8 +99,8 @@ function love.keypressed(key, isrepeat)
     stack:current():keypressed(key, isrepeat)
 end
 
-function love.keyreleased(key, isrepeat)
-    stack:current():keyreleased(key, isrepeat)
+function love.mousereleased(x, y, button)
+    stack:current():mousereleased(x, y, button)
 end
 
 function love.mousepressed(x, y, button)

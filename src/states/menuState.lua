@@ -6,6 +6,7 @@ require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
+require("events/mouseReleased")
 require("events/keyPressed")
 
 -- BoxComponents
@@ -42,7 +43,8 @@ function MenuState:load()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
     self.eventmanager:addListener("KeyPressed", {boxnavigation, boxnavigation.fireEvent})
-    self.eventmanager:addListener("MousePressed", {boxclick, boxclick.fireEvent})
+    self.eventmanager:addListener("MousePressed", {boxclick, boxclick.mousePressed})
+    self.eventmanager:addListener("MouseReleased", {boxclick, boxclick.mouseReleased})
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     
@@ -100,6 +102,10 @@ end
 
 function MenuState:keypressed(key, isrepeat)
     self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
+end
+
+function MenuState:mousereleased(x, y, button)
+    self.eventmanager:fireEvent(MouseReleased(x, y, button))
 end
 
 function MenuState:mousepressed(x, y, button)

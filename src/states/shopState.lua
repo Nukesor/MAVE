@@ -6,6 +6,7 @@ require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
+require("events/mouseReleased")
 require("events/keyPressed")
 require("events/buyBoolEvent")
 
@@ -32,24 +33,25 @@ ShopState = class("ShopState", State)
 function ShopState:__init()
     self.font = resources.fonts.forty
     self.menu = {
-    {function () stack:popload() end, "Main Menu"},
-    {function () stack:push(LevelOneState()) end, "Start Game"}
+        {function () stack:popload() end, "Main Menu"},
+        {function () stack:push(LevelOneState()) end, "Start Game"}
     }
 end
 
 function ShopState:load()
-
     self.engine = Engine()
     self.eventmanager = EventManager()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
     self.eventmanager:addListener("KeyPressed", {boxnavigation, boxnavigation.fireEvent})
-    self.eventmanager:addListener("MousePressed", {boxclick, boxclick.fireEvent})
+    self.eventmanager:addListener("MousePressed", {boxclick, boxclick.mousePressed})
+    self.eventmanager:addListener("MouseReleased", {boxclick, boxclick.mouseReleased})
 
-    self.engine:addSystem(BoxHoverSystem(), "logic")
-    self.engine:addSystem(MenuBoxDrawSystem(), "draw")
-    self.engine:addSystem(ItemBoxDrawSystem(), "draw")
-    self.engine:addSystem(StringDrawSystem(), "draw")
+    self.engine:addSystem(BoxHoverSystem(), "logic", 1)
+    self.engine:addSystem(MenuBoxDrawSystem(), "draw", 4)
+    self.engine:addSystem(ItemBoxDrawSystem(), "draw", 3)
+    self.engine:addSystem(StringDrawSystem(), "draw", 2)
+    self.engine:addSystem(DrawableDrawSystem(), "draw", 1)
     self.engine:addSystem(boxclick)
     self.engine:addSystem(boxnavigation)
 
@@ -57,6 +59,11 @@ function ShopState:load()
     self.boxes = {}
     self.width = 4
 
+    local bg = Entity()
+    bg:addComponent(DrawableComponent(resources.images.background, 0, 1, 1, 0, 0))
+    bg:addComponent(ZIndex(0))
+    bg:addComponent(PositionComponent(0, 0))
+    self.engine:addEntity(bg)
 
     local str = Entity()
     str:addComponent(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Blood:  %i", {{gameplay.stats, "blood"}}))
@@ -149,9 +156,12 @@ function ShopState:draw()
     self.engine:draw()
 end
 
-
 function ShopState:keypressed(key, isrepeat)
     self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
+end
+
+function ShopState:mousereleased(x, y, button)
+    self.eventmanager:fireEvent(MouseReleased(x, y, button))
 end
 
 function ShopState:mousepressed(x, y, button)

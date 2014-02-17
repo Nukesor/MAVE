@@ -25,7 +25,8 @@ function PauseState:load()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
     self.eventmanager:addListener("KeyPressed", {boxnavigation, boxnavigation.fireEvent})
-    self.eventmanager:addListener("MousePressed", {boxclick, boxclick.fireEvent})
+    self.eventmanager:addListener("MousePressed", {boxclick, boxclick.mousePressed})
+    self.eventmanager:addListener("MouseReleased", {boxclick, boxclick.mouseReleased})
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(DrawableDrawSystem(), "draw")
@@ -72,6 +73,14 @@ function PauseState:keypressed(key, isrepeatnicode)
     end
 end
 
+function PauseState:keyreleased(key, isrepeat)
+    self.eventmanager:fireEvent(KeyReleased(key, isrepeat))
+end
+
 function PauseState:mousepressed(x, y, button)
     self.eventmanager:fireEvent(MousePressed(x, y, button))
+end
+
+function PauseState:mousereleased(x, y, button)
+    self.eventmanager:fireEvent(MouseReleased(x, y, button))
 end

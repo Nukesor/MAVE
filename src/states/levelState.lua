@@ -8,6 +8,7 @@ require("lib/lua-lovetoys/lovetoys/collisionManager")
 
 --Events
 require("events/mousePressed")
+require("events/mouseReleased")
 require("events/keyPressed")
 require("events/explosionEvent")
 
@@ -281,6 +282,9 @@ function LevelState:keypressed(key, isrepeat)
     self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
 end
 
+function LevelState:mousereleased(x, y, button)
+    self.eventmanager:fireEvent(MouseReleased(x, y, button))
+end
 
 function LevelState:mousepressed(x, y, button)
     self.eventmanager:fireEvent(MousePressed(x, y, button))

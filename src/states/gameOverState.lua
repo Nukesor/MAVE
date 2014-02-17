@@ -7,6 +7,7 @@ require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
+require("events/mouseReleased")
 require("events/keyPressed")
 
 -- BoxComponents
@@ -46,7 +47,7 @@ function GameOverState:load()
     local boxnavigation = BoxNavigationSystem()
     local boxclick = BoxClickSystem()
     self.eventmanager:addListener("KeyPressed", {boxnavigation, boxnavigation.fireEvent})
-    self.eventmanager:addListener("MousePressed", {boxclick, boxclick.fireEvent})
+    self.eventmanager:addListener("MousePressed", {boxclick, boxclick.mousePressed})
 
     self.engine:addSystem(BoxHoverSystem(), "logic", 1)
     self.engine:addSystem(DrawableDrawSystem(), "draw")
@@ -93,6 +94,10 @@ end
 
 function GameOverState:keypressed(key, isrepeat)
     self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
+end
+
+function GameOverState:mousereleased(x, y, button)
+    self.eventmanager:fireEvent(MouseReleased(x, y, button))
 end
 
 function GameOverState:mousepressed(x, y, button)

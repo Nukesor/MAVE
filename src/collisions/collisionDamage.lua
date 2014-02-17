@@ -38,7 +38,7 @@ function CollisionDamage:action(entities)
     particle:setEmissionRate(50)
     particle:setSpeed(40, 20)
     particle:setSizes(0.3*relation(), 0.4*relation())
-    particle:setColors(255, 0, 0, 255, 200, 0, 0, 255)
+    particle:setColors(255, 0, 0, 255, 200, 0, 0, 0)
     particle:setPosition(getMid(e1, e2))
     particle:setEmitterLifetime(0.2) -- Zeit die der Partikelstrahl anhält
     particle:setParticleLifetime(0.2, 1) -- setzt Lebenszeit in min-max

@@ -1,6 +1,6 @@
 ShotModel = class("ShotModel", Entity)
 
-function ShotModel:__init(x, y, xt, yt)
+function ShotModel:__init(x, y, damage, speed, xt, yt)
     local sin, cos = getSinCos(x, y, xt, yt)
 
     local body = love.physics.newBody(world, x+(80 * cos * relation()), y+(80 * sin * relation()), "dynamic")
@@ -15,10 +15,10 @@ function ShotModel:__init(x, y, xt, yt)
     self:addComponent(DrawableComponent(resources.images.shot, getRadian(x, y, xt, yt), 1, 1, 20, 4))
     self:addComponent(IsShot())
     self:addComponent(ZIndex(99))
-    self:addComponent(DamageComponent(20))
+    self:addComponent(DamageComponent(damage))
     self:addComponent(TimerComponent(1.5))
 
     body:setGravityScale(0.1)
     body:setAngle(getRadian(x, y, xt, yt))
-    body:setLinearVelocity((2000*cos*relation()), (2000*sin*relation()))
+    body:setLinearVelocity((speed*cos*relation()), (speed*sin*relation()))
 end

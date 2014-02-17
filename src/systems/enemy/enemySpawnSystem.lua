@@ -22,7 +22,3 @@ function EnemySpawnSystem:update(dt)
         self.waitUntilSpawn = 5
     end
 end
-
-function EnemySpawnSystem:requires()
-    return {}
-end

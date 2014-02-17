@@ -14,13 +14,13 @@ function Gameplay:__init()
                     owned = {}
                     }
     self.items = {
-        --String, gekauft, Kosten, image, scalingx, scalingy, function 
-        ItemComponent(1, "Gewehr", false, 15, resources.images.gun, 0.18, 0.18, 0.25,
+        --String, gekauft, Kosten, image, scalingx, scalingy, weaponcooldown, function 
+        ItemComponent(1, "Gewehr", false, 15, resources.images.gun, 0.18, 0.18, 1.25,
         function()
             -- Erstellt ein neues Shotmodel
             local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
             if playercutie:getComponent("ItemComponent").counttimer < 0 then
-                local shot = ShotModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, love.mouse.getPosition())
+                local shot = ShotModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, 100, 4000 ,love.mouse.getPosition())
                 shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
                 stack:current().engine:addEntity(shot)
                 playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
@@ -54,7 +54,7 @@ function Gameplay:__init()
             -- Erstellen eines neuen Shotmodels
             local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
             if playercutie:getComponent("ItemComponent").counttimer < 0 then
-                local shot = ShotModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, love.mouse.getPosition())
+                local shot = ShotModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, 20, 2000, love.mouse.getPosition())
                 shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
                 stack:current().engine:addEntity(shot)
                 playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
@@ -76,7 +76,15 @@ function Gameplay:__init()
         self.stats.owned[i] = v.owned
     end
     
-    self.waves = {
-        Wave1()
-    }
+    self.waves = {}
+        table.insert(self.waves, Wave1())
+        table.insert(self.waves, Wave2())
+        table.insert(self.waves, Wave3())
+        table.insert(self.waves, Wave4())
+        table.insert(self.waves, Wave5())
+        table.insert(self.waves, Wave6())
+        table.insert(self.waves, Wave7())
+        table.insert(self.waves, Wave8())
+        table.insert(self.waves, Wave9())
+        table.insert(self.waves, Wave10())
 end

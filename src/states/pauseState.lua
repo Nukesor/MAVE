@@ -7,9 +7,6 @@ function PauseState:__init(screenshot)
                  stack:pop() end, "Resume"},
     {function () Saves:saveGame()
                  stack:pop()
-                 stack:popload() end, "Shop"},
-    {function () Saves:saveGame()
-                 stack:pop()
                  stack:pop()
                  stack:popload() end, "Main Menu"},
     {function () Saves:saveGame()

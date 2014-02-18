@@ -10,7 +10,7 @@ function Gameplay:__init()
                     highscore = 0,
                     level = 1,
                     kills = 0,
-                    blood = 5,
+                    blood = 0,
                     owned = {}
                     }
     self.items = {
@@ -60,7 +60,7 @@ function Gameplay:__init()
                 playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
             end
         end),
-        ItemComponent(5, "Rocketlauncher", true, 300, resources.images.rocketlauncher, 0.05, 0.05, 0.8,
+        ItemComponent(5, "Rocketlauncher", false, 300, resources.images.rocketlauncher, 0.05, 0.05, 0.8,
         function()
             -- Erstellen eines neuen Rocketmodels
             local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))

@@ -19,11 +19,11 @@ function Gameplay:__init()
         function()
             -- Erstellt ein neues Shotmodel
             local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
-            if playercutie:getComponent("ItemComponent").counttimer < 0 then
-                local shot = ShotModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, 100, 4000 ,love.mouse.getPosition())
-                shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
+            if playercutie:get("ItemComponent").counttimer < 0 then
+                local shot = ShotModel(playercutie:get("PositionComponent").x, playercutie:get("PositionComponent").y, 100, 4000 ,love.mouse.getPosition())
+                shot:get("PhysicsComponent").fixture:setUserData(shot)
                 stack:current().engine:addEntity(shot)
-                playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
+                playercutie:get("ItemComponent").counttimer = playercutie:get("ItemComponent").timer
             end
         end)
         ,
@@ -31,44 +31,44 @@ function Gameplay:__init()
         function()
             -- Generates a new Grenademodel
             local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
-            if playercutie:getComponent("ItemComponent").counttimer < 0 then
-                local grenade = GrenadeModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, love.mouse.getPosition())
-                grenade:getComponent("PhysicsComponent").fixture:setUserData(grenade)
+            if playercutie:get("ItemComponent").counttimer < 0 then
+                local grenade = GrenadeModel(playercutie:get("PositionComponent").x, playercutie:get("PositionComponent").y, love.mouse.getPosition())
+                grenade:get("PhysicsComponent").fixture:setUserData(grenade)
                 stack:current().engine:addEntity(grenade)
-                playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
+                playercutie:get("ItemComponent").counttimer = playercutie:get("ItemComponent").timer
             end
         end)
         ,
         ItemComponent(3, "Mine", false, 80, resources.images.mine, 0.4, 0.4, 1,
         function()
             local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
-            if playercutie:getComponent("ItemComponent").counttimer < 0 then
-                local mine = MineModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y)
-                mine:getComponent("PhysicsComponent").fixture:setUserData(mine)
+            if playercutie:get("ItemComponent").counttimer < 0 then
+                local mine = MineModel(playercutie:get("PositionComponent").x, playercutie:get("PositionComponent").y)
+                mine:get("PhysicsComponent").fixture:setUserData(mine)
                 stack:current().engine:addEntity(mine)
-                playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
+                playercutie:get("ItemComponent").counttimer = playercutie:get("ItemComponent").timer
             end
         end),
         ItemComponent(4, "Machinegun", false, 200, resources.images.gun, 0.18, 0.18, 0.1,
         function()
             -- Erstellen eines neuen Shotmodels
             local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
-            if playercutie:getComponent("ItemComponent").counttimer < 0 then
-                local shot = ShotModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, 20, 2000, love.mouse.getPosition())
-                shot:getComponent("PhysicsComponent").fixture:setUserData(shot)
+            if playercutie:get("ItemComponent").counttimer < 0 then
+                local shot = ShotModel(playercutie:get("PositionComponent").x, playercutie:get("PositionComponent").y, 20, 2000, love.mouse.getPosition())
+                shot:get("PhysicsComponent").fixture:setUserData(shot)
                 stack:current().engine:addEntity(shot)
-                playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
+                playercutie:get("ItemComponent").counttimer = playercutie:get("ItemComponent").timer
             end
         end),
         ItemComponent(5, "Rocketlauncher", false, 300, resources.images.rocketlauncher, 0.05, 0.05, 0.8,
         function()
             -- Erstellen eines neuen Rocketmodels
             local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
-            if playercutie:getComponent("ItemComponent").counttimer < 0 then
-                local rocket = RocketModel(playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y, love.mouse.getPosition())
-                rocket:getComponent("PhysicsComponent").fixture:setUserData(rocket)
+            if playercutie:get("ItemComponent").counttimer < 0 then
+                local rocket = RocketModel(playercutie:get("PositionComponent").x, playercutie:get("PositionComponent").y, love.mouse.getPosition())
+                rocket:get("PhysicsComponent").fixture:setUserData(rocket)
                 stack:current().engine:addEntity(rocket)
-                playercutie:getComponent("ItemComponent").counttimer = playercutie:getComponent("ItemComponent").timer
+                playercutie:get("ItemComponent").counttimer = playercutie:get("ItemComponent").timer
             end
         end)
     }

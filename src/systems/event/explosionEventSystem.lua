@@ -2,26 +2,26 @@ ExplosionEventSystem = class("ExplosionEventSystem")
 
 function ExplosionEventSystem.fireEvent(self, event)
     local entity = event.entity
-    local position = entity:getComponent("PositionComponent")
+    local position = entity:get("PositionComponent")
     -- Checks if an enemy is in the explosionradius and adds damage to the Entity.
     for i, enemy in pairs(stack:current().engine:getEntityList("IsEnemy")) do 
-        if insideRadius(entity, enemy, entity:getComponent("ExplosionComponent").radius ) then
-            enemy:getComponent("LifeComponent").life = enemy:getComponent("LifeComponent").life - entity:getComponent("ExplosionComponent").damage
+        if insideRadius(entity, enemy, entity:get("ExplosionComponent").radius ) then
+            enemy:get("LifeComponent").life = enemy:get("LifeComponent").life - entity:get("ExplosionComponent").damage
         end
     end
     -- Removes the exploding Entity
-    if entity:getComponent("PhysicsComponent") then
-        entity:addComponent(DestroyComponent())
+    if entity:get("PhysicsComponent") then
+        entity:add(DestroyComponent())
     else
         stack:current().engine:removeEntity(entity)
     end
     -- Creates an entity for Explosionparticles
     explosion = Entity()
-    local radius = entity:getComponent("ExplosionComponent").radius
-    explosion:addComponent(ParticleTimerComponent(0.6, 0.6))
-    explosion:addComponent(ParticleComponent(resources.images.particle1, 400))
+    local radius = entity:get("ExplosionComponent").radius
+    explosion:add(ParticleTimerComponent(0.6, 0.6))
+    explosion:add(ParticleComponent(resources.images.particle1, 400))
 
-    local particle = explosion:getComponent("ParticleComponent").particle
+    local particle = explosion:get("ParticleComponent").particle
     particle:setEmissionRate(400)
     particle:setSpeed((radius*3-50), (radius*3))
     particle:setSizes(2.5*relation(), 2.8*relation())

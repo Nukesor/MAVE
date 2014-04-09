@@ -8,5 +8,5 @@ end
 function MineGroundCollision:action(entities)
     local mine = entities.entity1
 
-    mine:getComponent("PhysicsComponent").body:setLinearVelocity(0, 0)
+    mine:get("PhysicsComponent").body:setLinearVelocity(0, 0)
 end

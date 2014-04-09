@@ -1,4 +1,4 @@
-require("lib/lua-lovetoys/lovetoys/engine")
+require("lib/lovetoys/lovetoys/engine")
 
 require("helper/saves")
 require("helper/tables")

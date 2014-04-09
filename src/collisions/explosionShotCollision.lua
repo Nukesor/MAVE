@@ -10,5 +10,5 @@ function ExplosionShotCollision:action(entities)
     local expl = entities.entity1
 
     stack:current().eventmanager:fireEvent(ExplosionEvent(expl))
-    shot:addComponent(DestroyComponent())
+    shot:add(DestroyComponent())
 end

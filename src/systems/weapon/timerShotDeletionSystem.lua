@@ -2,9 +2,9 @@ TimerShotDeletionSystem = class("TimerShotDeletionSystem", System)
 
 function TimerShotDeletionSystem:update(dt)
     for index, entity in pairs(self.targets) do
-        entity:getComponent("TimerComponent").time = entity:getComponent("TimerComponent").time - dt
-        if entity:getComponent("TimerComponent").time < 0 then
-            entity:addComponent(DestroyComponent())
+        entity:get("TimerComponent").time = entity:get("TimerComponent").time - dt
+        if entity:get("TimerComponent").time < 0 then
+            entity:add(DestroyComponent())
         end
     end
 end

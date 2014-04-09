@@ -4,8 +4,8 @@ GrenadeRotationSystem = class("GrenadeRotationSystem", System)
 
 function GrenadeRotationSystem:update(dt)
     for index, value in pairs(self.targets) do
-        local drawable = value:getComponent("DrawableComponent")
-        local physic = value:getComponent("PhysicsComponent")
+        local drawable = value:get("DrawableComponent")
+        local physic = value:get("PhysicsComponent")
         local x, y = physic.body:getLinearVelocity()
         
         -- Rotates the image in direction of movement  .. ?? Horrible english skills // totally correct :D

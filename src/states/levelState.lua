@@ -1,10 +1,5 @@
 require("core/resources")
 require("core/state")
-require("lib/lua-lovetoys/lovetoys/entity")
-require("lib/lua-lovetoys/lovetoys/engine")
-require("lib/lua-lovetoys/lovetoys/system")
-require("lib/lua-lovetoys/lovetoys/eventManager")
-require("lib/lua-lovetoys/lovetoys/collisionManager")
 
 --Events
 require("events/mousePressed")
@@ -210,30 +205,30 @@ function LevelState:load()
     self.shaketimer = 0
 
     local bg = Entity()
-    bg:addComponent(DrawableComponent(resources.images.level2, 0, 1, 1, 0, 0))
-    bg:addComponent(ZIndex(1))
-    bg:addComponent(PositionComponent(0, 0))
+    bg:add(DrawableComponent(resources.images.level2, 0, 1, 1, 0, 0))
+    bg:add(ZIndex(1))
+    bg:add(PositionComponent(0, 0))
     self.engine:addEntity(bg)
 
     -- Playercreation
     local playercutie = CutieModel(0, 0, resources.images.cutie1, 100)
-    playercutie:addComponent(IsPlayer())
-    playercutie:getComponent("PhysicsComponent").fixture:setFilterData(9, 3, 10)
+    playercutie:add(IsPlayer())
+    playercutie:get("PhysicsComponent").fixture:setFilterData(9, 3, 10)
     self.engine:addEntity(playercutie)
 
     local str = Entity()
-    str:addComponent(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Player's life:  %i", {{playercutie:getComponent("LifeComponent"), "life"}}))
-    str:addComponent(PositionComponent(love.graphics.getWidth()*0.005, love.graphics.getHeight()*0.01))
+    str:add(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Player's life:  %i", {{playercutie:get("LifeComponent"), "life"}}))
+    str:add(PositionComponent(love.graphics.getWidth()*0.005, love.graphics.getHeight()*0.01))
     self.engine:addEntity(str)
 
     str = Entity()
-    str:addComponent(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Blood:  %i", {{gameplay.stats, "blood"}}))
-    str:addComponent(PositionComponent(love.graphics.getWidth()*0.9, love.graphics.getHeight()*0.02))
+    str:add(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Blood:  %i", {{gameplay.stats, "blood"}}))
+    str:add(PositionComponent(love.graphics.getWidth()*0.9, love.graphics.getHeight()*0.02))
     self.engine:addEntity(str)
 
     str = Entity()
-    str:addComponent(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Kills:  %i", {{gameplay.stats, "kills"}}))
-    str:addComponent(PositionComponent(love.graphics.getWidth()*0.9, love.graphics.getHeight()*0.005))
+    str:add(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Kills:  %i", {{gameplay.stats, "kills"}}))
+    str:add(PositionComponent(love.graphics.getWidth()*0.9, love.graphics.getHeight()*0.005))
     self.engine:addEntity(str)
 
 end

@@ -1,8 +1,5 @@
 require("core/resources")
 require("core/state")
-require("lib/lua-lovetoys/lovetoys/entity")
-require("lib/lua-lovetoys/lovetoys/engine")
-require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -60,14 +57,14 @@ function ShopState:load()
     self.width = 4
 
     local bg = Entity()
-    bg:addComponent(DrawableComponent(resources.images.background, 0, 1, 1, 0, 0))
-    bg:addComponent(ZIndex(0))
-    bg:addComponent(PositionComponent(0, 0))
+    bg:add(DrawableComponent(resources.images.background, 0, 1, 1, 0, 0))
+    bg:add(ZIndex(0))
+    bg:add(PositionComponent(0, 0))
     self.engine:addEntity(bg)
 
     local str = Entity()
-    str:addComponent(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Blood:  %i", {{gameplay.stats, "blood"}}))
-    str:addComponent(PositionComponent(10, 10))
+    str:add(StringComponent(resources.fonts.thirty, {255, 0, 0, 255}, "Blood:  %i", {{gameplay.stats, "blood"}}))
+    str:add(PositionComponent(10, 10))
     self.engine:addEntity(str)
 
     -- Dynamische Erstellung der Item boxes
@@ -99,10 +96,10 @@ function ShopState:load()
                 xscale = yscale
             end
             box = ItemBoxModel(i, bwidth, bheight, x, y, false, gameplay.items[i].image, xscale)
-            box:addComponent(gameplay.items[i])
+            box:add(gameplay.items[i])
         else
             box = ItemBoxModel(i, bwidth, bheight, x, y, false)
-            box:addComponent(gameplay.items[i])
+            box:add(gameplay.items[i])
         end
         self.engine:addEntity(box)
     end
@@ -127,22 +124,22 @@ function ShopState:load()
 
     -- Verlinkung der MenuBoxes mit normalen Boxes
     for i, box in ipairs(self.menuboxes) do
-        box:getComponent("BoxComponent").linked[3] = self.boxes[self.boxnumber]
-        box:getComponent("BoxComponent").linked[4] = self.boxes[3]
+        box:get("BoxComponent").linked[3] = self.boxes[self.boxnumber]
+        box:get("BoxComponent").linked[4] = self.boxes[3]
     end
 
     --Verlinkung der Boxen unter und uebereinander und Verlinkung mit Menuboxes
     for i, box in ipairs(self.boxes) do
         if self.boxes[i-self.width] and (i - self.width) >= 0 then
-            box:getComponent("BoxComponent").linked[3] = self.boxes[i - self.width]
+            box:get("BoxComponent").linked[3] = self.boxes[i - self.width]
         elseif (i - self.width) < 1 and self.boxes[i - self.width + self.boxnumber] then
-            box:getComponent("BoxComponent").linked[3] = self.menuboxes[2]
+            box:get("BoxComponent").linked[3] = self.menuboxes[2]
         end
 
         if self.boxes[i + self.width] and (i + self.width) <= self.boxnumber then
-                box:getComponent("BoxComponent").linked[4] = self.boxes[(i+self.width)]
+                box:get("BoxComponent").linked[4] = self.boxes[(i+self.width)]
         elseif (i + self.width) > self.boxnumber and self.boxes[i + self.width - self.boxnumber] then
-            box:getComponent("BoxComponent").linked[4] = self.menuboxes[2]
+            box:get("BoxComponent").linked[4] = self.menuboxes[2]
         end
     end
 end

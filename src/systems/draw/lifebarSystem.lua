@@ -2,8 +2,8 @@ LifebarSystem = class("LifebarSystem", System)
 
 function LifebarSystem:draw()
     for index, value in pairs(self.targets) do
-        local position = value:getComponent("PositionComponent")
-        local life = value:getComponent("LifeComponent")
+        local position = value:get("PositionComponent")
+        local life = value:get("LifeComponent")
         local hp = life.life
         -- Draws a healthbar above Entity. If life is below 0 it resets to 0, Otherwise huge healthbars will be displayed.
         if hp < 0 then 

@@ -8,8 +8,8 @@ end
 function ShotCutieCollision:action(entities)
     local cutie = entities.entity1  
     local shot = entities.entity2
-    if cutie:getComponent("IsEnemy") then
-        cutie:getComponent("LifeComponent").life = cutie:getComponent("LifeComponent").life - shot:getComponent("DamageComponent").damage
+    if cutie:get("IsEnemy") then
+        cutie:get("LifeComponent").life = cutie:get("LifeComponent").life - shot:get("DamageComponent").damage
     end
-    shot:addComponent(DestroyComponent())
+    shot:add(DestroyComponent())
 end

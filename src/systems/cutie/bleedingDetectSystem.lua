@@ -3,15 +3,15 @@ BleedingDetectSystem = class("BleedingDetectSystem", System)
 function BleedingDetectSystem:update(dt)
     for index, enemy in pairs(self.targets) do
         -- Checks if life is below 1/4 of full health and adds a particleComponent for bleeding animation.
-        if (enemy:getComponent("LifeComponent").life/enemy:getComponent("LifeComponent").maxlife) <= 0.25 then
-            if not enemy:getComponent("ParticleComponent") then
-                enemy:addComponent(ParticleComponent(resources.images.particle1, 200))
-                local particle = enemy:getComponent("ParticleComponent").particle
+        if (enemy:get("LifeComponent").life/enemy:get("LifeComponent").maxlife) <= 0.25 then
+            if not enemy:get("ParticleComponent") then
+                enemy:add(ParticleComponent(resources.images.particle1, 200))
+                local particle = enemy:get("ParticleComponent").particle
                 particle:setEmissionRate(50)
                 particle:setSpeed(40, 20)
                 particle:setSizes(0.3*relation(), 0.4*relation())
                 particle:setColors(255, 0, 0, 255, 200, 0, 0, 255)
-                particle:setPosition(enemy:getComponent("PositionComponent").x, enemy:getComponent("PositionComponent").y)
+                particle:setPosition(enemy:get("PositionComponent").x, enemy:get("PositionComponent").y)
                 particle:setEmitterLifetime(-1) -- Zeit die der Partikelstrahl anhält
                 particle:setParticleLifetime(0.2, 1) -- setzt Lebenszeit in min-max
                 particle:setOffset(0, 0) -- Punkt um den der Partikel rotiert
@@ -21,7 +21,7 @@ function BleedingDetectSystem:update(dt)
                 particle:setRadialAcceleration(50*relation(), 100*relation())
                 particle:setLinearAcceleration(300, 300)
                 particle:setAreaSpread( "normal", 5*relation(), 5*relation() )
-                enemy:getComponent("ParticleComponent").particle:start()
+                enemy:get("ParticleComponent").particle:start()
             end
         end
     end

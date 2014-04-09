@@ -5,8 +5,8 @@ function ShootSystem:update(dt)
         if love.mouse.isDown("l") then
             -- Calls the funktion of the equipped item.
             local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
-            if playercutie:getComponent("ItemComponent") then
-                playercutie:getComponent("ItemComponent").use()
+            if playercutie:get("ItemComponent") then
+                playercutie:get("ItemComponent").use()
             end
         end
     end

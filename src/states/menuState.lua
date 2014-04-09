@@ -1,8 +1,5 @@
 require("core/resources")
 require("core/state")
-require("lib/lua-lovetoys/lovetoys/entity")
-require("lib/lua-lovetoys/lovetoys/engine")
-require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -53,15 +50,15 @@ function MenuState:load()
     self.engine:addSystem(boxnavigation)
 
     local bg = Entity()
-    bg:addComponent(DrawableComponent(resources.images.background, 0, 1, 1, 0, 0))
-    bg:addComponent(ZIndex(0))
-    bg:addComponent(PositionComponent(0, 0))
+    bg:add(DrawableComponent(resources.images.background, 0, 1, 1, 0, 0))
+    bg:add(ZIndex(0))
+    bg:add(PositionComponent(0, 0))
     self.engine:addEntity(bg)
 
     local logo = Entity()
-    logo:addComponent(DrawableComponent(resources.images.logo, 0, 1, 1, 0, 0))
-    logo:addComponent(ZIndex(1))
-    logo:addComponent(PositionComponent(100, 100))
+    logo:add(DrawableComponent(resources.images.logo, 0, 1, 1, 0, 0))
+    logo:add(ZIndex(1))
+    logo:add(PositionComponent(100, 100))
     self.engine:addEntity(logo)
 
     self.menunumber = #self.menu

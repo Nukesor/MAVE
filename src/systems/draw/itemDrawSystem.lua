@@ -3,12 +3,12 @@ ItemDrawSystem = class("ItemDrawSystem", System)
 -- Makes cuties carry the currently selected item
 function ItemDrawSystem:draw() 
     for key, entity in pairs(self.targets) do
-        if entity:getComponent("ItemComponent") then
-            local item = entity:getComponent("ItemComponent")
+        if entity:get("ItemComponent") then
+            local item = entity:get("ItemComponent")
             local drawable = item.drawableEntity
             local mouseX, mouseY = love.mouse.getPosition()
-            local entityX = entity:getComponent("PositionComponent").x
-            local entityY = entity:getComponent("PositionComponent").y
+            local entityX = entity:get("PositionComponent").x
+            local entityY = entity:get("PositionComponent").y
             local x = mouseX - entityX
             local y = mouseY - entityY
 

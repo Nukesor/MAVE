@@ -1,9 +1,5 @@
 require("core/resources")
 require("core/state")
-require("lib/lua-lovetoys/lovetoys/component")
-require("lib/lua-lovetoys/lovetoys/entity")
-require("lib/lua-lovetoys/lovetoys/engine")
-require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -72,9 +68,9 @@ function GameOverState:load()
     Menu:sortMenu(self.menuboxes)
 
     local background = Entity()
-    background:addComponent(DrawableComponent(self.screenshot))
-    background:addComponent(PositionComponent(0, 0))
-    background:addComponent(ZIndex(1))
+    background:add(DrawableComponent(self.screenshot))
+    background:add(PositionComponent(0, 0))
+    background:add(ZIndex(1))
     self.engine:addEntity(background)
 end
 

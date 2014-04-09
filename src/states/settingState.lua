@@ -1,8 +1,5 @@
 require("core/resources")
 require("core/state")
-require("lib/lua-lovetoys/lovetoys/entity")
-require("lib/lua-lovetoys/lovetoys/engine")
-require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -107,9 +104,9 @@ function SettingState:load()
     self.engine:addSystem(StringDrawSystem(), "draw", 3)
 
     local bg = Entity()
-    bg:addComponent(DrawableComponent(resources.images.background, 0, 1, 1, 0, 0))
-    bg:addComponent(ZIndex(100))
-    bg:addComponent(PositionComponent(0, 0))
+    bg:add(DrawableComponent(resources.images.background, 0, 1, 1, 0, 0))
+    bg:add(ZIndex(100))
+    bg:add(PositionComponent(0, 0))
     self.engine:addEntity(bg)
 
     self.menunumber = 3

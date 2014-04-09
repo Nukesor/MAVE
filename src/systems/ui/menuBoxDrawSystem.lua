@@ -6,8 +6,8 @@ end
 
 function MenuBoxDrawSystem:draw()
     for index, entity in pairs(self.targets) do
-        local box = entity:getComponent("BoxComponent")
-        local boxstring = entity:getComponent("UIStringComponent")
+        local box = entity:get("BoxComponent")
+        local boxstring = entity:get("UIStringComponent")
         local scale = 1
 
         -- Drawfunktion for Menuboxes

@@ -8,10 +8,10 @@ end
 function BounceCollision:action(entities)
     local cutie = entities.entity2
 
-    local cutiexv, cutieyv = cutie:getComponent("PhysicsComponent").body:getLinearVelocity()
-    cutie:getComponent("PhysicsComponent").body:setLinearVelocity(cutiexv, -200)
-    if cutie:getComponent("IsPlayer") then
-        cutie:getComponent("IsPlayer").jumpcount = 2
+    local cutiexv, cutieyv = cutie:get("PhysicsComponent").body:getLinearVelocity()
+    cutie:get("PhysicsComponent").body:setLinearVelocity(cutiexv, -200)
+    if cutie:get("IsPlayer") then
+        cutie:get("IsPlayer").jumpcount = 2
     end
 end
 

@@ -10,10 +10,10 @@ function MainKeySystem.fireEvent(self, event)
         stack:current().shaketimer = 0.5
     elseif event.key == "o" then
         local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
-        playercutie:getComponent("LifeComponent").life = 0
+        playercutie:get("LifeComponent").life = 0
     elseif event.key == "i" then
         local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
-        playercutie:getComponent("LifeComponent").life = 15
+        playercutie:get("LifeComponent").life = 15
     end
     if event.key == "[" then
         stack:current().engine:removeSystem("DrawableDrawSystem", "draw")
@@ -26,9 +26,9 @@ function MainKeySystem.fireEvent(self, event)
         if gameplay.items[tonumber(event.key)] then
             local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
             if gameplay.items[tonumber(event.key)].owned == true then
-                playercutie:addComponent(gameplay.items[tonumber(event.key)])
-            elseif playercutie:getComponent("ItemComponent") then
-                playercutie:removeComponent("ItemComponent")
+                playercutie:add(gameplay.items[tonumber(event.key)])
+            elseif playercutie:get("ItemComponent") then
+                playercutie:remove("ItemComponent")
             end
         end
     end

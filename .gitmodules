@@ -1,3 +1,6 @@
 [submodule "src/lib/lua-lovetoys"]
 	path = src/lib/lua-lovetoys
 	url = https://github.com/Nukesor/lua-lovetoys.git
+[submodule "lib/lovetoys"]
+	path = lib/lovetoys
+	url = git@github.com:nukesor/lovetoys.git

@@ -1,6 +1,6 @@
 -- Destroys an entity's body and removes it from the engine
 function removeEntityWithPhysics(entity)
-    stack:current().engine.entities[entity.id]:getComponent("PhysicsComponent").body:destroy()
+    stack:current().engine.entities[entity.id]:get("PhysicsComponent").body:destroy()
     stack:current().engine:removeEntity(entity)
 end
 

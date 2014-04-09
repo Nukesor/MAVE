@@ -8,8 +8,8 @@ end
 function DrawableDrawSystem:draw()
     love.graphics.setColor(255, 255, 255)
     for index, entity in ipairs(self.sortedTargets) do
-        local drawable = entity:getComponent("DrawableComponent")
-        local pos = entity:getComponent("PositionComponent")
+        local drawable = entity:get("DrawableComponent")
+        local pos = entity:get("PositionComponent")
 
         -- Draws the Picture. If Entity is near to the beginng or the end of the screen, the Entity is drawed on both sides for sideChangeSystem animation.
         if pos.x < love.graphics.getWidth()/20 then 
@@ -29,12 +29,12 @@ function DrawableDrawSystem:addEntity(entity)
     -- Entitys are sorted by ZIndex, therefore we had to overwrite System:addEntity
     self.targets[entity.id] = entity
     self.sortedTargets = table.resetIndice(self.targets)
-    table.sort(self.sortedTargets, function(a, b) return a:getComponent("ZIndex").index < b:getComponent("ZIndex").index end)
+    table.sort(self.sortedTargets, function(a, b) return a:get("ZIndex").index < b:get("ZIndex").index end)
 end
 
 function DrawableDrawSystem:removeEntity(entity)
     -- Entitys are sorted by ZIndex, therefore we had to overwrite System:addEntity
     self.targets[entity.id] = nil
     self.sortedTargets = table.resetIndice(self.targets)
-    table.sort(self.sortedTargets, function(a, b) return a:getComponent("ZIndex").index < b:getComponent("ZIndex").index end)
+    table.sort(self.sortedTargets, function(a, b) return a:get("ZIndex").index < b:get("ZIndex").index end)
 end

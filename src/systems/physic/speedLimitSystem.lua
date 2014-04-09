@@ -2,7 +2,7 @@ SpeedLimitSystem = class("SpeedLimitSystem", System)
 
 function SpeedLimitSystem:update()
     for key, entity in pairs(self.targets) do
-        local body = entity:getComponent("PhysicsComponent").body
+        local body = entity:get("PhysicsComponent").body
         local xacc, yacc = body:getLinearVelocity()
         -- Sets the Speedlimit for Cuties
         local height = love.graphics.getHeight()

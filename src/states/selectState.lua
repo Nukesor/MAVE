@@ -1,11 +1,7 @@
 -- This State will be used, if we decide to implement new levels.
 
-
 require("core/resources")
 require("core/state")
-require("lib/lua-lovetoys/lovetoys/entity")
-require("lib/lua-lovetoys/lovetoys/engine")
-require("lib/lua-lovetoys/lovetoys/eventManager")
 
 --Events
 require("events/mousePressed")
@@ -77,9 +73,9 @@ function SelectState:load()
     love.graphics.setFont(self.font)
 
     self.bg = Entity()
-    self.bg:addComponent(DrawableComponent(resources.images.background, 0, 1, 1, 0, 0))
-    self.bg:addComponent(PositionComponent(0, 0))
-    self.bg:addComponent(ZIndex(0))
+    self.bg:add(DrawableComponent(resources.images.background, 0, 1, 1, 0, 0))
+    self.bg:add(PositionComponent(0, 0))
+    self.bg:add(ZIndex(0))
     self.engine:addEntity(self.bg)
 end
 

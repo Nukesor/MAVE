@@ -4,9 +4,9 @@ function EnemyTrackingSystem:update(dt)
     for index, entity in pairs(self.targets) do
         local playercutie = table.firstElement(stack:current().engine:getEntityList("IsPlayer"))
         local height
-        local enemy=entity:getComponent("IsEnemy")
-        local playercutiex, playercutiey = playercutie:getComponent("PositionComponent").x, playercutie:getComponent("PositionComponent").y
-        local xpos, ypos = entity:getComponent("PositionComponent").x, entity:getComponent("PositionComponent").y
+        local enemy=entity:get("IsEnemy")
+        local playercutiex, playercutiey = playercutie:get("PositionComponent").x, playercutie:get("PositionComponent").y
+        local xpos, ypos = entity:get("PositionComponent").x, entity:get("PositionComponent").y
         local speed = stack:current().worldspeed or 1
 
         -- Ki
@@ -42,29 +42,29 @@ function EnemyTrackingSystem:update(dt)
             if xpos <= (love.graphics:getWidth()* 2/10 + (love.graphics:getWidth()/200-height/(love.graphics:getHeight()/10))*love.graphics:getWidth()/20) 
                     or xpos >= (love.graphics:getWidth()*6/10 - (love.graphics:getWidth()/200-height/(love.graphics:getHeight()/10))*love.graphics:getWidth()/20) then
                 enemy.check = 0
-                entity:getComponent("PhysicsComponent").body:applyLinearImpulse(0, -love.graphics:getHeight()/100)
+                entity:get("PhysicsComponent").body:applyLinearImpulse(0, -love.graphics:getHeight()/100)
                 if ypos > love.graphics:getHeight()/2 then
                     if xpos < playercutiex and (playercutiex - xpos) < love.graphics:getWidth()/2 then
-                        entity:getComponent("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
+                        entity:get("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
                     elseif xpos < playercutiex and (playercutiex - xpos) > love.graphics:getWidth()/2 then
-                        entity:getComponent("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
+                        entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                     elseif playercutiex < xpos and (xpos - playercutiex) < love.graphics:getWidth()/2 then
-                        entity:getComponent("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
+                        entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                     elseif playercutiex < xpos and (xpos - playercutiex) > love.graphics:getWidth()/2 then
-                        entity:getComponent("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
+                        entity:get("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
                     end
                 else
                     if playercutiex > xpos then
-                        entity:getComponent("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
+                        entity:get("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
                     elseif playercutiex < xpos then
-                        entity:getComponent("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
+                        entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                     end
                 end  
             else
                 if enemy.direction == 1 then
-                    entity:getComponent("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
+                    entity:get("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
                 elseif enemy.direction == 0 then
-                    entity:getComponent("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
+                    entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                 end
             end
 
@@ -82,45 +82,45 @@ function EnemyTrackingSystem:update(dt)
                 enemy.check = 0
                 if ypos > love.graphics:getHeight()/2 then
                     if xpos < playercutiex and (playercutiex - xpos) < love.graphics:getWidth()/2 then
-                        entity:getComponent("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
+                        entity:get("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
                     elseif xpos < playercutiex and (playercutiex - xpos) > love.graphics:getWidth()/2 then
-                        entity:getComponent("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
+                        entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                     elseif playercutiex < xpos and (xpos - playercutiex) < love.graphics:getWidth()/2 then
-                        entity:getComponent("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
+                        entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                     elseif playercutiex < xpos and (xpos - playercutiex) > love.graphics:getWidth()/2 then
-                        entity:getComponent("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
+                        entity:get("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
                     end
                 else
                     if playercutiex > xpos then
-                        entity:getComponent("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
+                        entity:get("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
                     elseif playercutiex < xpos then
-                        entity:getComponent("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
+                        entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                     end
                 end
             else
                 if enemy.direction == 1 then
-                    entity:getComponent("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
+                    entity:get("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
                 elseif enemy.direction == 0 then
-                    entity:getComponent("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
+                    entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                 end
             end
         else
             enemy.check = 0
             if ypos > love.graphics:getHeight()/2 then
                 if xpos < playercutiex and (playercutiex - xpos) < love.graphics:getWidth()/2 then
-                    entity:getComponent("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
+                    entity:get("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
                 elseif xpos < playercutiex and (playercutiex - xpos) > love.graphics:getWidth()/2 then
-                    entity:getComponent("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
+                    entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                 elseif playercutiex < xpos and (xpos - playercutiex) < love.graphics:getWidth()/2 then
-                    entity:getComponent("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
+                    entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                 elseif playercutiex < xpos and (xpos - playercutiex) > love.graphics:getWidth()/2 then
-                    entity:getComponent("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
+                    entity:get("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
                 end
             else
                 if playercutiex > xpos then
-                    entity:getComponent("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
+                    entity:get("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
                 elseif playercutiex < xpos then
-                    entity:getComponent("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
+                    entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                 end
             end  
          end

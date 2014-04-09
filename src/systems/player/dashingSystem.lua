@@ -3,11 +3,11 @@ DashingSystem = class("DashingSystem", System)
 function DashingSystem:update(dt)
     for key, entity in pairs(self.targets) do
         -- Calculate normalized target position
-        local targetX = entity:getComponent("DashingComponent").targetPosition.x
-        local targetY = entity:getComponent("DashingComponent").targetPosition.y
-        local physics = entity:getComponent("PhysicsComponent")
-        local playerX = entity:getComponent("DashingComponent").startPosition.x
-        local playerY = entity:getComponent("DashingComponent").startPosition.y
+        local targetX = entity:get("DashingComponent").targetPosition.x
+        local targetY = entity:get("DashingComponent").targetPosition.y
+        local physics = entity:get("PhysicsComponent")
+        local playerX = entity:get("DashingComponent").startPosition.x
+        local playerY = entity:get("DashingComponent").startPosition.y
 
         targetX = targetX - playerX
         targetY = targetY - playerY
@@ -19,9 +19,9 @@ function DashingSystem:update(dt)
         physics.body:setLinearVelocity(targetX, targetY)
 
         -- update timer. if dashed for long enough, remove the component
-        entity:getComponent("DashingComponent").time = entity:getComponent("DashingComponent").time + dt
-        if entity:getComponent("DashingComponent").time >= 0.15 then
-            entity:removeComponent("DashingComponent")
+        entity:get("DashingComponent").time = entity:get("DashingComponent").time + dt
+        if entity:get("DashingComponent").time >= 0.15 then
+            entity:remove("DashingComponent")
         end
     end
 end

@@ -2,16 +2,16 @@ BodyDestroySystem = class("BodyDestroySystem", System)
 
 function BodyDestroySystem:update()
     for index, entity in pairs(self.targets) do
-        if entity:getComponent("ParticleComponent") then
+        if entity:get("ParticleComponent") then
             local particle = Entity()
-            particle:addComponent(entity:getComponent("ParticleComponent"))
-            particle:getComponent("ParticleComponent").particle:pause()
-            local min, max = particle:getComponent("ParticleComponent").particle:getParticleLifetime()
-            local life = particle:getComponent("ParticleComponent").particle:getEmitterLifetime()
+            particle:add(entity:get("ParticleComponent"))
+            particle:get("ParticleComponent").particle:pause()
+            local min, max = particle:get("ParticleComponent").particle:getParticleLifetime()
+            local life = particle:get("ParticleComponent").particle:getEmitterLifetime()
             if life == -1 then
                 life = 0
             end
-            particle:addComponent(ParticleTimerComponent(life, max))
+            particle:add(ParticleTimerComponent(life, max))
             stack:current().engine:addEntity(particle)
         end
         removeEntityWithPhysics(entity)

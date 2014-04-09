@@ -2,7 +2,7 @@ ParticlePositionSyncSystem = class("ParticlePositionSyncSystem", System)
 
 function ParticlePositionSyncSystem:update()
     for k, entity in pairs(self.targets) do
-        entity:getComponent("ParticleComponent").particle:setPosition(entity:getComponent("PositionComponent").x, entity:getComponent("PositionComponent").y)
+        entity:get("ParticleComponent").particle:setPosition(entity:get("PositionComponent").x, entity:get("PositionComponent").y)
     end
 end
 

@@ -8,10 +8,10 @@ end
 function CollisionDamage:action(entities)
     -- Get some info
     local e1 = entities.entity1   
-    local e1XSpeed, e1YSpeed = e1:getComponent("PhysicsComponent").body:getLinearVelocity()
+    local e1XSpeed, e1YSpeed = e1:get("PhysicsComponent").body:getLinearVelocity()
 
     local e2 = entities.entity2
-    local e2XSpeed, e2YSpeed = e2:getComponent("PhysicsComponent").body:getLinearVelocity()
+    local e2XSpeed, e2YSpeed = e2:get("PhysicsComponent").body:getLinearVelocity()
 
     local difference = distanceBetween({e1XSpeed, e1YSpeed}, {e2XSpeed, e2YSpeed})
 
@@ -32,9 +32,9 @@ function CollisionDamage:action(entities)
 
     -- Blutpartikel
     blood = Entity()
-    blood:addComponent(ParticleComponent(resources.images.particle1, 50))
+    blood:add(ParticleComponent(resources.images.particle1, 50))
 
-    local particle = blood:getComponent("ParticleComponent").particle
+    local particle = blood:get("ParticleComponent").particle
     particle:setEmissionRate(50)
     particle:setSpeed(40, 20)
     particle:setSizes(0.3*relation(), 0.4*relation())
@@ -51,12 +51,12 @@ function CollisionDamage:action(entities)
     particle:setAreaSpread( "normal", 5*relation(), 5*relation() )
     particle:start()
 
-    blood:addComponent(ParticleTimerComponent(0.3, 0.5))
+    blood:add(ParticleTimerComponent(0.3, 0.5))
     stack:current().engine:addEntity(blood)
 end
 
 function CollisionDamage:dealDamage(entity, entity2)
-    local entityCuteness = entity2:getComponent("CutieComponent").cuteness
+    local entityCuteness = entity2:get("CutieComponent").cuteness
     local damage = math.random(0, 5 + entityCuteness)
 
     -- Critical particle?
@@ -65,5 +65,5 @@ function CollisionDamage:dealDamage(entity, entity2)
         main.shaketimer = 0.25
     end 
 
-    entity:getComponent("LifeComponent").life = entity:getComponent("LifeComponent").life - damage
+    entity:get("LifeComponent").life = entity:get("LifeComponent").life - damage
 end

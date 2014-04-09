@@ -47,9 +47,9 @@ function PauseState:load()
     Menu:sortMenuVertical(self.menuboxes)
         
     local background = Entity()
-    background:addComponent(DrawableComponent(self.screenshot))
-    background:addComponent(PositionComponent(0, 0))
-    background:addComponent(ZIndex(1))
+    background:add(DrawableComponent(self.screenshot))
+    background:add(PositionComponent(0, 0))
+    background:add(ZIndex(1))
     self.engine:addEntity(background)
 
     love.graphics.setFont(self.font)

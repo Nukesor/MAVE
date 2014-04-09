@@ -12,8 +12,8 @@ function Wave1:getWave()
     for i=1, 10, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie0, 5)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     return wave
@@ -26,8 +26,8 @@ function Wave2:getWave()
     for i=1, 15, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie2, 7)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     return wave
@@ -41,8 +41,8 @@ function Wave3:getWave()
     for i=1, 5, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie3, 20)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     return wave
@@ -57,8 +57,8 @@ function Wave4:getWave()
     for i=1, 20, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie3, 30)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     return wave
@@ -71,8 +71,8 @@ function Wave5:getWave()
     for i=1, 5, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie4, 50)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     return wave
@@ -86,8 +86,8 @@ function Wave6:getWave()
     for i=1, 10, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie4, 50)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     return wave
@@ -100,15 +100,15 @@ function Wave7:getWave()
     for i=1, 10, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie4, 50)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     for i=1, 10, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie2, 20)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     return wave
@@ -120,8 +120,8 @@ function Wave8:getWave()
     local wave = {}
     local pos = self:getRandomSpawnPosition()
     local enemy = CutieModel(pos.x, pos.y, resources.images.cutie5, 300)
-    enemy:addComponent(BloodComponent(1))
-    enemy:addComponent(IsEnemy())
+    enemy:add(BloodComponent(1))
+    enemy:add(IsEnemy())
     table.insert(wave, enemy)
     return wave
 end
@@ -134,22 +134,22 @@ function Wave9:getWave()
     for i=1, 10, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie4, 50)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     for i=1, 10, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie2, 20)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     for i=1, 7, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie3, 30)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     return wave
@@ -162,43 +162,43 @@ local wave = {}
     for i=1, 10, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie0, 5)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     for i=1, 15, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie2, 7)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     for i=1, 15, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie3, 20)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     for i=1, 15, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie4, 50)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     for i=1, 10, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie2, 20)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     for i=1, 2, 1 do
         local pos = self:getRandomSpawnPosition()
         local enemy = CutieModel(pos.x, pos.y, resources.images.cutie5, 300)
-        enemy:addComponent(BloodComponent(1))
-        enemy:addComponent(IsEnemy())
+        enemy:add(BloodComponent(1))
+        enemy:add(IsEnemy())
         table.insert(wave, enemy)
     end
     return wave

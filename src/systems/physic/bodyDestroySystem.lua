@@ -14,7 +14,8 @@ function BodyDestroySystem:update()
             particle:add(ParticleTimerComponent(life, max))
             stack:current().engine:addEntity(particle)
         end
-        removeEntityWithPhysics(entity)
+        stack:current().engine.entities[entity.id]:get("PhysicsComponent").body:destroy()
+        stack:current().engine:removeEntity(entity)
     end
 end
 

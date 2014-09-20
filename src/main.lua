@@ -1,4 +1,4 @@
-require("lib/lovetoys/lovetoys/engine")
+require("lib/lovetoys/src/engine")
 
 require("helper/saves")
 require("helper/tables")

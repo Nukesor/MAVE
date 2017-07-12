@@ -1,5 +1,7 @@
-TimerComponent = class("TimerComponent", Component)
+local TimerComponent = Component.create("TimerComponent")
 
-function TimerComponent:__init(time)
+function TimerComponent:initialize(time)
     self.time = time
 end
+
+return TimerComponent

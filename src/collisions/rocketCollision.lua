@@ -1,6 +1,6 @@
 RocketCollision = class("RocketCollision")
 
-function RocketCollision:__init()
+function RocketCollision:initialize()
     self.component1 = "Everything"
     self.component2 = "IsRocket"
 end

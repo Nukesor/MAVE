@@ -1,6 +1,6 @@
-ItemComponent = class("ItemComponent")
+local ItemComponent = Component.create("ItemComponent")
 
-function ItemComponent:__init(id, name, owned, price, image, sx, sy, timer, use)
+function ItemComponent:initialize(id, name, owned, price, image, sx, sy, timer, use)
     self.item = item
     self.name = name
     self.owned = owned

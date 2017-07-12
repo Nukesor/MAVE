@@ -1,6 +1,6 @@
-BoxComponent = class("BoxComponent")
+local BoxComponent = Component.create("BoxComponent")
 
-function BoxComponent:__init(width, height, linked, image, xscale)
+function BoxComponent:initialize(width, height, linked, image, xscale)
     self.width = width * relation()
     self.height = height * relation()
     self.selected = false
@@ -10,3 +10,5 @@ function BoxComponent:__init(width, height, linked, image, xscale)
         self.scale = xscale
     end
 end
+
+return BoxComponent

@@ -1,6 +1,8 @@
-ParticleTimerComponent = class("ParticleTimerComponent", Component)
+local ParticleTimerComponent = Component.create("ParticleTimerComponent")
 
-function ParticleTimerComponent:__init(particlelife, emitterlife)
+function ParticleTimerComponent:initialize(particlelife, emitterlife)
     self.particlelife = particlelife + 0.2
     self.emitterlife = emitterlife
 end
+
+return ParticleTimerComponent

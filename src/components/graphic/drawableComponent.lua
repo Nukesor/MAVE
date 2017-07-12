@@ -1,6 +1,6 @@
-DrawableComponent = class("DrawableComponent")
+local DrawableComponent = Component.create("DrawableComponent")
 
-function DrawableComponent:__init(image, r, sx, sy, ox, oy)
+function DrawableComponent:initialize(image, r, sx, sy, ox, oy)
     self.image = image
     self.r = r
     if sx then self.sx = sx * relation() end
@@ -8,3 +8,5 @@ function DrawableComponent:__init(image, r, sx, sy, ox, oy)
     if ox then self.ox = ox * relation() end
     if oy then self.oy = oy * relation() end
 end
+
+return DrawableComponent

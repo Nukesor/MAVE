@@ -22,7 +22,7 @@ require("systems/ui/boxNavigationSystem")
 
 GameOverState = class("GameOverState", State)
 
-function GameOverState:__init(screenshot)
+function GameOverState:initialize(screenshot)
     self.font = resources.fonts.forty
     self.menu = {
     {function () Saves:saveGame()

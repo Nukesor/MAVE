@@ -120,7 +120,7 @@ require("collisions/rocketCollision")
 
 LevelState = class("LevelState", State)
 
-function LevelState:__init()
+function LevelState:initialize()
 
 end
 
@@ -270,7 +270,7 @@ function LevelState:restart()
     for index, value in pairs(self.engine.entities) do
         self.engine:removeEntity(value)
     end
-    self:__init()
+    self:initialize()
 end
 
 function LevelState:keypressed(key, isrepeat)

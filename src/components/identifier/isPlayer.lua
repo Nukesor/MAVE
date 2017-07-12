@@ -1,3 +1,7 @@
-IsPlayer = class("IsPlayer")
+local IsPlayer = Component.create("IsPlayer")
 
-function IsPlayer:__init() self.jumpcount = 2 end
+function IsPlayer:initialize()
+    self.jumpcount = 2
+end
+
+return IsPlayer

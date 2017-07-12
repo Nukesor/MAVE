@@ -1,6 +1,6 @@
 DrawableDrawSystem = class("DrawableDrawSystem", System)
 
-function DrawableDrawSystem:__init()
+function DrawableDrawSystem:initialize()
     
     self.sortedTargets = {}
 end

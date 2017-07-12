@@ -1,6 +1,6 @@
 MineProximitySystem = class("MineProximitySystem", System)
 
-function MineProximitySystem:__init()    end
+function MineProximitySystem:initialize()    end
 
 function MineProximitySystem:update(dt)
     for index, entity in pairs(self.targets) do

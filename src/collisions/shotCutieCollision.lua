@@ -1,6 +1,6 @@
 ShotCutieCollision = class("ShotCutieCollision")
 
-function ShotCutieCollision:__init()
+function ShotCutieCollision:initialize()
     self.component1 = "CutieComponent"
     self.component2 = "IsShot"
 end

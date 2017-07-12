@@ -3,7 +3,7 @@ require("events/mouseReleased")
 
 PromptState = class("PromptState", State)
 
-function PromptState:__init(func)
+function PromptState:initialize(func)
     self.func = func
     self.font = resources.fonts.fifty
     self.menu = {

@@ -1,6 +1,6 @@
 GrenadeModel = class("GrenadeModel", Entity)
 
-function GrenadeModel:__init(x, y, xt, yt)
+function GrenadeModel:initialize(x, y, xt, yt)
     
     local sin, cos = getSinCos(x, y, xt, yt)
 

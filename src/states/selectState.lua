@@ -26,7 +26,7 @@ require("models/menuBoxModel")
 
 SelectState = class("SelectState", State)
 
-function SelectState:__init()
+function SelectState:initialize()
     self.font = resources.fonts.forty
     self.menu = {
     {function () stack:push(LevelOneState()) end , "Level1"},

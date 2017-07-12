@@ -1,6 +1,8 @@
-LifeComponent = class("LifeComponent")
+local LifeComponent = Component.create("LifeComponent")
 
-function LifeComponent:__init(life)
+function LifeComponent:initialize(life)
     self.life = life
     self.maxlife = life
 end
+
+return LifeComponent

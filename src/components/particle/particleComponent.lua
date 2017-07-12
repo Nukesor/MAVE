@@ -1,5 +1,7 @@
-ParticleComponent = class("ParticleComponent")
+local ParticleComponent = Component.create("ParticleComponent")
 
-function ParticleComponent:__init(image, buffer)
+function ParticleComponent:initialize(image, buffer)
     self.particle = love.graphics.newParticleSystem(image, buffer)
 end
+
+return ParticleComponent

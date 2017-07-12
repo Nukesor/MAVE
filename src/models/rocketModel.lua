@@ -1,6 +1,6 @@
 RocketModel = class("RocketModel", Entity)
 
-function RocketModel:__init(x, y, xt, yt)
+function RocketModel:initialize(x, y, xt, yt)
     local sin, cos = getSinCos(x, y, xt, yt)
 
     local body = love.physics.newBody(world, x+(80 * cos * relation()), y+(80 * sin * relation()), "dynamic")

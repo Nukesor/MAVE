@@ -1,6 +1,6 @@
 PauseState = class("PauseState", State)
 
-function PauseState:__init(screenshot)
+function PauseState:initialize(screenshot)
     self.font = resources.fonts.thirty
     self.menu = {
     {function () Saves:saveGame() 

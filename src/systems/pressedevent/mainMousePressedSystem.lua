@@ -6,7 +6,7 @@ function MainMousePressedSystem:fireEvent(event)
         if playercutie:get("DashingComponent") then
             playercutie:remove("DashingComponent")
         end
-        local targetX, targetY = event.x, event.y 
+        local targetX, targetY = event.x, event.y
         local xBefore, yBefore = playercutie:get("PhysicsComponent").body:getPosition()
 
         -- Adds a DashingComponent to the PlayerCutie

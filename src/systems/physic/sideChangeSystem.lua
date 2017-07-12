@@ -7,7 +7,7 @@ function SideChangeSystem:update()
         local x = body:getX()
         if x > love.graphics.getWidth() then
             body:setX(x - love.graphics.getWidth())
-        elseif x < 0 then 
+        elseif x < 0 then
             body:setX(love.graphics.getWidth() + x)
         end
     end
@@ -16,4 +16,3 @@ end
 function SideChangeSystem:requires()
     return {"PhysicsComponent"}
 end
-

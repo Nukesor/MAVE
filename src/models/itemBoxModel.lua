@@ -1,6 +1,6 @@
 ItemBoxModel = class("ItemBoxModel", Entity)
 
-function ItemBoxModel:__init(id, w, h, x, y, selected, image, xscale, yscale)
+function ItemBoxModel:initialize(id, w, h, x, y, selected, image, xscale, yscale)
     self:add(BoxComponent(w, h, {}, image, xscale, yscale))
     self:add(FunctionComponent(function ()
                                             if (gameplay.stats.blood - gameplay.items[id].price) >= 0 and gameplay.items[id].owned == false then

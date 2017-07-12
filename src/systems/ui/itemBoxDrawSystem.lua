@@ -1,7 +1,7 @@
 ItemBoxDrawSystem = class("ItemBoxDrawSystem", System)
 
-function ItemBoxDrawSystem:__init()
-    
+function ItemBoxDrawSystem:initialize()
+
     self.direction = true
 end
 
@@ -17,7 +17,7 @@ function ItemBoxDrawSystem:draw()
             else
                 love.graphics.setColor(255, 255, 255, 255)
             end
-            love.graphics.draw(box.image, position.x+box.width/2, position.y+box.height/2, 0, box.scale, 
+            love.graphics.draw(box.image, position.x+box.width/2, position.y+box.height/2, 0, box.scale,
                 box.scale, box.image:getWidth()/2, box.image:getHeight()/2)
         end
         if box.selected == true then
@@ -44,7 +44,7 @@ function ItemBoxDrawSystem:draw()
             end
             if entity:get("ItemComponent").owned == true then
                 love.graphics.setColor(255, 255, 255, 255)
-                love.graphics.draw(resources.images.sold, position.x+box.width/2, position.y+box.height/2, -0.125*math.pi, xscale, 
+                love.graphics.draw(resources.images.sold, position.x+box.width/2, position.y+box.height/2, -0.125*math.pi, xscale,
                     xscale, resources.images.sold:getWidth()/3, resources.images.sold:getHeight()/3)
             end
         end

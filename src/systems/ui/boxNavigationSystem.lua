@@ -21,7 +21,7 @@ function BoxNavigationSystem:requires()
     return {"BoxComponent"}
 end
 
-function BoxNavigationSystem:changeSelected(link) 
+function BoxNavigationSystem:changeSelected(link)
     local box = Menu:getSelectedBox()
     if box:get("BoxComponent").linked[link] then
            box:get("BoxComponent").selected = false

@@ -1,4 +1,8 @@
-require("lib/Lovetoys/src/engine")
+local lovetoys = require("lib/lovetoys/lovetoys")
+lovetoys.initialize({
+    debug = true,
+    globals = true
+})
 
 require("helper/saves")
 require("helper/tables")
@@ -74,15 +78,15 @@ function love.load()
     resources:addFont("forty", "data/font/Skranji-Regular.ttf", 40)
     resources:addFont("fifty", "data/font/Skranji-Regular.ttf", 50)
     resources:addFont("sixty", "data/font/Skranji-Regular.ttf", 60)
-    
+
     resources:load()
 
     set = Settings()
     Saves:loadSettings()
     gameplay = Gameplay()
-    
+
     stack = StackHelper()
-    
+
     stack:push(MenuState())
 end
 
@@ -93,7 +97,7 @@ end
 
 function love.draw()
     stack:draw()
-end 
+end
 
 function love.keypressed(key, isrepeat)
     stack:current():keypressed(key, isrepeat)

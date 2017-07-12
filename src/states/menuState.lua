@@ -21,7 +21,7 @@ require("systems/ui/boxNavigationSystem")
 
 MenuState = class("MenuState", State)
 
-function MenuState:__init()
+function MenuState:initialize()
     self.font = resources.fonts.forty
     self.menu = {
     {function () Saves:loadGame() 

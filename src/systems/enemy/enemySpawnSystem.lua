@@ -1,6 +1,6 @@
 EnemySpawnSystem = class("EnemySpawnSystem", System)
 
-function EnemySpawnSystem:__init()
+function EnemySpawnSystem:initialize()
     self.waitUntilSpawn = 5
     self.waveIndex = 1
 end

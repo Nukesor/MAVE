@@ -1,6 +1,6 @@
 CollisionDamage = class("CollisionDamage")
 
-function CollisionDamage:__init()
+function CollisionDamage:initialize()
     self.component1 = "IsPlayer"
     self.component2 = "IsEnemy"
 end

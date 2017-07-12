@@ -39,7 +39,7 @@ function EnemyTrackingSystem:update(dt)
                 end
             end
 
-            if xpos <= (love.graphics:getWidth()* 2/10 + (love.graphics:getWidth()/200-height/(love.graphics:getHeight()/10))*love.graphics:getWidth()/20) 
+            if xpos <= (love.graphics:getWidth()* 2/10 + (love.graphics:getWidth()/200-height/(love.graphics:getHeight()/10))*love.graphics:getWidth()/20)
                     or xpos >= (love.graphics:getWidth()*6/10 - (love.graphics:getWidth()/200-height/(love.graphics:getHeight()/10))*love.graphics:getWidth()/20) then
                 enemy.check = 0
                 entity:get("PhysicsComponent").body:applyLinearImpulse(0, -love.graphics:getHeight()/100)
@@ -59,7 +59,7 @@ function EnemyTrackingSystem:update(dt)
                     elseif playercutiex < xpos then
                         entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                     end
-                end  
+                end
             else
                 if enemy.direction == 1 then
                     entity:get("PhysicsComponent").body:applyLinearImpulse( love.graphics:getWidth()/2000*speed * dt*50, 0)
@@ -77,7 +77,7 @@ function EnemyTrackingSystem:update(dt)
                     enemy.direction = 0
                 end
             end
-            if  xpos < (love.graphics:getWidth() * 4/10 - love.graphics:getWidth()/100 - (height/(love.graphics:getHeight()/10))*love.graphics:getWidth()/20) 
+            if  xpos < (love.graphics:getWidth() * 4/10 - love.graphics:getWidth()/100 - (height/(love.graphics:getHeight()/10))*love.graphics:getWidth()/20)
                 or xpos > (love.graphics:getWidth() * 6/10 + love.graphics:getWidth()/100 + (height/(love.graphics:getHeight()/10))*love.graphics:getWidth()/20) then
                 enemy.check = 0
                 if ypos > love.graphics:getHeight()/2 then
@@ -122,7 +122,7 @@ function EnemyTrackingSystem:update(dt)
                 elseif playercutiex < xpos then
                     entity:get("PhysicsComponent").body:applyLinearImpulse( -love.graphics:getWidth()/2000*speed * dt*50, 0)
                 end
-            end  
+            end
          end
     end
 end

@@ -1,5 +1,7 @@
-ProximityExplodeComponent = class("ProximityExplodeComponent", Component)
+local ProximityExplodeComponent = Component.create("ProximityExplodeComponent")
 
-function ProximityExplodeComponent:__init(radius)
+function ProximityExplodeComponent:initialize(radius)
     self.radius = radius * relation()
 end
+
+return ProximityExplodeComponent

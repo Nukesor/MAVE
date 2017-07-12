@@ -1,5 +1,5 @@
 BuyBoolEvent = class("BuyBoolEvent")
 
-function BuyBoolEvent:__init(boolean)
+function BuyBoolEvent:initialize(boolean)
     self.boolean = boolean
 end

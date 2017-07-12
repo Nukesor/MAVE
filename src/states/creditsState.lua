@@ -1,6 +1,6 @@
 CreditsState = class("CreditsState", State)
 
-function CreditsState:__init()
+function CreditsState:initialize()
     self.bg = resources.images.level2
     self.names = {
                     {"Code:", "Arne Beer", "Rafael Epplée"}, 

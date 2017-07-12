@@ -1,6 +1,6 @@
 BounceCollision = class("BounceCollision")
 
-function BounceCollision:__init()
+function BounceCollision:initialize()
     self.component1 = "DrawablePolygonComponent"
     self.component2 = "CutieComponent"
 end

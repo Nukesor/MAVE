@@ -1,6 +1,6 @@
 MineGroundCollision = class(MineGroundCollision)
 
-function MineGroundCollision:__init()
+function MineGroundCollision:initialize()
     self.component1 = "IsMine"
     self.component2 = "DrawablePolygonComponent"
 end

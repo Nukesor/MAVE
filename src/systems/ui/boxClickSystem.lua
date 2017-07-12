@@ -1,7 +1,7 @@
 BoxClickSystem = class("BoxClickSystem", System)
 
 function BoxClickSystem:mousePressed(event)
-    local x = event.x 
+    local x = event.x
     local y = event.y
     if event.button == "l" then
         local entity = self:getBoxAtPosition(x, y)
@@ -12,8 +12,8 @@ function BoxClickSystem:mousePressed(event)
 end
 
 function BoxClickSystem:mouseReleased(event)
-    local x = event.x 
-    local y = event.y  
+    local x = event.x
+    local y = event.y
     if event.button == "l" then
         for key, entity in pairs(stack:current().engine:getEntityList("BoxComponent")) do
             if entity:get("DrawableComponent") then
@@ -22,7 +22,7 @@ function BoxClickSystem:mouseReleased(event)
         end
         local entity = self:getBoxAtPosition(x, y)
         if entity then
-            
+
             entity:get("FunctionComponent"):func()
         end
     end
@@ -35,7 +35,7 @@ function BoxClickSystem:getBoxAtPosition(x, y)
             if (y >= entity:get("PositionComponent").y) and (y <= (entity:get("PositionComponent").y + entity:get("BoxComponent").height)) then
                 return entity
             end
-        end    
+        end
     end
 end
 

@@ -1,6 +1,6 @@
 ShotWallCollision = class("ShotWallCollision")
 
-function ShotWallCollision:__init()
+function ShotWallCollision:initialize()
     self.component1 = "DrawablePolygonComponent"
     self.component2 = "IsShot"
 end

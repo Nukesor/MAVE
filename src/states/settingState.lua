@@ -22,7 +22,7 @@ require("systems/draw/stringDrawSystem")
 
 SettingState = class("SettingState", State)
 
-function SettingState:__init()
+function SettingState:initialize()
     self.font = resources.fonts.forty
     self.menu = {
     {function (val) 
@@ -80,7 +80,7 @@ function SettingState:__init()
         end 
        end , "Mousespeed"},
     {function ()  stack:push(PromptState(function()
-                                  gameplay:__init()  
+                                  gameplay:initialize()  
                                   Saves:saveGame() end )) end, "Reset Game"},
     {function () stack:popload() end, "Return"}
     }

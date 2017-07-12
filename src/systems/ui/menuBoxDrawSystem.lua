@@ -1,6 +1,6 @@
 MenuBoxDrawSystem = class("MenuBoxDrawSystem", System)
 
-function MenuBoxDrawSystem:__init()
+function MenuBoxDrawSystem:initialize()
     self.direction = true
 end
 
@@ -16,7 +16,7 @@ function MenuBoxDrawSystem:draw()
         if box.selected == true then
             scale = scale*1.1
         end
-        love.graphics.print(boxstring.string, boxstring.x, boxstring.y, 0, 
+        love.graphics.print(boxstring.string, boxstring.x, boxstring.y, 0,
                 scale*relation(), scale*relation(), 0, 0)
     end
 end

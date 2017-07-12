@@ -1,6 +1,8 @@
-IsEnemy = class("IsEnemy")
+local IsEnemy = Component.create("IsEnemy")
 
-function IsEnemy:__init()
+function IsEnemy:initialize()
     self.check = 0
     self.direction = nil
 end
+
+return IsEnemy

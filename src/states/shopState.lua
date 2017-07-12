@@ -27,7 +27,7 @@ require("models/itemBoxModel")
 
 ShopState = class("ShopState", State)
 
-function ShopState:__init()
+function ShopState:initialize()
     self.font = resources.fonts.forty
     self.menu = {
         {function () stack:popload() end, "Main Menu"},

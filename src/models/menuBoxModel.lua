@@ -1,6 +1,6 @@
 MenuBoxModel = class("MenuBoxModel",  Entity)
 
-function MenuBoxModel:__init(x, y, string, font, func, selected)
+function MenuBoxModel:initialize(x, y, string, font, func, selected)
     local backgroundImage = resources.images.button
 	self.width = backgroundImage:getWidth()
 	self.height = backgroundImage:getHeight()

@@ -1,6 +1,6 @@
 CutieModel = class("CutieModel", Entity)
 
-function CutieModel:__init(x, y, image, life)
+function CutieModel:initialize(x, y, image, life)
 
     local body = love.physics.newBody(world, x, y, "dynamic")
     local shape = love.physics.newCircleShape(20 * relation())

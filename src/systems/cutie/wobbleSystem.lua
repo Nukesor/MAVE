@@ -1,6 +1,6 @@
 WobbleSystem = class("WobbleSystem", System)
 
-function WobbleSystem:update() 
+function WobbleSystem:update()
     for key, entity in pairs(self.targets) do
         local drawable = entity:get("DrawableComponent")
         local wobbly = entity:get("WobblyComponent")
@@ -35,7 +35,7 @@ function WobbleSystem:setNewSy(entity, speed)
     if not speed then
         speed = distanceBetween({0, 0}, {entity:get("PhysicsComponent").body:getLinearVelocity()})
     end
-    
+
     if entity and entity:get("DrawableComponent") and entity:get("WobblyComponent") then
         local drawable = entity:get("DrawableComponent")
         local wobbly = entity:get("WobblyComponent")

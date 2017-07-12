@@ -1,6 +1,6 @@
 ShotModel = class("ShotModel", Entity)
 
-function ShotModel:__init(x, y, damage, speed, xt, yt)
+function ShotModel:initialize(x, y, damage, speed, xt, yt)
     local sin, cos = getSinCos(x, y, xt, yt)
 
     local body = love.physics.newBody(world, x+(80 * cos * relation()), y+(80 * sin * relation()), "dynamic")

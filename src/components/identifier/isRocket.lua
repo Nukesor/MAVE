@@ -1,5 +1,1 @@
-IsRocket = class("IsRocket")
-
-function IsRocket:__init()
-
-end
+Component.create("IsRocket")

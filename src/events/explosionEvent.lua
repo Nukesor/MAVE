@@ -1,5 +1,5 @@
 ExplosionEvent = class("ExplosionEvent")
 
-function ExplosionEvent:__init(entity)
+function ExplosionEvent:initialize(entity)
     self.entity = entity
 end

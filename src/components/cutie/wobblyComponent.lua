@@ -1,5 +1,7 @@
-WobblyComponent = class("WobblyComponent");
+local WobblyComponent = Component.create("WobblyComponent");
 
-function WobblyComponent:__init(default)
+function WobblyComponent:initialize(default)
     self.default = default * relation()
 end
+
+return WobblyComponent

@@ -1,6 +1,8 @@
-ExplosionComponent = class("ExplosionComponent")
+local ExplosionComponent = Component.create("ExplosionComponent")
 
-function ExplosionComponent:__init(damage, radius)
+function ExplosionComponent:initialize(damage, radius)
     self.damage = damage
     self.radius = radius * relation()
 end
+
+return ExplosionComponent

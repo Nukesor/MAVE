@@ -1,7 +1,7 @@
 MineModel = class("MineModel", Entity)
 
 
-function MineModel:__init(x,y)
+function MineModel:initialize(x,y)
     local direction
     if love.mouse.getX() < x then
         direction = -30 * relation()

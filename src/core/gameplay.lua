@@ -4,7 +4,7 @@ require("models/waves")
 
 Gameplay = class("Gameplay")
 
-function Gameplay:__init()
+function Gameplay:initialize()
     self.stats = {
                     time = 0,
                     highscore = 0,

@@ -1,6 +1,6 @@
 BoxHoverSystem = class("BoxHoverSystem", System)
 
-function BoxHoverSystem:__init()
+function BoxHoverSystem:initialize()
     self.x = 0
     self.y = 0
 end

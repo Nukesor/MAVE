@@ -1,3 +1,1 @@
-DestroyComponent = class("DestroyComponent")
-
-function DestroyComponent:__init() end
+Component.create("DestroyComponent")

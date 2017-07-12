@@ -1,6 +1,6 @@
 ExplosionShotCollision = class("ExplosionShotCollision")
 
-function ExplosionShotCollision:__init()
+function ExplosionShotCollision:initialize()
     self.component1 = "ExplosionComponent"
     self.component2 = "IsShot"
 end
